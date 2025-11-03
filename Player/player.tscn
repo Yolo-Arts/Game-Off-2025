@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dle2poylya83p"]
+[gd_scene load_steps=7 format=3 uid="uid://dle2poylya83p"]
 
 [ext_resource type="Script" uid="uid://c8cpssj7vjehk" path="res://Player/player.gd" id="1_k53q1"]
 [ext_resource type="Texture2D" uid="uid://b8s48xncdlhd4" path="res://Assets/kenney_pirate-pack/PNG/Default size/Ship parts/hullLarge (1).png" id="1_l8h54"]
@@ -6,7 +6,12 @@
 [ext_resource type="Texture2D" uid="uid://djop37l8jw66f" path="res://Assets/kenney_pirate-pack/PNG/Default size/Ship parts/cannonLoose.png" id="3_gwnis"]
 [ext_resource type="Texture2D" uid="uid://dmnkbpixhqpsq" path="res://Assets/kenney_pirate-pack/PNG/Default size/Ship parts/nest.png" id="3_k53q1"]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k53q1"]
+radius = 21.0
+height = 126.0
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_mask = 9
 script = ExtResource("1_k53q1")
 
 [node name="ShipParts" type="Node2D" parent="."]
@@ -47,3 +52,7 @@ position = Vector2(5, -40)
 
 [node name="CannonRight" type="Marker2D" parent="."]
 position = Vector2(5, 41)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_k53q1")

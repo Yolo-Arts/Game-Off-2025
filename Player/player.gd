@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+# TODO Make it so that W makes the player move, rather than constant speed.
+
 @export var base_speed: float = 150.0
 @export var max_speed: float = 500.0
 @export var min_turn_speed: float = 0.8  
@@ -11,6 +13,9 @@ extends CharacterBody2D
 # Cannons
 @onready var cannon_left = $CannonLeft
 @onready var cannon_right = $CannonRight
+
+# Cannonball
+@onready var cannonball = preload("uid://m1jsvblrkbdq")
 
 # Particles
 @export var cannon_fire: PackedScene = preload("uid://do1jur5t8qgko") 
@@ -52,15 +57,30 @@ func _physics_process(delta) -> void:
 	move_and_slide()
 
 func shoot():
+	var bullet_instance = cannonball.instantiate()
+	var bullet_instance2 = cannonball.instantiate()
 	
+	get_parent().add_child(bullet_instance)
+	get_parent().add_child(bullet_instance2)
+
 	var ship_forward = Vector2.RIGHT.rotated(rotation)
+	
+	var leftCannonPos = cannon_left.global_position
+	var rightCannonPos = cannon_right.global_position
+	
+	bullet_instance.global_position = leftCannonPos
+	bullet_instance2.global_position = rightCannonPos
 	
 	# FIXME Particles do not spawn firing in the correct direction.
 	var left_cannon_direction = ship_forward.rotated(deg_to_rad(-90)) 
 	var right_cannon_direction = ship_forward.rotated(deg_to_rad(90)) 
 	
-	spawn_cannon_particles(cannon_left.global_position, left_cannon_direction)
-	spawn_cannon_particles(cannon_right.global_position, right_cannon_direction)
+	bullet_instance.direction = left_cannon_direction
+	bullet_instance2.direction = right_cannon_direction
+	
+	
+	spawn_cannon_particles(leftCannonPos, left_cannon_direction)
+	spawn_cannon_particles(rightCannonPos, right_cannon_direction)
 	
 	Globals.camera.shake(0.25, 10, 10)
 

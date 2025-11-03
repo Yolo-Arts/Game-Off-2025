@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://m1jsvblrkbdq"]
+
+[ext_resource type="Texture2D" uid="uid://dx4qdtm1evw36" path="res://Assets/kenney_pirate-pack/PNG/Default size/Ship parts/cannonBall.png" id="1_m8ab4"]
+[ext_resource type="Script" uid="uid://cta41ux8mh0ud" path="res://Player/cannonball.gd" id="1_yqn88"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m8ab4"]
+radius = 8.062258
+
+[node name="cannonball" type="Area2D"]
+collision_layer = 4
+collision_mask = 10
+script = ExtResource("1_yqn88")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_m8ab4")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_m8ab4")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
