@@ -1,33 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://m1jsvblrkbdq"]
+[gd_scene load_steps=4 format=3 uid="uid://m1jsvblrkbdq"]
 
 [ext_resource type="Texture2D" uid="uid://dx4qdtm1evw36" path="res://Assets/kenney_pirate-pack/PNG/Default size/Ship parts/cannonBall.png" id="1_m8ab4"]
 [ext_resource type="Script" uid="uid://cta41ux8mh0ud" path="res://Player/cannonball.gd" id="1_yqn88"]
-[ext_resource type="Script" uid="uid://b8u2gmybierd3" path="res://addons/trail_2d/trail_2d.gd" id="3_vvcy0"]
-
-[sub_resource type="Curve" id="Curve_vvcy0"]
-_data = [Vector2(0, 1), 0.0, 1.7972558, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="Gradient" id="Gradient_vvcy0"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_m8ab4"]
 radius = 8.062258
 
 [node name="cannonball" type="Area2D"]
-scale = Vector2(1.9252241, 1.9252241)
 collision_layer = 4
 collision_mask = 10
 script = ExtResource("1_yqn88")
 
-[node name="Trail2D" type="Line2D" parent="."]
-width_curve = SubResource("Curve_vvcy0")
-gradient = SubResource("Gradient_vvcy0")
-script = ExtResource("3_vvcy0")
-metadata/_custom_type_script = "uid://b8u2gmybierd3"
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
-z_index = 4
 texture = ExtResource("1_m8ab4")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
