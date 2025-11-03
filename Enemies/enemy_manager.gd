@@ -9,7 +9,6 @@ func _on_timer_timeout():
 	var player = get_tree().get_first_node_in_group("player") as Node2D
 	if player == null:
 		return
-	
 
 	var enemy = basic_enemy_scene.instantiate() as Node2D
 	get_parent().add_child(enemy)
