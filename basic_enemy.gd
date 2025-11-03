@@ -28,7 +28,7 @@ func _ready():
 	if enemy_stats.texture:
 		sprite.texture = enemy_stats.texture
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if !isDead: 
 		var direction = get_direction_to_player()
 		velocity = direction * speed
