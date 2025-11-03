@@ -1,0 +1,83 @@
+[gd_scene load_steps=7 format=3 uid="uid://cjqp43sw23woi"]
+
+[ext_resource type="Script" uid="uid://v5hcfm67l3hn" path="res://Enemies/dead_ship.gd" id="1_bxmsg"]
+[ext_resource type="Texture2D" uid="uid://co6jsv40fj6ji" path="res://Assets/kenney_pirate-pack/PNG/Default size/Ship parts/hullLarge (4).png" id="1_tsjol"]
+[ext_resource type="Texture2D" uid="uid://buqqutsmrv55c" path="res://Assets/kenney_pirate-pack/PNG/Default size/Ship parts/sailLarge (13).png" id="2_vosbb"]
+
+[sub_resource type="Animation" id="Animation_vosbb"]
+resource_name = "sinkBoat"
+length = 10.0
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1e-05, 1e-05)]
+}
+
+[sub_resource type="Animation" id="Animation_bxmsg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_me67e"]
+_data = {
+&"RESET": SubResource("Animation_bxmsg"),
+&"sinkBoat": SubResource("Animation_vosbb")
+}
+
+[node name="DeadShip" type="Node2D"]
+script = ExtResource("1_bxmsg")
+
+[node name="hull" type="Sprite2D" parent="."]
+rotation = 1.5707964
+texture = ExtResource("1_tsjol")
+
+[node name="sail" type="Sprite2D" parent="."]
+rotation = 1.5707964
+texture = ExtResource("2_vosbb")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_me67e")
+}
