@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://34fhm4pp3113"]
+[gd_scene load_steps=9 format=3 uid="uid://34fhm4pp3113"]
 
-[ext_resource type="Script" uid="uid://d0cy7x87iaixj" path="res://basic_enemy.gd" id="1_221se"]
+[ext_resource type="Script" uid="uid://d0cy7x87iaixj" path="res://Enemies/basic_enemy.gd" id="1_221se"]
 [ext_resource type="Resource" uid="uid://c822wln20asv" path="res://Enemies/slow_enemy.tres" id="2_gie15"]
 [ext_resource type="Resource" uid="uid://bhkhvp6efwkbu" path="res://Enemies/slow_red_enemy.tres" id="3_iioo1"]
 [ext_resource type="Texture2D" uid="uid://hwmpk22f2q2h" path="res://Assets/kenney_pirate-pack/PNG/Default size/Ships/ship (2).png" id="4_iioo1"]
+[ext_resource type="Script" uid="uid://wke5xle7bpbn" path="res://Enemies/audio_stream_player_2d.gd" id="5_4vdx4"]
+[ext_resource type="Resource" uid="uid://xcfalartatb5" path="res://Resources/death_explosion.tres" id="6_rcyh1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iioo1"]
 radius = 17.0
@@ -35,3 +37,9 @@ collision_mask = 4
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_4vdx4")
 debug_color = Color(0.5813112, 0, 0.70196074, 0.41960785)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+script = ExtResource("5_4vdx4")
+explosion_sounds = ExtResource("6_rcyh1")
+
+[connection signal="playSound" from="." to="AudioStreamPlayer2D" method="_on_basic_enemy_play_sound"]

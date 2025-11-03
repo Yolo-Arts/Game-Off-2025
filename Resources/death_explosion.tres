@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="audios" load_steps=5 format=3 uid="uid://xcfalartatb5"]
+
+[ext_resource type="Script" uid="uid://ddkcv3ssulp1" path="res://sounds/explosion_sfx.gd" id="1_0vxp2"]
+[ext_resource type="AudioStream" uid="uid://de5cbvtstjw18" path="res://sounds/death_explosion.sfxr" id="2_h5ujw"]
+[ext_resource type="AudioStream" uid="uid://cwde2y4bxpmji" path="res://sounds/death_explosion1.sfxr" id="3_w5tdw"]
+[ext_resource type="AudioStream" uid="uid://ddypdve0ts2xh" path="res://sounds/death_explosion2.sfxr" id="4_rs8sp"]
+
+[resource]
+script = ExtResource("1_0vxp2")
+sounds = Array[AudioStream]([ExtResource("2_h5ujw"), ExtResource("3_w5tdw"), ExtResource("4_rs8sp")])
+metadata/_custom_type_script = "uid://ddkcv3ssulp1"
