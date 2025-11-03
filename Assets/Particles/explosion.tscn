@@ -1,0 +1,53 @@
+[gd_scene load_steps=10 format=3 uid="uid://do1jur5t8qgko"]
+
+[ext_resource type="Texture2D" uid="uid://nteeo1x4snbc" path="res://Assets/Particles/Particle.png" id="1_f05ew"]
+[ext_resource type="Script" uid="uid://bles4hjqi0ylq" path="res://Assets/Particles/explosion.gd" id="2_d4x5i"]
+
+[sub_resource type="Curve" id="Curve_vtle1"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.71957666, 0.79775286), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_od3ui"]
+curve = SubResource("Curve_vtle1")
+
+[sub_resource type="Gradient" id="Gradient_00tjw"]
+offsets = PackedFloat32Array(0, 0.11042945, 0.20858896, 0.28834355, 0.34969324, 0.9325153, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 0.1764706, 0.1764706, 1, 0, 0, 0, 1, 1, 0.7998047, 0.375, 1, 0, 0, 0, 1, 0.7924528, 0.7924528, 0.7924528, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_x3vf3"]
+gradient = SubResource("Gradient_00tjw")
+
+[sub_resource type="Curve" id="Curve_apopc"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.111111104, 1), 0.0, 0.0, 0, 0, Vector2(0.2116402, 0.50561804), 5.6212816, 5.6212816, 0, 0, Vector2(0.37566137, 0.1460675), -0.1397102, 0.0, 0, 0, Vector2(0.7354497, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_5htga"]
+curve = SubResource("Curve_apopc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_p5o4e"]
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+spread = 20.0
+initial_velocity_min = 167.4
+initial_velocity_max = 346.87
+gravity = Vector3(0, 0, 0)
+damping_min = 28.194002
+damping_max = 42.324
+scale_min = 0.39999998
+scale_max = 0.59999996
+scale_curve = SubResource("CurveTexture_5htga")
+color_ramp = SubResource("GradientTexture1D_x3vf3")
+alpha_curve = SubResource("CurveTexture_od3ui")
+
+[node name="Explosion" type="GPUParticles2D"]
+emitting = false
+texture = ExtResource("1_f05ew")
+lifetime = 0.7
+one_shot = true
+explosiveness = 0.87
+process_material = SubResource("ParticleProcessMaterial_p5o4e")
+script = ExtResource("2_d4x5i")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

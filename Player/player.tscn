@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://dle2poylya83p"]
+
+[ext_resource type="Script" uid="uid://c8cpssj7vjehk" path="res://Player/player.gd" id="1_k53q1"]
+[ext_resource type="Texture2D" uid="uid://b8s48xncdlhd4" path="res://Assets/kenney_pirate-pack/PNG/Default size/Ship parts/hullLarge (1).png" id="1_l8h54"]
+[ext_resource type="Texture2D" uid="uid://dybfpbl7p25yw" path="res://Assets/kenney_pirate-pack/PNG/Default size/Ship parts/sailLarge (7).png" id="2_4ntmi"]
+[ext_resource type="Texture2D" uid="uid://djop37l8jw66f" path="res://Assets/kenney_pirate-pack/PNG/Default size/Ship parts/cannonLoose.png" id="3_gwnis"]
+[ext_resource type="Texture2D" uid="uid://dmnkbpixhqpsq" path="res://Assets/kenney_pirate-pack/PNG/Default size/Ship parts/nest.png" id="3_k53q1"]
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_k53q1")
+
+[node name="ShipParts" type="Node2D" parent="."]
+rotation = -1.5707964
+
+[node name="Hull" type="Sprite2D" parent="ShipParts"]
+scale = Vector2(1, 1.2777778)
+texture = ExtResource("1_l8h54")
+
+[node name="MainSail" type="Sprite2D" parent="ShipParts/Hull"]
+position = Vector2(-1, -14.086956)
+scale = Vector2(1.060606, 0.5784499)
+texture = ExtResource("2_4ntmi")
+
+[node name="Sprite2D" type="Sprite2D" parent="ShipParts/Hull/MainSail"]
+position = Vector2(0.9428572, -25.705881)
+scale = Vector2(0.9428572, 1.3529412)
+texture = ExtResource("3_k53q1")
+
+[node name="SmallSail" type="Sprite2D" parent="ShipParts/Hull"]
+position = Vector2(-1, 23.47826)
+scale = Vector2(0.97818136, 0.510397)
+texture = ExtResource("2_4ntmi")
+
+[node name="CannonLeft" type="Sprite2D" parent="ShipParts/Hull"]
+position = Vector2(29, 3.9130447)
+scale = Vector2(1.246, 0.7826087)
+texture = ExtResource("3_gwnis")
+
+[node name="CannonRight" type="Sprite2D" parent="ShipParts/Hull"]
+position = Vector2(-29.457832, 3.9130447)
+rotation = 3.1415925
+scale = Vector2(1.2457836, 0.7826087)
+texture = ExtResource("3_gwnis")
+
+[node name="CannonLeft" type="Marker2D" parent="."]
+position = Vector2(5, -40)
+
+[node name="CannonRight" type="Marker2D" parent="."]
+position = Vector2(5, 41)
