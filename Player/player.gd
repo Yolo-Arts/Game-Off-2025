@@ -1,3 +1,4 @@
+class_name  Player
 extends CharacterBody2D
 
 # TODO Make it so that W makes the player move, rather than constant speed.
@@ -9,8 +10,6 @@ extends CharacterBody2D
 @export var turn_acceleration: float = 0.3
 @export var acceleration: float = 1.0
 @export var deceleration: float = 0.5
-
-
 
 # Cannons
 @onready var cannon_left = $CannonLeft
@@ -29,7 +28,6 @@ var turn_time: float = 0.0
 func _unhandled_input(event):
 	if event.is_action_pressed("fire"):
 		shoot()
-
 func _physics_process(delta) -> void:
 	var turn_direction = 0.0
 	if Input.is_action_pressed("turn_left"):

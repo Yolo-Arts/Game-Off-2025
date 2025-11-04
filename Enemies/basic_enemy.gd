@@ -5,14 +5,14 @@ extends CharacterBody2D
 @export var speed = 200
 const DEATH_EXPLOSION = preload("uid://da1djwy4cr28t")
 const DEAD_SHIP = preload("uid://cjqp43sw23woi")
-
+const EXP_ORB = preload("res://Scenes/exp_orb.tscn")
 signal playSound
 
 @onready var sprite = $Sprite2D
 @onready var collision_shape_2d = $CollisionShape2D
 @onready var hitbox_collision_shape_2d = $Hitbox/CollisionShape2D
 @onready var hitboxArea = $Hitbox
-
+@onready var exp_orb: Area2D = $Exp_Orb
 
 
 @export var enemy_types: Array[Resource]
@@ -47,6 +47,7 @@ func get_direction_to_player():
 func take_damage():
 	spawn_dead_ship(self.position, get_direction_to_player())
 	spawn_death_explosion(self.position, Vector2(0,0))
+	spawn_exp_orb(self.position)
 	sprite.visible = false
 	isDead = true
 	disable_hitbox()
@@ -65,6 +66,11 @@ func spawn_dead_ship(pos: Vector2, normal:Vector2) -> void:
 	add_child(instance)
 	instance.global_position = pos
 	instance.rotation = get_direction_to_player().angle() + deg_to_rad(180)
+
+func spawn_exp_orb(pos: Vector2):
+	var instance = EXP_ORB.instantiate()
+	add_child(instance)
+	instance.global_position = pos
 
 func disable_hitbox():
 	print("disabled")

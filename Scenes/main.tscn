@@ -1,12 +1,14 @@
-[gd_scene load_steps=13 format=4 uid="uid://d0id8y3lwuvg4"]
+[gd_scene load_steps=15 format=4 uid="uid://d0id8y3lwuvg4"]
 
 [ext_resource type="TileSet" uid="uid://dq0j7rx72yqkf" path="res://Resources/KenneyPirateTilemap.tres" id="1_jjgbg"]
 [ext_resource type="Script" uid="uid://iygc8so2fmtd" path="res://Scenes/main.gd" id="1_jjvhh"]
 [ext_resource type="Shader" uid="uid://b4oixuorco5vd" path="res://Shaders/water.gdshader" id="2_8gbba"]
 [ext_resource type="PackedScene" uid="uid://dle2poylya83p" path="res://Player/player.tscn" id="2_bo1nx"]
+[ext_resource type="PackedScene" uid="uid://cbag74ryx0pu8" path="res://Scenes/player_manager.tscn" id="2_ynf5e"]
 [ext_resource type="Script" uid="uid://dec20rh0utiay" path="res://Scenes/camera_2d.gd" id="5_kry3j"]
 [ext_resource type="PackedScene" uid="uid://brjyeo32vgcfh" path="res://Enemies/enemy_manager.tscn" id="6_6bp64"]
 [ext_resource type="PackedScene" uid="uid://34fhm4pp3113" path="res://Enemies/basic_enemy.tscn" id="7_344ge"]
+[ext_resource type="PackedScene" uid="uid://84edigyryvvl" path="res://Scenes/exp_orb.tscn" id="8_344ge"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_8gbba"]
 
@@ -39,6 +41,8 @@ shader_parameter/backGroundDirY = 0.01500000397237999
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_jjvhh")
+
+[node name="Player_Manager" parent="." instance=ExtResource("2_ynf5e")]
 
 [node name="Tilemap" type="Node2D" parent="."]
 
@@ -74,3 +78,15 @@ script = ExtResource("5_kry3j")
 
 [node name="EnemyManager" parent="." instance=ExtResource("6_6bp64")]
 basic_enemy_scene = ExtResource("7_344ge")
+
+[node name="Exp_Orb" parent="." instance=ExtResource("8_344ge")]
+position = Vector2(299, 22)
+
+[node name="Exp_Orb2" parent="." instance=ExtResource("8_344ge")]
+position = Vector2(540, -137)
+
+[node name="Exp_Orb3" parent="." instance=ExtResource("8_344ge")]
+position = Vector2(703, 199)
+
+[node name="Exp_Orb4" parent="." instance=ExtResource("8_344ge")]
+position = Vector2(193, 261)
