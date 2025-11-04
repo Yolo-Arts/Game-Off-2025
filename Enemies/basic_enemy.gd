@@ -3,6 +3,7 @@ extends CharacterBody2D
 class_name Enemy
 
 #TODO FIX THE MOVEMENT SCRIPT SO THAT THEY ACTUALLY MOVE LIKE A BOAT 
+#FIXME Fix the hitboxes, they do not rotate with the enemy.
 
 @export var speed = 200
 const DEATH_EXPLOSION = preload("uid://da1djwy4cr28t")
