@@ -10,6 +10,8 @@ extends CharacterBody2D
 @export var acceleration: float = 1.0
 @export var deceleration: float = 0.5
 
+
+
 # Cannons
 @onready var cannon_left = $CannonLeft
 @onready var cannon_right = $CannonRight
