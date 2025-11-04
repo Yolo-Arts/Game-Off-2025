@@ -8,17 +8,19 @@ const DEAD_SHIP = preload("uid://cjqp43sw23woi")
 
 signal playSound
 
+@onready var player = get_tree().get_first_node_in_group("player")
 @onready var sprite = $Sprite2D
 @onready var collision_shape_2d = $CollisionShape2D
 @onready var hitbox_collision_shape_2d = $Hitbox/CollisionShape2D
 @onready var hitboxArea = $Hitbox
+@onready var navigator := $NavigationAgent2D as NavigationAgent2D
 
 
 
 @export var enemy_types: Array[Resource]
 var enemy_stats: Resource
 
-var player = null
+
 var isDead = false
 
 var rng = RandomNumberGenerator.new()
@@ -29,18 +31,18 @@ func _ready():
 	if enemy_stats.texture:
 		sprite.texture = enemy_stats.texture
 
-func _physics_process(_delta):
-	if !isDead: 
-		var direction = get_direction_to_player()
-		velocity = direction * speed
-		if direction:
-			sprite.rotation = direction.angle() - deg_to_rad(90)
-		move_and_slide()
+func _physics_process(_delta: float) -> void:
+	get_direction_to_player()
+	var direc = to_local(navigator.get_next_path_position()).normalized()
+	velocity = direc * speed
+	move_and_slide()
+
+func makepath() -> void:
+	navigator.target_position = player.global_position
 
 func get_direction_to_player():
-	player = get_tree().get_first_node_in_group("player")
 	if player:
-		var direction = (player.global_position - global_position).normalized()
+		var direction = to_local(navigator.get_next_path_position()).normalized()
 		return direction
 	return Vector2.ZERO  # Return zero vector if no player found
 
@@ -54,12 +56,13 @@ func take_damage():
 	playSound.emit()
 
 
+@warning_ignore("unused_parameter")
 func spawn_death_explosion(pos: Vector2, normal: Vector2) -> void:
 	var instance = DEATH_EXPLOSION.instantiate()
 	get_tree().get_current_scene().add_child(instance)
 	instance.global_position = pos
-	#instance.rotation = normal.angle()
 
+@warning_ignore("unused_parameter")
 func spawn_dead_ship(pos: Vector2, normal:Vector2) -> void:
 	var instance = DEAD_SHIP.instantiate()
 	add_child(instance)
@@ -74,3 +77,7 @@ func disable_hitbox():
 	if hitboxArea:
 		hitboxArea.set_deferred("monitorable", false)
 		hitboxArea.queue_free()
+
+
+func _on_timer_timeout() -> void:
+	makepath()
