@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+class_name Enemy
+
 #TODO FIX THE MOVEMENT SCRIPT SO THAT THEY ACTUALLY MOVE LIKE A BOAT 
 
 @export var speed = 200
@@ -12,7 +14,7 @@ signal playSound
 @onready var collision_shape_2d = $CollisionShape2D
 @onready var hitbox_collision_shape_2d = $Hitbox/CollisionShape2D
 @onready var hitboxArea = $Hitbox
-
+@onready var damage_interval_timer = $damage_interval_timer
 
 
 @export var enemy_types: Array[Resource]
@@ -74,3 +76,13 @@ func disable_hitbox():
 	if hitboxArea:
 		hitboxArea.set_deferred("monitorable", false)
 		hitboxArea.queue_free()
+
+
+#TODO add a signal to make sure that the timer works properly
+func _on_hurtbox_body_entered(body):
+	if body == player && damage_interval_timer.is_stopped():
+		Globals.player_health -= enemy_stats.damage
+		print("Player Health: ", Globals.player_health, "Damaged by: ", enemy_stats.type)
+		damage_interval_timer.start()
+	else:
+		print("Damage on cooldown")
