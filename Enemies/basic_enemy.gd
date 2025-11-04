@@ -15,6 +15,9 @@ signal playSound
 @onready var hitbox_collision_shape_2d = $Hitbox/CollisionShape2D
 @onready var hitboxArea = $Hitbox
 @onready var damage_interval_timer = $damage_interval_timer
+@onready var hurtbox = $Hurtbox
+@onready var hurt_shape = $Hurtbox/hurtShape
+
 
 
 @export var enemy_types: Array[Resource]
@@ -76,6 +79,13 @@ func disable_hitbox():
 	if hitboxArea:
 		hitboxArea.set_deferred("monitorable", false)
 		hitboxArea.queue_free()
+	if hurtbox:
+		hurtbox.set_deferred("monitorable", false)
+		hurtbox.queue_free()
+	if hurt_shape:
+		hurt_shape.set_deferred("disabled", true)
+		hurt_shape.queue_free()
+	
 
 
 #TODO add a signal to make sure that the timer works properly
