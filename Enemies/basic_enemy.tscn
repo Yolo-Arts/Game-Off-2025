@@ -22,11 +22,13 @@ height = 110.0
 [node name="Basic_enemy" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 14
+motion_mode = 1
+wall_min_slide_angle = 0.0
 script = ExtResource("1_221se")
 enemy_types = Array[Resource]([ExtResource("2_gie15"), ExtResource("3_iioo1")])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-rotation = 1.5707964
+rotation = 4.712389
 texture = ExtResource("4_iioo1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -46,6 +48,15 @@ debug_color = Color(0.5813112, 0, 0.70196074, 0.41960785)
 script = ExtResource("5_4vdx4")
 explosion_sounds = ExtResource("6_rcyh1")
 
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[connection signal="playSound" from="." to="AudioStreamPlayer2D" method="_on_basic_enemy_play_sound"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [node name="Hurtbox" type="Area2D" parent="."]
 
 [node name="hurtShape" type="CollisionShape2D" parent="Hurtbox"]
