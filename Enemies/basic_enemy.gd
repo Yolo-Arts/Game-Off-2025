@@ -10,7 +10,6 @@ const DEATH_EXPLOSION = preload("uid://da1djwy4cr28t")
 const DEAD_SHIP = preload("uid://cjqp43sw23woi")
 
 signal playSound
-signal enemyKilled
 
 @onready var sprite = $Sprite2D
 @onready var collision_shape_2d = $CollisionShape2D
@@ -27,13 +26,9 @@ var enemy_stats: Resource
 var player = null
 var isDead = false
 
-var UserInterface
-
 var rng = RandomNumberGenerator.new()
 
 func _ready():
-	UserInterface = get_tree().get_current_scene().get_node("UserInterface")
-	self.enemyKilled.connect(UserInterface.get_node("ScoreLabel")._update_score.bind(Globals.POINTS_CATEGORIES.ENEMY_SHIPWRECKED))
 	rng.randomize()
 	enemy_stats = enemy_types[randi_range(0, enemy_types.size() - 1)]
 	if enemy_stats.texture:
@@ -62,9 +57,9 @@ func take_damage():
 	isDead = true
 	disable_hitbox()
 	Globals.camera.shake(0.20, 15, 20)
+	Globals.update_score("ENEMY_SHIPWRECKED")
 	playSound.emit()
-	enemyKilled.emit()
-	
+		
 
 
 func spawn_death_explosion(pos: Vector2, normal: Vector2) -> void:

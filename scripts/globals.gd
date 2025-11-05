@@ -10,12 +10,22 @@ signal player_died
 
 var my_timer: Timer = Timer.new()
 const INTERVAL: float = 1
+var score = {
+	"PER_SECOND_SURVIVED":0,
+	"ENEMY_SHIPWRECKED":0,
+	"BOUNTY_POINT":0,
+	"WAVES_SURVIVED":0, 
+	"BOSSES_SHIPWRECKED":0
+}
 
 var UserInterface
 
 enum POINTS_CATEGORIES  {
 	PER_SECOND_SURVIVED = 2,
-	ENEMY_SHIPWRECKED = 50
+	ENEMY_SHIPWRECKED = 50,
+	BOUNTY_POINT = 100,
+	WAVES_SURVIVED = 100, 
+	BOSSES_SHIPWRECKED = 250
 }
 
 func _ready() -> void:
@@ -36,7 +46,10 @@ func _process(delta):
 		player_died.emit()
 		playerDied = true
 		flag = false
+		print("Final Score %s" % score)
 		
 func _on_my_timer_timeout():
-	UserInterface.get_node("ScoreLabel")._update_score(POINTS_CATEGORIES.PER_SECOND_SURVIVED)
-	
+	update_score("PER_SECOND_SURVIVED")
+
+func update_score(points_scored_category):
+	score[points_scored_category] += POINTS_CATEGORIES[points_scored_category]
