@@ -89,3 +89,4 @@ material = SubResource("ShaderMaterial_ynf5e")
 position = Vector2(577, 304)
 scale = Vector2(10.765625, 6.609375)
 texture = ExtResource("9_ynf5e")
+
