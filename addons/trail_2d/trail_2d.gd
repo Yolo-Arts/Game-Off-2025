@@ -18,3 +18,4 @@ func _physics_process(_delta: float) -> void:
 	
 	if get_point_count() > length:
 		remove_point(get_point_count() - 1)
+
