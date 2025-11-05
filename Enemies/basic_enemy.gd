@@ -43,6 +43,7 @@ func _physics_process(_delta):
 			sprite.rotation = direction.angle() - deg_to_rad(90)
 		move_and_slide()
 
+
 func get_direction_to_player():
 	player = get_tree().get_first_node_in_group("player")
 	if player:

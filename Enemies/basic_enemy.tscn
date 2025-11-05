@@ -4,7 +4,7 @@
 [ext_resource type="Resource" uid="uid://c822wln20asv" path="res://Enemies/slow_enemy.tres" id="2_gie15"]
 [ext_resource type="Resource" uid="uid://bhkhvp6efwkbu" path="res://Enemies/slow_red_enemy.tres" id="3_iioo1"]
 [ext_resource type="Texture2D" uid="uid://hwmpk22f2q2h" path="res://Assets/kenney_pirate-pack/PNG/Default size/Ships/ship (2).png" id="4_iioo1"]
-[ext_resource type="Script" uid="uid://wke5xle7bpbn" path="res://Enemies/audio_stream_player_2d.gd" id="5_4vdx4"]
+[ext_resource type="Script" path="res://Enemies/audio_stream_player_2d.gd" id="5_4vdx4"]
 [ext_resource type="Resource" uid="uid://xcfalartatb5" path="res://Resources/death_explosion.tres" id="6_rcyh1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iioo1"]
