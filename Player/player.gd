@@ -24,6 +24,12 @@ var current_speed: float = 300.0
 var current_turn_speed: float = min_turn_speed  
 var turn_time: float = 0.0 
 
+func _ready():
+	Globals.player_died.connect(dead_player)
+
+func dead_player():
+	queue_free()
+
 func _unhandled_input(event):
 	if event.is_action_pressed("fire"):
 		shoot()
