@@ -1,6 +1,9 @@
 extends CharacterBody2D
 
+class_name Enemy
+
 #TODO FIX THE MOVEMENT SCRIPT SO THAT THEY ACTUALLY MOVE LIKE A BOAT 
+#FIXME Fix the hitboxes, they do not rotate with the enemy.
 
 @export var speed = 200
 const DEATH_EXPLOSION = preload("uid://da1djwy4cr28t")
@@ -13,6 +16,10 @@ signal playSound
 @onready var hitbox_collision_shape_2d = $Hitbox/CollisionShape2D
 @onready var hitboxArea = $Hitbox
 @onready var exp_orb: Area2D = $Exp_Orb
+@onready var damage_interval_timer = $damage_interval_timer
+@onready var hurtbox = $Hurtbox
+@onready var hurt_shape = $Hurtbox/hurtShape
+
 
 
 @export var enemy_types: Array[Resource]
@@ -36,6 +43,7 @@ func _physics_process(_delta):
 		if direction:
 			sprite.rotation = direction.angle() - deg_to_rad(90)
 		move_and_slide()
+
 
 func get_direction_to_player():
 	player = get_tree().get_first_node_in_group("player")
@@ -80,3 +88,20 @@ func disable_hitbox():
 	if hitboxArea:
 		hitboxArea.set_deferred("monitorable", false)
 		hitboxArea.queue_free()
+	if hurtbox:
+		hurtbox.set_deferred("monitorable", false)
+		hurtbox.queue_free()
+	if hurt_shape:
+		hurt_shape.set_deferred("disabled", true)
+		hurt_shape.queue_free()
+	
+
+
+#TODO add a signal to make sure that the timer works properly
+func _on_hurtbox_body_entered(body):
+	if body == player && damage_interval_timer.is_stopped():
+		Globals.player_health -= enemy_stats.damage
+		print("Player Health: ", Globals.player_health, "Damaged by: ", enemy_stats.type)
+		damage_interval_timer.start()
+	else:
+		print("Damage on cooldown")

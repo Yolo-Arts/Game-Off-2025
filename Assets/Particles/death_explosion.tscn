@@ -31,6 +31,7 @@ anim_speed_max = 1.0
 
 [node name="DeathExplosion" type="GPUParticles2D"]
 material = SubResource("CanvasItemMaterial_vtle1")
+scale = Vector2(1.5, 1.5)
 emitting = false
 amount = 32
 texture = ExtResource("1_242b4")

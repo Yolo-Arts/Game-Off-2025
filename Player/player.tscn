@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dle2poylya83p"]
+[gd_scene load_steps=8 format=3 uid="uid://dle2poylya83p"]
 
 [ext_resource type="Script" uid="uid://c8cpssj7vjehk" path="res://Player/player.gd" id="1_k53q1"]
 [ext_resource type="Texture2D" uid="uid://b8s48xncdlhd4" path="res://Assets/kenney_pirate-pack/PNG/Default size/Ship parts/hullLarge (1).png" id="1_l8h54"]
@@ -9,6 +9,10 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k53q1"]
 radius = 21.0
 height = 126.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fhl08"]
+radius = 22.0
+height = 120.0
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 3
@@ -57,3 +61,20 @@ position = Vector2(5, 41)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_k53q1")
+
+[node name="DamageArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_fhl08")
+debug_color = Color(0.70196074, 0, 0, 0.41960785)
+
+[node name="damage_interval_timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="body_entered" from="DamageArea" to="." method="_on_damage_area_body_entered"]
+[connection signal="body_exited" from="DamageArea" to="." method="_on_damage_area_body_exited"]
+[connection signal="timeout" from="damage_interval_timer" to="." method="_on_damage_interval_timer_timeout"]

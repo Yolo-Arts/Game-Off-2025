@@ -20,41 +20,54 @@ extends CharacterBody2D
 
 # Particles
 @export var cannon_fire: PackedScene = preload("uid://do1jur5t8qgko") 
+const DEATH_EXPLOSION = preload("uid://da1djwy4cr28t")
 
 var current_speed: float = 300.0
 var current_turn_speed: float = min_turn_speed  
 var turn_time: float = 0.0 
 
+var isDead = false
+
+func _ready():
+	Globals.player_died.connect(dead_player)
+
+func dead_player():
+	isDead = true
+	for i in range(0, 5):
+		spawn_death_explosion(self.global_position)
+	self.hide()
+
 func _unhandled_input(event):
 	if event.is_action_pressed("fire"):
 		shoot()
 func _physics_process(delta) -> void:
-	var turn_direction = 0.0
-	if Input.is_action_pressed("turn_left"):
-		turn_direction -= 1.0
-	if Input.is_action_pressed("turn_right"):
-		turn_direction += 1.0
-	
-	if turn_direction != 0.0:
-		turn_time += delta
+	if !isDead:
+		var turn_direction = 0.0
+		if Input.is_action_pressed("turn_left"):
+			turn_direction -= 1.0
+		if Input.is_action_pressed("turn_right"):
+			turn_direction += 1.0
 		
-		var turn_factor = min(1.0, turn_time * turn_acceleration)
-		current_turn_speed = lerp(min_turn_speed, max_turn_speed, turn_factor)
+		if turn_direction != 0.0:
+			turn_time += delta
+			
+			var turn_factor = min(1.0, turn_time * turn_acceleration)
+			current_turn_speed = lerp(min_turn_speed, max_turn_speed, turn_factor)
+			
+			rotate(turn_direction * current_turn_speed * delta)
+			current_speed = lerp(current_speed, base_speed, deceleration * delta)
+			#print("Turning with speed: ", current_turn_speed, " Deaccelerating: ", current_speed)
+		else:
+			turn_time = 0.0
+			current_turn_speed = min_turn_speed
+			
+			current_speed = lerp(current_speed, max_speed, acceleration * delta)
+			#print("Accelerating: ", current_speed)
 		
-		rotate(turn_direction * current_turn_speed * delta)
-		current_speed = lerp(current_speed, base_speed, deceleration * delta)
-		#print("Turning with speed: ", current_turn_speed, " Deaccelerating: ", current_speed)
-	else:
-		turn_time = 0.0
-		current_turn_speed = min_turn_speed
+		var forward_direction = Vector2.RIGHT.rotated(rotation)
+		velocity = forward_direction * current_speed
 		
-		current_speed = lerp(current_speed, max_speed, acceleration * delta)
-		#print("Accelerating: ", current_speed)
-	
-	var forward_direction = Vector2.RIGHT.rotated(rotation)
-	velocity = forward_direction * current_speed
-	
-	move_and_slide()
+		move_and_slide()
 
 func shoot():
 	var bullet_instance = cannonball.instantiate()
@@ -89,3 +102,8 @@ func spawn_cannon_particles(pos: Vector2, normal: Vector2) -> void:
 	add_child(instance)
 	instance.global_position = pos
 	instance.rotation = normal.angle()
+
+func spawn_death_explosion(pos: Vector2) -> void:
+	var instance = DEATH_EXPLOSION.instantiate()
+	get_tree().get_current_scene().add_child(instance)
+	instance.global_position = pos
