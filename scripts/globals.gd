@@ -2,7 +2,7 @@ extends Node
 
 var camera
 
-var player_health: float = 5
+var player_health: float = 1000
 
 var playerDied = false
 

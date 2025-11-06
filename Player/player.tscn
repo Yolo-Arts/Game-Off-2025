@@ -17,6 +17,8 @@ height = 120.0
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_mask = 9
 script = ExtResource("1_k53q1")
+base_speed = 300.0
+turn_acceleration = 0.5
 
 [node name="ShipParts" type="Node2D" parent="."]
 rotation = -1.5707964
