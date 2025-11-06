@@ -1,15 +1,13 @@
 class_name  Player
 extends CharacterBody2D
 
-# TODO Make it so that W makes the player move, rather than constant speed.
-
 @export var base_speed: float = 150.0
-@export var max_speed: float = 500.0
+@export var max_speed: float = 700.0
 @export var min_turn_speed: float = 0.8  
-@export var max_turn_speed: float = 4.0  
-@export var turn_acceleration: float = 0.3
+@export var max_turn_speed: float = 6.0  
+@export var turn_acceleration: float = 0.4
 @export var acceleration: float = 1.0
-@export var deceleration: float = 0.5
+@export var deceleration: float = 0.15
 
 # Cannons
 @onready var cannon_left = $CannonLeft
@@ -50,24 +48,34 @@ func _physics_process(delta) -> void:
 		
 		if turn_direction != 0.0:
 			turn_time += delta
-			
 			var turn_factor = min(1.0, turn_time * turn_acceleration)
 			current_turn_speed = lerp(min_turn_speed, max_turn_speed, turn_factor)
 			
 			rotate(turn_direction * current_turn_speed * delta)
-			current_speed = lerp(current_speed, base_speed, deceleration * delta)
-			#print("Turning with speed: ", current_turn_speed, " Deaccelerating: ", current_speed)
 		else:
 			turn_time = 0.0
 			current_turn_speed = min_turn_speed
-			
-			current_speed = lerp(current_speed, max_speed, acceleration * delta)
-			#print("Accelerating: ", current_speed)
 		
+		var target_speed = 0.0
+		var current_accel = 0.0
+
+		if Input.is_action_pressed("move_forward"):
+			if turn_direction != 0.0:
+				target_speed = base_speed
+				current_accel = deceleration 
+			else:
+				target_speed = max_speed
+				current_accel = acceleration
+		else:
+			target_speed = base_speed
+			current_accel = acceleration 
+
+		current_speed = lerp(current_speed, target_speed, current_accel * delta)
 		var forward_direction = Vector2.RIGHT.rotated(rotation)
 		velocity = forward_direction * current_speed
 		
 		move_and_slide()
+
 
 func shoot():
 	var bullet_instance = cannonball.instantiate()
