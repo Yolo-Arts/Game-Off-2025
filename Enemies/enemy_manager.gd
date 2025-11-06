@@ -4,12 +4,12 @@ const SPAWN_RADIUS = 700
 
 @export var basic_enemy_scene: PackedScene
 
-
 func _on_timer_timeout():
 	var player = get_tree().get_first_node_in_group("player") as Node2D
 	if player == null:
 		return
-
+	
+	# TODO Turn this into a wave spawn system.
 	var enemy = basic_enemy_scene.instantiate() as Node2D
 	get_parent().add_child(enemy)
 	enemy.global_position = get_spawn_position()
@@ -17,7 +17,6 @@ func _on_timer_timeout():
 func get_spawn_position():
 	var player = get_tree().get_first_node_in_group("player") as Node2D
 	if player == null:
-		print("what")
 		return Vector2.ZERO
 	
 	var spawn_position = Vector2.ZERO

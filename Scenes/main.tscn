@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://d0id8y3lwuvg4"]
+[gd_scene load_steps=17 format=4 uid="uid://d0id8y3lwuvg4"]
 
 [ext_resource type="TileSet" uid="uid://dq0j7rx72yqkf" path="res://Resources/KenneyPirateTilemap.tres" id="1_jjgbg"]
 [ext_resource type="Script" uid="uid://iygc8so2fmtd" path="res://Scenes/main.gd" id="1_jjvhh"]
@@ -7,6 +7,9 @@
 [ext_resource type="Script" uid="uid://dec20rh0utiay" path="res://Scenes/camera_2d.gd" id="5_kry3j"]
 [ext_resource type="PackedScene" uid="uid://brjyeo32vgcfh" path="res://Enemies/enemy_manager.tscn" id="6_6bp64"]
 [ext_resource type="PackedScene" uid="uid://34fhm4pp3113" path="res://Enemies/basic_enemy.tscn" id="7_344ge"]
+[ext_resource type="Shader" uid="uid://c3xdyeo558avw" path="res://Shaders/grayscale.gdshader" id="8_344ge"]
+[ext_resource type="Script" uid="uid://dvs1hw40el01v" path="res://Scenes/grayscale_filter.gd" id="8_hptm8"]
+[ext_resource type="Texture2D" uid="uid://c12v3gr0dt8sm" path="res://icon.svg" id="9_ynf5e"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_8gbba"]
 
@@ -36,6 +39,9 @@ shader_parameter/tiling = Vector2(25, 25)
 shader_parameter/offSetSpeed = Vector2(0.1, 0.1)
 shader_parameter/backGroundDirX = 0.01200000382987999
 shader_parameter/backGroundDirY = 0.01500000397237999
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ynf5e"]
+shader = ExtResource("8_344ge")
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_jjvhh")
@@ -74,3 +80,12 @@ script = ExtResource("5_kry3j")
 
 [node name="EnemyManager" parent="." instance=ExtResource("6_6bp64")]
 basic_enemy_scene = ExtResource("7_344ge")
+
+[node name="GrayscaleFilter" type="CanvasLayer" parent="."]
+script = ExtResource("8_hptm8")
+
+[node name="Grayscale" type="Sprite2D" parent="GrayscaleFilter"]
+material = SubResource("ShaderMaterial_ynf5e")
+position = Vector2(577, 304)
+scale = Vector2(10.765625, 6.609375)
+texture = ExtResource("9_ynf5e")

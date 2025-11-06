@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="enemy_type" load_steps=3 format=3 uid="uid://c822wln20asv"]
+
+[ext_resource type="Script" uid="uid://bujng151akkyd" path="res://Resources/enemy_type.gd" id="1_e8rr3"]
+[ext_resource type="Texture2D" uid="uid://hwmpk22f2q2h" path="res://Assets/kenney_pirate-pack/PNG/Default size/Ships/ship (2).png" id="2_4anp4"]
+
+[resource]
+script = ExtResource("1_e8rr3")
+texture = ExtResource("2_4anp4")
+damage = 15.0
+metadata/_custom_type_script = "uid://bujng151akkyd"
