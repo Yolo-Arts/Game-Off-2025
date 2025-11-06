@@ -1,0 +1,21 @@
+[gd_scene load_steps=6 format=3 uid="uid://cbl87v0abvfrp"]
+
+[ext_resource type="TileSet" uid="uid://dq0j7rx72yqkf" path="res://Resources/KenneyPirateTilemap.tres" id="1_1c7qu"]
+[ext_resource type="Script" uid="uid://cmmnq6uom248" path="res://Scenes/proc_gen_world.gd" id="1_o670l"]
+[ext_resource type="PackedScene" uid="uid://dle2poylya83p" path="res://Player/player.tscn" id="2_uabjr"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ighaj"]
+frequency = 0.0147
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_p1hu2"]
+noise = SubResource("FastNoiseLite_ighaj")
+
+[node name="Proc_gen_world" type="Node2D"]
+script = ExtResource("1_o670l")
+noise_height_texture = SubResource("NoiseTexture2D_p1hu2")
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("1_1c7qu")
+format = 2
+
+[node name="Player" parent="." instance=ExtResource("2_uabjr")]

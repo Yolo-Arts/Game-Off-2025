@@ -47,3 +47,6 @@ position = Vector2(5, -40)
 
 [node name="CannonRight" type="Marker2D" parent="."]
 position = Vector2(5, 41)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.105, 0.105)
