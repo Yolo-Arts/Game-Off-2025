@@ -20,7 +20,6 @@ signal playSound
 @onready var hurt_shape = $Hurtbox/hurtShape
 
 
-
 @export var enemy_types: Array[Resource]
 var enemy_stats: Resource
 
@@ -58,7 +57,9 @@ func take_damage():
 	isDead = true
 	disable_hitbox()
 	Globals.camera.shake(0.20, 15, 20)
+	Globals.update_score("ENEMY_SHIPWRECKED")
 	playSound.emit()
+		
 
 
 func spawn_death_explosion(pos: Vector2, normal: Vector2) -> void:
