@@ -45,7 +45,6 @@ func _process(delta):
 		print("player died")
 		player_died.emit()
 		playerDied = true
-		flag = false
 		print("Final Score %s" % score)
 		
 func _on_my_timer_timeout():
