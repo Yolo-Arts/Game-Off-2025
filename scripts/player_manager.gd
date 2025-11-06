@@ -15,13 +15,14 @@ func _process(_delta: float) -> void:
 		level_up()
 		
 func level_up():
-	level += 1
 	# pause game
 	# show upgrade options
 	# allow player to choose upgrade
 	# implement upgrade
 	# change level thresholda
 	# resume game
+	level += 1                 
+	Globals.player_level_up.emit()
 	level_threshold = 2*level_threshold
 	print("level up")
 	return

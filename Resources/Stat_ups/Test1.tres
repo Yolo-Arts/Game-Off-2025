@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Statup" load_steps=3 format=3 uid="uid://b2k3d3nv6iipi"]
+
+[ext_resource type="Texture2D" uid="uid://c12v3gr0dt8sm" path="res://icon.svg" id="1_4vwku"]
+[ext_resource type="Script" uid="uid://cx0xqtau6rhsj" path="res://Resources/Stat_ups/Stat_up.gd" id="2_4vwku"]
+
+[resource]
+script = ExtResource("2_4vwku")
+image = ExtResource("1_4vwku")
+name = "test"
+description = "test test"
+metadata/_custom_type_script = "uid://cx0xqtau6rhsj"

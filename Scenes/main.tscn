@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://d0id8y3lwuvg4"]
+[gd_scene load_steps=19 format=4 uid="uid://d0id8y3lwuvg4"]
 
 [ext_resource type="TileSet" uid="uid://dq0j7rx72yqkf" path="res://Resources/KenneyPirateTilemap.tres" id="1_jjgbg"]
 [ext_resource type="Script" uid="uid://iygc8so2fmtd" path="res://Scenes/main.gd" id="1_jjvhh"]
@@ -11,6 +11,7 @@
 [ext_resource type="Shader" uid="uid://c3xdyeo558avw" path="res://Shaders/grayscale.gdshader" id="8_344ge"]
 [ext_resource type="Script" uid="uid://dvs1hw40el01v" path="res://Scenes/grayscale_filter.gd" id="8_hptm8"]
 [ext_resource type="Texture2D" uid="uid://c12v3gr0dt8sm" path="res://icon.svg" id="9_ynf5e"]
+[ext_resource type="PackedScene" uid="uid://d38tjnetmpjft" path="res://Scenes/UI/upgrade_menu.tscn" id="10_6iyac"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_8gbba"]
 
@@ -84,17 +85,6 @@ script = ExtResource("5_kry3j")
 [node name="EnemyManager" parent="." instance=ExtResource("6_6bp64")]
 basic_enemy_scene = ExtResource("7_344ge")
 
-[node name="Exp_Orb" parent="." instance=ExtResource("8_344ge")]
-position = Vector2(299, 22)
-
-[node name="Exp_Orb2" parent="." instance=ExtResource("8_344ge")]
-position = Vector2(540, -137)
-
-[node name="Exp_Orb3" parent="." instance=ExtResource("8_344ge")]
-position = Vector2(703, 199)
-
-[node name="Exp_Orb4" parent="." instance=ExtResource("8_344ge")]
-position = Vector2(193, 261)
 [node name="GrayscaleFilter" type="CanvasLayer" parent="."]
 script = ExtResource("8_hptm8")
 
@@ -103,3 +93,7 @@ material = SubResource("ShaderMaterial_ynf5e")
 position = Vector2(577, 304)
 scale = Vector2(10.765625, 6.609375)
 texture = ExtResource("9_ynf5e")
+
+[node name="menu_layer" type="CanvasLayer" parent="."]
+
+[node name="Upgrade_Menu" parent="menu_layer" instance=ExtResource("10_6iyac")]

@@ -3,6 +3,7 @@ extends Node
 var camera
 
 signal exp_collected
+signal player_level_up
 var player_health: float = 5
 
 var playerDied = false
