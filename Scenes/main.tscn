@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://d0id8y3lwuvg4"]
+[gd_scene load_steps=19 format=4 uid="uid://d0id8y3lwuvg4"]
 
 [ext_resource type="TileSet" uid="uid://dq0j7rx72yqkf" path="res://Resources/KenneyPirateTilemap.tres" id="1_jjgbg"]
 [ext_resource type="Script" uid="uid://iygc8so2fmtd" path="res://Scenes/main.gd" id="1_jjvhh"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://dvs1hw40el01v" path="res://Scenes/grayscale_filter.gd" id="8_hptm8"]
 [ext_resource type="Shader" uid="uid://c3xdyeo558avw" path="res://Shaders/grayscale.gdshader" id="9_d1ilt"]
 [ext_resource type="Texture2D" uid="uid://c12v3gr0dt8sm" path="res://icon.svg" id="9_ynf5e"]
+[ext_resource type="PackedScene" uid="uid://dm2vcmwj1bfse" path="res://Game_Objects/test_walls.tscn" id="12_6iyac"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_8gbba"]
 
@@ -74,10 +75,7 @@ tile_map_data = PackedByteArray("AAD+//z/AAABAAQAAAABAPz/AAAGAAQAAAADAPr/AAAAAAM
 tile_set = ExtResource("1_jjgbg")
 
 [node name="Player" parent="." instance=ExtResource("2_bo1nx")]
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-unique_name_in_owner = true
-script = ExtResource("5_kry3j")
+position = Vector2(-844, 622)
 
 [node name="EnemyManager" parent="." instance=ExtResource("6_6bp64")]
 basic_enemy_scene = ExtResource("7_344ge")
@@ -97,3 +95,27 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("8_344ge")
+
+[node name="TestMap" type="Node2D" parent="."]
+
+[node name="testWalls" parent="TestMap" instance=ExtResource("12_6iyac")]
+position = Vector2(57, 299)
+scale = Vector2(27.88, 1)
+
+[node name="testWalls2" parent="TestMap" instance=ExtResource("12_6iyac")]
+position = Vector2(51, 1551)
+scale = Vector2(27.88, 1)
+
+[node name="testWalls3" parent="TestMap" instance=ExtResource("12_6iyac")]
+position = Vector2(-1349, 919)
+scale = Vector2(-1.2464099, 10.33724)
+
+[node name="testWalls4" parent="TestMap" instance=ExtResource("12_6iyac")]
+position = Vector2(976, 919)
+scale = Vector2(-1.2464099, 10.33724)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-195, 912)
+zoom = Vector2(0.5, 0.5)
+script = ExtResource("5_kry3j")

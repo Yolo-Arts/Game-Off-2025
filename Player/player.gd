@@ -1,12 +1,15 @@
 extends CharacterBody2D
 
-@export var base_speed: float = 150.0
+# movement related code
+@export_group("Movement Parameters")
+@export var base_speed: float = 400
 @export var max_speed: float = 700.0
 @export var min_turn_speed: float = 0.8  
 @export var max_turn_speed: float = 6.0  
 @export var turn_acceleration: float = 0.4
 @export var acceleration: float = 1.0
 @export var deceleration: float = 0.15
+@export var bounce_dampening: float = 0.7
 
 # Cannons
 @onready var cannon_left = $CannonLeft
@@ -15,9 +18,17 @@ extends CharacterBody2D
 # Cannonball
 @onready var cannonball = preload("uid://m1jsvblrkbdq")
 
+@onready var animation_player = $AnimationPlayer
+
 # Particles
+@export_group("Particles")
 @export var cannon_fire: PackedScene = preload("uid://do1jur5t8qgko") 
 const DEATH_EXPLOSION = preload("uid://da1djwy4cr28t")
+const BOUNCE_PARTICLES = preload("uid://mr7hf4xv0s7j")
+
+
+# Sounds
+signal fire_cannon_SFX
 
 var current_speed: float = 300.0
 var current_turn_speed: float = min_turn_speed  
@@ -74,7 +85,16 @@ func _physics_process(delta) -> void:
 		var forward_direction = Vector2.RIGHT.rotated(rotation)
 		velocity = forward_direction * current_speed
 		
-		move_and_slide()
+		# Wall collisions:
+		var collision = move_and_collide(velocity * delta)
+		if collision:
+			animation_player.play("bounce")
+			var normal = collision.get_normal()
+			velocity = velocity.bounce(normal) * bounce_dampening
+			rotation = velocity.angle()
+			spawn_bounce_particles(collision.get_position(), normal)
+			Globals.camera.shake(0.15, 10, 5)
+			move_and_slide()
 
 
 func shoot():
@@ -110,8 +130,15 @@ func spawn_cannon_particles(pos: Vector2, normal: Vector2) -> void:
 	add_child(instance)
 	instance.global_position = pos
 	instance.rotation = normal.angle()
+	fire_cannon_SFX.emit()
 
 func spawn_death_explosion(pos: Vector2) -> void:
 	var instance = DEATH_EXPLOSION.instantiate()
 	get_tree().get_current_scene().add_child(instance)
 	instance.global_position = pos
+
+func spawn_bounce_particles(pos: Vector2, normal: Vector2) -> void:
+	var instance = BOUNCE_PARTICLES.instantiate()
+	add_child(instance)
+	instance.global_position = pos
+	instance.rotation = normal.angle()

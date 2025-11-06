@@ -50,6 +50,8 @@ func get_direction_to_player():
 		return direction
 	return Vector2.ZERO  # Return zero vector if no player found
 
+# TODO queue_free() enemy when they die. 
+
 func take_damage():
 	spawn_dead_ship(self.position, get_direction_to_player())
 	spawn_death_explosion(self.position, Vector2(0,0))
@@ -59,7 +61,7 @@ func take_damage():
 	Globals.camera.shake(0.20, 15, 20)
 	Globals.update_score("ENEMY_SHIPWRECKED")
 	playSound.emit()
-		
+
 
 
 func spawn_death_explosion(pos: Vector2, normal: Vector2) -> void:

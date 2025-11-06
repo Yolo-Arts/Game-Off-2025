@@ -1,10 +1,11 @@
 [gd_resource type="Resource" script_class="enemy_type" load_steps=3 format=3 uid="uid://bhkhvp6efwkbu"]
 
-[ext_resource type="Script" uid="uid://bujng151akkyd" path="res://Resources/enemy_type.gd" id="1_ey0vg"]
-[ext_resource type="Texture2D" uid="uid://cmgr0tenwiefy" path="res://Assets/kenney_pirate-pack/PNG/Default size/Ships/ship (3).png" id="2_e5cw5"]
+[ext_resource type="Script" uid="uid://bujng151akkyd" path="res://Resources/enemy_type.gd" id="1_apone"]
+[ext_resource type="Texture2D" uid="uid://cmgr0tenwiefy" path="res://Assets/kenney_pirate-pack/PNG/Default size/Ships/ship (3).png" id="2_b4p1m"]
 
 [resource]
-script = ExtResource("1_ey0vg")
-texture = ExtResource("2_e5cw5")
+script = ExtResource("1_apone")
+texture = ExtResource("2_b4p1m")
+speed = 300.0
 damage = 5.0
 metadata/_custom_type_script = "uid://bujng151akkyd"
