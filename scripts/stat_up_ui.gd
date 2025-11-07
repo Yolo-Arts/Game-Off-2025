@@ -12,6 +12,7 @@ var player: Player
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	# set up variables and grab player from group
 	var stat_up_image = Stat_up.image
 	var stat_up_name = Stat_up.name
 	var stat_up_description = Stat_up.description
@@ -27,6 +28,7 @@ func _process(_delta: float) -> void:
 
 
 func _on_button_pressed() -> void:
+	# pause game and allow options to choose from
 	if get_tree().paused == true:
 		get_tree().paused = false
 		Stat_up.apply_upgrade(player)

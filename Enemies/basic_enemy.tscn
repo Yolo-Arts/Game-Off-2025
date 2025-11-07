@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://34fhm4pp3113"]
 
-[ext_resource type="Script" uid="uid://d0cy7x87iaixj" path="res://Resources/basic_enemy.gd" id="1_221se"]
+[ext_resource type="Script" uid="uid://d0cy7x87iaixj" path="res://Enemies/basic_enemy.gd" id="1_221se"]
 [ext_resource type="Resource" uid="uid://c822wln20asv" path="res://Enemies/slow_enemy.tres" id="2_gie15"]
 [ext_resource type="Resource" uid="uid://bhkhvp6efwkbu" path="res://Enemies/slow_red_enemy.tres" id="3_iioo1"]
 [ext_resource type="Texture2D" uid="uid://hwmpk22f2q2h" path="res://Assets/kenney_pirate-pack/PNG/Default size/Ships/ship (2).png" id="4_iioo1"]

@@ -4,14 +4,14 @@ var camera
 
 signal exp_collected
 signal player_level_up
-var player_health: float = 5
+
 var player_health: float = 1000
 
 var playerDied = false
 
 signal player_died
 
-var my_timer: Timer = Timer.new()
+var my_timer: Timer = Timer.new()      
 const INTERVAL: float = 1
 var score = {
 	"PER_SECOND_SURVIVED":0,

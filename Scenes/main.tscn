@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://d0id8y3lwuvg4"]
+[gd_scene load_steps=20 format=4 uid="uid://d0id8y3lwuvg4"]
 
 [ext_resource type="TileSet" uid="uid://dq0j7rx72yqkf" path="res://Resources/KenneyPirateTilemap.tres" id="1_jjgbg"]
 [ext_resource type="Script" uid="uid://iygc8so2fmtd" path="res://Scenes/main.gd" id="1_jjvhh"]
@@ -86,6 +86,13 @@ script = ExtResource("5_kry3j")
 [node name="EnemyManager" parent="." instance=ExtResource("6_6bp64")]
 basic_enemy_scene = ExtResource("7_344ge")
 
+[node name="UserInterface" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("8_344ge")
+
 [node name="GrayscaleFilter" type="CanvasLayer" parent="."]
 script = ExtResource("8_hptm8")
 
@@ -98,9 +105,3 @@ texture = ExtResource("9_ynf5e")
 [node name="menu_layer" type="CanvasLayer" parent="."]
 
 [node name="Upgrade_Menu" parent="menu_layer" instance=ExtResource("10_6iyac")]
-[node name="UserInterface" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("8_344ge")

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Health_stat_up" load_steps=3 format=3 uid="uid://7iejxasil351"]
+
+[ext_resource type="Script" uid="uid://d4gv35wm8rxe" path="res://Resources/Stat_ups/health_up.gd" id="1_3d8p2"]
+[ext_resource type="Texture2D" uid="uid://c12v3gr0dt8sm" path="res://icon.svg" id="1_pa4gd"]
+
+[resource]
+script = ExtResource("1_3d8p2")
+image = ExtResource("1_pa4gd")
+name = "Health Up"
+description = "Increases health"
+metadata/_custom_type_script = "uid://d4gv35wm8rxe"

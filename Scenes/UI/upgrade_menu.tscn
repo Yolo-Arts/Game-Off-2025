@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://d38tjnetmpjft"]
+[gd_scene load_steps=5 format=3 uid="uid://d38tjnetmpjft"]
 
 [ext_resource type="Script" uid="uid://cjmocno1w2bko" path="res://scripts/upgrade_menu.gd" id="1_ltp0x"]
 [ext_resource type="PackedScene" uid="uid://oy6uunjy18" path="res://Scenes/UI/stat_up_ui.tscn" id="2_7giqg"]
+[ext_resource type="Resource" uid="uid://7iejxasil351" path="res://Resources/Stat_ups/Health_stat_up.tres" id="3_o5ea3"]
+[ext_resource type="Resource" uid="uid://hxju3ayitf60" path="res://Resources/Stat_ups/Speed_stat_up.tres" id="4_iryf2"]
 
 [node name="Upgrade_Menu" type="Control" groups=["Upgrade_UI"]]
 process_mode = 3
@@ -38,6 +40,7 @@ size_flags_horizontal = 3
 
 [node name="Stat_up_UI" parent="PanelContainer/HBoxContainer/CenterContainer2" instance=ExtResource("2_7giqg")]
 layout_mode = 2
+Stat_up = ExtResource("3_o5ea3")
 
 [node name="CenterContainer" type="CenterContainer" parent="PanelContainer/HBoxContainer"]
 layout_mode = 2
@@ -45,3 +48,4 @@ size_flags_horizontal = 3
 
 [node name="Stat_up_UI2" parent="PanelContainer/HBoxContainer/CenterContainer" instance=ExtResource("2_7giqg")]
 layout_mode = 2
+Stat_up = ExtResource("4_iryf2")

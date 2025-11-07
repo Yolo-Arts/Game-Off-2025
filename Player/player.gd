@@ -1,6 +1,8 @@
 class_name  Player
 extends CharacterBody2D
 
+var player_max_health: = 1000
+
 @export var base_speed: float = 150.0
 @export var max_speed: float = 700.0
 @export var min_turn_speed: float = 0.8  
@@ -102,7 +104,7 @@ func shoot():
 	
 	spawn_cannon_particles(leftCannonPos, left_cannon_direction)
 	spawn_cannon_particles(rightCannonPos, right_cannon_direction)
-	
+
 	Globals.camera.shake(0.25, 10, 10)
 
 func spawn_cannon_particles(pos: Vector2, normal: Vector2) -> void:
