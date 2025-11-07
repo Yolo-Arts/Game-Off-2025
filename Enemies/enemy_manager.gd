@@ -1,6 +1,7 @@
 extends Node
 
 const SPAWN_RADIUS = 700
+var swapper_index = 0
 
 @export var basic_enemy_scene: PackedScene
 
@@ -12,7 +13,13 @@ func _on_timer_timeout():
 	# TODO Turn this into a wave spawn system.
 	var enemy = basic_enemy_scene.instantiate() as Node2D
 	get_parent().add_child(enemy)
+	enemy.set_enemy_type(swapper_index)
 	enemy.global_position = get_spawn_position()
+	
+	if swapper_index == 0:
+		swapper_index = 1
+	else: 
+		swapper_index = 0
 
 func get_spawn_position():
 	var player = get_tree().get_first_node_in_group("player") as Node2D
