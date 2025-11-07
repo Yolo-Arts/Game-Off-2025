@@ -7,8 +7,12 @@ class_name Enemy
 
 var speed
 var health
+
+# Particles
 const DEATH_EXPLOSION = preload("uid://da1djwy4cr28t")
 const DEAD_SHIP = preload("uid://cjqp43sw23woi")
+const HIT_EXPLOSION = preload("uid://bk5p2f8p57tdj")
+
 
 signal playSound
 
@@ -65,6 +69,7 @@ func get_direction_to_player():
 func take_damage(damage: int):
 	health -= damage
 	self.animation_player.play("hit_flash")
+	spawn_hit_explosion(self.position, Vector2(0,0))
 	if health <= health/2:
 		sprite.texture = enemy_stats.texture_damaged
 		speed = speed/2
@@ -91,6 +96,12 @@ func spawn_dead_ship(pos: Vector2, normal:Vector2) -> void:
 	add_child(instance)
 	instance.global_position = pos
 	instance.rotation = get_direction_to_player().angle() + deg_to_rad(180)
+
+func spawn_hit_explosion(pos: Vector2, normal:Vector2) -> void:
+	var instance = HIT_EXPLOSION.instantiate()
+	add_child(instance)
+	instance.global_position = pos
+	instance.rotation = normal.angle()
 
 func disable_hitbox():
 	print("disabled")
