@@ -51,6 +51,14 @@ land_to_water_ratio = 0.5
 modulate = Color(1, 1, 1, 0.48235294)
 tile_set = ExtResource("1_1c7qu")
 
+[node name="ColorRect" type="ColorRect" parent="Tilemap"]
+material = SubResource("ShaderMaterial_ysbv3")
+offset_left = -3192.0
+offset_top = -2519.0
+offset_right = 4626.0
+offset_bottom = 2643.0
+metadata/_edit_use_anchors_ = true
+
 [node name="Sand" type="TileMapLayer" parent="Tilemap"]
 tile_set = ExtResource("1_1c7qu")
 
@@ -59,14 +67,5 @@ tile_set = ExtResource("1_1c7qu")
 
 [node name="Rocks and plant" type="TileMapLayer" parent="Tilemap"]
 tile_set = ExtResource("1_1c7qu")
-
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
-material = SubResource("ShaderMaterial_ysbv3")
-offset_left = -3192.0
-offset_top = -2519.0
-offset_right = 4626.0
-offset_bottom = 2643.0
-metadata/_edit_use_anchors_ = true
 
 [node name="Player" parent="." instance=ExtResource("2_uabjr")]

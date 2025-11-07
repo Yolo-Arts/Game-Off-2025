@@ -5,6 +5,8 @@ extends Node2D
 @onready var grass: TileMapLayer = $Tilemap/Grass
 @onready var rocks_and_plant: TileMapLayer = $"Tilemap/Rocks and plant"
 
+#var land_threshold = 0.1
+
 var terrain_set = 0
 var sand_terrain_int = 0
 var water_terrain_int = 1
@@ -32,9 +34,10 @@ var noise_array = []
 
 func _ready() -> void:
 	noise = noise_height_texture.noise
-	generate_world()
+	generate_world()#
+	
 
-func find_noise_range(noise: Noise) -> float:
+func find_noise_range(noise: Noise) -> Array:
 	for x in range(-width/2, width/2):
 		for y in range(-height/2, height/2):
 			var current_noise_val = noise.get_noise_2d(x, y)
@@ -46,18 +49,29 @@ func find_noise_range(noise: Noise) -> float:
 	var noise_mean = (max_noise_val + min_noise_val)/2
 	
 	var land_threshold = noise_mean - (max_noise_val - min_noise_val)/2*(2*land_to_water_ratio-1)
-	
-	return land_threshold
+	var grass_threshold = (max_noise_val+land_threshold)*0.5
+	var rock_threshold = (grass_threshold + max_noise_val)*0.5
+	return [land_threshold, grass_threshold, rock_threshold]
 	
 	
 
 func generate_world() -> void:
-	var land_threshold = find_noise_range(noise)
+	var thresholds = find_noise_range(noise)
+	var land_threshold = thresholds[0]
+	var grass_threshold = thresholds[1]
+	var rock_thresold = thresholds[2]
+	
 	for x in range(-width/2, width/2):
 		for y in range(-height/2, height/2):
 			var current_coord = Vector2i(x, y)
 			var noise_val = noise.get_noise_2d(x, y)
-			if noise_val > land_threshold:
+			
+			if noise_val > grass_threshold:
+				if noise_val > rock_thresold:
+					rock_tiles_array.append(current_coord)
+				grass_tiles_array.append(current_coord)
+				
+			elif noise_val > land_threshold:
 				#place land tile
 				sand_tiles_array.append(current_coord)
 				
@@ -68,6 +82,8 @@ func generate_world() -> void:
 			
 	
 	sand.set_cells_terrain_connect(sand_tiles_array, terrain_set, sand_terrain_int)
+	grass.set_cells_terrain_connect(grass_tiles_array, terrain_set, grass_terrain_int)
+	rocks_and_plant.set_cells_terrain_connect(rock_tiles_array, terrain_set, rock_terrain_int)
 	water.set_cells_terrain_connect(water_tiles_array, terrain_set, water_terrain_int)
 	
 	print("highest:", noise_array.max())
