@@ -22,6 +22,7 @@ signal playSound
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
+
 @export var enemy_types: Array[Resource]
 var enemy_stats: Resource
 
@@ -112,6 +113,8 @@ func disable_hitbox():
 func _on_hurtbox_body_entered(body):
 	if body == player && damage_interval_timer.is_stopped():
 		Globals.player_health -= enemy_stats.damage
+		player.animation_player.play("hit_shock")
+		Globals.camera.shake(0.5, 15, 10)
 		print("Player Health: ", Globals.player_health, "Damaged by: ", enemy_stats.type)
 		damage_interval_timer.start()
 	else:
