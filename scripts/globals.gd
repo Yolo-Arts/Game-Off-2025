@@ -29,7 +29,7 @@ enum POINTS_CATEGORIES  {
 }
 
 func _ready() -> void:
-	UserInterface = get_parent().get_node("Main").get_node("UserInterface")
+	UserInterface = get_parent().get_node("Main").get_node("UI").get_node("UserInterface")
 	my_timer.wait_time = INTERVAL
 	my_timer.autostart = true
 	my_timer.one_shot = false
