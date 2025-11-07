@@ -1,13 +1,15 @@
-[gd_scene load_steps=22 format=3 uid="uid://dle2poylya83p"]
+[gd_scene load_steps=24 format=3 uid="uid://dle2poylya83p"]
 
 [ext_resource type="Script" uid="uid://c8cpssj7vjehk" path="res://Player/player.gd" id="1_k53q1"]
 [ext_resource type="Texture2D" uid="uid://b8s48xncdlhd4" path="res://Assets/kenney_pirate-pack/PNG/Default size/Ship parts/hullLarge (1).png" id="1_l8h54"]
-[ext_resource type="Shader" uid="uid://dhfkgyvufew58" path="res://Shaders/shock_damage.gdshader" id="1_od3ui"]
+[ext_resource type="Shader" path="res://Shaders/shock_damage.gdshader" id="1_od3ui"]
 [ext_resource type="Texture2D" uid="uid://dybfpbl7p25yw" path="res://Assets/kenney_pirate-pack/PNG/Default size/Ship parts/sailLarge (7).png" id="2_4ntmi"]
 [ext_resource type="Texture2D" uid="uid://djop37l8jw66f" path="res://Assets/kenney_pirate-pack/PNG/Default size/Ship parts/cannonLoose.png" id="3_gwnis"]
 [ext_resource type="Texture2D" uid="uid://dmnkbpixhqpsq" path="res://Assets/kenney_pirate-pack/PNG/Default size/Ship parts/nest.png" id="3_k53q1"]
 [ext_resource type="AudioStream" uid="uid://d0bs1a2x8outq" path="res://sounds/cannon_fire.sfxr" id="6_84ia6"]
-[ext_resource type="Script" uid="uid://c1a3da1a17ig8" path="res://Player/cannon_fire_sfx.gd" id="7_utq14"]
+[ext_resource type="Script" path="res://Player/cannon_fire_sfx.gd" id="7_utq14"]
+[ext_resource type="Script" uid="uid://octyfubw21an" path="res://Player/player_hurt_sfx.gd" id="9_00tjw"]
+[ext_resource type="Resource" uid="uid://2j64bpw03vht" path="res://Resources/player_hurt_sfx.tres" id="10_x3vf3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_00tjw"]
 
@@ -469,7 +471,12 @@ libraries = {
 &"": SubResource("AnimationLibrary_rxrgg")
 }
 
+[node name="PlayerHurtSFX" type="AudioStreamPlayer2D" parent="."]
+script = ExtResource("9_00tjw")
+hurt_SFX = ExtResource("10_x3vf3")
+
 [connection signal="fire_cannon_SFX" from="." to="CannonFireSFX" method="_on_player_fire_cannon_sfx"]
+[connection signal="playerHitSFX" from="." to="PlayerHurtSFX" method="_on_player_player_hit_sfx"]
 [connection signal="body_entered" from="DamageArea" to="." method="_on_damage_area_body_entered"]
 [connection signal="body_exited" from="DamageArea" to="." method="_on_damage_area_body_exited"]
 [connection signal="timeout" from="damage_interval_timer" to="." method="_on_damage_interval_timer_timeout"]

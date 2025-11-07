@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://34fhm4pp3113"]
 
 [ext_resource type="Script" uid="uid://d0cy7x87iaixj" path="res://Enemies/basic_enemy.gd" id="1_221se"]
-[ext_resource type="Shader" uid="uid://darti4k2he22i" path="res://Shaders/hit_flash.gdshader" id="1_qenpu"]
+[ext_resource type="Shader" path="res://Shaders/hit_flash.gdshader" id="1_qenpu"]
 [ext_resource type="Resource" uid="uid://c822wln20asv" path="res://Enemies/slow_enemy.tres" id="2_gie15"]
 [ext_resource type="Resource" uid="uid://bhkhvp6efwkbu" path="res://Enemies/slow_red_enemy.tres" id="3_iioo1"]
 [ext_resource type="Texture2D" uid="uid://hwmpk22f2q2h" path="res://Assets/kenney_pirate-pack/PNG/Default size/Ships/ship (2).png" id="4_iioo1"]
@@ -25,6 +25,21 @@ height = 120.0
 radius = 16.0
 height = 110.0
 
+[sub_resource type="Animation" id="Animation_e4a15"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/flash_value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
 [sub_resource type="Animation" id="Animation_qenpu"]
 resource_name = "hit_flash"
 length = 0.2
@@ -39,21 +54,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(-2, -2, -2),
 "update": 0,
 "values": [0.0, 1.0, 0.0]
-}
-
-[sub_resource type="Animation" id="Animation_e4a15"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:material:shader_parameter/flash_value")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_85m4s"]

@@ -108,13 +108,12 @@ func disable_hitbox():
 		hurt_shape.queue_free()
 	
 
-signal hitPlayer
 
 #TODO add a signal to make sure that the timer works properly
 func _on_hurtbox_body_entered(body):
 	if body == player && damage_interval_timer.is_stopped():
 		Globals.player_health -= enemy_stats.damage
-		hitPlayer.emit()
+		player.player_hit()
 		player.animation_player.play("hit_shock")
 		Globals.camera.shake(0.5, 15, 10)
 		print("Player Health: ", Globals.player_health, "Damaged by: ", enemy_stats.type)

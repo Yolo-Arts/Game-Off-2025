@@ -29,6 +29,8 @@ const BOUNCE_PARTICLES = preload("uid://mr7hf4xv0s7j")
 
 # Sounds
 signal fire_cannon_SFX
+@onready var player_hurt_sfx = $PlayerHurtSFX
+
 
 var current_speed: float = 300.0
 var current_turn_speed: float = min_turn_speed  
@@ -142,3 +144,8 @@ func spawn_bounce_particles(pos: Vector2, normal: Vector2) -> void:
 	add_child(instance)
 	instance.global_position = pos
 	instance.rotation = normal.angle()
+
+signal playerHitSFX
+
+func player_hit():
+	playerHitSFX.emit()
