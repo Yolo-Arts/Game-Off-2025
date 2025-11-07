@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://dle2poylya83p"]
+[gd_scene load_steps=13 format=3 uid="uid://dle2poylya83p"]
 
 [ext_resource type="Script" uid="uid://c8cpssj7vjehk" path="res://Player/player.gd" id="1_k53q1"]
 [ext_resource type="Texture2D" uid="uid://b8s48xncdlhd4" path="res://Assets/kenney_pirate-pack/PNG/Default size/Ship parts/hullLarge (1).png" id="1_l8h54"]
 [ext_resource type="Texture2D" uid="uid://dybfpbl7p25yw" path="res://Assets/kenney_pirate-pack/PNG/Default size/Ship parts/sailLarge (7).png" id="2_4ntmi"]
 [ext_resource type="Texture2D" uid="uid://djop37l8jw66f" path="res://Assets/kenney_pirate-pack/PNG/Default size/Ship parts/cannonLoose.png" id="3_gwnis"]
 [ext_resource type="Texture2D" uid="uid://dmnkbpixhqpsq" path="res://Assets/kenney_pirate-pack/PNG/Default size/Ship parts/nest.png" id="3_k53q1"]
+[ext_resource type="AudioStream" uid="uid://d0bs1a2x8outq" path="res://sounds/cannon_fire.sfxr" id="6_84ia6"]
+[ext_resource type="Script" uid="uid://c1a3da1a17ig8" path="res://Player/cannon_fire_sfx.gd" id="7_utq14"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k53q1"]
 radius = 21.0
@@ -14,11 +16,47 @@ height = 126.0
 radius = 22.0
 height = 120.0
 
+[sub_resource type="Animation" id="Animation_utq14"]
+resource_name = "bounce"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ShipParts:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.16666667, 0.3),
+"transitions": PackedFloat32Array(-2, -2, -2, -2),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.22, 0.45), Vector2(0.835, 1.03), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_m6d10"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ShipParts:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rxrgg"]
+_data = {
+&"RESET": SubResource("Animation_m6d10"),
+&"bounce": SubResource("Animation_utq14")
+}
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 3
 collision_mask = 9
 script = ExtResource("1_k53q1")
-base_speed = 300.0
 turn_acceleration = 0.5
 
 [node name="ShipParts" type="Node2D" parent="."]
@@ -77,6 +115,18 @@ debug_color = Color(0.70196074, 0, 0, 0.41960785)
 wait_time = 0.5
 one_shot = true
 
+[node name="CannonFireSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_84ia6")
+volume_db = -10.32
+bus = &"SFX"
+script = ExtResource("7_utq14")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_rxrgg")
+}
+
+[connection signal="fire_cannon_SFX" from="." to="CannonFireSFX" method="_on_player_fire_cannon_sfx"]
 [connection signal="body_entered" from="DamageArea" to="." method="_on_damage_area_body_entered"]
 [connection signal="body_exited" from="DamageArea" to="." method="_on_damage_area_body_exited"]
 [connection signal="timeout" from="damage_interval_timer" to="." method="_on_damage_interval_timer_timeout"]

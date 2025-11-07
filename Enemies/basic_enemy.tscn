@@ -43,6 +43,7 @@ shape = SubResource("CapsuleShape2D_4vdx4")
 debug_color = Color(0.5813112, 0, 0.70196074, 0.41960785)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+bus = &"SFX"
 script = ExtResource("5_4vdx4")
 explosion_sounds = ExtResource("6_rcyh1")
 

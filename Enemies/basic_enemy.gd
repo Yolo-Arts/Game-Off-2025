@@ -5,7 +5,8 @@ class_name Enemy
 #TODO FIX THE MOVEMENT SCRIPT SO THAT THEY ACTUALLY MOVE LIKE A BOAT 
 #FIXME Fix the hitboxes, they do not rotate with the enemy.
 
-@export var speed = 200
+var speed
+var health
 const DEATH_EXPLOSION = preload("uid://da1djwy4cr28t")
 const DEAD_SHIP = preload("uid://cjqp43sw23woi")
 const EXP_ORB = preload("res://Scenes/exp_orb.tscn")
@@ -29,9 +30,12 @@ var isDead = false
 
 var rng = RandomNumberGenerator.new()
 
-func _ready():
-	rng.randomize()
-	enemy_stats = enemy_types[randi_range(0, enemy_types.size() - 1)]
+func set_enemy_type(enemy_type: int):
+	if enemy_type > enemy_types.size(): 
+		return
+	enemy_stats = enemy_types[enemy_type]
+	speed = enemy_stats.speed
+	health = enemy_stats.health
 	if enemy_stats.texture:
 		sprite.texture = enemy_stats.texture
 
@@ -51,17 +55,23 @@ func get_direction_to_player():
 		return direction
 	return Vector2.ZERO  # Return zero vector if no player found
 
-func take_damage():
-	spawn_dead_ship(self.position, get_direction_to_player())
-	spawn_death_explosion(self.position, Vector2(0,0))
-	spawn_exp_orb(self.position)
-	sprite.visible = false
-	isDead = true
-	disable_hitbox()
-	Globals.camera.shake(0.20, 15, 20)
-	Globals.update_score("ENEMY_SHIPWRECKED")
-	playSound.emit()
-		
+# TODO queue_free() enemy when they die. 
+
+func take_damage(damage: int):
+	health -= damage
+	if health <= health/2:
+		sprite.texture = enemy_stats.texture_damaged
+		speed = speed/2
+	if health < 0:
+		spawn_dead_ship(self.position, get_direction_to_player())
+		spawn_death_explosion(self.position, Vector2(0,0))
+		sprite.visible = false
+		isDead = true
+		disable_hitbox() 
+		Globals.camera.shake(0.20, 15, 20)
+		Globals.update_score("ENEMY_SHIPWRECKED")
+		playSound.emit()
+
 
 
 func spawn_death_explosion(pos: Vector2, normal: Vector2) -> void:
