@@ -60,7 +60,7 @@ func get_direction_to_player():
 		return direction
 	return Vector2.ZERO  # Return zero vector if no player found
 
-# TODO queue_free() enemy when they die. 
+# FIXME queue_free() enemy when they die. 
 
 func take_damage(damage: int):
 	health -= damage
@@ -108,11 +108,13 @@ func disable_hitbox():
 		hurt_shape.queue_free()
 	
 
+signal hitPlayer
 
 #TODO add a signal to make sure that the timer works properly
 func _on_hurtbox_body_entered(body):
 	if body == player && damage_interval_timer.is_stopped():
 		Globals.player_health -= enemy_stats.damage
+		hitPlayer.emit()
 		player.animation_player.play("hit_shock")
 		Globals.camera.shake(0.5, 15, 10)
 		print("Player Health: ", Globals.player_health, "Damaged by: ", enemy_stats.type)

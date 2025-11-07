@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://d0id8y3lwuvg4"]
+[gd_scene load_steps=22 format=4 uid="uid://d0id8y3lwuvg4"]
 
 [ext_resource type="TileSet" uid="uid://dq0j7rx72yqkf" path="res://Resources/KenneyPirateTilemap.tres" id="1_jjgbg"]
 [ext_resource type="Script" uid="uid://iygc8so2fmtd" path="res://Scenes/main.gd" id="1_jjvhh"]
@@ -12,6 +12,8 @@
 [ext_resource type="Shader" uid="uid://c3xdyeo558avw" path="res://Shaders/grayscale.gdshader" id="9_d1ilt"]
 [ext_resource type="Texture2D" uid="uid://c12v3gr0dt8sm" path="res://icon.svg" id="9_ynf5e"]
 [ext_resource type="PackedScene" uid="uid://dm2vcmwj1bfse" path="res://Game_Objects/test_walls.tscn" id="12_6iyac"]
+[ext_resource type="Shader" uid="uid://v1xgpsc65cqs" path="res://Scenes/screen_hit_flash.gdshader" id="13_fdnlq"]
+[ext_resource type="Script" uid="uid://dnyf7avobunau" path="res://Scenes/screen_damage_flash.gd" id="13_jkdf5"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_8gbba"]
 
@@ -45,6 +47,14 @@ shader_parameter/backGroundDirY = 0.01500000397237999
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ynf5e"]
 shader = ExtResource("9_d1ilt")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jkdf5"]
+shader = ExtResource("13_fdnlq")
+shader_parameter/flash_color = Color(1, 0, 0, 1)
+shader_parameter/intensity = 0.0
+shader_parameter/edge_power = 2.5
+shader_parameter/inner_ratio = 0.75
+shader_parameter/feather = 0.4
+
 [node name="Main" type="Node2D"]
 script = ExtResource("1_jjvhh")
 
@@ -75,6 +85,7 @@ tile_map_data = PackedByteArray("AAD+//z/AAABAAQAAAABAPz/AAAGAAQAAAADAPr/AAAAAAM
 tile_set = ExtResource("1_jjgbg")
 
 [node name="Player" parent="." instance=ExtResource("2_bo1nx")]
+unique_name_in_owner = true
 position = Vector2(-844, 622)
 
 [node name="EnemyManager" parent="." instance=ExtResource("6_6bp64")]
@@ -119,3 +130,14 @@ unique_name_in_owner = true
 position = Vector2(-195, 912)
 zoom = Vector2(0.5, 0.5)
 script = ExtResource("5_kry3j")
+
+[node name="ScreenDamageFlash" type="CanvasLayer" parent="."]
+script = ExtResource("13_jkdf5")
+
+[node name="Screen_flash" type="ColorRect" parent="ScreenDamageFlash"]
+material = SubResource("ShaderMaterial_jkdf5")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
