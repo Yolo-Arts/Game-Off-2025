@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+# TODO finish this
+
 #@export var enemy: PackedScene
 #@onready var material: ColorRect = $Screen_flash
 #
