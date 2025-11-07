@@ -14,6 +14,8 @@ extends CharacterBody2D
 @onready var cannon_left = $CannonLeft
 @onready var cannon_right = $CannonRight
 
+@onready var camera_2d: Camera2D = $Camera2D
+
 # Cannonball
 @onready var cannonball = preload("uid://m1jsvblrkbdq")
 
@@ -21,14 +23,16 @@ extends CharacterBody2D
 @export var cannon_fire: PackedScene = preload("uid://do1jur5t8qgko") 
 const DEATH_EXPLOSION = preload("uid://da1djwy4cr28t")
 
+
 var current_speed: float = 300.0
 var current_turn_speed: float = min_turn_speed  
 var turn_time: float = 0.0 
 
 var isDead = false
-
+   
 func _ready():
 	Globals.player_died.connect(dead_player)
+	Globals.camera = camera_2d
 
 func dead_player():
 	isDead = true

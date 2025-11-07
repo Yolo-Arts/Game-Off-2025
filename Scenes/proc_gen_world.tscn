@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cbl87v0abvfrp"]
+[gd_scene load_steps=12 format=3 uid="uid://cbl87v0abvfrp"]
 
 [ext_resource type="TileSet" uid="uid://dq0j7rx72yqkf" path="res://Resources/KenneyPirateTilemap.tres" id="1_1c7qu"]
 [ext_resource type="Script" uid="uid://cmmnq6uom248" path="res://Scenes/proc_gen_world.gd" id="1_o670l"]
+[ext_resource type="Shader" uid="uid://b4oixuorco5vd" path="res://Shaders/water.gdshader" id="2_ighaj"]
 [ext_resource type="PackedScene" uid="uid://dle2poylya83p" path="res://Player/player.tscn" id="2_uabjr"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ighaj"]
@@ -10,12 +11,62 @@ frequency = 0.0147
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_p1hu2"]
 noise = SubResource("FastNoiseLite_ighaj")
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ft30c"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_qqs6s"]
+noise = SubResource("FastNoiseLite_ft30c")
+seamless = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_37qt4"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_sd6co"]
+noise = SubResource("FastNoiseLite_37qt4")
+seamless = true
+invert = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ysbv3"]
+shader = ExtResource("2_ighaj")
+shader_parameter/waterNoise = SubResource("NoiseTexture2D_sd6co")
+shader_parameter/waterDistortionNoise = SubResource("NoiseTexture2D_qqs6s")
+shader_parameter/waterColor = Color(0.25193787, 0.7370279, 0.81640625, 1)
+shader_parameter/colorCorection = 0.3499999921768
+shader_parameter/distortionForce = 0.01600000076
+shader_parameter/WDBrightness = 1.0000000149012
+shader_parameter/WDFreq = 0.6
+shader_parameter/WDSize = 0.95000002905728
+shader_parameter/WDSpeed = 3.15000003203758
+shader_parameter/tiling = Vector2(25, 25)
+shader_parameter/offSetSpeed = Vector2(0.1, 0.1)
+shader_parameter/backGroundDirX = 0.01200000382987999
+shader_parameter/backGroundDirY = 0.01500000397237999
+
 [node name="Proc_gen_world" type="Node2D"]
 script = ExtResource("1_o670l")
 noise_height_texture = SubResource("NoiseTexture2D_p1hu2")
+land_to_water_ratio = 0.5
 
-[node name="TileMap" type="TileMap" parent="."]
+[node name="Tilemap" type="Node2D" parent="."]
+
+[node name="Water" type="TileMapLayer" parent="Tilemap"]
+modulate = Color(1, 1, 1, 0.48235294)
 tile_set = ExtResource("1_1c7qu")
-format = 2
+
+[node name="Sand" type="TileMapLayer" parent="Tilemap"]
+tile_set = ExtResource("1_1c7qu")
+
+[node name="Grass" type="TileMapLayer" parent="Tilemap"]
+tile_set = ExtResource("1_1c7qu")
+
+[node name="Rocks and plant" type="TileMapLayer" parent="Tilemap"]
+tile_set = ExtResource("1_1c7qu")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_ysbv3")
+offset_left = -3192.0
+offset_top = -2519.0
+offset_right = 4626.0
+offset_bottom = 2643.0
+metadata/_edit_use_anchors_ = true
 
 [node name="Player" parent="." instance=ExtResource("2_uabjr")]
