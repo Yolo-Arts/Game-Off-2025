@@ -15,7 +15,7 @@ signal playSound
 @onready var collision_shape_2d = $CollisionShape2D
 @onready var hitbox_collision_shape_2d = $Hitbox/CollisionShape2D
 @onready var hitboxArea = $Hitbox
-@onready var exp_orb: Area2D = $Exp_Orb
+#@onready var exp_orb: Area2D = $Exp_Orb
 @onready var damage_interval_timer = $damage_interval_timer
 @onready var hurtbox = $Hurtbox
 @onready var hurt_shape = $Hurtbox/hurtShape
@@ -78,7 +78,7 @@ func spawn_dead_ship(pos: Vector2, normal:Vector2) -> void:
 
 func spawn_exp_orb(pos: Vector2):
 	var instance = EXP_ORB.instantiate()
-	add_child(instance)
+	get_tree().get_current_scene().call_deferred("add_child", instance)
 	instance.global_position = pos
 
 func disable_hitbox():
