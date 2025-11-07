@@ -19,6 +19,7 @@ signal playSound
 @onready var damage_interval_timer = $damage_interval_timer
 @onready var hurtbox = $Hurtbox
 @onready var hurt_shape = $Hurtbox/hurtShape
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
 @export var enemy_types: Array[Resource]
@@ -28,6 +29,10 @@ var player = null
 var isDead = false
 
 var rng = RandomNumberGenerator.new()
+
+func _ready() -> void:
+	if sprite.material:
+		sprite.material = sprite.material.duplicate()
 
 func set_enemy_type(enemy_type: int):
 	if enemy_type > enemy_types.size(): 
@@ -58,6 +63,7 @@ func get_direction_to_player():
 
 func take_damage(damage: int):
 	health -= damage
+	self.animation_player.play("hit_flash")
 	if health <= health/2:
 		sprite.texture = enemy_stats.texture_damaged
 		speed = speed/2
