@@ -48,7 +48,7 @@ func spawn():
 		#TODO Add a spawn animation for enemy to give the player a chance before they get absolutely jumped.
 		 #add 0.5 second delay before spawning
 		var instance = ENEMY_SPAWN_INDICATOR.instantiate()
-		get_parent().add_child(instance)
+		get_parent().add_child.call_deferred(instance)
 		instance.global_position = enemy.global_position
 		await get_tree().create_timer(1.7).timeout
 		#await get_tree().create_timer(0.2).timeout
