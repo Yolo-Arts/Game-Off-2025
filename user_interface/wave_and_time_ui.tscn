@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://dgraqldufn15t"]
+
+[ext_resource type="Script" uid="uid://dkfnj0a5uckl1" path="res://wave_and_time_ui.gd" id="1_dk8ve"]
+
+[node name="WaveAndTimeUI" type="CanvasLayer"]
+script = ExtResource("1_dk8ve")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_top = 50
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "TEST"
+horizontal_alignment = 1

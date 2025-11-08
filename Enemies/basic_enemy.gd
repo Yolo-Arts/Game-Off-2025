@@ -12,10 +12,10 @@ var health
 const DEATH_EXPLOSION = preload("uid://da1djwy4cr28t")
 const DEAD_SHIP = preload("uid://cjqp43sw23woi")
 const HIT_EXPLOSION = preload("uid://bk5p2f8p57tdj")
+const SHIP__4_ = preload("uid://dtggqs3n2orf8")
 
 
 signal playSound
-
 @onready var sprite = $Sprite2D
 @onready var collision_shape_2d = $CollisionShape2D
 @onready var hitbox_collision_shape_2d = $Hitbox/CollisionShape2D
@@ -36,17 +36,19 @@ var isDead = false
 var rng = RandomNumberGenerator.new()
 
 func _ready() -> void:
+	if enemy_stats and enemy_stats.texture:
+		sprite.texture = enemy_stats.texture
+
 	if sprite.material:
 		sprite.material = sprite.material.duplicate()
 
 func set_enemy_type(enemy_type: int):
-	if enemy_type > enemy_types.size(): 
+	if enemy_type >= enemy_types.size(): 
 		return
 	enemy_stats = enemy_types[enemy_type]
 	speed = enemy_stats.speed
 	health = enemy_stats.health
-	if enemy_stats.texture:
-		sprite.texture = enemy_stats.texture
+
 
 func _physics_process(_delta):
 	if !isDead: 

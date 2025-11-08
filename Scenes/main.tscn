@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://d0id8y3lwuvg4"]
+[gd_scene load_steps=28 format=4 uid="uid://d0id8y3lwuvg4"]
 
 [ext_resource type="TileSet" uid="uid://dq0j7rx72yqkf" path="res://Resources/KenneyPirateTilemap.tres" id="1_jjgbg"]
 [ext_resource type="Script" uid="uid://iygc8so2fmtd" path="res://Scenes/main.gd" id="1_jjvhh"]
@@ -8,13 +8,18 @@
 [ext_resource type="PackedScene" uid="uid://brjyeo32vgcfh" path="res://Enemies/enemy_manager.tscn" id="6_6bp64"]
 [ext_resource type="PackedScene" uid="uid://34fhm4pp3113" path="res://Enemies/basic_enemy.tscn" id="7_344ge"]
 [ext_resource type="Script" path="res://Scenes/user_interface.gd" id="8_344ge"]
-[ext_resource type="Script" uid="uid://dvs1hw40el01v" path="res://Scenes/grayscale_filter.gd" id="8_hptm8"]
-[ext_resource type="Shader" uid="uid://c3xdyeo558avw" path="res://Shaders/grayscale.gdshader" id="9_d1ilt"]
+[ext_resource type="Script" path="res://Scenes/grayscale_filter.gd" id="8_hptm8"]
+[ext_resource type="Shader" path="res://Shaders/grayscale.gdshader" id="9_d1ilt"]
 [ext_resource type="Texture2D" uid="uid://c12v3gr0dt8sm" path="res://icon.svg" id="9_ynf5e"]
 [ext_resource type="Script" uid="uid://d3svlihxaqvav" path="res://user_interface/hp_label.gd" id="11_wsu2k"]
 [ext_resource type="PackedScene" uid="uid://dm2vcmwj1bfse" path="res://Game_Objects/test_walls.tscn" id="12_6iyac"]
 [ext_resource type="Shader" uid="uid://v1xgpsc65cqs" path="res://Scenes/screen_hit_flash.gdshader" id="13_fdnlq"]
 [ext_resource type="Script" uid="uid://dnyf7avobunau" path="res://Scenes/screen_damage_flash.gd" id="13_jkdf5"]
+[ext_resource type="Resource" uid="uid://c822wln20asv" path="res://Enemies/slow_enemy.tres" id="16_fevyy"]
+[ext_resource type="PackedScene" uid="uid://dgraqldufn15t" path="res://user_interface/wave_and_time_ui.tscn" id="16_h1bgf"]
+[ext_resource type="PackedScene" uid="uid://47p0cviqpnrv" path="res://user_interface/wave_time_manager.tscn" id="17_b3802"]
+[ext_resource type="Resource" uid="uid://bhkhvp6efwkbu" path="res://Enemies/slow_red_enemy.tres" id="17_hibaj"]
+[ext_resource type="Resource" uid="uid://kyar3y0pf6d0" path="res://Enemies/green_enemy_test.tres" id="18_hibaj"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_8gbba"]
 
@@ -89,9 +94,6 @@ tile_set = ExtResource("1_jjgbg")
 unique_name_in_owner = true
 position = Vector2(-844, 622)
 
-[node name="EnemyManager" parent="." instance=ExtResource("6_6bp64")]
-basic_enemy_scene = ExtResource("7_344ge")
-
 [node name="GrayscaleFilter" type="CanvasLayer" parent="."]
 script = ExtResource("8_hptm8")
 
@@ -137,6 +139,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="UI" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="UserInterface" type="Control" parent="UI"]
 layout_mode = 3
@@ -161,3 +164,13 @@ theme_override_constants/margin_top = 50
 [node name="Label" type="Label" parent="UI/UserInterface/MarginContainer"]
 layout_mode = 2
 script = ExtResource("11_wsu2k")
+
+[node name="EnemyManager" parent="." node_paths=PackedStringArray("wave_time_manager") instance=ExtResource("6_6bp64")]
+basic_enemy_scene = ExtResource("7_344ge")
+enemy_types = Array[Resource]([ExtResource("16_fevyy"), ExtResource("17_hibaj"), ExtResource("18_hibaj")])
+wave_time_manager = NodePath("../WaveTimeManager")
+
+[node name="WaveAndTimeUI" parent="." node_paths=PackedStringArray("wave_time_manager") instance=ExtResource("16_h1bgf")]
+wave_time_manager = NodePath("../WaveTimeManager")
+
+[node name="WaveTimeManager" parent="." instance=ExtResource("17_b3802")]

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://47p0cviqpnrv"]
+
+[ext_resource type="Script" uid="uid://dkya1ok5vsqvk" path="res://user_interface/wave_time_manager.gd" id="1_r048n"]
+
+[node name="WaveTimeManager" type="Node"]
+script = ExtResource("1_r048n")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 600.0
+autostart = true

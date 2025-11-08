@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c8cpssj7vjehk" path="res://Player/player.gd" id="1_k53q1"]
 [ext_resource type="Texture2D" uid="uid://b8s48xncdlhd4" path="res://Assets/kenney_pirate-pack/PNG/Default size/Ship parts/hullLarge (1).png" id="1_l8h54"]
-[ext_resource type="Shader" path="res://Shaders/shock_damage.gdshader" id="1_od3ui"]
+[ext_resource type="Shader" uid="uid://dhfkgyvufew58" path="res://Shaders/shock_damage.gdshader" id="1_od3ui"]
 [ext_resource type="Texture2D" uid="uid://dybfpbl7p25yw" path="res://Assets/kenney_pirate-pack/PNG/Default size/Ship parts/sailLarge (7).png" id="2_4ntmi"]
 [ext_resource type="Texture2D" uid="uid://djop37l8jw66f" path="res://Assets/kenney_pirate-pack/PNG/Default size/Ship parts/cannonLoose.png" id="3_gwnis"]
 [ext_resource type="Texture2D" uid="uid://dmnkbpixhqpsq" path="res://Assets/kenney_pirate-pack/PNG/Default size/Ship parts/nest.png" id="3_k53q1"]
