@@ -10,4 +10,5 @@ type = 1
 texture = ExtResource("2_q6gr7")
 texture_damaged = ExtResource("3_uylxh")
 speed = 400.0
+damage = 10.0
 health = 30.0

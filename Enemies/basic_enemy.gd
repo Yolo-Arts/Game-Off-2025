@@ -26,7 +26,6 @@ signal playSound
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
-
 @export var enemy_types: Array[Resource]
 var enemy_stats: Resource
 
@@ -41,6 +40,7 @@ func _ready() -> void:
 
 	if sprite.material:
 		sprite.material = sprite.material.duplicate()
+	
 
 func set_enemy_type(enemy_type: int):
 	if enemy_type >= enemy_types.size(): 

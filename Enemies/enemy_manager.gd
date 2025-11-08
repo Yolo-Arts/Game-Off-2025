@@ -9,6 +9,8 @@ var enemy_stats: Resource
 @export var wave_time_manager: Node
 @onready var timer = $Timer
 
+@onready var ENEMY_SPAWN_INDICATOR = preload("uid://dx4o5mretwoae")
+
 var enemy_table = WeightedTable.new()
 
 var rng = RandomNumberGenerator.new()
@@ -33,15 +35,23 @@ func _ready():
 
 func spawn_enemy(enemy_num):
 	for i in range(enemy_num):
+		spawn()
+		await get_tree().create_timer(0.2).timeout
+
+func spawn():
 		var enemy_type_index = enemy_table.pick_item()
 		var enemy = basic_enemy_scene.instantiate() as Enemy
 		
-		#TODO Add a spawn animation for enemy to give the player a chance before they get absolutely jumped.
-		# add 0.5 second delay before spawning
 		enemy.set_enemy_type(enemy_type_index)
-		await get_tree().create_timer(0.5).timeout
-		
 		enemy.global_position = get_spawn_position()
+		
+		#TODO Add a spawn animation for enemy to give the player a chance before they get absolutely jumped.
+		 #add 0.5 second delay before spawning
+		var instance = ENEMY_SPAWN_INDICATOR.instantiate()
+		get_parent().add_child(instance)
+		instance.global_position = enemy.global_position
+		await get_tree().create_timer(1.7).timeout
+		#await get_tree().create_timer(0.2).timeout
 		get_parent().add_child.call_deferred(enemy)
 
 func on_difficulty_increased(difficulty: int):
