@@ -16,6 +16,7 @@ const SHIP__4_ = preload("uid://dtggqs3n2orf8")
 
 
 signal playSound
+signal playerHitSound
 @onready var sprite = $Sprite2D
 @onready var collision_shape_2d = $CollisionShape2D
 @onready var hitbox_collision_shape_2d = $Hitbox/CollisionShape2D
@@ -24,6 +25,7 @@ signal playSound
 @onready var hurtbox = $Hurtbox
 @onready var hurt_shape = $Hurtbox/hurtShape
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+
 
 
 @export var enemy_types: Array[Resource]
@@ -71,6 +73,7 @@ func get_direction_to_player():
 func take_damage(damage: int):
 	health -= damage
 	self.animation_player.play("hit_flash")
+	playerHitSound.emit()
 	spawn_hit_explosion(self.position, Vector2(0,0))
 	if health <= health/2:
 		sprite.texture = enemy_stats.texture_damaged
@@ -84,6 +87,8 @@ func take_damage(damage: int):
 		Globals.camera.shake(0.20, 15, 20)
 		Globals.update_score("ENEMY_SHIPWRECKED")
 		playSound.emit()
+
+
 
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://34fhm4pp3113"]
+[gd_scene load_steps=18 format=3 uid="uid://34fhm4pp3113"]
 
 [ext_resource type="Script" uid="uid://d0cy7x87iaixj" path="res://Enemies/basic_enemy.gd" id="1_221se"]
 [ext_resource type="Shader" uid="uid://darti4k2he22i" path="res://Shaders/hit_flash.gdshader" id="1_qenpu"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://hwmpk22f2q2h" path="res://Assets/kenney_pirate-pack/PNG/Default size/Ships/ship (2).png" id="4_iioo1"]
 [ext_resource type="Script" path="res://Enemies/audio_stream_player_2d.gd" id="5_4vdx4"]
 [ext_resource type="Resource" uid="uid://xcfalartatb5" path="res://Resources/death_explosion.tres" id="6_rcyh1"]
+[ext_resource type="AudioStream" uid="uid://du63xssb4ybdb" path="res://sounds/enemy_hit.sfxr" id="9_85m4s"]
+[ext_resource type="Script" uid="uid://b5xmers4gw01h" path="res://Enemies/enemy_hitSFX.gd" id="10_p61vm"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qenpu"]
 shader = ExtResource("1_qenpu")
@@ -109,6 +111,11 @@ libraries = {
 &"": SubResource("AnimationLibrary_85m4s")
 }
 
+[node name="Enemy_Hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_85m4s")
+script = ExtResource("10_p61vm")
+
 [connection signal="playSound" from="." to="AudioStreamPlayer2D" method="_on_basic_enemy_play_sound"]
+[connection signal="playerHitSound" from="." to="Enemy_Hit" method="_on_basic_enemy_player_hit_sound"]
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
 [connection signal="timeout" from="damage_interval_timer" to="." method="_on_damage_interval_timer_timeout"]
