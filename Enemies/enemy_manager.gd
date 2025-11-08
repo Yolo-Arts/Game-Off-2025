@@ -63,9 +63,6 @@ func on_difficulty_increased(difficulty: int):
 			enemy_count += 1
 	
 	
-	if difficulty == 2:
-		enemy_table.add_item(2, 10)
-	
 	var time_off = 0.2 * difficulty
 	time_off = min(time_off, 8.0)  
 	timer.wait_time = base_spawn_time - time_off
