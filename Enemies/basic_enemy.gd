@@ -87,6 +87,7 @@ func take_damage(damage: int):
 		Globals.camera.shake(0.20, 15, 20)
 		Globals.update_score("ENEMY_SHIPWRECKED")
 		playSound.emit()
+		await get_tree().create_timer(2).timeout
 
 
 
