@@ -104,6 +104,8 @@ func spawn_dead_ship(pos: Vector2, normal:Vector2) -> void:
 	add_child(instance)
 	instance.global_position = pos
 	instance.rotation = get_direction_to_player().angle() + deg_to_rad(180)
+	$queue_free.start()
+	
 
 func spawn_hit_explosion(pos: Vector2, normal:Vector2) -> void:
 	var instance = HIT_EXPLOSION.instantiate()
@@ -139,3 +141,7 @@ func _on_hurtbox_body_entered(body):
 		damage_interval_timer.start()
 	else:
 		print("Damage on cooldown")
+
+
+func _on_queue_free_timeout() -> void:
+	self.queue_free()
