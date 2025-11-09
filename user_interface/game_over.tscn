@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://cwwekbcfo4hgu"]
+[gd_scene load_steps=2 format=3 uid="uid://d31hkdhneb8rg"]
 
 [ext_resource type="Script" uid="uid://beiwt1l5yk3ny" path="res://user_interface/game_over.gd" id="1_bkg1s"]
 
@@ -53,7 +53,7 @@ theme_override_font_sizes/font_size = 64
 text = "WASTED"
 
 [node name="Scoreboard" type="Panel" parent="Control/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 250)
+custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/VBoxContainer/Scoreboard"]
@@ -116,6 +116,10 @@ text = "Waves Survived:"
 layout_mode = 2
 text = "Bosses Shipwrecked:"
 
+[node name="Total" type="Label" parent="Control/MarginContainer/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider/ScoreCategories"]
+layout_mode = 2
+text = "Total:"
+
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider"]
 layout_mode = 2
 theme_override_constants/separation = 10
@@ -148,6 +152,11 @@ horizontal_alignment = 2
 unique_name_in_owner = true
 layout_mode = 2
 text = "Bosses Shipwrecked:"
+horizontal_alignment = 2
+
+[node name="total_score" type="Label" parent="Control/MarginContainer/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
 horizontal_alignment = 2
 
 [node name="MarginContainer2" type="MarginContainer" parent="Control/MarginContainer/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider"]
