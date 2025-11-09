@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://d0id8y3lwuvg4"]
+[gd_scene load_steps=30 format=4 uid="uid://d0id8y3lwuvg4"]
 
 [ext_resource type="TileSet" uid="uid://dq0j7rx72yqkf" path="res://Resources/KenneyPirateTilemap.tres" id="1_jjgbg"]
 [ext_resource type="Script" uid="uid://iygc8so2fmtd" path="res://Scenes/main.gd" id="1_jjvhh"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://dm2vcmwj1bfse" path="res://Game_Objects/test_walls.tscn" id="12_6iyac"]
 [ext_resource type="Shader" uid="uid://v1xgpsc65cqs" path="res://Scenes/screen_hit_flash.gdshader" id="13_fdnlq"]
 [ext_resource type="Script" uid="uid://dnyf7avobunau" path="res://Scenes/screen_damage_flash.gd" id="13_jkdf5"]
+[ext_resource type="PackedScene" uid="uid://cwwekbcfo4hgu" path="res://user_interface/game_over.tscn" id="15_ee4r6"]
 [ext_resource type="Resource" uid="uid://c822wln20asv" path="res://Enemies/slow_enemy.tres" id="16_fevyy"]
 [ext_resource type="PackedScene" path="res://user_interface/wave_and_time_ui.tscn" id="16_h1bgf"]
 [ext_resource type="PackedScene" uid="uid://47p0cviqpnrv" path="res://user_interface/wave_time_manager.tscn" id="17_b3802"]
@@ -101,13 +102,12 @@ unique_name_in_owner = true
 position = Vector2(-844, 622)
 
 [node name="GrayscaleFilter" type="CanvasLayer" parent="."]
-visible = false
 script = ExtResource("8_hptm8")
 
 [node name="Grayscale" type="Sprite2D" parent="GrayscaleFilter"]
 material = SubResource("ShaderMaterial_ynf5e")
-position = Vector2(577, 304)
-scale = Vector2(10.765625, 6.609375)
+position = Vector2(1742.0002, 549.0001)
+scale = Vector2(34.132813, 17.601563)
 texture = ExtResource("9_ynf5e")
 
 [node name="TestMap" type="Node2D" parent="."]
@@ -171,6 +171,8 @@ theme_override_constants/margin_right = 50
 layout_mode = 2
 text = "HP"
 script = ExtResource("11_wsu2k")
+
+[node name="GameOver" parent="UI" instance=ExtResource("15_ee4r6")]
 
 [node name="EnemyManager" parent="." node_paths=PackedStringArray("wave_time_manager") instance=ExtResource("6_6bp64")]
 basic_enemy_scene = ExtResource("7_344ge")
