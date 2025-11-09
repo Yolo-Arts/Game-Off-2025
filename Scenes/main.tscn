@@ -6,8 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://dle2poylya83p" path="res://Player/player.tscn" id="2_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://brjyeo32vgcfh" path="res://Enemies/enemy_manager.tscn" id="6_6bp64"]
 [ext_resource type="PackedScene" uid="uid://34fhm4pp3113" path="res://Enemies/basic_enemy.tscn" id="7_344ge"]
-[ext_resource type="Shader" uid="uid://c3xdyeo558avw" path="res://Shaders/grayscale.gdshader" id="8_344ge"]
-[ext_resource type="Script" uid="uid://dvs1hw40el01v" path="res://Scenes/grayscale_filter.gd" id="8_hptm8"]
+[ext_resource type="Shader" path="res://Shaders/grayscale.gdshader" id="8_344ge"]
+[ext_resource type="Script" path="res://Scenes/grayscale_filter.gd" id="8_hptm8"]
 [ext_resource type="Texture2D" uid="uid://c12v3gr0dt8sm" path="res://icon.svg" id="9_ynf5e"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_8gbba"]
