@@ -19,6 +19,11 @@ config/icon="res://icon.svg"
 
 Globals="*res://scripts/globals.gd"
 
+[display]
+
+window/size/viewport_width=1910
+window/size/viewport_height=1080
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg", "res://addons/gdfxr/plugin.cfg", "res://addons/trail_2d/plugin.cfg")

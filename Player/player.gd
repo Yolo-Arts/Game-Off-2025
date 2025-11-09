@@ -39,6 +39,7 @@ var turn_time: float = 0.0
 var isDead = false
 
 func _ready():
+	Globals.player_health = 100
 	Globals.player_died.connect(dead_player)
 
 func dead_player():

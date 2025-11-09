@@ -2,7 +2,7 @@ extends Node
 
 var camera
 
-var player_health: float = 1000
+var player_health: float = 100
 
 var playerDied = false
 
@@ -38,7 +38,7 @@ func _ready() -> void:
 	my_timer.timeout.connect(_on_my_timer_timeout)
 	
 func _process(delta):
-	if player_health < 0 && playerDied == false:
+	if player_health <= 0 && playerDied == false:
 		print("player died")
 		player_died.emit()
 		playerDied = true
