@@ -20,7 +20,6 @@ signal playSound
 @onready var collision_shape_2d = $CollisionShape2D
 @onready var hitbox_collision_shape_2d = $Hitbox/CollisionShape2D
 @onready var hitboxArea = $Hitbox
-@onready var damage_interval_timer = $damage_interval_timer
 @onready var hurtbox = $Hurtbox
 @onready var hurt_shape = $Hurtbox/hurtShape
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -122,20 +121,6 @@ func disable_hitbox():
 		hurt_shape.set_deferred("disabled", true)
 		hurt_shape.queue_free()
 	
-
-
-#TODO add a signal to make sure that the timer works properly
-func _on_hurtbox_body_entered(body):
-	if body == player && damage_interval_timer.is_stopped():
-		Globals.player_health -= enemy_stats.damage
-		player.player_hit()
-		player.animation_player.play("hit_shock")
-		Globals.camera.shake(0.5, 15, 10)
-		print("Player Health: ", Globals.player_health, "Damaged by: ", enemy_stats.type)
-		damage_interval_timer.start()
-	else:
-		print("Damage on cooldown")
-
 
 func _on_queue_free_timeout() -> void:
 	self.queue_free()
