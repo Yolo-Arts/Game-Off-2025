@@ -81,3 +81,4 @@ texture = ExtResource("2_vosbb")
 libraries = {
 &"": SubResource("AnimationLibrary_me67e")
 }
+speed_scale = 2.0

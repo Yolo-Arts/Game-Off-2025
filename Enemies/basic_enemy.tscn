@@ -6,7 +6,7 @@
 [ext_resource type="Resource" uid="uid://bhkhvp6efwkbu" path="res://Enemies/slow_red_enemy.tres" id="3_iioo1"]
 [ext_resource type="Resource" uid="uid://kyar3y0pf6d0" path="res://Enemies/green_enemy_test.tres" id="4_e4a15"]
 [ext_resource type="Texture2D" uid="uid://hwmpk22f2q2h" path="res://Assets/kenney_pirate-pack/PNG/Default size/Ships/ship (2).png" id="4_iioo1"]
-[ext_resource type="Script" path="res://Enemies/audio_stream_player_2d.gd" id="5_4vdx4"]
+[ext_resource type="Script" uid="uid://wke5xle7bpbn" path="res://Enemies/audio_stream_player_2d.gd" id="5_4vdx4"]
 [ext_resource type="Resource" uid="uid://xcfalartatb5" path="res://Resources/death_explosion.tres" id="6_rcyh1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qenpu"]
@@ -108,6 +108,11 @@ libraries = {
 &"": SubResource("AnimationLibrary_85m4s")
 }
 
+[node name="queue_free" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
 [connection signal="playSound" from="." to="AudioStreamPlayer2D" method="_on_basic_enemy_play_sound"]
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
 [connection signal="timeout" from="damage_interval_timer" to="." method="_on_damage_interval_timer_timeout"]
+[connection signal="timeout" from="queue_free" to="." method="_on_queue_free_timeout"]
