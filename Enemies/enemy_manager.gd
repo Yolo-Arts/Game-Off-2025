@@ -15,7 +15,7 @@ var enemy_table = WeightedTable.new()
 
 var rng = RandomNumberGenerator.new()
 
-var enemy_count = 5
+var enemy_count = 2
 var base_spawn_time
 
 func _ready():

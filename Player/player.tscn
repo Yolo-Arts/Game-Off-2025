@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dle2poylya83p"]
+[gd_scene load_steps=27 format=3 uid="uid://dle2poylya83p"]
 
 [ext_resource type="Script" uid="uid://c8cpssj7vjehk" path="res://Player/player.gd" id="1_k53q1"]
 [ext_resource type="Texture2D" uid="uid://b8s48xncdlhd4" path="res://Assets/kenney_pirate-pack/PNG/Default size/Ship parts/hullLarge (1).png" id="1_l8h54"]
@@ -10,8 +10,17 @@
 [ext_resource type="Script" path="res://Player/cannon_fire_sfx.gd" id="7_utq14"]
 [ext_resource type="Script" uid="uid://octyfubw21an" path="res://Player/player_hurt_sfx.gd" id="9_00tjw"]
 [ext_resource type="Resource" uid="uid://2j64bpw03vht" path="res://Resources/player_hurt_sfx.tres" id="10_x3vf3"]
+[ext_resource type="Script" uid="uid://b8u2gmybierd3" path="res://addons/trail_2d/trail_2d.gd" id="11_apopc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_00tjw"]
+
+[sub_resource type="Curve" id="Curve_apopc"]
+_data = [Vector2(0, 1), 0.0, -1.0, 0, 0, Vector2(1, 0), -1.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_apopc"]
+offsets = PackedFloat32Array(0, 0.97044337)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_od3ui"]
 shader = ExtResource("1_od3ui")
@@ -398,7 +407,17 @@ collision_mask = 9
 script = ExtResource("1_k53q1")
 turn_acceleration = 0.5
 
+[node name="Trail2D" type="Line2D" parent="."]
+width = 55.0
+width_curve = SubResource("Curve_apopc")
+default_color = Color(1, 1, 1, 0.35686275)
+gradient = SubResource("Gradient_apopc")
+script = ExtResource("11_apopc")
+length = 25
+metadata/_custom_type_script = "uid://b8u2gmybierd3"
+
 [node name="ShipParts" type="Node2D" parent="."]
+z_index = 2
 rotation = -1.5707964
 
 [node name="Hull" type="Sprite2D" parent="ShipParts"]
