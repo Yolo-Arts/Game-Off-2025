@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://dm2vcmwj1bfse" path="res://Game_Objects/test_walls.tscn" id="12_6iyac"]
 [ext_resource type="Shader" path="res://Scenes/screen_hit_flash.gdshader" id="13_fdnlq"]
 [ext_resource type="Script" path="res://Scenes/screen_damage_flash.gd" id="13_jkdf5"]
-[ext_resource type="PackedScene" uid="uid://cwwekbcfo4hgu" path="res://user_interface/game_over.tscn" id="15_ee4r6"]
+[ext_resource type="PackedScene" uid="uid://d31hkdhneb8rg" path="res://user_interface/game_over.tscn" id="15_ee4r6"]
 [ext_resource type="Resource" uid="uid://c822wln20asv" path="res://Enemies/slow_enemy.tres" id="16_fevyy"]
 [ext_resource type="PackedScene" uid="uid://dgraqldufn15t" path="res://user_interface/wave_and_time_ui.tscn" id="16_h1bgf"]
 [ext_resource type="PackedScene" uid="uid://47p0cviqpnrv" path="res://user_interface/wave_time_manager.tscn" id="17_b3802"]
