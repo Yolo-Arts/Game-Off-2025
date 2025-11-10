@@ -5,6 +5,6 @@ extends AudioStreamPlayer2D
 
 var rng = RandomNumberGenerator.new()
 
-func _on_player_fire_cannon_sfx():
+func _on_player_isometric_fire_cannon_sfx():
 	pitch_scale = rng.randf_range(min_pitch, max_pitch)
 	play()

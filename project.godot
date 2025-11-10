@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Game-Off-2025"
-run/main_scene="uid://d0id8y3lwuvg4"
+run/main_scene="uid://wa1tmls6mvmx"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 

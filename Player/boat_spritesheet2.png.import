@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d4tjmg7v217m"
-path="res://.godot/imported/isometric_tilesheet.png-c8b72e9374d6fc34b758992a0fd14316.ctex"
+uid="uid://bjchrxewdcwy2"
+path="res://.godot/imported/boat_spritesheet2.png-0effeba84bd51496fd296f32ed422870.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/isometric_tilesheet.png"
-dest_files=["res://.godot/imported/isometric_tilesheet.png-c8b72e9374d6fc34b758992a0fd14316.ctex"]
+source_file="res://Player/boat_spritesheet2.png"
+dest_files=["res://.godot/imported/boat_spritesheet2.png-0effeba84bd51496fd296f32ed422870.ctex"]
 
 [params]
 
