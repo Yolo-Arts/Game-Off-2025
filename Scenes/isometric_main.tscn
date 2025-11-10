@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://b3imdjb1so30p"]
+[gd_scene load_steps=18 format=4 uid="uid://b3imdjb1so30p"]
 
 [ext_resource type="Script" path="res://Scenes/isometric_main.gd" id="1_1enjl"]
 [ext_resource type="PackedScene" path="res://Scenes/camera_2d.tscn" id="2_pwvqx"]
@@ -8,11 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://deqnmjpt3dxgb" path="res://Player/player_isometric.tscn" id="6_wgbrh"]
 [ext_resource type="PackedScene" uid="uid://brjyeo32vgcfh" path="res://Enemies/enemy_manager.tscn" id="7_0lw5m"]
 [ext_resource type="PackedScene" uid="uid://dgraqldufn15t" path="res://user_interface/wave_and_time_ui.tscn" id="8_gpok4"]
-[ext_resource type="PackedScene" uid="uid://34fhm4pp3113" path="res://Enemies/basic_enemy.tscn" id="8_yws0v"]
-[ext_resource type="Resource" uid="uid://c822wln20asv" path="res://Enemies/slow_enemy.tres" id="9_dlawb"]
 [ext_resource type="PackedScene" uid="uid://47p0cviqpnrv" path="res://user_interface/wave_time_manager.tscn" id="9_ynplv"]
-[ext_resource type="Resource" uid="uid://bhkhvp6efwkbu" path="res://Enemies/slow_red_enemy.tres" id="10_gvepe"]
-[ext_resource type="Resource" uid="uid://kyar3y0pf6d0" path="res://Enemies/green_enemy_test.tres" id="11_ixf2m"]
+[ext_resource type="Resource" uid="uid://d1qpml40osw4y" path="res://Enemies/Enemy_Types/black_isometric.tres" id="9_yws0v"]
+[ext_resource type="Resource" uid="uid://3bjbysn0exty" path="res://Enemies/Enemy_Types/red_isometric.tres" id="10_dlawb"]
 [ext_resource type="PackedScene" uid="uid://h0hdesj12ofh" path="res://Enemies/isometric_basic_enemy.tscn" id="14_dlawb"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_wgbrh"]
@@ -92,13 +90,11 @@ unique_name_in_owner = true
 zoom = Vector2(0.8, 0.8)
 
 [node name="EnemyManager" parent="." node_paths=PackedStringArray("wave_time_manager") instance=ExtResource("7_0lw5m")]
-basic_enemy_scene = ExtResource("8_yws0v")
-enemy_types = Array[Resource]([ExtResource("9_dlawb"), ExtResource("10_gvepe"), ExtResource("11_ixf2m")])
+basic_enemy_scene = ExtResource("14_dlawb")
+enemy_types = Array[Resource]([ExtResource("9_yws0v"), ExtResource("10_dlawb")])
 wave_time_manager = NodePath("../WaveTimeManager")
 
 [node name="WaveAndTimeUI" parent="." node_paths=PackedStringArray("wave_time_manager") instance=ExtResource("8_gpok4")]
 wave_time_manager = NodePath("../WaveTimeManager")
 
 [node name="WaveTimeManager" parent="." instance=ExtResource("9_ynplv")]
-
-[node name="Basic_enemy" parent="." instance=ExtResource("14_dlawb")]

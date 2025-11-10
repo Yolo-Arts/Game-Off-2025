@@ -17,11 +17,11 @@
 [ext_resource type="Shader" path="res://Scenes/screen_hit_flash.gdshader" id="13_fdnlq"]
 [ext_resource type="Script" path="res://Scenes/screen_damage_flash.gd" id="13_jkdf5"]
 [ext_resource type="PackedScene" uid="uid://cwwekbcfo4hgu" path="res://user_interface/game_over.tscn" id="15_ee4r6"]
-[ext_resource type="Resource" uid="uid://c822wln20asv" path="res://Enemies/slow_enemy.tres" id="16_fevyy"]
+[ext_resource type="Resource" uid="uid://c822wln20asv" path="res://Enemies/Enemy_Types/slow_enemy.tres" id="16_fevyy"]
 [ext_resource type="PackedScene" uid="uid://dgraqldufn15t" path="res://user_interface/wave_and_time_ui.tscn" id="16_h1bgf"]
 [ext_resource type="PackedScene" uid="uid://47p0cviqpnrv" path="res://user_interface/wave_time_manager.tscn" id="17_b3802"]
-[ext_resource type="Resource" uid="uid://bhkhvp6efwkbu" path="res://Enemies/slow_red_enemy.tres" id="17_hibaj"]
-[ext_resource type="Resource" uid="uid://kyar3y0pf6d0" path="res://Enemies/green_enemy_test.tres" id="18_hibaj"]
+[ext_resource type="Resource" uid="uid://bhkhvp6efwkbu" path="res://Enemies/Enemy_Types/slow_red_enemy.tres" id="17_hibaj"]
+[ext_resource type="Resource" uid="uid://kyar3y0pf6d0" path="res://Enemies/Enemy_Types/green_enemy_test.tres" id="18_hibaj"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_8gbba"]
 

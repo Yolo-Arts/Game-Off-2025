@@ -5,8 +5,8 @@ class_name Enemy_iso
 #TODO FIX THE MOVEMENT SCRIPT SO THAT THEY ACTUALLY MOVE LIKE A BOAT 
 #FIXME Fix the hitboxes, they do not rotate with the enemy.
 
-var speed: float = 400.0
-var health: float = 100.0  
+var speed = 0
+var health = 0
 
 # Particles
 const DEATH_EXPLOSION = preload("uid://da1djwy4cr28t")
@@ -31,10 +31,10 @@ var enemy_stats: Resource
 var player = null
 var isDead = false
 
-
-
-
 var rng = RandomNumberGenerator.new()
+
+var total_frames = 360
+var frame_offset = -50
 
 func _ready() -> void:
 	
@@ -50,6 +50,8 @@ func set_enemy_type(enemy_type: int):
 	enemy_stats = enemy_types[enemy_type]
 	speed = enemy_stats.speed
 	health = enemy_stats.health
+	total_frames = enemy_stats.total_frames
+	frame_offset = enemy_stats.frame_offset
 
 
 func _physics_process(_delta):
@@ -70,8 +72,6 @@ func get_direction_to_player():
 
 
 
-var total_frames = 360
-var frame_offset = -50
 func update_sprite_rotation(angle: float):
 	var deg = rad_to_deg(angle)
 	deg = fmod(deg, 360.0)
@@ -88,7 +88,8 @@ func take_damage(damage: int):
 	playerHitSound.emit()
 	spawn_hit_explosion(self.position, Vector2(0,0))
 	if health <= health/2:
-		sprite.texture = enemy_stats.texture_damaged
+		# TODO Make damaged texture
+		#sprite.texture = enemy_stats.texture_damaged
 		speed = speed/2
 	if health < 0:
 		spawn_dead_ship(self.position, get_direction_to_player())
@@ -126,7 +127,7 @@ func spawn_hit_explosion(pos: Vector2, normal:Vector2) -> void:
 	instance.rotation = normal.angle()
 
 func disable_hitbox():
-	print("disabled")
+	#print("disabled")
 	if collision_shape_2d:
 		collision_shape_2d.set_deferred("disabled", true)
 		collision_shape_2d.queue_free()
