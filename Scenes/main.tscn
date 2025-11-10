@@ -5,20 +5,20 @@
 [ext_resource type="Shader" uid="uid://b4oixuorco5vd" path="res://Shaders/water.gdshader" id="2_8gbba"]
 [ext_resource type="PackedScene" uid="uid://dle2poylya83p" path="res://Player/player.tscn" id="2_bo1nx"]
 [ext_resource type="Texture2D" uid="uid://c1age5y3vs0tr" path="res://Assets/nicubunu_RPG_map_symbols_Shipwreck.png" id="3_pdsj5"]
-[ext_resource type="Script" uid="uid://dec20rh0utiay" path="res://Scenes/camera_2d.gd" id="5_kry3j"]
 [ext_resource type="PackedScene" uid="uid://brjyeo32vgcfh" path="res://Enemies/enemy_manager.tscn" id="6_6bp64"]
 [ext_resource type="PackedScene" uid="uid://34fhm4pp3113" path="res://Enemies/basic_enemy.tscn" id="7_344ge"]
 [ext_resource type="Script" path="res://Scenes/user_interface.gd" id="8_344ge"]
 [ext_resource type="Script" path="res://Scenes/grayscale_filter.gd" id="8_hptm8"]
 [ext_resource type="Shader" path="res://Shaders/grayscale.gdshader" id="9_d1ilt"]
 [ext_resource type="Texture2D" uid="uid://c12v3gr0dt8sm" path="res://icon.svg" id="9_ynf5e"]
+[ext_resource type="PackedScene" uid="uid://2sw5s3fxyqo3" path="res://Scenes/camera_2d.tscn" id="10_ee4r6"]
 [ext_resource type="Script" uid="uid://d3svlihxaqvav" path="res://user_interface/hp_label.gd" id="11_wsu2k"]
 [ext_resource type="PackedScene" uid="uid://dm2vcmwj1bfse" path="res://Game_Objects/test_walls.tscn" id="12_6iyac"]
-[ext_resource type="Shader" uid="uid://v1xgpsc65cqs" path="res://Scenes/screen_hit_flash.gdshader" id="13_fdnlq"]
-[ext_resource type="Script" uid="uid://dnyf7avobunau" path="res://Scenes/screen_damage_flash.gd" id="13_jkdf5"]
+[ext_resource type="Shader" path="res://Scenes/screen_hit_flash.gdshader" id="13_fdnlq"]
+[ext_resource type="Script" path="res://Scenes/screen_damage_flash.gd" id="13_jkdf5"]
 [ext_resource type="PackedScene" uid="uid://cwwekbcfo4hgu" path="res://user_interface/game_over.tscn" id="15_ee4r6"]
 [ext_resource type="Resource" uid="uid://c822wln20asv" path="res://Enemies/slow_enemy.tres" id="16_fevyy"]
-[ext_resource type="PackedScene" path="res://user_interface/wave_and_time_ui.tscn" id="16_h1bgf"]
+[ext_resource type="PackedScene" uid="uid://dgraqldufn15t" path="res://user_interface/wave_and_time_ui.tscn" id="16_h1bgf"]
 [ext_resource type="PackedScene" uid="uid://47p0cviqpnrv" path="res://user_interface/wave_time_manager.tscn" id="17_b3802"]
 [ext_resource type="Resource" uid="uid://bhkhvp6efwkbu" path="res://Enemies/slow_red_enemy.tres" id="17_hibaj"]
 [ext_resource type="Resource" uid="uid://kyar3y0pf6d0" path="res://Enemies/green_enemy_test.tres" id="18_hibaj"]
@@ -128,11 +128,9 @@ scale = Vector2(-1.2464099, 10.33724)
 position = Vector2(976, 919)
 scale = Vector2(-1.2464099, 10.33724)
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" parent="." instance=ExtResource("10_ee4r6")]
 unique_name_in_owner = true
 position = Vector2(-195, 912)
-zoom = Vector2(0.5, 0.5)
-script = ExtResource("5_kry3j")
 
 [node name="ScreenDamageFlash" type="CanvasLayer" parent="."]
 script = ExtResource("13_jkdf5")
