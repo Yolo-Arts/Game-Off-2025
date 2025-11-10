@@ -1,18 +1,15 @@
-[gd_scene load_steps=18 format=3 uid="uid://34fhm4pp3113"]
+[gd_scene load_steps=15 format=3 uid="uid://h0hdesj12ofh"]
 
-[ext_resource type="Script" uid="uid://d0cy7x87iaixj" path="res://Enemies/basic_enemy.gd" id="1_221se"]
-[ext_resource type="Shader" path="res://Shaders/hit_flash.gdshader" id="1_qenpu"]
-[ext_resource type="Resource" uid="uid://c822wln20asv" path="res://Enemies/slow_enemy.tres" id="2_gie15"]
-[ext_resource type="Resource" uid="uid://bhkhvp6efwkbu" path="res://Enemies/slow_red_enemy.tres" id="3_iioo1"]
-[ext_resource type="Resource" uid="uid://kyar3y0pf6d0" path="res://Enemies/green_enemy_test.tres" id="4_e4a15"]
-[ext_resource type="Texture2D" uid="uid://hwmpk22f2q2h" path="res://Assets/kenney_pirate-pack/PNG/Default size/Ships/ship (2).png" id="4_iioo1"]
-[ext_resource type="Script" path="res://Enemies/audio_stream_player_2d.gd" id="5_4vdx4"]
-[ext_resource type="Resource" uid="uid://xcfalartatb5" path="res://Resources/death_explosion.tres" id="6_rcyh1"]
-[ext_resource type="AudioStream" uid="uid://du63xssb4ybdb" path="res://sounds/enemy_hit.sfxr" id="9_85m4s"]
-[ext_resource type="Script" path="res://Enemies/enemy_hitSFX.gd" id="10_p61vm"]
+[ext_resource type="Script" uid="uid://62nijy3yjwul" path="res://Enemies/basic_enemy_isometric.gd" id="1_guxgk"]
+[ext_resource type="Shader" path="res://Shaders/hit_flash.gdshader" id="5_r2gfe"]
+[ext_resource type="Texture2D" uid="uid://bhhya7080ahh8" path="res://Enemies/enemy_ship_red_spritesheet.png" id="6_gwrt0"]
+[ext_resource type="Script" path="res://Enemies/audio_stream_player_2d.gd" id="7_ovsua"]
+[ext_resource type="Resource" uid="uid://xcfalartatb5" path="res://Resources/death_explosion.tres" id="8_ls42v"]
+[ext_resource type="AudioStream" uid="uid://du63xssb4ybdb" path="res://sounds/enemy_hit.sfxr" id="9_20k64"]
+[ext_resource type="Script" path="res://Enemies/enemy_hitSFX.gd" id="10_bkher"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qenpu"]
-shader = ExtResource("1_qenpu")
+shader = ExtResource("5_r2gfe")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/flash_value = 0.0
 
@@ -69,13 +66,15 @@ _data = {
 z_index = 1
 collision_layer = 2
 collision_mask = 14
-script = ExtResource("1_221se")
-enemy_types = Array[Resource]([ExtResource("2_gie15"), ExtResource("3_iioo1"), ExtResource("4_e4a15")])
+script = ExtResource("1_guxgk")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_qenpu")
 rotation = 1.5707964
-texture = ExtResource("4_iioo1")
+scale = Vector2(2, 2)
+texture = ExtResource("6_gwrt0")
+hframes = 45
+vframes = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5659956
@@ -92,8 +91,8 @@ debug_color = Color(0.5813112, 0, 0.70196074, 0.41960785)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 bus = &"SFX"
-script = ExtResource("5_4vdx4")
-explosion_sounds = ExtResource("6_rcyh1")
+script = ExtResource("7_ovsua")
+explosion_sounds = ExtResource("8_ls42v")
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 2
@@ -109,8 +108,8 @@ libraries = {
 }
 
 [node name="Enemy_Hit" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("9_85m4s")
-script = ExtResource("10_p61vm")
+stream = ExtResource("9_20k64")
+script = ExtResource("10_bkher")
 
 [node name="queue_free" type="Timer" parent="."]
 wait_time = 5.0

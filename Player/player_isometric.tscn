@@ -1,6 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://bpbf4kpd3nn1m"]
+[gd_scene load_steps=13 format=3 uid="uid://deqnmjpt3dxgb"]
 
-[ext_resource type="Script" uid="uid://bg21p6igd7lvn" path="res://player_isometric.gd" id="1_60ovk"]
+[ext_resource type="Script" path="res://player_isometric.gd" id="1_60ovk"]
 [ext_resource type="Texture2D" uid="uid://bjchrxewdcwy2" path="res://Player/boat_spritesheet2.png" id="2_evufl"]
 [ext_resource type="Shader" path="res://Shaders/shock_damage.gdshader" id="3_5y3gb"]
 [ext_resource type="AudioStream" uid="uid://bbo0dxfs3wbnj" path="res://sounds/playerHurt1.sfxr" id="3_amulb"]
@@ -29,7 +29,7 @@ random_pitch = 1.7
 streams_count = 1
 stream_0/stream = ExtResource("8_b0dan")
 
-[node name="player_isometric" type="CharacterBody2D"]
+[node name="player_isometric" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_60ovk")
 
 [node name="boat" type="Sprite2D" parent="."]

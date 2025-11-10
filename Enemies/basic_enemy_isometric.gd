@@ -1,11 +1,11 @@
 extends CharacterBody2D
 
-class_name Enemy
+class_name Enemy_iso
 
 #TODO FIX THE MOVEMENT SCRIPT SO THAT THEY ACTUALLY MOVE LIKE A BOAT 
 #FIXME Fix the hitboxes, they do not rotate with the enemy.
 
-var speed: float = 100.0  
+var speed: float = 400.0
 var health: float = 100.0  
 
 # Particles
@@ -28,20 +28,15 @@ signal playerHitSound
 @export var enemy_types: Array[Resource]
 var enemy_stats: Resource
 
-#@export var isometric_angle: float = 30.0
-#var isometric_transform: Transform2D
-
 var player = null
 var isDead = false
 
-var total_frames = 360
-var frame_offset = 0  
+
+
 
 var rng = RandomNumberGenerator.new()
 
 func _ready() -> void:
-	#isometric_transform = Transform2D()
-	#isometric_transform = isometric_transform.rotated(deg_to_rad(isometric_angle))
 	
 	if enemy_stats and enemy_stats.texture:
 		sprite.texture = enemy_stats.texture
@@ -60,12 +55,9 @@ func set_enemy_type(enemy_type: int):
 func _physics_process(_delta):
 	if !isDead: 
 		var direction = get_direction_to_player()
-		#var isometric_direction = isometric_transform * direction
-		#velocity = isometric_direction * speed
 		velocity = direction * speed
 		if direction:
-			sprite.rotation = direction.angle() - deg_to_rad(90)
-			#update_sprite_rotation(direction.angle())
+			update_sprite_rotation(direction.angle())
 		move_and_slide()
 
 
@@ -76,24 +68,18 @@ func get_direction_to_player():
 		return direction
 	return Vector2.ZERO  # Return zero vector if no player found
 
-# FIXME queue_free() enemy when they die. 
 
+
+var total_frames = 360
+var frame_offset = -50
 func update_sprite_rotation(angle: float):
-	# Convert angle to degrees and normalize to 0-360
 	var deg = rad_to_deg(angle)
 	deg = fmod(deg, 360.0)
 	if deg < 0: deg += 360.0
-
-	# Calculate frame index based on your 45x8 grid
-	# Each column represents a different angle (360/45 = 8 degrees per column)
-	var frame_index = int(deg / 8.0)
-
-	# Apply offset and wrap around
-	frame_index = (frame_index + frame_offset) % total_frames
-
-	# Set the frame
+	var frame_index = int(deg / (360.0 / total_frames))
+	frame_index = (frame_index + frame_offset + total_frames) % total_frames
 	sprite.frame = frame_index
-	sprite.global_rotation = 0  # Keep the sprite from rotating with the transform
+	sprite.global_rotation = 0 
 
 
 func take_damage(damage: int):

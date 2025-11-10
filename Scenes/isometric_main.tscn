@@ -1,11 +1,19 @@
-[gd_scene load_steps=12 format=4 uid="uid://wa1tmls6mvmx"]
+[gd_scene load_steps=20 format=4 uid="uid://b3imdjb1so30p"]
 
-[ext_resource type="Script" uid="uid://wjiwydm880cx" path="res://Scenes/isometric_main.gd" id="1_1enjl"]
-[ext_resource type="PackedScene" uid="uid://2sw5s3fxyqo3" path="res://Scenes/camera_2d.tscn" id="2_pwvqx"]
+[ext_resource type="Script" path="res://Scenes/isometric_main.gd" id="1_1enjl"]
+[ext_resource type="PackedScene" path="res://Scenes/camera_2d.tscn" id="2_pwvqx"]
 [ext_resource type="TileSet" uid="uid://b34gp3nmiu6lb" path="res://Assets/isometric_tileset.tres" id="4_1enjl"]
 [ext_resource type="Shader" uid="uid://b4oixuorco5vd" path="res://Shaders/water.gdshader" id="5_504xn"]
 [ext_resource type="Texture2D" uid="uid://c12v3gr0dt8sm" path="res://icon.svg" id="6_0lw5m"]
-[ext_resource type="PackedScene" uid="uid://bpbf4kpd3nn1m" path="res://Player/player_isometric.tscn" id="6_wgbrh"]
+[ext_resource type="PackedScene" uid="uid://deqnmjpt3dxgb" path="res://Player/player_isometric.tscn" id="6_wgbrh"]
+[ext_resource type="PackedScene" uid="uid://brjyeo32vgcfh" path="res://Enemies/enemy_manager.tscn" id="7_0lw5m"]
+[ext_resource type="PackedScene" uid="uid://dgraqldufn15t" path="res://user_interface/wave_and_time_ui.tscn" id="8_gpok4"]
+[ext_resource type="PackedScene" uid="uid://34fhm4pp3113" path="res://Enemies/basic_enemy.tscn" id="8_yws0v"]
+[ext_resource type="Resource" uid="uid://c822wln20asv" path="res://Enemies/slow_enemy.tres" id="9_dlawb"]
+[ext_resource type="PackedScene" uid="uid://47p0cviqpnrv" path="res://user_interface/wave_time_manager.tscn" id="9_ynplv"]
+[ext_resource type="Resource" uid="uid://bhkhvp6efwkbu" path="res://Enemies/slow_red_enemy.tres" id="10_gvepe"]
+[ext_resource type="Resource" uid="uid://kyar3y0pf6d0" path="res://Enemies/green_enemy_test.tres" id="11_ixf2m"]
+[ext_resource type="PackedScene" uid="uid://h0hdesj12ofh" path="res://Enemies/isometric_basic_enemy.tscn" id="14_dlawb"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_wgbrh"]
 
@@ -33,7 +41,7 @@ shader_parameter/WDSpeed = 12.7500001750891
 shader_parameter/tiling = Vector2(5, 5)
 shader_parameter/offSetSpeed = Vector2(0.05, 0.05)
 shader_parameter/backGroundDirX = 3.259879990946679e-09
-shader_parameter/backGroundDirY = -0.030999998212620006
+shader_parameter/backGroundDirY = -0.03099999821262
 
 [node name="isometricMain" type="Node2D"]
 script = ExtResource("1_1enjl")
@@ -82,3 +90,15 @@ tile_set = ExtResource("4_1enjl")
 [node name="Camera2D" parent="player_isometric" instance=ExtResource("2_pwvqx")]
 unique_name_in_owner = true
 zoom = Vector2(0.8, 0.8)
+
+[node name="EnemyManager" parent="." node_paths=PackedStringArray("wave_time_manager") instance=ExtResource("7_0lw5m")]
+basic_enemy_scene = ExtResource("8_yws0v")
+enemy_types = Array[Resource]([ExtResource("9_dlawb"), ExtResource("10_gvepe"), ExtResource("11_ixf2m")])
+wave_time_manager = NodePath("../WaveTimeManager")
+
+[node name="WaveAndTimeUI" parent="." node_paths=PackedStringArray("wave_time_manager") instance=ExtResource("8_gpok4")]
+wave_time_manager = NodePath("../WaveTimeManager")
+
+[node name="WaveTimeManager" parent="." instance=ExtResource("9_ynplv")]
+
+[node name="Basic_enemy" parent="." instance=ExtResource("14_dlawb")]
