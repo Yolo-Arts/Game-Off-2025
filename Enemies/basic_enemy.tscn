@@ -1,11 +1,20 @@
-[gd_scene load_steps=10 format=3 uid="uid://34fhm4pp3113"]
+[gd_scene load_steps=18 format=3 uid="uid://34fhm4pp3113"]
 
 [ext_resource type="Script" uid="uid://d0cy7x87iaixj" path="res://Enemies/basic_enemy.gd" id="1_221se"]
+[ext_resource type="Shader" uid="uid://darti4k2he22i" path="res://Shaders/hit_flash.gdshader" id="1_qenpu"]
 [ext_resource type="Resource" uid="uid://c822wln20asv" path="res://Enemies/slow_enemy.tres" id="2_gie15"]
 [ext_resource type="Resource" uid="uid://bhkhvp6efwkbu" path="res://Enemies/slow_red_enemy.tres" id="3_iioo1"]
+[ext_resource type="Resource" uid="uid://kyar3y0pf6d0" path="res://Enemies/green_enemy_test.tres" id="4_e4a15"]
 [ext_resource type="Texture2D" uid="uid://hwmpk22f2q2h" path="res://Assets/kenney_pirate-pack/PNG/Default size/Ships/ship (2).png" id="4_iioo1"]
-[ext_resource type="Script" path="res://Enemies/audio_stream_player_2d.gd" id="5_4vdx4"]
+[ext_resource type="Script" uid="uid://wke5xle7bpbn" path="res://Enemies/audio_stream_player_2d.gd" id="5_4vdx4"]
 [ext_resource type="Resource" uid="uid://xcfalartatb5" path="res://Resources/death_explosion.tres" id="6_rcyh1"]
+[ext_resource type="AudioStream" uid="uid://du63xssb4ybdb" path="res://sounds/enemy_hit.sfxr" id="9_85m4s"]
+[ext_resource type="Script" uid="uid://b5xmers4gw01h" path="res://Enemies/enemy_hitSFX.gd" id="10_p61vm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qenpu"]
+shader = ExtResource("1_qenpu")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_value = 0.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iioo1"]
 radius = 17.0
@@ -19,13 +28,52 @@ height = 120.0
 radius = 16.0
 height = 110.0
 
+[sub_resource type="Animation" id="Animation_e4a15"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/flash_value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_qenpu"]
+resource_name = "hit_flash"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/flash_value")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [0.0, 1.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_85m4s"]
+_data = {
+&"RESET": SubResource("Animation_e4a15"),
+&"hit_flash": SubResource("Animation_qenpu")
+}
+
 [node name="Basic_enemy" type="CharacterBody2D"]
+z_index = 1
 collision_layer = 2
 collision_mask = 14
 script = ExtResource("1_221se")
-enemy_types = Array[Resource]([ExtResource("2_gie15"), ExtResource("3_iioo1")])
+enemy_types = Array[Resource]([ExtResource("2_gie15"), ExtResource("3_iioo1"), ExtResource("4_e4a15")])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_qenpu")
 rotation = 1.5707964
 texture = ExtResource("4_iioo1")
 
@@ -43,20 +91,31 @@ shape = SubResource("CapsuleShape2D_4vdx4")
 debug_color = Color(0.5813112, 0, 0.70196074, 0.41960785)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+bus = &"SFX"
 script = ExtResource("5_4vdx4")
 explosion_sounds = ExtResource("6_rcyh1")
 
 [node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 2
 
 [node name="hurtShape" type="CollisionShape2D" parent="Hurtbox"]
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_rcyh1")
 debug_color = Color(0.70196074, 0.6745404, 0, 0.41960785)
 
-[node name="damage_interval_timer" type="Timer" parent="."]
-wait_time = 0.5
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_85m4s")
+}
+
+[node name="Enemy_Hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_85m4s")
+script = ExtResource("10_p61vm")
+[node name="queue_free" type="Timer" parent="."]
+wait_time = 5.0
 one_shot = true
 
 [connection signal="playSound" from="." to="AudioStreamPlayer2D" method="_on_basic_enemy_play_sound"]
+[connection signal="playerHitSound" from="." to="Enemy_Hit" method="_on_basic_enemy_player_hit_sound"]
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
-[connection signal="timeout" from="damage_interval_timer" to="." method="_on_damage_interval_timer_timeout"]
+[connection signal="timeout" from="queue_free" to="." method="_on_queue_free_timeout"]

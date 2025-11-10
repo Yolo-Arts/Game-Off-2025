@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=3 uid="uid://mr7hf4xv0s7j"]
+
+[ext_resource type="Texture2D" uid="uid://nteeo1x4snbc" path="res://Assets/Particles/Particle.png" id="1_td3r2"]
+[ext_resource type="Script" uid="uid://bhl2t6yn1m0kp" path="res://Assets/Particles/bounce_particles.gd" id="2_5fjh3"]
+
+[sub_resource type="Gradient" id="Gradient_rxrgg"]
+offsets = PackedFloat32Array(0, 0.5521472, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.85276073, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_rmkg1"]
+gradient = SubResource("Gradient_rxrgg")
+
+[sub_resource type="Curve" id="Curve_253m4"]
+_data = [Vector2(0, 0.9887641), 0.0, 1.4, 0, 0, Vector2(0.32804233, 0.64044946), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ir8v3"]
+curve = SubResource("Curve_253m4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_w01da"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 45.0
+initial_velocity_max = 70.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.19999999
+scale_max = 0.29999998
+scale_curve = SubResource("CurveTexture_ir8v3")
+color_ramp = SubResource("GradientTexture1D_rmkg1")
+
+[node name="bounce_particles" type="GPUParticles2D"]
+emitting = false
+amount = 14
+texture = ExtResource("1_td3r2")
+one_shot = true
+speed_scale = 2.0
+explosiveness = 1.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_w01da")
+script = ExtResource("2_5fjh3")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

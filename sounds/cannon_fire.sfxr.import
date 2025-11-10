@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://d0bs1a2x8outq"
+path="res://.godot/imported/cannon_fire.sfxr-700f37121a9cc3d0aec778e42fdedc3d.sample"
+
+[deps]
+
+source_file="res://sounds/cannon_fire.sfxr"
+dest_files=["res://.godot/imported/cannon_fire.sfxr-700f37121a9cc3d0aec778e42fdedc3d.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

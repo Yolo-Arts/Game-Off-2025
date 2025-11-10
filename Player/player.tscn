@@ -1,11 +1,69 @@
-[gd_scene load_steps=9 format=3 uid="uid://dle2poylya83p"]
+[gd_scene load_steps=27 format=3 uid="uid://dle2poylya83p"]
 
 [ext_resource type="Script" uid="uid://c8cpssj7vjehk" path="res://Player/player.gd" id="1_k53q1"]
 [ext_resource type="Texture2D" uid="uid://b8s48xncdlhd4" path="res://Assets/kenney_pirate-pack/PNG/Default size/Ship parts/hullLarge (1).png" id="1_l8h54"]
+[ext_resource type="Shader" uid="uid://dhfkgyvufew58" path="res://Shaders/shock_damage.gdshader" id="1_od3ui"]
 [ext_resource type="Texture2D" uid="uid://dybfpbl7p25yw" path="res://Assets/kenney_pirate-pack/PNG/Default size/Ship parts/sailLarge (7).png" id="2_4ntmi"]
 [ext_resource type="Texture2D" uid="uid://djop37l8jw66f" path="res://Assets/kenney_pirate-pack/PNG/Default size/Ship parts/cannonLoose.png" id="3_gwnis"]
 [ext_resource type="Texture2D" uid="uid://dmnkbpixhqpsq" path="res://Assets/kenney_pirate-pack/PNG/Default size/Ship parts/nest.png" id="3_k53q1"]
 [ext_resource type="Script" uid="uid://dec20rh0utiay" path="res://Scenes/camera_2d.gd" id="6_fhl08"]
+[ext_resource type="AudioStream" uid="uid://d0bs1a2x8outq" path="res://sounds/cannon_fire.sfxr" id="6_84ia6"]
+[ext_resource type="Script" uid="uid://c1a3da1a17ig8" path="res://Player/cannon_fire_sfx.gd" id="7_utq14"]
+[ext_resource type="Script" uid="uid://octyfubw21an" path="res://Player/player_hurt_sfx.gd" id="9_00tjw"]
+[ext_resource type="Resource" uid="uid://2j64bpw03vht" path="res://Resources/player_hurt_sfx.tres" id="10_x3vf3"]
+[ext_resource type="Script" uid="uid://b8u2gmybierd3" path="res://addons/trail_2d/trail_2d.gd" id="11_apopc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_00tjw"]
+
+[sub_resource type="Curve" id="Curve_apopc"]
+_data = [Vector2(0, 1), 0.0, -1.0, 0, 0, Vector2(1, 0), -1.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_apopc"]
+offsets = PackedFloat32Array(0, 0.97044337)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_od3ui"]
+shader = ExtResource("1_od3ui")
+shader_parameter/shock_color = Color(0.012617188, 0, 0, 1)
+shader_parameter/amplitude = 30.0
+shader_parameter/frequecy = 10.0
+shader_parameter/progress = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x3vf3"]
+shader = ExtResource("1_od3ui")
+shader_parameter/shock_color = Color(0.012617188, 0, 0, 1)
+shader_parameter/amplitude = 30.0
+shader_parameter/frequecy = 10.0
+shader_parameter/progress = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_apopc"]
+shader = ExtResource("1_od3ui")
+shader_parameter/shock_color = Color(0.012617188, 0, 0, 1)
+shader_parameter/amplitude = 30.0
+shader_parameter/frequecy = 10.0
+shader_parameter/progress = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5htga"]
+shader = ExtResource("1_od3ui")
+shader_parameter/shock_color = Color(0.012617188, 0, 0, 1)
+shader_parameter/amplitude = 30.0
+shader_parameter/frequecy = 10.0
+shader_parameter/progress = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p5o4e"]
+shader = ExtResource("1_od3ui")
+shader_parameter/shock_color = Color(0.012617188, 0, 0, 1)
+shader_parameter/amplitude = 30.0
+shader_parameter/frequecy = 10.0
+shader_parameter/progress = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gu6f8"]
+shader = ExtResource("1_od3ui")
+shader_parameter/shock_color = Color(0.012617188, 0, 0, 1)
+shader_parameter/amplitude = 30.0
+shader_parameter/frequecy = 10.0
+shader_parameter/progress = 0.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k53q1"]
 radius = 21.0
@@ -15,42 +73,389 @@ height = 126.0
 radius = 22.0
 height = 120.0
 
+[sub_resource type="Animation" id="Animation_m6d10"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ShipParts:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ShipParts/Hull:material:shader_parameter/shock_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.012617188, 0, 0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ShipParts/Hull/MainSail:material:shader_parameter/shock_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.012617188, 0, 0, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ShipParts/Hull/MainSail/Sprite2D:material:shader_parameter/shock_color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.012617188, 0, 0, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ShipParts/Hull/SmallSail:material:shader_parameter/shock_color")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.012617188, 0, 0, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ShipParts/Hull/CannonLeft:material:shader_parameter/shock_color")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.012617188, 0, 0, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("ShipParts/Hull/CannonRight:material:shader_parameter/shock_color")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.012617188, 0, 0, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("ShipParts/Hull:material:shader_parameter/progress")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("ShipParts/Hull/MainSail:material:shader_parameter/progress")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("ShipParts/Hull/MainSail/Sprite2D:material:shader_parameter/progress")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("ShipParts/Hull/SmallSail:material:shader_parameter/progress")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("ShipParts/Hull/CannonRight:material:shader_parameter/progress")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("ShipParts/Hull/CannonLeft:material:shader_parameter/progress")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_utq14"]
+resource_name = "bounce"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ShipParts:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.16666667, 0.3),
+"transitions": PackedFloat32Array(-2, -2, -2, -2),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.22, 0.45), Vector2(0.835, 1.03), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_od3ui"]
+resource_name = "hit_shock"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ShipParts/Hull:material:shader_parameter/shock_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ShipParts/Hull/MainSail:material:shader_parameter/shock_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0, 0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ShipParts/Hull/MainSail/Sprite2D:material:shader_parameter/shock_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0, 0, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ShipParts/Hull/SmallSail:material:shader_parameter/shock_color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0, 0, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ShipParts/Hull/CannonLeft:material:shader_parameter/shock_color")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0, 0, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ShipParts/Hull/CannonRight:material:shader_parameter/shock_color")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0, 0, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("ShipParts/Hull:material:shader_parameter/progress")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("ShipParts/Hull/MainSail:material:shader_parameter/progress")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("ShipParts/Hull/MainSail/Sprite2D:material:shader_parameter/progress")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("ShipParts/Hull/SmallSail:material:shader_parameter/progress")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("ShipParts/Hull/CannonRight:material:shader_parameter/progress")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.999999977648]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("ShipParts/Hull/CannonLeft:material:shader_parameter/progress")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rxrgg"]
+_data = {
+&"RESET": SubResource("Animation_m6d10"),
+&"bounce": SubResource("Animation_utq14"),
+&"hit_shock": SubResource("Animation_od3ui")
+}
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+material = SubResource("ShaderMaterial_00tjw")
 collision_mask = 9
 script = ExtResource("1_k53q1")
+turn_acceleration = 0.5
+
+[node name="Trail2D" type="Line2D" parent="."]
+width = 55.0
+width_curve = SubResource("Curve_apopc")
+default_color = Color(1, 1, 1, 0.35686275)
+gradient = SubResource("Gradient_apopc")
+script = ExtResource("11_apopc")
+length = 25
+metadata/_custom_type_script = "uid://b8u2gmybierd3"
 
 [node name="ShipParts" type="Node2D" parent="."]
+z_index = 2
 rotation = -1.5707964
 
 [node name="Hull" type="Sprite2D" parent="ShipParts"]
+material = SubResource("ShaderMaterial_od3ui")
 scale = Vector2(1, 1.2777778)
 texture = ExtResource("1_l8h54")
 
 [node name="MainSail" type="Sprite2D" parent="ShipParts/Hull"]
+material = SubResource("ShaderMaterial_x3vf3")
 position = Vector2(-1, -14.086956)
 scale = Vector2(1.060606, 0.5784499)
 texture = ExtResource("2_4ntmi")
 
 [node name="Sprite2D" type="Sprite2D" parent="ShipParts/Hull/MainSail"]
+material = SubResource("ShaderMaterial_apopc")
 position = Vector2(0.9428572, -25.705881)
 scale = Vector2(0.9428572, 1.3529412)
 texture = ExtResource("3_k53q1")
 
 [node name="SmallSail" type="Sprite2D" parent="ShipParts/Hull"]
+material = SubResource("ShaderMaterial_5htga")
 position = Vector2(-1, 23.47826)
 scale = Vector2(0.97818136, 0.510397)
 texture = ExtResource("2_4ntmi")
 
 [node name="CannonLeft" type="Sprite2D" parent="ShipParts/Hull"]
+material = SubResource("ShaderMaterial_p5o4e")
 position = Vector2(29, 3.9130447)
 scale = Vector2(1.246, 0.7826087)
 texture = ExtResource("3_gwnis")
 
 [node name="CannonRight" type="Sprite2D" parent="ShipParts/Hull"]
+material = SubResource("ShaderMaterial_gu6f8")
 position = Vector2(-29.457832, 3.9130447)
-rotation = 3.1415925
 scale = Vector2(1.2457836, 0.7826087)
 texture = ExtResource("3_gwnis")
+flip_h = true
 
 [node name="CannonLeft" type="Marker2D" parent="."]
 position = Vector2(5, -40)
@@ -63,7 +468,6 @@ rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_k53q1")
 
 [node name="DamageArea" type="Area2D" parent="."]
-collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
@@ -79,6 +483,23 @@ one_shot = true
 zoom = Vector2(0.5, 0.5)
 script = ExtResource("6_fhl08")
 
+[node name="CannonFireSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_84ia6")
+volume_db = -10.32
+bus = &"SFX"
+script = ExtResource("7_utq14")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_rxrgg")
+}
+
+[node name="PlayerHurtSFX" type="AudioStreamPlayer2D" parent="."]
+script = ExtResource("9_00tjw")
+hurt_SFX = ExtResource("10_x3vf3")
+
+[connection signal="fire_cannon_SFX" from="." to="CannonFireSFX" method="_on_player_fire_cannon_sfx"]
+[connection signal="playerHitSFX" from="." to="PlayerHurtSFX" method="_on_player_player_hit_sfx"]
 [connection signal="body_entered" from="DamageArea" to="." method="_on_damage_area_body_entered"]
 [connection signal="body_exited" from="DamageArea" to="." method="_on_damage_area_body_exited"]
 [connection signal="timeout" from="damage_interval_timer" to="." method="_on_damage_interval_timer_timeout"]

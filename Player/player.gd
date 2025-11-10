@@ -1,14 +1,15 @@
 extends CharacterBody2D
 
-# TODO Make it so that W makes the player move, rather than constant speed.
-
-@export var base_speed: float = 150.0
-@export var max_speed: float = 500.0
+# movement related code
+@export_group("Movement Parameters")
+@export var base_speed: float = 400
+@export var max_speed: float = 700.0
 @export var min_turn_speed: float = 0.8  
-@export var max_turn_speed: float = 4.0  
-@export var turn_acceleration: float = 0.3
+@export var max_turn_speed: float = 6.0  
+@export var turn_acceleration: float = 0.4
 @export var acceleration: float = 1.0
-@export var deceleration: float = 0.5
+@export var deceleration: float = 0.15
+@export var bounce_dampening: float = 0.7
 
 # Cannons
 @onready var cannon_left = $CannonLeft
@@ -19,9 +20,19 @@ extends CharacterBody2D
 # Cannonball
 @onready var cannonball = preload("uid://m1jsvblrkbdq")
 
+@onready var animation_player = $AnimationPlayer
+
 # Particles
+@export_group("Particles")
 @export var cannon_fire: PackedScene = preload("uid://do1jur5t8qgko") 
 const DEATH_EXPLOSION = preload("uid://da1djwy4cr28t")
+const BOUNCE_PARTICLES = preload("uid://mr7hf4xv0s7j")
+
+
+# Sounds
+signal fire_cannon_SFX
+@onready var player_hurt_sfx = $PlayerHurtSFX
+
 
 
 var current_speed: float = 300.0
@@ -31,6 +42,7 @@ var turn_time: float = 0.0
 var isDead = false
    
 func _ready():
+	Globals.player_health = 100
 	Globals.player_died.connect(dead_player)
 	Globals.camera = camera_2d
 
@@ -54,24 +66,43 @@ func _physics_process(delta) -> void:
 		
 		if turn_direction != 0.0:
 			turn_time += delta
-			
 			var turn_factor = min(1.0, turn_time * turn_acceleration)
 			current_turn_speed = lerp(min_turn_speed, max_turn_speed, turn_factor)
 			
 			rotate(turn_direction * current_turn_speed * delta)
-			current_speed = lerp(current_speed, base_speed, deceleration * delta)
-			#print("Turning with speed: ", current_turn_speed, " Deaccelerating: ", current_speed)
 		else:
 			turn_time = 0.0
 			current_turn_speed = min_turn_speed
-			
-			current_speed = lerp(current_speed, max_speed, acceleration * delta)
-			#print("Accelerating: ", current_speed)
 		
+		var target_speed = 0.0
+		var current_accel = 0.0
+
+		if Input.is_action_pressed("move_forward"):
+			if turn_direction != 0.0:
+				target_speed = base_speed
+				current_accel = deceleration 
+			else:
+				target_speed = max_speed
+				current_accel = acceleration
+		else:
+			target_speed = base_speed
+			current_accel = acceleration 
+
+		current_speed = lerp(current_speed, target_speed, current_accel * delta)
 		var forward_direction = Vector2.RIGHT.rotated(rotation)
 		velocity = forward_direction * current_speed
 		
-		move_and_slide()
+		# Wall collisions:
+		var collision = move_and_collide(velocity * delta)
+		if collision:
+			animation_player.play("bounce")
+			var normal = collision.get_normal()
+			velocity = velocity.bounce(normal) * bounce_dampening
+			rotation = velocity.angle()
+			spawn_bounce_particles(collision.get_position(), normal)
+			Globals.camera.shake(0.15, 10, 5)
+			move_and_slide()
+
 
 func shoot():
 	var bullet_instance = cannonball.instantiate()
@@ -106,8 +137,33 @@ func spawn_cannon_particles(pos: Vector2, normal: Vector2) -> void:
 	add_child(instance)
 	instance.global_position = pos
 	instance.rotation = normal.angle()
+	fire_cannon_SFX.emit()
 
 func spawn_death_explosion(pos: Vector2) -> void:
 	var instance = DEATH_EXPLOSION.instantiate()
 	get_tree().get_current_scene().add_child(instance)
 	instance.global_position = pos
+
+func spawn_bounce_particles(pos: Vector2, normal: Vector2) -> void:
+	var instance = BOUNCE_PARTICLES.instantiate()
+	add_child(instance)
+	instance.global_position = pos
+	instance.rotation = normal.angle()
+
+signal playerHitSFX
+
+func player_hit():
+	playerHitSFX.emit()
+	
+	
+
+func _on_damage_area_body_entered(body: Node2D) -> void:
+	if $damage_interval_timer.is_stopped():
+		Globals.player_health -= body.enemy_stats.damage
+		self.player_hit()
+		self.animation_player.play("hit_shock")
+		Globals.camera.shake(0.5, 15, 10)
+		print("Player Health: ", Globals.player_health, "Damaged by: ", body.enemy_stats.type)
+		$damage_interval_timer.start()
+	else:
+		print("Damage on cooldown")

@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://db6pcdv5k26es"
+path="res://.godot/imported/playerHurt2.sfxr-a4f1a60b75662172c006776c9a48f5f7.sample"
+
+[deps]
+
+source_file="res://sounds/playerHurt2.sfxr"
+dest_files=["res://.godot/imported/playerHurt2.sfxr-a4f1a60b75662172c006776c9a48f5f7.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

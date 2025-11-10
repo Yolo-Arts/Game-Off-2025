@@ -1,0 +1,183 @@
+[gd_scene load_steps=2 format=3 uid="uid://d31hkdhneb8rg"]
+
+[ext_resource type="Script" uid="uid://beiwt1l5yk3ny" path="res://user_interface/game_over.gd" id="1_bkg1s"]
+
+[node name="GameOver" type="CanvasLayer"]
+layer = 4
+script = ExtResource("1_bkg1s")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -210.0
+offset_right = 250.0
+offset_bottom = 210.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="WastedPanel" type="Panel" parent="Control/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(500, 100)
+layout_mode = 2
+
+[node name="WastedLabel" type="Label" parent="Control/MarginContainer/VBoxContainer/WastedPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 64
+text = "WASTED"
+
+[node name="Scoreboard" type="Panel" parent="Control/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/VBoxContainer/Scoreboard"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -28.0
+offset_right = 28.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme_override_constants/margin_top = 10
+
+[node name="Score_" type="Label" parent="Control/MarginContainer/VBoxContainer/Scoreboard/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+text = "SCORE:"
+
+[node name="MarginContainer2" type="MarginContainer" parent="Control/MarginContainer/VBoxContainer/Scoreboard"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 70
+
+[node name="CategoriesAndScoresDivider" type="HBoxContainer" parent="Control/MarginContainer/VBoxContainer/Scoreboard/MarginContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider"]
+layout_mode = 2
+
+[node name="ScoreCategories" type="VBoxContainer" parent="Control/MarginContainer/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="seconds survived" type="Label" parent="Control/MarginContainer/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider/ScoreCategories"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Time survived:"
+
+[node name="shipwrecked" type="Label" parent="Control/MarginContainer/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider/ScoreCategories"]
+layout_mode = 2
+text = "Enemies shipwrecked:"
+
+[node name="shipwrecked2" type="Label" parent="Control/MarginContainer/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider/ScoreCategories"]
+layout_mode = 2
+text = "Bounty:"
+
+[node name="waves_survived" type="Label" parent="Control/MarginContainer/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider/ScoreCategories"]
+layout_mode = 2
+text = "Waves Survived:"
+
+[node name="bosses_shipwrecked" type="Label" parent="Control/MarginContainer/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider/ScoreCategories"]
+layout_mode = 2
+text = "Bosses Shipwrecked:"
+
+[node name="Total" type="Label" parent="Control/MarginContainer/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider/ScoreCategories"]
+layout_mode = 2
+text = "Total:"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="secondsScore" type="Label" parent="Control/MarginContainer/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Time survived:"
+horizontal_alignment = 2
+
+[node name="shipwreckedScore" type="Label" parent="Control/MarginContainer/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Enemies shipwrecked:"
+horizontal_alignment = 2
+
+[node name="bountyScore" type="Label" parent="Control/MarginContainer/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Bounty:"
+horizontal_alignment = 2
+
+[node name="waves_survivedScore" type="Label" parent="Control/MarginContainer/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Waves Survived:"
+horizontal_alignment = 2
+
+[node name="bosses_shipwreckedScore" type="Label" parent="Control/MarginContainer/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Bosses Shipwrecked:"
+horizontal_alignment = 2
+
+[node name="total_score" type="Label" parent="Control/MarginContainer/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+horizontal_alignment = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="Control/MarginContainer/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider"]
+layout_mode = 2
+
+[node name="ButtonContainer" type="HBoxContainer" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Menu" type="Button" parent="Control/MarginContainer/VBoxContainer/ButtonContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Go back to Menu"
+
+[node name="Restart" type="Button" parent="Control/MarginContainer/VBoxContainer/ButtonContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Restart"
+
+[connection signal="pressed" from="Control/MarginContainer/VBoxContainer/ButtonContainer/Menu" to="." method="_on_menu_pressed"]
+[connection signal="pressed" from="Control/MarginContainer/VBoxContainer/ButtonContainer/Restart" to="." method="_on_restart_pressed"]
