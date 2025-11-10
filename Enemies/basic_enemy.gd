@@ -7,11 +7,17 @@ class_name Enemy
 
 var speed
 var health
+
+# Particles
 const DEATH_EXPLOSION = preload("uid://da1djwy4cr28t")
 const DEAD_SHIP = preload("uid://cjqp43sw23woi")
 const EXP_ORB = preload("res://Scenes/exp_orb.tscn")
-signal playSound
+const HIT_EXPLOSION = preload("uid://bk5p2f8p57tdj")
+const SHIP__4_ = preload("uid://dtggqs3n2orf8")
 
+
+signal playSound
+signal playerHitSound
 @onready var sprite = $Sprite2D
 @onready var collision_shape_2d = $CollisionShape2D
 @onready var hitbox_collision_shape_2d = $Hitbox/CollisionShape2D
@@ -20,6 +26,8 @@ signal playSound
 @onready var damage_interval_timer = $damage_interval_timer
 @onready var hurtbox = $Hurtbox
 @onready var hurt_shape = $Hurtbox/hurtShape
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+
 
 
 @export var enemy_types: Array[Resource]
@@ -30,14 +38,21 @@ var isDead = false
 
 var rng = RandomNumberGenerator.new()
 
+func _ready() -> void:
+	if enemy_stats and enemy_stats.texture:
+		sprite.texture = enemy_stats.texture
+
+	if sprite.material:
+		sprite.material = sprite.material.duplicate()
+	
+
 func set_enemy_type(enemy_type: int):
-	if enemy_type > enemy_types.size(): 
+	if enemy_type >= enemy_types.size(): 
 		return
 	enemy_stats = enemy_types[enemy_type]
 	speed = enemy_stats.speed
 	health = enemy_stats.health
-	if enemy_stats.texture:
-		sprite.texture = enemy_stats.texture
+
 
 func _physics_process(_delta):
 	if !isDead: 
@@ -55,10 +70,13 @@ func get_direction_to_player():
 		return direction
 	return Vector2.ZERO  # Return zero vector if no player found
 
-# TODO queue_free() enemy when they die. 
+# FIXME queue_free() enemy when they die. 
 
 func take_damage(damage: int):
 	health -= damage
+	self.animation_player.play("hit_flash")
+	playerHitSound.emit()
+	spawn_hit_explosion(self.position, Vector2(0,0))
 	if health <= health/2:
 		sprite.texture = enemy_stats.texture_damaged
 		speed = speed/2
@@ -71,6 +89,9 @@ func take_damage(damage: int):
 		Globals.camera.shake(0.20, 15, 20)
 		Globals.update_score("ENEMY_SHIPWRECKED")
 		playSound.emit()
+		await get_tree().create_timer(2).timeout
+
+
 
 
 
@@ -85,6 +106,14 @@ func spawn_dead_ship(pos: Vector2, normal:Vector2) -> void:
 	add_child(instance)
 	instance.global_position = pos
 	instance.rotation = get_direction_to_player().angle() + deg_to_rad(180)
+	$queue_free.start()
+	
+
+func spawn_hit_explosion(pos: Vector2, normal:Vector2) -> void:
+	var instance = HIT_EXPLOSION.instantiate()
+	add_child(instance)
+	instance.global_position = pos
+	instance.rotation = normal.angle()
 
 func spawn_exp_orb(pos: Vector2):
 	var instance = EXP_ORB.instantiate()
@@ -107,12 +136,5 @@ func disable_hitbox():
 		hurt_shape.queue_free()
 	
 
-
-#TODO add a signal to make sure that the timer works properly
-func _on_hurtbox_body_entered(body):
-	if body == player && damage_interval_timer.is_stopped():
-		Globals.player_health -= enemy_stats.damage
-		print("Player Health: ", Globals.player_health, "Damaged by: ", enemy_stats.type)
-		damage_interval_timer.start()
-	else:
-		print("Damage on cooldown")
+func _on_queue_free_timeout() -> void:
+	self.queue_free()

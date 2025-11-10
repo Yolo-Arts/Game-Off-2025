@@ -8,5 +8,6 @@ func _ready():
 	#var tween = create_tween()
 	#tween.tween_property(hull, "modulate", Color(0.0, 0.0, 0.0, 0.0), 10.0)
 	animation_player.play("sinkBoat")
-	await animation_player.animation_finished
+
+func kill():
 	queue_free()

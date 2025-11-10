@@ -30,6 +30,8 @@ const BOUNCE_PARTICLES = preload("uid://mr7hf4xv0s7j")
 
 # Sounds
 signal fire_cannon_SFX
+@onready var player_hurt_sfx = $PlayerHurtSFX
+
 
 var current_speed: float = 300.0
 var current_turn_speed: float = min_turn_speed  
@@ -38,6 +40,7 @@ var turn_time: float = 0.0
 var isDead = false
 
 func _ready():
+	Globals.player_health = 100
 	Globals.player_died.connect(dead_player)
 
 func dead_player():
@@ -142,3 +145,21 @@ func spawn_bounce_particles(pos: Vector2, normal: Vector2) -> void:
 	add_child(instance)
 	instance.global_position = pos
 	instance.rotation = normal.angle()
+
+signal playerHitSFX
+
+func player_hit():
+	playerHitSFX.emit()
+	
+	
+
+func _on_damage_area_body_entered(body: Node2D) -> void:
+	if $damage_interval_timer.is_stopped():
+		Globals.player_health -= body.enemy_stats.damage
+		self.player_hit()
+		self.animation_player.play("hit_shock")
+		Globals.camera.shake(0.5, 15, 10)
+		print("Player Health: ", Globals.player_health, "Damaged by: ", body.enemy_stats.type)
+		$damage_interval_timer.start()
+	else:
+		print("Damage on cooldown")
