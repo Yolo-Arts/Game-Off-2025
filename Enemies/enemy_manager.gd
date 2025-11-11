@@ -40,7 +40,7 @@ func spawn_enemy(enemy_num):
 
 func spawn():
 		var enemy_type_index = enemy_table.pick_item()
-		var enemy = basic_enemy_scene.instantiate() as Enemy
+		var enemy = basic_enemy_scene.instantiate() as Enemy_iso
 		
 		enemy.set_enemy_type(enemy_type_index)
 		enemy.global_position = get_spawn_position()
@@ -62,7 +62,8 @@ func on_difficulty_increased(difficulty: int):
 		1:
 			pass
 		2:
-			enemy_table.add_item(2, 10)
+			pass
+			#enemy_table.add_item(2, 10)
 		3:
 			enemy_count += 1
 		4:

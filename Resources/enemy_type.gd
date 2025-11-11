@@ -2,6 +2,15 @@ extends Resource
 
 class_name enemy_type
 
+# Enemies have a spritesheet of 360 images
+# 45 columns
+# 8 rows
+# 45 x 8 = 360
+
+# dealing with weird rotation of enemy
+@export var total_frames = 360
+@export var frame_offset = -50
+
 @export var type: types
 @export var texture: Texture2D
 @export var texture_damaged: Texture2D

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Game-Off-2025"
-run/main_scene="uid://d0id8y3lwuvg4"
+run/main_scene="uid://b3imdjb1so30p"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -78,3 +78,4 @@ move_forward={
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.4509804, 0.74509805, 0.827451, 1)

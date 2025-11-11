@@ -1,17 +1,16 @@
 extends CharacterBody2D
 
-class_name Enemy
+class_name Enemy_iso
 
 #TODO FIX THE MOVEMENT SCRIPT SO THAT THEY ACTUALLY MOVE LIKE A BOAT 
 #FIXME Fix the hitboxes, they do not rotate with the enemy.
 
-var speed: float = 100.0  
-var health: float = 100.0  
+var speed = 0
+var health = 0
 
 # Particles
 const DEATH_EXPLOSION = preload("uid://da1djwy4cr28t")
 const DEAD_SHIP = preload("uid://cjqp43sw23woi")
-const EXP_ORB = preload("res://Scenes/exp_orb.tscn")
 const HIT_EXPLOSION = preload("uid://bk5p2f8p57tdj")
 const SHIP__4_ = preload("uid://dtggqs3n2orf8")
 
@@ -22,8 +21,6 @@ signal playerHitSound
 @onready var collision_shape_2d = $CollisionShape2D
 @onready var hitbox_collision_shape_2d = $Hitbox/CollisionShape2D
 @onready var hitboxArea = $Hitbox
-#@onready var exp_orb: Area2D = $Exp_Orb
-@onready var damage_interval_timer = $damage_interval_timer
 @onready var hurtbox = $Hurtbox
 @onready var hurt_shape = $Hurtbox/hurtShape
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -31,20 +28,15 @@ signal playerHitSound
 @export var enemy_types: Array[Resource]
 var enemy_stats: Resource
 
-#@export var isometric_angle: float = 30.0
-#var isometric_transform: Transform2D
-
 var player = null
 var isDead = false
 
-var total_frames = 360
-var frame_offset = 0  
-
 var rng = RandomNumberGenerator.new()
 
+var total_frames = 360
+var frame_offset = -50
+
 func _ready() -> void:
-	#isometric_transform = Transform2D()
-	#isometric_transform = isometric_transform.rotated(deg_to_rad(isometric_angle))
 	
 	if enemy_stats and enemy_stats.texture:
 		sprite.texture = enemy_stats.texture
@@ -58,17 +50,16 @@ func set_enemy_type(enemy_type: int):
 	enemy_stats = enemy_types[enemy_type]
 	speed = enemy_stats.speed
 	health = enemy_stats.health
+	total_frames = enemy_stats.total_frames
+	frame_offset = enemy_stats.frame_offset
 
 
 func _physics_process(_delta):
 	if !isDead: 
 		var direction = get_direction_to_player()
-		#var isometric_direction = isometric_transform * direction
-		#velocity = isometric_direction * speed
 		velocity = direction * speed
 		if direction:
-			sprite.rotation = direction.angle() - deg_to_rad(90)
-			#update_sprite_rotation(direction.angle())
+			update_sprite_rotation(direction.angle())
 		move_and_slide()
 
 
@@ -79,24 +70,16 @@ func get_direction_to_player():
 		return direction
 	return Vector2.ZERO  # Return zero vector if no player found
 
-# FIXME queue_free() enemy when they die. 
+
 
 func update_sprite_rotation(angle: float):
-	# Convert angle to degrees and normalize to 0-360
 	var deg = rad_to_deg(angle)
 	deg = fmod(deg, 360.0)
 	if deg < 0: deg += 360.0
-
-	# Calculate frame index based on your 45x8 grid
-	# Each column represents a different angle (360/45 = 8 degrees per column)
-	var frame_index = int(deg / 8.0)
-
-	# Apply offset and wrap around
-	frame_index = (frame_index + frame_offset) % total_frames
-
-	# Set the frame
+	var frame_index = int(deg / (360.0 / total_frames))
+	frame_index = (frame_index + frame_offset + total_frames) % total_frames
 	sprite.frame = frame_index
-	sprite.global_rotation = 0  # Keep the sprite from rotating with the transform
+	sprite.global_rotation = 0 
 
 
 func take_damage(damage: int):
@@ -105,12 +88,12 @@ func take_damage(damage: int):
 	playerHitSound.emit()
 	spawn_hit_explosion(self.position, Vector2(0,0))
 	if health <= health/2:
-		sprite.texture = enemy_stats.texture_damaged
+		# TODO Make damaged texture
+		#sprite.texture = enemy_stats.texture_damaged
 		speed = speed/2
 	if health < 0:
 		spawn_dead_ship(self.position, get_direction_to_player())
 		spawn_death_explosion(self.position, Vector2(0,0))
-		spawn_exp_orb(self.position)
 		sprite.visible = false
 		isDead = true
 		disable_hitbox() 
@@ -118,6 +101,10 @@ func take_damage(damage: int):
 		Globals.update_score("ENEMY_SHIPWRECKED")
 		playSound.emit()
 		await get_tree().create_timer(2).timeout
+
+
+
+
 
 func spawn_death_explosion(pos: Vector2, normal: Vector2) -> void:
 	var instance = DEATH_EXPLOSION.instantiate()
@@ -139,13 +126,8 @@ func spawn_hit_explosion(pos: Vector2, normal:Vector2) -> void:
 	instance.global_position = pos
 	instance.rotation = normal.angle()
 
-func spawn_exp_orb(pos: Vector2):
-	var instance = EXP_ORB.instantiate()
-	get_tree().get_current_scene().call_deferred("add_child", instance)
-	instance.global_position = pos
-
 func disable_hitbox():
-	print("disabled")
+	#print("disabled")
 	if collision_shape_2d:
 		collision_shape_2d.set_deferred("disabled", true)
 		collision_shape_2d.queue_free()
