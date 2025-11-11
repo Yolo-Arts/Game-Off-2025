@@ -1,12 +1,17 @@
 class_name Bullet_type
 extends Resource
 
-
+var left_cannon_direction
+var right_cannon_direction
 
 func _ready():
 	pass
 	
-func shoot(cannonball: PackedScene, player: Player):
+func shoot(cannonball: PackedScene, player: Player, isometric = false):
+	
+	pass
+
+func iso_shoot(cannonball: PackedScene, player: Player):
 	
 	pass
 

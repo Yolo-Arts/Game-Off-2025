@@ -104,8 +104,6 @@ func take_damage(damage: int):
 
 
 
-
-
 func spawn_death_explosion(pos: Vector2, normal: Vector2) -> void:
 	var instance = DEATH_EXPLOSION.instantiate()
 	get_tree().get_current_scene().add_child(instance)

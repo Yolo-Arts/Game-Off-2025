@@ -1,6 +1,8 @@
 class_name  Player
 extends CharacterBody2D
 
+@export var Bullet_Type: Bullet_type
+
 # movement related code
 @export_group("Movement Parameters")
 @export var base_speed: float = 400
@@ -33,7 +35,7 @@ const BOUNCE_PARTICLES = preload("uid://mr7hf4xv0s7j")
 signal fire_cannon_SFX
 @onready var player_hurt_sfx = $PlayerHurtSFX
 
-@export var Bullet_Type: Bullet_type
+
 
 var current_speed: float = 300.0
 var current_turn_speed: float = min_turn_speed  
@@ -111,32 +113,7 @@ func _physics_process(delta) -> void:
 func shoot():
 	
 	Bullet_Type.shoot(cannonball, self)
-	#var bullet_instance = cannonball.instantiate()
-	#var bullet_instance2 = cannonball.instantiate()
-	#
-	#get_parent().add_child(bullet_instance)
-	#get_parent().add_child(bullet_instance2)
-#
-	#var ship_forward = Vector2.RIGHT.rotated(rotation)
-	#
-	#var leftCannonPos = cannon_left.global_position
-	#var rightCannonPos = cannon_right.global_position
-	#
-	#bullet_instance.global_position = leftCannonPos
-	#bullet_instance2.global_position = rightCannonPos
-	#
-	## FIXME Particles do not spawn firing in the correct direction.
-	#var left_cannon_direction = ship_forward.rotated(deg_to_rad(-90)) 
-	#var right_cannon_direction = ship_forward.rotated(deg_to_rad(90)) 
-	#
-	#bullet_instance.direction = left_cannon_direction
-	#bullet_instance2.direction = right_cannon_direction
-	#
-	#
-	#spawn_cannon_particles(leftCannonPos, left_cannon_direction)
-	#spawn_cannon_particles(rightCannonPos, right_cannon_direction)
-#
-	#Globals.camera.shake(0.25, 10, 10)
+
 
 func spawn_cannon_particles(pos: Vector2, normal: Vector2) -> void:
 	var instance = cannon_fire.instantiate()

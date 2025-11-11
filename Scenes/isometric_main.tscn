@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=4 uid="uid://b3imdjb1so30p"]
 
-[ext_resource type="Script" path="res://Scenes/isometric_main.gd" id="1_1enjl"]
-[ext_resource type="PackedScene" path="res://Scenes/camera_2d.tscn" id="2_pwvqx"]
+[ext_resource type="Script" uid="uid://wjiwydm880cx" path="res://Scenes/isometric_main.gd" id="1_1enjl"]
+[ext_resource type="PackedScene" uid="uid://2sw5s3fxyqo3" path="res://Scenes/camera_2d.tscn" id="2_pwvqx"]
 [ext_resource type="TileSet" uid="uid://b34gp3nmiu6lb" path="res://Assets/isometric_tileset.tres" id="4_1enjl"]
 [ext_resource type="Shader" uid="uid://b4oixuorco5vd" path="res://Shaders/water.gdshader" id="5_504xn"]
 [ext_resource type="Texture2D" uid="uid://c12v3gr0dt8sm" path="res://icon.svg" id="6_0lw5m"]
@@ -65,10 +65,10 @@ tile_set = ExtResource("4_1enjl")
 
 [node name="WaterShader" type="TextureRect" parent="tilemapFolder"]
 material = SubResource("ShaderMaterial_j2xfm")
-offset_left = -25960.998
-offset_top = -15646.999
-offset_right = -17847.998
-offset_bottom = -13018.999
+offset_left = -26027.0
+offset_top = -15930.0
+offset_right = -17914.0
+offset_bottom = -13302.0
 scale = Vector2(20, 20)
 texture = ExtResource("6_0lw5m")
 stretch_mode = 1
@@ -89,10 +89,9 @@ tile_set = ExtResource("4_1enjl")
 unique_name_in_owner = true
 zoom = Vector2(0.8, 0.8)
 
-[node name="EnemyManager" parent="." node_paths=PackedStringArray("wave_time_manager") instance=ExtResource("7_0lw5m")]
+[node name="EnemyManager" parent="." instance=ExtResource("7_0lw5m")]
 basic_enemy_scene = ExtResource("14_dlawb")
 enemy_types = Array[Resource]([ExtResource("9_yws0v"), ExtResource("10_dlawb")])
-wave_time_manager = NodePath("../WaveTimeManager")
 
 [node name="WaveAndTimeUI" parent="." node_paths=PackedStringArray("wave_time_manager") instance=ExtResource("8_gpok4")]
 wave_time_manager = NodePath("../WaveTimeManager")

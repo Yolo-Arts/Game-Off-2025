@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://deqnmjpt3dxgb"]
 
 [ext_resource type="Script" uid="uid://bg21p6igd7lvn" path="res://player_isometric.gd" id="1_60ovk"]
-[ext_resource type="Resource" uid="uid://bgntu42b22hqi" path="res://Resources/Bullet types/Double_Shot.tres" id="2_1xiy1"]
+[ext_resource type="Resource" uid="uid://j3tfs6h36efg" path="res://Resources/Bullet types/default_bullet.tres" id="2_1xiy1"]
 [ext_resource type="Texture2D" uid="uid://bjchrxewdcwy2" path="res://Player/boat_spritesheet2.png" id="2_evufl"]
 [ext_resource type="Shader" uid="uid://dhfkgyvufew58" path="res://Shaders/shock_damage.gdshader" id="3_5y3gb"]
 [ext_resource type="AudioStream" uid="uid://bbo0dxfs3wbnj" path="res://sounds/playerHurt1.sfxr" id="3_amulb"]
@@ -32,16 +32,7 @@ stream_0/stream = ExtResource("8_b0dan")
 
 [node name="player_isometric" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_60ovk")
-isometric_angle = null
 Bullet_Type = ExtResource("2_1xiy1")
-base_speed = null
-max_speed = null
-min_turn_speed = null
-max_turn_speed = null
-turn_acceleration = null
-acceleration = null
-deceleration = null
-bounce_dampening = null
 
 [node name="boat" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_fphli")
