@@ -19,3 +19,7 @@ func _on_player_player_hit_sfx():
 		play()
 	else:
 		return
+
+
+func _on_player_isometric_player_hit_sfx():
+	pass # Replace with function body.

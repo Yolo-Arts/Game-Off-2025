@@ -1,0 +1,61 @@
+[gd_scene load_steps=13 format=3 uid="uid://deqnmjpt3dxgb"]
+
+[ext_resource type="Script" path="res://player_isometric.gd" id="1_60ovk"]
+[ext_resource type="Texture2D" uid="uid://bjchrxewdcwy2" path="res://Player/boat_spritesheet2.png" id="2_evufl"]
+[ext_resource type="Shader" path="res://Shaders/shock_damage.gdshader" id="3_5y3gb"]
+[ext_resource type="AudioStream" uid="uid://bbo0dxfs3wbnj" path="res://sounds/playerHurt1.sfxr" id="3_amulb"]
+[ext_resource type="AudioStream" uid="uid://db6pcdv5k26es" path="res://sounds/playerHurt2.sfxr" id="4_qif08"]
+[ext_resource type="AudioStream" uid="uid://bcdx1wnye1sbw" path="res://sounds/playerHurt3.sfxr" id="5_r0ntv"]
+[ext_resource type="AudioStream" uid="uid://d0bs1a2x8outq" path="res://sounds/cannon_fire.sfxr" id="8_b0dan"]
+[ext_resource type="Script" uid="uid://c1a3da1a17ig8" path="res://Player/cannon_fire_sfx.gd" id="9_w5xkq"]
+[ext_resource type="Script" uid="uid://octyfubw21an" path="res://Player/player_hurt_sfx.gd" id="10_606xv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fphli"]
+shader = ExtResource("3_5y3gb")
+shader_parameter/shock_color = Color(1, 0, 0, 1)
+shader_parameter/amplitude = 15.0
+shader_parameter/frequecy = 30.0
+shader_parameter/progress = 0.999999977648
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_t0vef"]
+random_pitch = 1.2
+streams_count = 3
+stream_0/stream = ExtResource("3_amulb")
+stream_1/stream = ExtResource("4_qif08")
+stream_2/stream = ExtResource("5_r0ntv")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qif08"]
+random_pitch = 1.7
+streams_count = 1
+stream_0/stream = ExtResource("8_b0dan")
+
+[node name="player_isometric" type="CharacterBody2D" groups=["player"]]
+script = ExtResource("1_60ovk")
+
+[node name="boat" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_fphli")
+texture = ExtResource("2_evufl")
+hframes = 45
+vframes = 8
+frame = 188
+
+[node name="CannonLeft" type="Marker2D" parent="."]
+position = Vector2(20, 16)
+
+[node name="CannonRight" type="Marker2D" parent="."]
+position = Vector2(-19, 16)
+
+[node name="PlayerHurtSFX" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_t0vef")
+bus = &"SFX"
+script = ExtResource("10_606xv")
+
+[node name="CannonFireSFX" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_qif08")
+bus = &"SFX"
+script = ExtResource("9_w5xkq")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[connection signal="fire_cannon_SFX" from="." to="CannonFireSFX" method="_on_player_isometric_fire_cannon_sfx"]
+[connection signal="playerHitSFX" from="." to="PlayerHurtSFX" method="_on_player_isometric_player_hit_sfx"]
