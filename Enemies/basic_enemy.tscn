@@ -111,6 +111,7 @@ libraries = {
 [node name="Enemy_Hit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("9_85m4s")
 script = ExtResource("10_p61vm")
+
 [node name="queue_free" type="Timer" parent="."]
 wait_time = 5.0
 one_shot = true

@@ -1,3 +1,4 @@
+class_name Cannonball
 extends Area2D
 
 @export var speed = 700
@@ -13,7 +14,7 @@ func _ready():
 	if !bullet:
 		return
 	sprite.texture = bullet.texture
-	set_modulate(bullet.find_appearance())
+	set_modulate(bullet.find_appearance()) 
 
 func _physics_process(delta):
 	#if !bullet:

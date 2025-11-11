@@ -1,0 +1,7 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://j3tfs6h36efg"]
+
+[ext_resource type="Script" uid="uid://bo6vq6co3j2ya" path="res://Resources/Bullet types/Default_Bullet.gd" id="1_ku80e"]
+
+[resource]
+script = ExtResource("1_ku80e")
+metadata/_custom_type_script = "uid://bo6vq6co3j2ya"

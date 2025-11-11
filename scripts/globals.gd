@@ -4,7 +4,6 @@ var camera
 
 signal exp_collected
 signal player_level_up
-var player_health: float = 100
 
 var playerDied = false
 
@@ -31,7 +30,7 @@ enum POINTS_CATEGORIES  {
 }
 
 func _ready() -> void:
-	
+
 	UserInterface = get_parent().get_node("Main").get_node("UI").get_node("UserInterface")
 	my_timer.wait_time = INTERVAL
 	my_timer.autostart = true
@@ -40,14 +39,18 @@ func _ready() -> void:
 	my_timer.timeout.connect(_on_my_timer_timeout)
 	
 func _process(delta):
-	if player_health <= 0 && playerDied == false:
-		print("player died")
-		player_died.emit()
-		playerDied = true
-		print("Final Score %s" % score)
+	pass
+
 		
 func _on_my_timer_timeout():
 	update_score("PER_SECOND_SURVIVED")
 
 func update_score(points_scored_category):
 	score[points_scored_category] += POINTS_CATEGORIES[points_scored_category]
+
+func _on_playerDied():
+	print("player died")
+	player_died.emit()
+	playerDied = true
+	print("Final Score %s" % score)
+	pass

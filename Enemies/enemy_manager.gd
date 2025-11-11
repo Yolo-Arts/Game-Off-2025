@@ -6,8 +6,8 @@ var swapper_index = 0
 @export var basic_enemy_scene: PackedScene
 @export var enemy_types: Array[Resource]
 var enemy_stats: Resource
-@export var wave_time_manager: Node
 @onready var timer = $Timer
+@onready var wave_time_manager: Node = $"../WaveTimeManager"
 
 @onready var ENEMY_SPAWN_INDICATOR = preload("uid://dx4o5mretwoae")
 

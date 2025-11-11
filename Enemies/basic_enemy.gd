@@ -83,6 +83,7 @@ func take_damage(damage: int):
 	if health < 0:
 		spawn_dead_ship(self.position, get_direction_to_player())
 		spawn_death_explosion(self.position, Vector2(0,0))
+		spawn_exp_orb(self.position)
 		sprite.visible = false
 		isDead = true
 		disable_hitbox() 
@@ -90,10 +91,6 @@ func take_damage(damage: int):
 		Globals.update_score("ENEMY_SHIPWRECKED")
 		playSound.emit()
 		await get_tree().create_timer(2).timeout
-
-
-
-
 
 func spawn_death_explosion(pos: Vector2, normal: Vector2) -> void:
 	var instance = DEATH_EXPLOSION.instantiate()
