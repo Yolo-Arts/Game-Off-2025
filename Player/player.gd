@@ -35,8 +35,6 @@ const BOUNCE_PARTICLES = preload("uid://mr7hf4xv0s7j")
 signal fire_cannon_SFX
 @onready var player_hurt_sfx = $PlayerHurtSFX
 
-
-
 var current_speed: float = 300.0
 var current_turn_speed: float = min_turn_speed  
 var turn_time: float = 0.0 
@@ -59,6 +57,7 @@ func _unhandled_input(event):
 	if event.is_action_pressed("fire"):
 		shoot()
 func _physics_process(delta) -> void:
+	
 	if !isDead:
 		var turn_direction = 0.0
 		if Input.is_action_pressed("turn_left"):
@@ -112,7 +111,7 @@ func _physics_process(delta) -> void:
 
 func shoot():
 	
-	Bullet_Type.shoot(cannonball, self)
+	Bullet_Type.shoot(cannonball, self, false)
 
 
 func spawn_cannon_particles(pos: Vector2, normal: Vector2) -> void:
@@ -150,3 +149,9 @@ func _on_damage_area_body_entered(body: Node2D) -> void:
 		$damage_interval_timer.start()
 	else:
 		print("Damage on cooldown")
+
+
+func _on_exp_collection_radius_body_entered(body: Node2D) -> void:
+	if body is Exp_Orb:
+		Globals.exp_collected.emit()
+		body.queue_free()

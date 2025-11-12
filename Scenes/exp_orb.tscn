@@ -7,7 +7,9 @@
 radius = 27.018513
 
 [node name="Exp_Orb" type="Area2D"]
-collision_layer = 0
+scale = Vector2(0.5, 0.5)
+collision_layer = 16
+collision_priority = 3.0
 script = ExtResource("1_sdqly")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

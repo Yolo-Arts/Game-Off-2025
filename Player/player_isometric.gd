@@ -82,7 +82,7 @@ func _physics_process(delta) -> void:
 
 
 func shoot():
-	
+
 	Bullet_Type.shoot(cannonball, self, true)
 
 func spawn_cannon_particles(pos: Vector2, normal: Vector2) -> void:
@@ -122,3 +122,9 @@ func update_sprite_rotation():
 		frame_index += total_frames
 	boat.frame = frame_index
 	boat.global_rotation = 0
+
+
+func _on_exp_collection_radius_area_entered(area: Area2D) -> void:
+	if area is Exp_Orb:
+		area.collected = true
+		area.player = self

@@ -77,6 +77,7 @@ func iso_shoot(cannonball: PackedScene, player: Player):
 	spawn_cannon_particles(rightCannonPos, right_cannon_direction, player)
 
 	Globals.camera.shake(0.25, 10, 10)
+	
 func spawn_cannon_particles(pos: Vector2, normal: Vector2, player: Player):
 	var instance = player.cannon_fire.instantiate()
 	player.add_child(instance)
