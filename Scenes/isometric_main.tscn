@@ -15,8 +15,8 @@
 [ext_resource type="PackedScene" uid="uid://h0hdesj12ofh" path="res://Enemies/isometric_basic_enemy.tscn" id="14_dlawb"]
 [ext_resource type="PackedScene" uid="uid://d38tjnetmpjft" path="res://user_interface/upgrade_menu.tscn" id="14_gvepe"]
 [ext_resource type="PackedScene" uid="uid://cwwekbcfo4hgu" path="res://user_interface/game_over.tscn" id="15_gvepe"]
-[ext_resource type="Script" uid="uid://dt41mbv4yvwkl" path="res://Scenes/grayscale.gd" id="16_hvs2a"]
-[ext_resource type="Shader" uid="uid://c3xdyeo558avw" path="res://Shaders/grayscale.gdshader" id="16_ixf2m"]
+[ext_resource type="Script" path="res://Scenes/grayscale.gd" id="16_hvs2a"]
+[ext_resource type="Shader" path="res://Shaders/grayscale.gdshader" id="16_ixf2m"]
 [ext_resource type="PackedScene" uid="uid://bqc47rhr50tki" path="res://user_interface/healthbar.tscn" id="18_ifoba"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_wgbrh"]
@@ -110,6 +110,7 @@ wave_time_manager = NodePath("../WaveTimeManager")
 [node name="WaveTimeManager" parent="." instance=ExtResource("9_ynplv")]
 
 [node name="Upgrade_menu_UI" type="CanvasLayer" parent="."]
+layer = 11
 
 [node name="Upgrade_Menu" parent="Upgrade_menu_UI" instance=ExtResource("14_gvepe")]
 
