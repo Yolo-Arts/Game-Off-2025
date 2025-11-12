@@ -13,6 +13,7 @@ extends CanvasLayer
 @onready var total_score_label = %total_score
 
 @onready var shaker = $Shaker
+@onready var animation_player = $AnimationPlayer
 
 
 func _ready():
@@ -24,6 +25,8 @@ func _ready():
 	
 
 func _on_restart_pressed():
+	animation_player.play("close-transition")
+	await get_tree().create_timer(1).timeout
 	get_tree().change_scene_to_file("res://Scenes/isometric_main.tscn")
 
 

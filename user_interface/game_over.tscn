@@ -1,8 +1,74 @@
-[gd_scene load_steps=4 format=3 uid="uid://cwwekbcfo4hgu"]
+[gd_scene load_steps=11 format=3 uid="uid://cwwekbcfo4hgu"]
 
 [ext_resource type="Script" uid="uid://beiwt1l5yk3ny" path="res://user_interface/game_over.gd" id="1_bkg1s"]
 [ext_resource type="Theme" uid="uid://bi4882lo6q8km" path="res://user_interface/ThemeV2.tres" id="2_adlvt"]
 [ext_resource type="Script" uid="uid://b4hwrp8guiq8a" path="res://addons/shaker/shaker.gd" id="3_adlvt"]
+[ext_resource type="Shader" uid="uid://ydw2wifhpp88" path="res://Shaders/screenTransition.gdshader" id="4_12xn0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_upsow"]
+shader = ExtResource("4_12xn0")
+shader_parameter/use_sprite_alpha = true
+shader_parameter/use_transition_texture = false
+shader_parameter/transition_type = 2
+shader_parameter/position = Vector2(0.5, 0.5)
+shader_parameter/invert = false
+shader_parameter/grid_size = Vector2(1, 1)
+shader_parameter/rotation_angle = 0.0
+shader_parameter/stagger = Vector2(0, 0)
+shader_parameter/stagger_frequency = Vector2i(2, 2)
+shader_parameter/flip_frequency = Vector2i(1, 1)
+shader_parameter/basic_feather = 0.0
+shader_parameter/use_mask_size = false
+shader_parameter/mask_size = Vector2(100, 100)
+shader_parameter/edges = 64
+shader_parameter/shape_feather = 0.1
+shader_parameter/sectors = 1
+shader_parameter/clock_feather = 0.0
+shader_parameter/progress = 2.06
+shader_parameter/progress_bias = Vector2(0, 0)
+
+[sub_resource type="Gradient" id="Gradient_adlvt"]
+offsets = PackedFloat32Array(0.005376344)
+colors = PackedColorArray(0.035858154, 0.13177991, 0.1953125, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_12xn0"]
+gradient = SubResource("Gradient_adlvt")
+
+[sub_resource type="Animation" id="Animation_12xn0"]
+resource_name = "close-transition"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [2.06, -0.095]
+}
+
+[sub_resource type="Animation" id="Animation_upsow"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2.06]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lingh"]
+_data = {
+&"RESET": SubResource("Animation_upsow"),
+&"close-transition": SubResource("Animation_12xn0")
+}
 
 [node name="GameOver" type="CanvasLayer"]
 layer = 5
@@ -384,7 +450,6 @@ text = "TEST"
 layout_mode = 2
 
 [node name="RestartMargin" type="MarginContainer" parent="Control/Scoreboard/VBoxContainer/Scoreboard"]
-z_index = 4
 custom_minimum_size = Vector2(300, 100)
 layout_mode = 1
 anchors_preset = 7
@@ -400,7 +465,6 @@ grow_vertical = 0
 theme_override_constants/margin_bottom = 30
 
 [node name="Restart" type="Button" parent="Control/Scoreboard/VBoxContainer/Scoreboard/RestartMargin"]
-z_index = 6
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme = ExtResource("2_adlvt")
@@ -414,5 +478,21 @@ min_value = 2.0
 max_value = -2.0
 constant = true
 metadata/_custom_type_script = "uid://b4hwrp8guiq8a"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = 3
+material = SubResource("ShaderMaterial_upsow")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture1D_12xn0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_lingh")
+}
 
 [connection signal="pressed" from="Control/Scoreboard/VBoxContainer/Scoreboard/RestartMargin/Restart" to="." method="_on_restart_pressed"]

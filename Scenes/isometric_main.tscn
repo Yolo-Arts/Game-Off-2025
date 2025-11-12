@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://b3imdjb1so30p"]
+[gd_scene load_steps=32 format=4 uid="uid://b3imdjb1so30p"]
 
 [ext_resource type="Script" uid="uid://wjiwydm880cx" path="res://Scenes/isometric_main.gd" id="1_1enjl"]
 [ext_resource type="PackedScene" uid="uid://cbag74ryx0pu8" path="res://Scenes/player_manager.tscn" id="2_dlawb"]
@@ -18,6 +18,7 @@
 [ext_resource type="Script" path="res://Scenes/grayscale.gd" id="16_hvs2a"]
 [ext_resource type="Shader" path="res://Shaders/grayscale.gdshader" id="16_ixf2m"]
 [ext_resource type="PackedScene" uid="uid://bqc47rhr50tki" path="res://user_interface/healthbar.tscn" id="18_ifoba"]
+[ext_resource type="Shader" uid="uid://ydw2wifhpp88" path="res://Shaders/screenTransition.gdshader" id="19_b21ex"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_wgbrh"]
 
@@ -49,6 +50,71 @@ shader_parameter/backGroundDirY = -0.03099999821262
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hvs2a"]
 shader = ExtResource("16_ixf2m")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7tq1b"]
+shader = ExtResource("19_b21ex")
+shader_parameter/use_sprite_alpha = true
+shader_parameter/use_transition_texture = false
+shader_parameter/transition_type = 2
+shader_parameter/position = Vector2(0.5, 0.5)
+shader_parameter/invert = false
+shader_parameter/grid_size = Vector2(1, 1)
+shader_parameter/rotation_angle = 0.0
+shader_parameter/stagger = Vector2(0, 0)
+shader_parameter/stagger_frequency = Vector2i(2, 2)
+shader_parameter/flip_frequency = Vector2i(1, 1)
+shader_parameter/basic_feather = 0.0
+shader_parameter/use_mask_size = false
+shader_parameter/mask_size = Vector2(100, 100)
+shader_parameter/edges = 64
+shader_parameter/shape_feather = 0.10000000475
+shader_parameter/sectors = 1
+shader_parameter/clock_feather = 0.0
+shader_parameter/progress = 0.0
+shader_parameter/progress_bias = Vector2(0, 0)
+
+[sub_resource type="Gradient" id="Gradient_b21ex"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.035858154, 0.13177991, 0.1953125, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7tq1b"]
+gradient = SubResource("Gradient_b21ex")
+
+[sub_resource type="Animation" id="Animation_b21ex"]
+resource_name = "transition"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UI/ScreenTransition/TextureRect:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 2.0]
+}
+
+[sub_resource type="Animation" id="Animation_7tq1b"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UI/ScreenTransition/TextureRect:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oiwry"]
+_data = {
+&"RESET": SubResource("Animation_7tq1b"),
+&"transition": SubResource("Animation_b21ex")
+}
 
 [node name="isometricMain" type="Node2D"]
 script = ExtResource("1_1enjl")
@@ -124,13 +190,29 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Grayscale" type="CanvasLayer" parent="."]
+[node name="HP" parent="UI" instance=ExtResource("18_ifoba")]
+
+[node name="Grayscale" type="CanvasLayer" parent="UI"]
 script = ExtResource("16_hvs2a")
 
-[node name="Sprite2D" type="Sprite2D" parent="Grayscale"]
+[node name="Sprite2D" type="Sprite2D" parent="UI/Grayscale"]
 material = SubResource("ShaderMaterial_hvs2a")
 position = Vector2(988.5, 557)
 scale = Vector2(16.445313, 9.703125)
 texture = ExtResource("6_0lw5m")
 
-[node name="CanvasLayer" parent="." instance=ExtResource("18_ifoba")]
+[node name="ScreenTransition" type="CanvasLayer" parent="UI"]
+
+[node name="TextureRect" type="TextureRect" parent="UI/ScreenTransition"]
+material = SubResource("ShaderMaterial_7tq1b")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_7tq1b")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_oiwry")
+}
