@@ -8,7 +8,7 @@
 [ext_resource type="Script" uid="uid://wke5xle7bpbn" path="res://Enemies/audio_stream_player_2d.gd" id="7_ovsua"]
 [ext_resource type="Resource" uid="uid://xcfalartatb5" path="res://Resources/death_explosion.tres" id="8_ls42v"]
 [ext_resource type="AudioStream" uid="uid://du63xssb4ybdb" path="res://sounds/enemy_hit.sfxr" id="9_20k64"]
-[ext_resource type="Script" uid="uid://b5xmers4gw01h" path="res://Enemies/enemy_hitSFX.gd" id="10_bkher"]
+[ext_resource type="Script" path="res://Enemies/enemy_hitSFX.gd" id="10_bkher"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qenpu"]
 shader = ExtResource("5_r2gfe")

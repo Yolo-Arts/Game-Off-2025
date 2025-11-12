@@ -6,7 +6,7 @@ var isometric_transform: Transform2D
 
 func _ready():
 	health = 100
-	Globals.player_died.connect(dead_player)
+	#Globals.player_died.connect(dead_player)
 	
 	isometric_transform = Transform2D()
 	isometric_transform = isometric_transform.rotated(deg_to_rad(isometric_angle))
@@ -128,3 +128,16 @@ func _on_exp_collection_radius_area_entered(area: Area2D) -> void:
 	if area is Exp_Orb:
 		area.collected = true
 		area.player = self
+
+func _on_damage_area_iso_body_entered(body: Node2D) -> void:
+	if $damage_interval_timer.is_stopped() and body is Enemy:
+		health -= body.enemy_stats.damage
+		self.player_hit()
+		print("hit")
+		#TODO ADD BACK HITSHOCK
+		#self.animation_player.play("hit_shock")
+		Globals.camera.shake(0.5, 15, 10)
+		print("Player Health: ", health, "Damaged by: ", body.enemy_stats.type)
+		$damage_interval_timer.start()
+	else:
+		print("Damage on cooldown")

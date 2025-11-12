@@ -23,7 +23,7 @@ signal playerHitSound
 @onready var hitbox_collision_shape_2d = $Hitbox/CollisionShape2D
 @onready var hitboxArea = $Hitbox
 #@onready var exp_orb: Area2D = $Exp_Orb
-@onready var damage_interval_timer = $damage_interval_timer
+#@onready var damage_interval_timer = $damage_interval_timer
 @onready var hurtbox = $Hurtbox
 @onready var hurt_shape = $Hurtbox/hurtShape
 @onready var animation_player: AnimationPlayer = $AnimationPlayer

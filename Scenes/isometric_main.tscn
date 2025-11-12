@@ -1,6 +1,6 @@
-[gd_scene load_steps=20 format=4 uid="uid://b3imdjb1so30p"]
+[gd_scene load_steps=25 format=4 uid="uid://b3imdjb1so30p"]
 
-[ext_resource type="Script" path="res://Scenes/isometric_main.gd" id="1_1enjl"]
+[ext_resource type="Script" uid="uid://wjiwydm880cx" path="res://Scenes/isometric_main.gd" id="1_1enjl"]
 [ext_resource type="PackedScene" uid="uid://cbag74ryx0pu8" path="res://Scenes/player_manager.tscn" id="2_dlawb"]
 [ext_resource type="PackedScene" uid="uid://2sw5s3fxyqo3" path="res://Scenes/camera_2d.tscn" id="2_pwvqx"]
 [ext_resource type="TileSet" uid="uid://b34gp3nmiu6lb" path="res://Assets/isometric_tileset.tres" id="4_1enjl"]
@@ -14,6 +14,10 @@
 [ext_resource type="Resource" uid="uid://3bjbysn0exty" path="res://Enemies/Enemy_Types/red_isometric.tres" id="10_dlawb"]
 [ext_resource type="PackedScene" uid="uid://h0hdesj12ofh" path="res://Enemies/isometric_basic_enemy.tscn" id="14_dlawb"]
 [ext_resource type="PackedScene" uid="uid://d38tjnetmpjft" path="res://user_interface/upgrade_menu.tscn" id="14_gvepe"]
+[ext_resource type="PackedScene" uid="uid://cwwekbcfo4hgu" path="res://user_interface/game_over.tscn" id="15_gvepe"]
+[ext_resource type="Script" uid="uid://dt41mbv4yvwkl" path="res://Scenes/grayscale.gd" id="16_hvs2a"]
+[ext_resource type="Shader" uid="uid://c3xdyeo558avw" path="res://Shaders/grayscale.gdshader" id="16_ixf2m"]
+[ext_resource type="PackedScene" uid="uid://bqc47rhr50tki" path="res://user_interface/healthbar.tscn" id="18_ifoba"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_wgbrh"]
 
@@ -42,6 +46,9 @@ shader_parameter/tiling = Vector2(5, 5)
 shader_parameter/offSetSpeed = Vector2(0.05, 0.05)
 shader_parameter/backGroundDirX = 3.259879990946679e-09
 shader_parameter/backGroundDirY = -0.03099999821262
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hvs2a"]
+shader = ExtResource("16_ixf2m")
 
 [node name="isometricMain" type="Node2D"]
 script = ExtResource("1_1enjl")
@@ -105,3 +112,16 @@ wave_time_manager = NodePath("../WaveTimeManager")
 [node name="Upgrade_menu_UI" type="CanvasLayer" parent="."]
 
 [node name="Upgrade_Menu" parent="Upgrade_menu_UI" instance=ExtResource("14_gvepe")]
+
+[node name="GameOver" parent="." instance=ExtResource("15_gvepe")]
+
+[node name="Grayscale" type="CanvasLayer" parent="."]
+script = ExtResource("16_hvs2a")
+
+[node name="Sprite2D" type="Sprite2D" parent="Grayscale"]
+material = SubResource("ShaderMaterial_hvs2a")
+position = Vector2(988.5, 557)
+scale = Vector2(16.445313, 9.703125)
+texture = ExtResource("6_0lw5m")
+
+[node name="CanvasLayer" parent="." instance=ExtResource("18_ifoba")]

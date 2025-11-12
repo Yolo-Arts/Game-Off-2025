@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://deqnmjpt3dxgb"]
+[gd_scene load_steps=17 format=3 uid="uid://deqnmjpt3dxgb"]
 
 [ext_resource type="Script" uid="uid://bg21p6igd7lvn" path="res://Player/player_isometric.gd" id="1_60ovk"]
 [ext_resource type="Resource" uid="uid://bgntu42b22hqi" path="res://Resources/Bullet types/Double_Shot.tres" id="2_1xiy1"]
@@ -33,9 +33,11 @@ stream_0/stream = ExtResource("8_b0dan")
 [sub_resource type="CircleShape2D" id="CircleShape2D_1xiy1"]
 radius = 61.03278
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1xiy1"]
-radius = 31.64491
-height = 87.08247
+[sub_resource type="CircleShape2D" id="CircleShape2D_k28l0"]
+radius = 27.730848
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eoyfg"]
+radius = 24.083189
 
 [node name="player_isometric" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_60ovk")
@@ -46,7 +48,7 @@ material = SubResource("ShaderMaterial_fphli")
 texture = ExtResource("2_evufl")
 hframes = 45
 vframes = 8
-frame = 188
+frame = 230
 
 [node name="CannonLeft" type="Marker2D" parent="."]
 position = Vector2(20, 16)
@@ -74,11 +76,25 @@ collision_mask = 16
 position = Vector2(4, 6)
 shape = SubResource("CircleShape2D_1xiy1")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-4.7683716e-07, -2.861023e-06)
+[node name="CollisionShapeForEnv" type="CollisionShape2D" parent="."]
+position = Vector2(-2.980234e-07, 10.000001)
 rotation = -1.048381
-shape = SubResource("CapsuleShape2D_1xiy1")
+shape = SubResource("CircleShape2D_k28l0")
+
+[node name="DamageAreaIso" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageAreaIso"]
+position = Vector2(0, 13)
+shape = SubResource("CircleShape2D_eoyfg")
+debug_color = Color(0.70196074, 0.51001835, 0, 0.41960785)
+
+[node name="damage_interval_timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
 
 [connection signal="fire_cannon_SFX" from="." to="CannonFireSFX" method="_on_player_isometric_fire_cannon_sfx"]
 [connection signal="playerHitSFX" from="." to="PlayerHurtSFX" method="_on_player_isometric_player_hit_sfx"]
 [connection signal="area_entered" from="exp_collection_radius" to="." method="_on_exp_collection_radius_area_entered"]
+[connection signal="body_entered" from="DamageAreaIso" to="." method="_on_damage_area_iso_body_entered"]

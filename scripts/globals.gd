@@ -53,4 +53,4 @@ func _on_playerDied():
 	player_died.emit()
 	playerDied = true
 	print("Final Score %s" % score)
-	pass
+	

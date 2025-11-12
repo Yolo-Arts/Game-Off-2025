@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqc47rhr50tki"]
+
+[ext_resource type="Script" uid="uid://dtotaivqauih3" path="res://user_interface/healthbar.gd" id="1_0gvxq"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_0gvxq")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -300.0
+offset_bottom = 27.0
+grow_horizontal = 0
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 40
+
+[node name="HealthBar" type="ProgressBar" parent="Control/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
