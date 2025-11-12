@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bqk1j1fmrm7sv"
-path="res://.godot/imported/enemy_ship_green_spritesheet.png-0613dedafac874c3da0c3476e9f1a244.ctex"
+uid="uid://bhhya7080ahh8"
+path="res://.godot/imported/enemy_ship_red_spritesheet.png-ccd90b266dd182dc865bc6dbc8ac1b1d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Enemies/enemy_ship_green_spritesheet.png"
-dest_files=["res://.godot/imported/enemy_ship_green_spritesheet.png-0613dedafac874c3da0c3476e9f1a244.ctex"]
+source_file="res://Enemies/Sprites/enemy_ship_red_spritesheet.png"
+dest_files=["res://.godot/imported/enemy_ship_red_spritesheet.png-ccd90b266dd182dc865bc6dbc8ac1b1d.ctex"]
 
 [params]
 

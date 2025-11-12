@@ -6,8 +6,6 @@ func _ready():
 func _on_menu_pressed():
 	print("Menu Pressed")
 
-
-
 func _on_restart_pressed():
 	get_tree().change_scene_to_file("res://Scenes/isometric_main.tscn")
 

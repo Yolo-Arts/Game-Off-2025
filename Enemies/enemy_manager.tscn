@@ -1,9 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://brjyeo32vgcfh"]
+[gd_scene load_steps=8 format=3 uid="uid://brjyeo32vgcfh"]
 
 [ext_resource type="Script" uid="uid://m76y16vg58jb" path="res://Enemies/enemy_manager.gd" id="1_md8k8"]
+[ext_resource type="PackedScene" uid="uid://34fhm4pp3113" path="res://Enemies/basic_enemy.tscn" id="2_oktp5"]
+[ext_resource type="Resource" uid="uid://d1qpml40osw4y" path="res://Enemies/Enemy_Types/black_isometric.tres" id="3_d5b0f"]
+[ext_resource type="Resource" uid="uid://kyar3y0pf6d0" path="res://Enemies/Enemy_Types/green_enemy_test.tres" id="4_6p43x"]
+[ext_resource type="Resource" uid="uid://3bjbysn0exty" path="res://Enemies/Enemy_Types/red_isometric.tres" id="5_82utm"]
+[ext_resource type="Resource" uid="uid://c822wln20asv" path="res://Enemies/Enemy_Types/slow_enemy.tres" id="6_8xlf6"]
+[ext_resource type="Resource" uid="uid://bhkhvp6efwkbu" path="res://Enemies/Enemy_Types/slow_red_enemy.tres" id="7_yfnhu"]
 
 [node name="EnemyManager" type="Node"]
 script = ExtResource("1_md8k8")
+basic_enemy_scene = ExtResource("2_oktp5")
+enemy_types = Array[Resource]([ExtResource("3_d5b0f"), ExtResource("4_6p43x"), ExtResource("5_82utm"), ExtResource("6_8xlf6"), ExtResource("7_yfnhu")])
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 10.0

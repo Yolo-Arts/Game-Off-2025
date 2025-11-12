@@ -1,4 +1,7 @@
+class_name  Player
 extends CharacterBody2D
+
+@export var Bullet_Type: Bullet_type
 
 # movement related code
 @export_group("Movement Parameters")
@@ -14,6 +17,7 @@ extends CharacterBody2D
 # Cannons
 @onready var cannon_left = $CannonLeft
 @onready var cannon_right = $CannonRight
+
 
 # Cannonball
 @onready var cannonball = preload("uid://m1jsvblrkbdq")
@@ -31,18 +35,19 @@ const BOUNCE_PARTICLES = preload("uid://mr7hf4xv0s7j")
 signal fire_cannon_SFX
 @onready var player_hurt_sfx = $PlayerHurtSFX
 
-
 var current_speed: float = 300.0
 var current_turn_speed: float = min_turn_speed  
 var turn_time: float = 0.0 
+var player_max_health = 100.0
+var health = 100.00
 
 var isDead = false
 
 func _ready():
-	Globals.player_health = 100
-	Globals.player_died.connect(dead_player)
+	pass
 
 func dead_player():
+	Globals.player_died.emit()
 	isDead = true
 	for i in range(0, 5):
 		spawn_death_explosion(self.global_position)
@@ -51,8 +56,8 @@ func dead_player():
 func _unhandled_input(event):
 	if event.is_action_pressed("fire"):
 		shoot()
-
 func _physics_process(delta) -> void:
+	
 	if !isDead:
 		var turn_direction = 0.0
 		if Input.is_action_pressed("turn_left"):
@@ -98,35 +103,16 @@ func _physics_process(delta) -> void:
 			spawn_bounce_particles(collision.get_position(), normal)
 			Globals.camera.shake(0.15, 10, 5)
 			move_and_slide()
+		
+		if health <= 0:
+			isDead = true
+			dead_player()
 
 
 func shoot():
-	var bullet_instance = cannonball.instantiate()
-	var bullet_instance2 = cannonball.instantiate()
 	
-	get_parent().add_child(bullet_instance)
-	get_parent().add_child(bullet_instance2)
+	Bullet_Type.shoot(cannonball, self, false)
 
-	var ship_forward = Vector2.RIGHT.rotated(rotation)
-	
-	var leftCannonPos = cannon_left.global_position
-	var rightCannonPos = cannon_right.global_position
-	
-	bullet_instance.global_position = leftCannonPos
-	bullet_instance2.global_position = rightCannonPos
-	
-	# FIXME Particles do not spawn firing in the correct direction.
-	var left_cannon_direction = ship_forward.rotated(deg_to_rad(-90)) 
-	var right_cannon_direction = ship_forward.rotated(deg_to_rad(90)) 
-	
-	bullet_instance.direction = left_cannon_direction
-	bullet_instance2.direction = right_cannon_direction
-	
-	
-	spawn_cannon_particles(leftCannonPos, left_cannon_direction)
-	spawn_cannon_particles(rightCannonPos, right_cannon_direction)
-	
-	Globals.camera.shake(0.25, 10, 10)
 
 func spawn_cannon_particles(pos: Vector2, normal: Vector2) -> void:
 	var instance = cannon_fire.instantiate()
@@ -154,12 +140,18 @@ func player_hit():
 	
 
 func _on_damage_area_body_entered(body: Node2D) -> void:
-	if $damage_interval_timer.is_stopped():
-		Globals.player_health -= body.enemy_stats.damage
+	if $damage_interval_timer.is_stopped() and body is Enemy:
+		health -= body.enemy_stats.damage
 		self.player_hit()
 		self.animation_player.play("hit_shock")
 		Globals.camera.shake(0.5, 15, 10)
-		print("Player Health: ", Globals.player_health, "Damaged by: ", body.enemy_stats.type)
+		print("Player Health: ", health, "Damaged by: ", body.enemy_stats.type)
 		$damage_interval_timer.start()
 	else:
 		print("Damage on cooldown")
+
+
+func _on_exp_collection_radius_body_entered(body: Node2D) -> void:
+	if body is Exp_Orb:
+		Globals.exp_collected.emit()
+		body.queue_free()

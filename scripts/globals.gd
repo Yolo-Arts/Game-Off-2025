@@ -2,13 +2,14 @@ extends Node
 
 var camera
 
-var player_health: float = 100
+signal exp_collected
+signal player_level_up
 
 var playerDied = false
 
 signal player_died
 
-var my_timer: Timer = Timer.new()
+var my_timer: Timer = Timer.new()      
 const INTERVAL: float = 1
 var score = {
 	"PER_SECOND_SURVIVED":0,
@@ -38,14 +39,18 @@ enum POINTS_CATEGORIES  {
 	#my_timer.timeout.connect(_on_my_timer_timeout)
 	
 func _process(delta):
-	if player_health <= 0 && playerDied == false:
-		print("player died")
-		player_died.emit()
-		playerDied = true
-		print("Final Score %s" % score)
+	pass
+
 		
 func _on_my_timer_timeout():
 	update_score("PER_SECOND_SURVIVED")
 
 func update_score(points_scored_category):
 	score[points_scored_category] += POINTS_CATEGORIES[points_scored_category]
+
+func _on_playerDied():
+	print("player died")
+	player_died.emit()
+	playerDied = true
+	print("Final Score %s" % score)
+	pass

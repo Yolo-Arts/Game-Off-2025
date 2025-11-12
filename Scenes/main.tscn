@@ -1,22 +1,24 @@
-[gd_scene load_steps=30 format=4 uid="uid://d0id8y3lwuvg4"]
+[gd_scene load_steps=32 format=4 uid="uid://d0id8y3lwuvg4"]
 
 [ext_resource type="TileSet" uid="uid://dq0j7rx72yqkf" path="res://Resources/KenneyPirateTilemap.tres" id="1_jjgbg"]
 [ext_resource type="Script" uid="uid://iygc8so2fmtd" path="res://Scenes/main.gd" id="1_jjvhh"]
 [ext_resource type="Shader" uid="uid://b4oixuorco5vd" path="res://Shaders/water.gdshader" id="2_8gbba"]
 [ext_resource type="PackedScene" uid="uid://dle2poylya83p" path="res://Player/player.tscn" id="2_bo1nx"]
+[ext_resource type="PackedScene" uid="uid://cbag74ryx0pu8" path="res://Scenes/player_manager.tscn" id="2_ynf5e"]
 [ext_resource type="Texture2D" uid="uid://c1age5y3vs0tr" path="res://Assets/nicubunu_RPG_map_symbols_Shipwreck.png" id="3_pdsj5"]
 [ext_resource type="PackedScene" uid="uid://brjyeo32vgcfh" path="res://Enemies/enemy_manager.tscn" id="6_6bp64"]
 [ext_resource type="PackedScene" uid="uid://34fhm4pp3113" path="res://Enemies/basic_enemy.tscn" id="7_344ge"]
-[ext_resource type="Script" path="res://Scenes/user_interface.gd" id="8_344ge"]
+[ext_resource type="Script" uid="uid://gr5j402lymtf" path="res://Scenes/user_interface.gd" id="8_344ge"]
 [ext_resource type="Script" path="res://Scenes/grayscale_filter.gd" id="8_hptm8"]
 [ext_resource type="Shader" path="res://Shaders/grayscale.gdshader" id="9_d1ilt"]
 [ext_resource type="Texture2D" uid="uid://c12v3gr0dt8sm" path="res://icon.svg" id="9_ynf5e"]
-[ext_resource type="PackedScene" path="res://Scenes/camera_2d.tscn" id="10_ee4r6"]
+[ext_resource type="PackedScene" uid="uid://2sw5s3fxyqo3" path="res://Scenes/camera_2d.tscn" id="10_ee4r6"]
 [ext_resource type="Script" uid="uid://d3svlihxaqvav" path="res://user_interface/hp_label.gd" id="11_wsu2k"]
 [ext_resource type="PackedScene" uid="uid://dm2vcmwj1bfse" path="res://Game_Objects/test_walls.tscn" id="12_6iyac"]
-[ext_resource type="Shader" path="res://Scenes/screen_hit_flash.gdshader" id="13_fdnlq"]
-[ext_resource type="Script" path="res://Scenes/screen_damage_flash.gd" id="13_jkdf5"]
-[ext_resource type="PackedScene" uid="uid://cwwekbcfo4hgu" path="res://user_interface/game_over.tscn" id="15_ee4r6"]
+[ext_resource type="Shader" uid="uid://v1xgpsc65cqs" path="res://Scenes/screen_hit_flash.gdshader" id="13_fdnlq"]
+[ext_resource type="Script" uid="uid://dnyf7avobunau" path="res://Scenes/screen_damage_flash.gd" id="13_jkdf5"]
+[ext_resource type="PackedScene" uid="uid://d38tjnetmpjft" path="res://user_interface/upgrade_menu.tscn" id="14_3pmx8"]
+[ext_resource type="PackedScene" uid="uid://d31hkdhneb8rg" path="res://user_interface/game_over.tscn" id="15_ee4r6"]
 [ext_resource type="Resource" uid="uid://c822wln20asv" path="res://Enemies/Enemy_Types/slow_enemy.tres" id="16_fevyy"]
 [ext_resource type="PackedScene" uid="uid://dgraqldufn15t" path="res://user_interface/wave_and_time_ui.tscn" id="16_h1bgf"]
 [ext_resource type="PackedScene" uid="uid://47p0cviqpnrv" path="res://user_interface/wave_time_manager.tscn" id="17_b3802"]
@@ -65,6 +67,8 @@ shader_parameter/feather = 0.4
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_jjvhh")
+
+[node name="Player_Manager" parent="." instance=ExtResource("2_ynf5e")]
 
 [node name="Tilemap" type="Node2D" parent="."]
 
@@ -172,12 +176,16 @@ script = ExtResource("11_wsu2k")
 
 [node name="GameOver" parent="UI" instance=ExtResource("15_ee4r6")]
 
-[node name="EnemyManager" parent="." node_paths=PackedStringArray("wave_time_manager") instance=ExtResource("6_6bp64")]
+[node name="EnemyManager" parent="." instance=ExtResource("6_6bp64")]
 basic_enemy_scene = ExtResource("7_344ge")
 enemy_types = Array[Resource]([ExtResource("16_fevyy"), ExtResource("17_hibaj"), ExtResource("18_hibaj")])
-wave_time_manager = NodePath("../WaveTimeManager")
 
 [node name="WaveAndTimeUI" parent="." node_paths=PackedStringArray("wave_time_manager") instance=ExtResource("16_h1bgf")]
 wave_time_manager = NodePath("../WaveTimeManager")
 
 [node name="WaveTimeManager" parent="." instance=ExtResource("17_b3802")]
+
+[node name="Upgrade_menu" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="Upgrade_Menu" parent="Upgrade_menu" instance=ExtResource("14_3pmx8")]

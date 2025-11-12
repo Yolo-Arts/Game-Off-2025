@@ -7,6 +7,7 @@ extends Node2D
 func _ready():
 	Globals.playerDied = false
 	Globals.camera = camera
+	
 	game_over.visible = false
 	Globals.player_died.connect(show_game_over_screen)
 

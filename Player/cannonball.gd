@@ -1,3 +1,4 @@
+class_name Cannonball
 extends Area2D
 
 @export var speed = 700
@@ -10,10 +11,11 @@ var base_damage = 10
 var direction = Vector2.ZERO
 
 func _ready():
-	if !bullet:
-		return
-	sprite.texture = bullet.texture
-	set_modulate(bullet.find_appearance())
+	#if !bullet:
+		#return
+	#sprite.texture = bullet.texture
+	#set_modulate(bullet.find_appearance()) 
+	pass
 
 func _physics_process(delta):
 	#if !bullet:

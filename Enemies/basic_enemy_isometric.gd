@@ -1,40 +1,8 @@
-extends CharacterBody2D
-
+extends Enemy
 class_name Enemy_iso
 
 #TODO FIX THE MOVEMENT SCRIPT SO THAT THEY ACTUALLY MOVE LIKE A BOAT 
 #FIXME Fix the hitboxes, they do not rotate with the enemy.
-
-var speed = 0
-var health = 0
-
-# Particles
-const DEATH_EXPLOSION = preload("uid://da1djwy4cr28t")
-const DEAD_SHIP = preload("uid://cjqp43sw23woi")
-const HIT_EXPLOSION = preload("uid://bk5p2f8p57tdj")
-const SHIP__4_ = preload("uid://dtggqs3n2orf8")
-
-
-signal playSound
-signal playerHitSound
-@onready var sprite = $Sprite2D
-@onready var collision_shape_2d = $CollisionShape2D
-@onready var hitbox_collision_shape_2d = $Hitbox/CollisionShape2D
-@onready var hitboxArea = $Hitbox
-@onready var hurtbox = $Hurtbox
-@onready var hurt_shape = $Hurtbox/hurtShape
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
-
-@export var enemy_types: Array[Resource]
-var enemy_stats: Resource
-
-var player = null
-var isDead = false
-
-var rng = RandomNumberGenerator.new()
-
-var total_frames = 360
-var frame_offset = -50
 
 func _ready() -> void:
 	
@@ -70,8 +38,6 @@ func get_direction_to_player():
 		return direction
 	return Vector2.ZERO  # Return zero vector if no player found
 
-
-
 func update_sprite_rotation(angle: float):
 	var deg = rad_to_deg(angle)
 	deg = fmod(deg, 360.0)
@@ -94,6 +60,7 @@ func take_damage(damage: int):
 	if health < 0:
 		spawn_dead_ship(self.position, get_direction_to_player())
 		spawn_death_explosion(self.position, Vector2(0,0))
+		spawn_exp_orb(self.position)
 		sprite.visible = false
 		isDead = true
 		disable_hitbox() 
@@ -101,8 +68,6 @@ func take_damage(damage: int):
 		Globals.update_score("ENEMY_SHIPWRECKED")
 		playSound.emit()
 		await get_tree().create_timer(2).timeout
-
-
 
 
 

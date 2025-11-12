@@ -1,10 +1,10 @@
-[gd_scene load_steps=29 format=3 uid="uid://dle2poylya83p"]
+[gd_scene load_steps=28 format=3 uid="uid://dle2poylya83p"]
 
 [ext_resource type="Script" uid="uid://c8cpssj7vjehk" path="res://Player/player.gd" id="1_k53q1"]
 [ext_resource type="Texture2D" uid="uid://b8s48xncdlhd4" path="res://Assets/kenney_pirate-pack/PNG/Default size/Ship parts/hullLarge (1).png" id="1_l8h54"]
 [ext_resource type="Shader" uid="uid://dhfkgyvufew58" path="res://Shaders/shock_damage.gdshader" id="1_od3ui"]
 [ext_resource type="Texture2D" uid="uid://dybfpbl7p25yw" path="res://Assets/kenney_pirate-pack/PNG/Default size/Ship parts/sailLarge (7).png" id="2_4ntmi"]
-[ext_resource type="Resource" uid="uid://bgntu42b22hqi" path="res://Resources/Bullet types/Double_Shot.tres" id="2_5htga"]
+[ext_resource type="Resource" uid="uid://j3tfs6h36efg" path="res://Resources/Bullet types/default_bullet.tres" id="2_5htga"]
 [ext_resource type="Texture2D" uid="uid://djop37l8jw66f" path="res://Assets/kenney_pirate-pack/PNG/Default size/Ship parts/cannonLoose.png" id="3_gwnis"]
 [ext_resource type="Texture2D" uid="uid://dmnkbpixhqpsq" path="res://Assets/kenney_pirate-pack/PNG/Default size/Ship parts/nest.png" id="3_k53q1"]
 [ext_resource type="AudioStream" uid="uid://d0bs1a2x8outq" path="res://sounds/cannon_fire.sfxr" id="6_84ia6"]
@@ -402,24 +402,13 @@ _data = {
 &"hit_shock": SubResource("Animation_od3ui")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_5htga"]
-radius = 73.00685
-
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 material = SubResource("ShaderMaterial_00tjw")
 collision_layer = 3
 collision_mask = 9
 script = ExtResource("1_k53q1")
-Bullet_Type = ExtResource("2_5htga")
-base_speed = null
-max_speed = null
-min_turn_speed = null
-max_turn_speed = null
 turn_acceleration = 0.5
-acceleration = null
-deceleration = null
-bounce_dampening = null
-cannon_fire = null
+Bullet_Type = ExtResource("2_5htga")
 
 [node name="Trail2D" type="Line2D" parent="."]
 width = 55.0
@@ -508,16 +497,8 @@ libraries = {
 script = ExtResource("9_00tjw")
 hurt_SFX = ExtResource("10_x3vf3")
 
-[node name="Exp collection radius" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 16
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Exp collection radius"]
-shape = SubResource("CircleShape2D_5htga")
-
 [connection signal="fire_cannon_SFX" from="." to="CannonFireSFX" method="_on_player_fire_cannon_sfx"]
 [connection signal="playerHitSFX" from="." to="PlayerHurtSFX" method="_on_player_player_hit_sfx"]
 [connection signal="body_entered" from="DamageArea" to="." method="_on_damage_area_body_entered"]
 [connection signal="body_exited" from="DamageArea" to="." method="_on_damage_area_body_exited"]
 [connection signal="timeout" from="damage_interval_timer" to="." method="_on_damage_interval_timer_timeout"]
-[connection signal="body_entered" from="Exp collection radius" to="." method="_on_exp_collection_radius_body_entered"]

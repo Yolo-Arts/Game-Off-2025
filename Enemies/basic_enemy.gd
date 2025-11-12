@@ -11,6 +11,7 @@ var health: float = 100.0
 # Particles
 const DEATH_EXPLOSION = preload("uid://da1djwy4cr28t")
 const DEAD_SHIP = preload("uid://cjqp43sw23woi")
+const EXP_ORB = preload("res://Scenes/exp_orb.tscn")
 const HIT_EXPLOSION = preload("uid://bk5p2f8p57tdj")
 const SHIP__4_ = preload("uid://dtggqs3n2orf8")
 
@@ -21,6 +22,8 @@ signal playerHitSound
 @onready var collision_shape_2d = $CollisionShape2D
 @onready var hitbox_collision_shape_2d = $Hitbox/CollisionShape2D
 @onready var hitboxArea = $Hitbox
+#@onready var exp_orb: Area2D = $Exp_Orb
+@onready var damage_interval_timer = $damage_interval_timer
 @onready var hurtbox = $Hurtbox
 @onready var hurt_shape = $Hurtbox/hurtShape
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -107,6 +110,7 @@ func take_damage(damage: int):
 	if health < 0:
 		spawn_dead_ship(self.position, get_direction_to_player())
 		spawn_death_explosion(self.position, Vector2(0,0))
+		spawn_exp_orb(self.position)
 		sprite.visible = false
 		isDead = true
 		disable_hitbox() 
@@ -114,10 +118,6 @@ func take_damage(damage: int):
 		Globals.update_score("ENEMY_SHIPWRECKED")
 		playSound.emit()
 		await get_tree().create_timer(2).timeout
-
-
-
-
 
 func spawn_death_explosion(pos: Vector2, normal: Vector2) -> void:
 	var instance = DEATH_EXPLOSION.instantiate()
@@ -138,6 +138,11 @@ func spawn_hit_explosion(pos: Vector2, normal:Vector2) -> void:
 	add_child(instance)
 	instance.global_position = pos
 	instance.rotation = normal.angle()
+
+func spawn_exp_orb(pos: Vector2):
+	var instance = EXP_ORB.instantiate()
+	get_tree().get_current_scene().call_deferred("add_child", instance)
+	instance.global_position = pos
 
 func disable_hitbox():
 	print("disabled")

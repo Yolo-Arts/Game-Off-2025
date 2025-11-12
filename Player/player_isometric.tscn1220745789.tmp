@@ -1,7 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://deqnmjpt3dxgb"]
+[gd_scene load_steps=14 format=3 uid="uid://deqnmjpt3dxgb"]
 
-[ext_resource type="Script" uid="uid://bg21p6igd7lvn" path="res://Player/player_isometric.gd" id="1_60ovk"]
-[ext_resource type="Resource" uid="uid://bgntu42b22hqi" path="res://Resources/Bullet types/Double_Shot.tres" id="2_1xiy1"]
+[ext_resource type="Script" uid="uid://bg21p6igd7lvn" path="res://player_isometric.gd" id="1_60ovk"]
+[ext_resource type="Resource" uid="uid://j3tfs6h36efg" path="res://Resources/Bullet types/default_bullet.tres" id="2_1xiy1"]
 [ext_resource type="Texture2D" uid="uid://bjchrxewdcwy2" path="res://Player/boat_spritesheet2.png" id="2_evufl"]
 [ext_resource type="Shader" uid="uid://dhfkgyvufew58" path="res://Shaders/shock_damage.gdshader" id="3_5y3gb"]
 [ext_resource type="AudioStream" uid="uid://bbo0dxfs3wbnj" path="res://sounds/playerHurt1.sfxr" id="3_amulb"]
@@ -29,13 +29,6 @@ stream_2/stream = ExtResource("5_r0ntv")
 random_pitch = 1.7
 streams_count = 1
 stream_0/stream = ExtResource("8_b0dan")
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_1xiy1"]
-radius = 61.03278
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1xiy1"]
-radius = 31.64491
-height = 87.08247
 
 [node name="player_isometric" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_60ovk")
@@ -66,19 +59,5 @@ script = ExtResource("9_w5xkq")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
-[node name="exp_collection_radius" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 16
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="exp_collection_radius"]
-position = Vector2(4, 6)
-shape = SubResource("CircleShape2D_1xiy1")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-4.7683716e-07, -2.861023e-06)
-rotation = -1.048381
-shape = SubResource("CapsuleShape2D_1xiy1")
-
 [connection signal="fire_cannon_SFX" from="." to="CannonFireSFX" method="_on_player_isometric_fire_cannon_sfx"]
 [connection signal="playerHitSFX" from="." to="PlayerHurtSFX" method="_on_player_isometric_player_hit_sfx"]
-[connection signal="area_entered" from="exp_collection_radius" to="." method="_on_exp_collection_radius_area_entered"]

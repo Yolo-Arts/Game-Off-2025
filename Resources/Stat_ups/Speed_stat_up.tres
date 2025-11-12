@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Speed_stat_up" load_steps=3 format=3 uid="uid://hxju3ayitf60"]
+
+[ext_resource type="Texture2D" uid="uid://c12v3gr0dt8sm" path="res://icon.svg" id="1_nikhc"]
+[ext_resource type="Script" uid="uid://b27wf0pyfhg5p" path="res://Resources/Stat_ups/Speed_up.gd" id="1_x40an"]
+
+[resource]
+script = ExtResource("1_x40an")
+image = ExtResource("1_nikhc")
+name = "Speed Up"
+description = "Increases speed"
+metadata/_custom_type_script = "uid://b27wf0pyfhg5p"
