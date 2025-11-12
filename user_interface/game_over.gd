@@ -9,7 +9,7 @@ func _on_menu_pressed():
 
 
 func _on_restart_pressed():
-	get_tree().change_scene_to_file("res://Scenes/main.tscn")
+	get_tree().change_scene_to_file("res://Scenes/isometric_main.tscn")
 
 # Score Labels:
 @onready var seconds_score = %secondsScore
