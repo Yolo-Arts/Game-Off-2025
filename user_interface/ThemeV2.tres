@@ -1,0 +1,50 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://bi4882lo6q8km"]
+
+[ext_resource type="Texture2D" uid="uid://bngypyy031ecg" path="res://user_interface/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Sprite sheet for Basic Pack.png" id="1_6jhoh"]
+[ext_resource type="FontFile" uid="uid://b01tc6c8f4r8e" path="res://user_interface/Sprout Lands - UI Pack - Basic pack/fonts/pixelFont-7-8x14-sproutLands.ttf" id="1_aa4mt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6jhoh"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.75)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aa4mt"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_aa4mt"]
+texture = ExtResource("1_6jhoh")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 6.0
+region_rect = Rect2(163, 178, 90, 27)
+
+[resource]
+Label/colors/font_color = Color(0.19921875, 0.12863982, 0.007003784, 1)
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/colors/font_shadow_color = Color(0, 0, 0, 0)
+Label/constants/line_spacing = 3
+Label/constants/outline_size = 0
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 1
+Label/constants/shadow_outline_size = 1
+Label/font_sizes/font_size = 32
+Label/fonts/font = ExtResource("1_aa4mt")
+Label/styles/focus = SubResource("StyleBoxFlat_6jhoh")
+Label/styles/normal = SubResource("StyleBoxEmpty_aa4mt")
+Panel/styles/panel = SubResource("StyleBoxTexture_aa4mt")
