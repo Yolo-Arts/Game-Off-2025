@@ -1,0 +1,55 @@
+[gd_scene load_steps=14 format=3 uid="uid://cjqdhk1yxoc0h"]
+
+[ext_resource type="Script" uid="uid://cy5j6mtf0cjtq" path="res://sounds/sound_manager.gd" id="1_a1hhe"]
+[ext_resource type="AudioStream" uid="uid://cwde2y4bxpmji" path="res://sounds/death_explosion1.sfxr" id="1_f05am"]
+[ext_resource type="AudioStream" uid="uid://d0bs1a2x8outq" path="res://sounds/cannon_fire.sfxr" id="1_witqk"]
+[ext_resource type="AudioStream" uid="uid://ddypdve0ts2xh" path="res://sounds/death_explosion2.sfxr" id="2_witqk"]
+[ext_resource type="AudioStream" uid="uid://de5cbvtstjw18" path="res://sounds/death_explosion.sfxr" id="3_8a8qv"]
+[ext_resource type="AudioStream" uid="uid://du63xssb4ybdb" path="res://sounds/enemy_hit.sfxr" id="5_8a8qv"]
+[ext_resource type="AudioStream" uid="uid://bbo0dxfs3wbnj" path="res://sounds/playerHurt1.sfxr" id="6_yvcp5"]
+[ext_resource type="AudioStream" uid="uid://db6pcdv5k26es" path="res://sounds/playerHurt2.sfxr" id="7_a1hhe"]
+[ext_resource type="AudioStream" uid="uid://bcdx1wnye1sbw" path="res://sounds/playerHurt3.sfxr" id="8_pp33v"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_8a8qv"]
+random_pitch = 1.51
+streams_count = 1
+stream_0/stream = ExtResource("1_witqk")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_1awae"]
+random_pitch = 1.38
+random_volume_offset_db = 0.34
+streams_count = 3
+stream_0/stream = ExtResource("1_f05am")
+stream_1/stream = ExtResource("2_witqk")
+stream_2/stream = ExtResource("3_8a8qv")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_v0x57"]
+random_pitch = 1.26
+streams_count = 1
+stream_0/stream = ExtResource("5_8a8qv")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_0v1q7"]
+random_pitch = 1.2
+streams_count = 3
+stream_0/stream = ExtResource("6_yvcp5")
+stream_1/stream = ExtResource("7_a1hhe")
+stream_2/stream = ExtResource("8_pp33v")
+
+[node name="SoundManager" type="Node"]
+script = ExtResource("1_a1hhe")
+
+[node name="CannonFire" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_8a8qv")
+volume_db = -2.457
+bus = &"SFX"
+
+[node name="DeathExplosions" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_1awae")
+
+[node name="EnemyHit" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_v0x57")
+
+[node name="PlayerHurtSFX" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_0v1q7")
+
+[node name="UI_SFX" type="Node" parent="."]

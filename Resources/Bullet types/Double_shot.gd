@@ -83,4 +83,4 @@ func spawn_cannon_particles(pos: Vector2, normal: Vector2, player: Player):
 	player.add_child(instance)
 	instance.global_position = pos
 	instance.rotation = normal.angle()
-	player.fire_cannon_SFX.emit()
+	#player.fire_cannon_SFX.emit()

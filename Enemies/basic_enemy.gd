@@ -16,8 +16,6 @@ const HIT_EXPLOSION = preload("uid://bk5p2f8p57tdj")
 const SHIP__4_ = preload("uid://dtggqs3n2orf8")
 
 
-signal playSound
-signal playerHitSound
 @onready var sprite = $Sprite2D
 @onready var collision_shape_2d = $CollisionShape2D
 @onready var hitbox_collision_shape_2d = $Hitbox/CollisionShape2D
@@ -102,7 +100,6 @@ func update_sprite_rotation(angle: float):
 func take_damage(damage: int):
 	health -= damage
 	self.animation_player.play("hit_flash")
-	playerHitSound.emit()
 	spawn_hit_explosion(self.position, Vector2(0,0))
 	if health <= health/2:
 		sprite.texture = enemy_stats.texture_damaged
@@ -116,7 +113,6 @@ func take_damage(damage: int):
 		disable_hitbox() 
 		Globals.camera.shake(0.20, 15, 20)
 		Globals.update_score("ENEMY_SHIPWRECKED")
-		playSound.emit()
 		await get_tree().create_timer(2).timeout
 
 func spawn_death_explosion(pos: Vector2, normal: Vector2) -> void:

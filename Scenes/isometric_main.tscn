@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://h0hdesj12ofh" path="res://Enemies/isometric_basic_enemy.tscn" id="14_dlawb"]
 [ext_resource type="PackedScene" uid="uid://d38tjnetmpjft" path="res://user_interface/upgrade_menu.tscn" id="14_gvepe"]
 [ext_resource type="PackedScene" uid="uid://cwwekbcfo4hgu" path="res://user_interface/game_over.tscn" id="15_gvepe"]
-[ext_resource type="Script" path="res://Scenes/grayscale.gd" id="16_hvs2a"]
+[ext_resource type="Script" uid="uid://dt41mbv4yvwkl" path="res://Scenes/grayscale.gd" id="16_hvs2a"]
 [ext_resource type="Shader" path="res://Shaders/grayscale.gdshader" id="16_ixf2m"]
 [ext_resource type="PackedScene" uid="uid://bqc47rhr50tki" path="res://user_interface/healthbar.tscn" id="18_ifoba"]
 [ext_resource type="Shader" uid="uid://ydw2wifhpp88" path="res://Shaders/screenTransition.gdshader" id="19_b21ex"]
@@ -80,21 +80,6 @@ colors = PackedColorArray(0.035858154, 0.13177991, 0.1953125, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_7tq1b"]
 gradient = SubResource("Gradient_b21ex")
 
-[sub_resource type="Animation" id="Animation_b21ex"]
-resource_name = "transition"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("UI/ScreenTransition/TextureRect:material:shader_parameter/progress")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 2.0]
-}
-
 [sub_resource type="Animation" id="Animation_7tq1b"]
 length = 0.001
 tracks/0/type = "value"
@@ -108,6 +93,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_b21ex"]
+resource_name = "transition"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UI/ScreenTransition/TextureRect:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 2.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_oiwry"]

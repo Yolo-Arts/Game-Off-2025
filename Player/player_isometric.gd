@@ -20,6 +20,7 @@ func dead_player():
 
 func _unhandled_input(event):
 	if event.is_action_pressed("fire"):
+		SoundManager.play_CannonFire()
 		shoot()
 
 func _physics_process(delta) -> void:
@@ -90,7 +91,6 @@ func spawn_cannon_particles(pos: Vector2, normal: Vector2) -> void:
 	add_child(instance)
 	instance.global_position = pos
 	instance.rotation = normal.angle()
-	fire_cannon_SFX.emit()
 
 func spawn_death_explosion(pos: Vector2) -> void:
 	var instance = DEATH_EXPLOSION.instantiate()
@@ -103,8 +103,6 @@ func spawn_bounce_particles(pos: Vector2, normal: Vector2) -> void:
 	instance.global_position = pos
 	instance.rotation = normal.angle()
 
-func player_hit():
-	playerHitSFX.emit()
 
 @onready var boat = $boat
 
@@ -136,8 +134,11 @@ func _on_damage_area_iso_body_entered(body: Node2D) -> void:
 		print("hit")
 		#TODO ADD BACK HITSHOCK
 		#self.animation_player.play("hit_shock")
-		Globals.camera.shake(0.5, 15, 10)
+		Globals.camera.shake(0.5, 25, 25)
 		print("Player Health: ", health, "Damaged by: ", body.enemy_stats.type)
 		$damage_interval_timer.start()
 	else:
 		print("Damage on cooldown")
+
+func player_hit():
+	SoundManager.play_PlayerHurt()

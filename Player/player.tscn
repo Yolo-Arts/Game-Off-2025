@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dle2poylya83p"]
+[gd_scene load_steps=28 format=3 uid="uid://dle2poylya83p"]
 
 [ext_resource type="Script" uid="uid://c8cpssj7vjehk" path="res://Player/player.gd" id="1_k53q1"]
 [ext_resource type="Texture2D" uid="uid://b8s48xncdlhd4" path="res://Assets/kenney_pirate-pack/PNG/Default size/Ship parts/hullLarge (1).png" id="1_l8h54"]
@@ -10,7 +10,6 @@
 [ext_resource type="AudioStream" uid="uid://d0bs1a2x8outq" path="res://sounds/cannon_fire.sfxr" id="6_84ia6"]
 [ext_resource type="Script" uid="uid://c1a3da1a17ig8" path="res://Player/cannon_fire_sfx.gd" id="7_utq14"]
 [ext_resource type="Script" uid="uid://octyfubw21an" path="res://Player/player_hurt_sfx.gd" id="9_00tjw"]
-[ext_resource type="Resource" uid="uid://2j64bpw03vht" path="res://Resources/player_hurt_sfx.tres" id="10_x3vf3"]
 [ext_resource type="Script" uid="uid://b8u2gmybierd3" path="res://addons/trail_2d/trail_2d.gd" id="11_apopc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_00tjw"]
@@ -498,7 +497,6 @@ libraries = {
 
 [node name="PlayerHurtSFX" type="AudioStreamPlayer2D" parent="."]
 script = ExtResource("9_00tjw")
-hurt_SFX = ExtResource("10_x3vf3")
 
 [node name="Exp collection radius" type="Area2D" parent="."]
 collision_layer = 0
@@ -507,8 +505,6 @@ collision_mask = 16
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Exp collection radius"]
 shape = SubResource("CircleShape2D_5htga")
 
-[connection signal="fire_cannon_SFX" from="." to="CannonFireSFX" method="_on_player_fire_cannon_sfx"]
-[connection signal="playerHitSFX" from="." to="PlayerHurtSFX" method="_on_player_player_hit_sfx"]
 [connection signal="body_entered" from="DamageArea" to="." method="_on_damage_area_body_entered"]
 [connection signal="body_exited" from="DamageArea" to="." method="_on_damage_area_body_exited"]
 [connection signal="timeout" from="damage_interval_timer" to="." method="_on_damage_interval_timer_timeout"]

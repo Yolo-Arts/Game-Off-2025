@@ -32,8 +32,8 @@ const BOUNCE_PARTICLES = preload("uid://mr7hf4xv0s7j")
 
 
 # Sounds
-signal fire_cannon_SFX
-@onready var player_hurt_sfx = $PlayerHurtSFX
+#signal fire_cannon_SFX
+#@onready var player_hurt_sfx = $PlayerHurtSFX
 
 var current_speed: float = 300.0
 var current_turn_speed: float = min_turn_speed  
@@ -119,7 +119,7 @@ func spawn_cannon_particles(pos: Vector2, normal: Vector2) -> void:
 	add_child(instance)
 	instance.global_position = pos
 	instance.rotation = normal.angle()
-	fire_cannon_SFX.emit()
+	#fire_cannon_SFX.emit()
 
 func spawn_death_explosion(pos: Vector2) -> void:
 	var instance = DEATH_EXPLOSION.instantiate()
@@ -132,17 +132,17 @@ func spawn_bounce_particles(pos: Vector2, normal: Vector2) -> void:
 	instance.global_position = pos
 	instance.rotation = normal.angle()
 
-signal playerHitSFX
-
-func player_hit():
-	playerHitSFX.emit()
+#signal playerHitSFX
+#
+#func player_hit():
+	#playerHitSFX.emit()
 	
 	
 
 func _on_damage_area_body_entered(body: Node2D) -> void:
 	if $damage_interval_timer.is_stopped() and body is Enemy:
 		health -= body.enemy_stats.damage
-		self.player_hit()
+
 		print("hit")
 		self.animation_player.play("hit_shock")
 		Globals.camera.shake(0.5, 15, 10)
