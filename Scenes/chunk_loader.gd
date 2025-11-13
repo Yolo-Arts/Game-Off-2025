@@ -1,62 +1,107 @@
 extends Node
 
-@onready var camera = $Camera2D
+const CHUNK_SIZE = 8000
+# Distance to use to load next chunk ahead of time.
+const VIEW_SIZE = CHUNK_SIZE / 2
 
-const CHUNK_SIZE = 100.0
-var current_chunk_index = 0
+var player: Node2D = null
+# Current Chunk is the chunk the player is in.
+# X-Y Coordinates of Current Chunk. 
+var current_chunk_start_position: Vector2 = Vector2(0, 0)
+# Current chunk key X and Y are used to access the chunks_map. Use with create_key
+var current_chunk_key_x = 0
+var current_chunk_key_y = 0
 
-var player = null
-var testcounter = 0
-
-##
-# Thoughts:
-#So crete a map, that contains coordinates.
-#Attach the to the coordinates a scene. 
-#This scene will then be the scene that loads in that area. 
-#If a player moves towards that area then reload that scene. 
-#Keep track of scenes around the player in a 3x3 (likely too many). Will need to just do infront of play (arrow head)
-#Need to separate the player and screen. 
-
-##
-
-# List of Map Segments to generate chunks
+# List of Map Segments to generate chunks. All island designs.
 const MAP_SEGMENTS = [
 	preload("res://Game_Objects/Islands/island_0.tscn"),
 	preload("res://Game_Objects/Islands/island_1.tscn")
 ]
+
+# Map to keep track of loaded scenes. Will be reused when player re-enters already explored position.
+var chunks_map = {
+	"0.0_0.0": "orignal_scene_no_file"
+}
 
 @onready var parent_scene = $scene
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	player = get_tree().get_first_node_in_group("player") as Node2D
-	print("loading")
-	#load_scene()
-	var scene = MAP_SEGMENTS[0].instantiate()
-	scene.position = Vector2(-8000, 0)
-	parent_scene.add_child.call_deferred(scene)
-	move_child(scene, 0)
 	
-	var scene_2 = MAP_SEGMENTS[1].instantiate()
-	scene_2.position = Vector2(8000, 0)
-	parent_scene.add_child.call_deferred(scene_2)
-	move_child(scene_2, 1)
-	
-
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
-	#if testcounter < 1:
-		#connect_to_parent(0)
-		#testcounter += 1 
+	if player:
+		# ---- +X Axis -----
+		var player_position: Vector2 = player.global_position
+		var distance_from_chunk: Vector2 = player_position - current_chunk_start_position
+		
+		if distance_from_chunk.x > 0 && abs(distance_from_chunk.x) > VIEW_SIZE / 2:
+			var vector_change = Vector2(1,0)
+			update_map_by_player_position(vector_change)
+		
+		# Move current chunk position to new chunk after player has
+		if distance_from_chunk.x > 0 && abs(distance_from_chunk.x) > CHUNK_SIZE / 2:
+			var vector_change = Vector2(1,0)
+			update_current_chunk(vector_change)
+		
+		# ---- -X Axis -----
+		if distance_from_chunk.x < 0 && abs(distance_from_chunk.x) > VIEW_SIZE / 2:
+			var vector_change = Vector2(-1,0)
+			update_map_by_player_position(vector_change)
+		
+		# Move current chunk position to new chunk after player has
+		if distance_from_chunk.x < 0 && abs(distance_from_chunk.x) > CHUNK_SIZE / 2:
+			var vector_change = Vector2(-1,0)
+			update_current_chunk(vector_change)
+		
+		# ---- +Y Axis -----
+		if distance_from_chunk.y > 0 && abs(distance_from_chunk.y) > VIEW_SIZE / 2:
+			var vector_change = Vector2(0,1)
+			update_map_by_player_position(vector_change)
+		
+		# Move current chunk position to new chunk after player has
+		if distance_from_chunk.y > 0 && abs(distance_from_chunk.y) > CHUNK_SIZE / 2:
+			var vector_change = Vector2(0,1)
+			update_current_chunk(vector_change)
+		
+		# ---- -Y Axis -----
+		if distance_from_chunk.y < 0 && abs(distance_from_chunk.y) > VIEW_SIZE / 2:
+			var vector_change = Vector2(0,-1)
+			update_map_by_player_position(vector_change)
+		
+		# Move current chunk position to new chunk after player has
+		if distance_from_chunk.y < 0 && abs(distance_from_chunk.y) > CHUNK_SIZE / 2:
+			var vector_change = Vector2(0,-1)
+			update_current_chunk(vector_change)
+			
+		# TODO Deload any necessary chunksnstantiate()
 	
 func load_chunk(x, y): 
-	pass
+	var scene = MAP_SEGMENTS[1].instantiate()
+	scene.position = Vector2(x, y)
+	parent_scene.add_child.call_deferred(scene)
 	
-#func load_scene():
-	#var scene = load("res://Game_Objects/Islands/island_1.tscn")
+func create_key(x, y): 
+	return str(x) + "_" + str(y)
 	
+func update_map_by_player_position(vector_change: Vector2):
+	var next_x = current_chunk_key_x + vector_change.x
+	var next_y = current_chunk_key_y + vector_change.y
+	
+	var key = create_key(next_x, next_y)
+	
+	if not chunks_map.has(key):
+		load_chunk(CHUNK_SIZE * next_x, CHUNK_SIZE * next_y)
+		chunks_map[key] = MAP_SEGMENTS[1]
+		
+func update_current_chunk(vector_change: Vector2):
+	var next_x = current_chunk_key_x + vector_change.x
+	var next_y = current_chunk_key_y + vector_change.y
+	
+	current_chunk_start_position = Vector2(CHUNK_SIZE * next_x, CHUNK_SIZE * next_y)
+	current_chunk_key_x = next_x
+	current_chunk_key_y = next_y
 	
 func connect_to_parent(shift):
 	var next_segment = get_random_segement(shift)
