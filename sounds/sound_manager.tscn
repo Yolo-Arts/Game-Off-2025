@@ -40,16 +40,19 @@ script = ExtResource("1_a1hhe")
 
 [node name="CannonFire" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_8a8qv")
-volume_db = -2.457
+volume_db = -9.827
 bus = &"SFX"
 
 [node name="DeathExplosions" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_1awae")
+volume_db = -6.551
 
 [node name="EnemyHit" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_v0x57")
+volume_db = -3.276
 
 [node name="PlayerHurtSFX" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_0v1q7")
+volume_db = -4.913
 
 [node name="UI_SFX" type="Node" parent="."]
