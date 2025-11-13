@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://cpx0xphjgp1lt"]
+
+[ext_resource type="Shader" uid="uid://ciydayxuyc20o" path="res://Shaders/cloud.gdshader" id="1_uofjt"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n7qmi"]
+shader = ExtResource("1_uofjt")
+shader_parameter/tiling = Vector2(1, 1)
+shader_parameter/scroll_speed = Vector2(0.01, 0.01)
+shader_parameter/cloud_color = Color(0.8392157, 0.85882354, 0.88235295, 0.6392157)
+shader_parameter/shadow_rotation = 0.0
+shader_parameter/shadow_offset = Vector2(0.1, 0.1)
+shader_parameter/shadow_scale = Vector2(0.5, 0.5)
+shader_parameter/shadow_opacity = 0.110000005225
+
+[sub_resource type="Gradient" id="Gradient_d50mw"]
+offsets = PackedFloat32Array(0, 0.23655914, 0.3172043)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_uofjt"]
+seed = 7
+frequency = 0.0117
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5377d"]
+noise = SubResource("FastNoiseLite_uofjt")
+color_ramp = SubResource("Gradient_d50mw")
+seamless = true
+
+[node name="cloud" type="TextureRect"]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_n7qmi")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(20, 20)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("NoiseTexture2D_5377d")
+stretch_mode = 1
