@@ -1,9 +1,7 @@
-extends Control
+extends Node
 
-
-@onready var stat_up_ui: Stat_ui = $PanelContainer/HBoxContainer/CenterContainer2/Stat_up_UI
-@onready var stat_up_ui_2: Stat_ui = $PanelContainer/HBoxContainer/CenterContainer/Stat_up_UI2
-
+@onready var stat_up_ui: Stat_ui = $"../PanelContainer/HBoxContainer/CenterContainer2/Stat_up_UI"
+@onready var stat_up_ui_2: Stat_ui = $"../PanelContainer/HBoxContainer/CenterContainer/Stat_up_UI2"
 
 @export var stat_up_list: Array[Statup]
 
@@ -22,27 +20,15 @@ func _ready() -> void:
 	stat_up_index2 = item_table.pick_item([stat_up_index])
 	stat_up_ui.Stat_up = stat_up_list[stat_up_index]
 	stat_up_ui_2.Stat_up = stat_up_list[stat_up_index2]
-	
-	stat_up_ui.update()
-	stat_up_ui_2.update()
 
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta: float) -> void:
+	pass
+	
 func _on_player_level_up():
 	stat_up_index = item_table.pick_item()
 	stat_up_index2 = item_table.pick_item([stat_up_index])
 	stat_up_ui.Stat_up = stat_up_list[stat_up_index]
 	stat_up_ui_2.Stat_up = stat_up_list[stat_up_index2]
 	
-	stat_up_ui.update()
-	stat_up_ui_2.update()
-	
-	get_tree().paused = true    
-	visible = true  
-
-func _on_option_1_pressed() -> void:
-	get_tree().paused = false
-	visible = false
-
-
-func _on_option_2_pressed() -> void:
-	get_tree().paused = false
-	visible = false

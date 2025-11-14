@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://oy6uunjy18"]
 
 [ext_resource type="Script" uid="uid://r0qqura0dwvl" path="res://scripts/stat_up_ui.gd" id="1_0f4c1"]
-[ext_resource type="Resource" uid="uid://b2k3d3nv6iipi" path="res://Resources/Stat_ups/Test1.tres" id="2_uxr3i"]
+[ext_resource type="Resource" uid="uid://b2k3d3nv6iipi" path="res://Resources/Stat_ups/tres/Test1.tres" id="2_uxr3i"]
 
 [node name="Stat_up_UI" type="Control"]
 layout_mode = 3

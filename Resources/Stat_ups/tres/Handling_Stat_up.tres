@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Handling_stat_up" load_steps=3 format=3 uid="uid://dohph3126ka40"]
+
+[ext_resource type="Script" uid="uid://k0blmulvrxp6" path="res://Resources/Stat_ups/Handling_up.gd" id="1_ovhbd"]
+[ext_resource type="Texture2D" uid="uid://c12v3gr0dt8sm" path="res://icon.svg" id="1_vwqkg"]
+
+[resource]
+script = ExtResource("1_ovhbd")
+image = ExtResource("1_vwqkg")
+name = "Handling up"
+description = "Increases ability to turn"
+Weight = 3
+metadata/_custom_type_script = "uid://k0blmulvrxp6"

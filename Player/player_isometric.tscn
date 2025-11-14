@@ -31,7 +31,7 @@ streams_count = 1
 stream_0/stream = ExtResource("8_b0dan")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1xiy1"]
-radius = 61.03278
+radius = 60.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1xiy1"]
 radius = 31.64491
@@ -70,7 +70,7 @@ script = ExtResource("9_w5xkq")
 collision_layer = 0
 collision_mask = 16
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="exp_collection_radius"]
+[node name="exp_collection_radius_shape" type="CollisionShape2D" parent="exp_collection_radius"]
 position = Vector2(4, 6)
 shape = SubResource("CircleShape2D_1xiy1")
 

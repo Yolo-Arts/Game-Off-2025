@@ -13,13 +13,10 @@ var player: Player
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# set up variables and grab player from group
-	var stat_up_image = Stat_up.image
-	var stat_up_name = Stat_up.name
-	var stat_up_description = Stat_up.description
 	player = get_tree().get_first_node_in_group("player")
-	texture_rect.texture = stat_up_image
-	button.text = stat_up_name
-	description.text = stat_up_description
+	texture_rect.texture = Stat_up.image
+	button.text = Stat_up.name
+	description.text = Stat_up.description
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -32,3 +29,8 @@ func _on_button_pressed() -> void:
 		get_tree().paused = false
 		Stat_up.apply_upgrade(player)
 		get_tree().get_first_node_in_group("Upgrade_UI").visible = false 
+		
+func update():
+	texture_rect.texture = Stat_up.image
+	button.text = Stat_up.name
+	description.text = Stat_up.description

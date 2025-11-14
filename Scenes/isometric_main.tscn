@@ -1,6 +1,6 @@
 [gd_scene load_steps=20 format=4 uid="uid://b3imdjb1so30p"]
 
-[ext_resource type="Script" path="res://Scenes/isometric_main.gd" id="1_1enjl"]
+[ext_resource type="Script" uid="uid://wjiwydm880cx" path="res://Scenes/isometric_main.gd" id="1_1enjl"]
 [ext_resource type="PackedScene" uid="uid://cbag74ryx0pu8" path="res://Scenes/player_manager.tscn" id="2_dlawb"]
 [ext_resource type="PackedScene" uid="uid://2sw5s3fxyqo3" path="res://Scenes/camera_2d.tscn" id="2_pwvqx"]
 [ext_resource type="TileSet" uid="uid://b34gp3nmiu6lb" path="res://Assets/isometric_tileset.tres" id="4_1enjl"]
@@ -91,7 +91,6 @@ tile_set = ExtResource("4_1enjl")
 
 [node name="Camera2D" parent="player_isometric" instance=ExtResource("2_pwvqx")]
 unique_name_in_owner = true
-zoom = Vector2(0.8, 0.8)
 
 [node name="EnemyManager" parent="." instance=ExtResource("7_0lw5m")]
 basic_enemy_scene = ExtResource("14_dlawb")

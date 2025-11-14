@@ -3,12 +3,22 @@ extends Bullet_type
 
 var spread_between_cannonballs = 20.00
 
-func shoot(cannonball: PackedScene, player:Player, isometric = false):
+func shoot(cannonball: PackedScene, player:Player, isometric = false, scale = 1.0):
 	
 	var bullet_instance = cannonball.instantiate()
 	var bullet_instance2 = cannonball.instantiate()
 	var bullet_instance3 = cannonball.instantiate()
 	var bullet_instance4 = cannonball.instantiate()
+	
+	bullet_instance.base_damage = player.damage
+	bullet_instance2.base_damage = player.damage
+	bullet_instance3.base_damage = player.damage
+	bullet_instance4.base_damage = player.damage
+	
+	bullet_instance.apply_scale(Vector2(scale, scale))
+	bullet_instance2.apply_scale(Vector2(scale, scale))
+	bullet_instance3.apply_scale(Vector2(scale, scale))
+	bullet_instance4.apply_scale(Vector2(scale, scale))
 	
 	player.get_parent().add_child(bullet_instance)
 	player.get_parent().add_child(bullet_instance2)
