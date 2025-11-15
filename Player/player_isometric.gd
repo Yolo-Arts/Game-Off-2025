@@ -24,7 +24,7 @@ func _unhandled_input(event):
 
 func _physics_process(delta) -> void:
 	if drift_value >= 1:
-		drift_value -= 100
+		drift_value -= 100 * delta * 8
 	
 	if can_drift == true:
 		if Input.is_action_just_released("turn_left") or Input.is_action_just_released("turn_right"):
