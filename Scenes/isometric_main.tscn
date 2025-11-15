@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=4 uid="uid://b3imdjb1so30p"]
+[gd_scene load_steps=37 format=4 uid="uid://b3imdjb1so30p"]
 
 [ext_resource type="Script" uid="uid://wjiwydm880cx" path="res://Scenes/isometric_main.gd" id="1_1enjl"]
 [ext_resource type="PackedScene" uid="uid://cbag74ryx0pu8" path="res://Scenes/player_manager.tscn" id="2_dlawb"]
@@ -13,8 +13,11 @@
 [ext_resource type="Resource" uid="uid://d1qpml40osw4y" path="res://Enemies/Enemy_Types/black_isometric.tres" id="9_yws0v"]
 [ext_resource type="Resource" uid="uid://3bjbysn0exty" path="res://Enemies/Enemy_Types/red_isometric.tres" id="10_dlawb"]
 [ext_resource type="PackedScene" uid="uid://h0hdesj12ofh" path="res://Enemies/isometric_basic_enemy.tscn" id="14_dlawb"]
+[ext_resource type="Resource" uid="uid://dm54cgwnfqywy" path="res://Enemies/Enemy_Types/green_isometric.tres" id="14_ga6nx"]
 [ext_resource type="PackedScene" uid="uid://d38tjnetmpjft" path="res://user_interface/upgrade_menu.tscn" id="14_gvepe"]
+[ext_resource type="Resource" uid="uid://svmp2d2l0to4" path="res://Enemies/Enemy_Types/purple_isometric.tres" id="15_2y55o"]
 [ext_resource type="PackedScene" uid="uid://cwwekbcfo4hgu" path="res://user_interface/game_over.tscn" id="15_gvepe"]
+[ext_resource type="Resource" uid="uid://bprcgrgyghoih" path="res://Enemies/Enemy_Types/orange_isometric.tres" id="16_dppuq"]
 [ext_resource type="Script" uid="uid://dt41mbv4yvwkl" path="res://Scenes/grayscale.gd" id="16_hvs2a"]
 [ext_resource type="Shader" path="res://Shaders/grayscale.gdshader" id="16_ixf2m"]
 [ext_resource type="PackedScene" uid="uid://bqc47rhr50tki" path="res://user_interface/healthbar.tscn" id="18_ifoba"]
@@ -213,7 +216,7 @@ unique_name_in_owner = true
 
 [node name="EnemyManager" parent="." instance=ExtResource("7_0lw5m")]
 basic_enemy_scene = ExtResource("14_dlawb")
-enemy_types = Array[Resource]([ExtResource("9_yws0v"), ExtResource("10_dlawb")])
+enemy_types = Array[Resource]([ExtResource("9_yws0v"), ExtResource("10_dlawb"), ExtResource("14_ga6nx"), ExtResource("15_2y55o"), ExtResource("16_dppuq")])
 
 [node name="WaveAndTimeUI" parent="." node_paths=PackedStringArray("wave_time_manager") instance=ExtResource("8_gpok4")]
 wave_time_manager = NodePath("../WaveTimeManager")
