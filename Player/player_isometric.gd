@@ -23,6 +23,23 @@ func _unhandled_input(event):
 		shoot()
 
 func _physics_process(delta) -> void:
+	if drift_value >= 1:
+		drift_value -= 100
+	
+	if can_drift == true:
+		if Input.is_action_just_released("turn_left") or Input.is_action_just_released("turn_right"):
+			drift_value += 1000
+			can_drift = false
+			print("drifting")
+	if Input.is_action_just_pressed("turn_left"):
+		drift.start()
+		if Input.is_action_just_released("turn_left"):
+			drift.stop()
+	if Input.is_action_just_pressed("turn_right"):
+		drift.start()
+		if Input.is_action_just_released("turn_right"):
+			drift.stop()
+	
 	if !isDead:
 		var turn_direction = 0.0
 		if Input.is_action_pressed("turn_left"):
@@ -61,7 +78,7 @@ func _physics_process(delta) -> void:
 		# ISOMETRIC MOVEMENT: 
 		var forward_direction = Vector2.RIGHT.rotated(rotation)
 		var isometric_direction = isometric_transform * forward_direction
-		velocity = isometric_direction * current_speed
+		velocity = isometric_direction * ( current_speed + drift_value)
 		
 		# Wall collisions:
 		var collision = move_and_collide(velocity * delta)
@@ -141,3 +158,6 @@ func _on_damage_area_iso_body_entered(body: Node2D) -> void:
 		$damage_interval_timer.start()
 	else:
 		print("Damage on cooldown")
+func _on_drift_timeout() -> void:
+	can_drift = true
+	print("driftable")
