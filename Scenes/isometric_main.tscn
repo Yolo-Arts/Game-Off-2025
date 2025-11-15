@@ -124,6 +124,7 @@ script = ExtResource("1_1enjl")
 [node name="Player_Manager" parent="." instance=ExtResource("2_dlawb")]
 
 [node name="WaterShader" type="TextureRect" parent="."]
+visible = false
 material = SubResource("ShaderMaterial_j2xfm")
 offset_left = -26027.0
 offset_top = -15930.0
@@ -138,34 +139,35 @@ position = Vector2(-347, -2750)
 scale = Vector2(4, 4)
 
 [node name="island2" parent="." instance=ExtResource("21_oiwry")]
-position = Vector2(13499, -2750)
+position = Vector2(13673, -2750)
 scale = Vector2(4, 4)
 
 [node name="island3" parent="." instance=ExtResource("21_oiwry")]
-position = Vector2(27421, -2750)
+position = Vector2(27694, -2750)
 scale = Vector2(4, 4)
 
 [node name="island4" parent="." instance=ExtResource("21_oiwry")]
-position = Vector2(41267, -2750)
+position = Vector2(41714, -2750)
 scale = Vector2(4, 4)
 
 [node name="island5" parent="." instance=ExtResource("21_oiwry")]
-position = Vector2(-347, 9420)
+position = Vector2(-347, 9606)
 scale = Vector2(4, 4)
 
 [node name="island6" parent="." instance=ExtResource("21_oiwry")]
-position = Vector2(13499, 9420)
+position = Vector2(13673, 9606)
 scale = Vector2(4, 4)
 
 [node name="island7" parent="." instance=ExtResource("21_oiwry")]
-position = Vector2(27421, 9420)
+position = Vector2(27694, 9606)
 scale = Vector2(4, 4)
 
 [node name="island8" parent="." instance=ExtResource("21_oiwry")]
-position = Vector2(41267, 9420)
+position = Vector2(41714, 9606)
 scale = Vector2(4, 4)
 
 [node name="cloud" parent="." instance=ExtResource("20_7tq1b")]
+visible = false
 z_index = 7
 offset_left = -7517.9995
 offset_top = -9337.0
