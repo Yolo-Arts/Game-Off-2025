@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=4 uid="uid://b3imdjb1so30p"]
+[gd_scene load_steps=34 format=4 uid="uid://b3imdjb1so30p"]
 
 [ext_resource type="Script" uid="uid://wjiwydm880cx" path="res://Scenes/isometric_main.gd" id="1_1enjl"]
 [ext_resource type="PackedScene" uid="uid://cbag74ryx0pu8" path="res://Scenes/player_manager.tscn" id="2_dlawb"]
@@ -16,10 +16,11 @@
 [ext_resource type="PackedScene" uid="uid://d38tjnetmpjft" path="res://user_interface/upgrade_menu.tscn" id="14_gvepe"]
 [ext_resource type="PackedScene" uid="uid://cwwekbcfo4hgu" path="res://user_interface/game_over.tscn" id="15_gvepe"]
 [ext_resource type="Script" uid="uid://dt41mbv4yvwkl" path="res://Scenes/grayscale.gd" id="16_hvs2a"]
-[ext_resource type="Shader" uid="uid://c3xdyeo558avw" path="res://Shaders/grayscale.gdshader" id="16_ixf2m"]
+[ext_resource type="Shader" path="res://Shaders/grayscale.gdshader" id="16_ixf2m"]
 [ext_resource type="PackedScene" uid="uid://bqc47rhr50tki" path="res://user_interface/healthbar.tscn" id="18_ifoba"]
 [ext_resource type="Shader" uid="uid://ydw2wifhpp88" path="res://Shaders/screenTransition.gdshader" id="19_b21ex"]
 [ext_resource type="PackedScene" uid="uid://cpx0xphjgp1lt" path="res://Shaders/cloud.tscn" id="20_7tq1b"]
+[ext_resource type="PackedScene" uid="uid://3xc21ujc0r2q" path="res://Scenes/island_1.tscn" id="21_oiwry"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_wgbrh"]
 
@@ -122,7 +123,57 @@ script = ExtResource("1_1enjl")
 
 [node name="Player_Manager" parent="." instance=ExtResource("2_dlawb")]
 
+[node name="WaterShader" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_j2xfm")
+offset_left = -26027.0
+offset_top = -15930.0
+offset_right = -17914.0
+offset_bottom = -13302.0
+scale = Vector2(20, 20)
+texture = ExtResource("6_0lw5m")
+stretch_mode = 1
+
+[node name="island1" parent="." instance=ExtResource("21_oiwry")]
+position = Vector2(-347, -2750)
+scale = Vector2(4, 4)
+
+[node name="island2" parent="." instance=ExtResource("21_oiwry")]
+position = Vector2(13499, -2750)
+scale = Vector2(4, 4)
+
+[node name="island3" parent="." instance=ExtResource("21_oiwry")]
+position = Vector2(27421, -2750)
+scale = Vector2(4, 4)
+
+[node name="island4" parent="." instance=ExtResource("21_oiwry")]
+position = Vector2(41267, -2750)
+scale = Vector2(4, 4)
+
+[node name="island5" parent="." instance=ExtResource("21_oiwry")]
+position = Vector2(-347, 9420)
+scale = Vector2(4, 4)
+
+[node name="island6" parent="." instance=ExtResource("21_oiwry")]
+position = Vector2(13499, 9420)
+scale = Vector2(4, 4)
+
+[node name="island7" parent="." instance=ExtResource("21_oiwry")]
+position = Vector2(27421, 9420)
+scale = Vector2(4, 4)
+
+[node name="island8" parent="." instance=ExtResource("21_oiwry")]
+position = Vector2(41267, 9420)
+scale = Vector2(4, 4)
+
+[node name="cloud" parent="." instance=ExtResource("20_7tq1b")]
+z_index = 7
+offset_left = -7517.9995
+offset_top = -9337.0
+offset_right = -4729.4497
+offset_bottom = -8085.0
+
 [node name="tilemapFolder" type="Node2D" parent="."]
+visible = false
 
 [node name="Water" type="TileMapLayer" parent="tilemapFolder"]
 visible = false
@@ -141,16 +192,6 @@ tile_set = ExtResource("4_1enjl")
 scale = Vector2(4, 4)
 tile_set = ExtResource("4_1enjl")
 
-[node name="WaterShader" type="TextureRect" parent="tilemapFolder"]
-material = SubResource("ShaderMaterial_j2xfm")
-offset_left = -26027.0
-offset_top = -15930.0
-offset_right = -17914.0
-offset_bottom = -13302.0
-scale = Vector2(20, 20)
-texture = ExtResource("6_0lw5m")
-stretch_mode = 1
-
 [node name="Grass3" type="TileMapLayer" parent="tilemapFolder"]
 y_sort_enabled = true
 scale = Vector2(4, 4)
@@ -163,10 +204,10 @@ tile_map_data = PackedByteArray("AAD///z/AAAEAAYAAAD///v/AAAHAAYAAAAEAPz/AAAAAAc
 tile_set = ExtResource("4_1enjl")
 
 [node name="player_isometric" parent="." instance=ExtResource("6_wgbrh")]
+position = Vector2(7635, -3234)
 
 [node name="Camera2D" parent="player_isometric" instance=ExtResource("2_pwvqx")]
 unique_name_in_owner = true
-zoom = Vector2(0.8, 0.8)
 
 [node name="EnemyManager" parent="." instance=ExtResource("7_0lw5m")]
 basic_enemy_scene = ExtResource("14_dlawb")
@@ -218,9 +259,3 @@ texture = SubResource("GradientTexture1D_7tq1b")
 libraries = {
 &"": SubResource("AnimationLibrary_oiwry")
 }
-
-[node name="cloud" parent="." instance=ExtResource("20_7tq1b")]
-offset_left = -256.0
-offset_top = -256.0
-offset_right = 256.0
-offset_bottom = 256.0

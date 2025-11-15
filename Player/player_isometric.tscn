@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bg21p6igd7lvn" path="res://Player/player_isometric.gd" id="1_60ovk"]
 [ext_resource type="Resource" uid="uid://bgntu42b22hqi" path="res://Resources/Bullet types/Double_Shot.tres" id="2_1xiy1"]
 [ext_resource type="Texture2D" uid="uid://bjchrxewdcwy2" path="res://Player/boat_spritesheet2.png" id="2_evufl"]
-[ext_resource type="Shader" path="res://Shaders/shock_damage.gdshader" id="3_5y3gb"]
+[ext_resource type="Shader" uid="uid://dhfkgyvufew58" path="res://Shaders/shock_damage.gdshader" id="3_5y3gb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fphli"]
 shader = ExtResource("3_5y3gb")
@@ -22,6 +22,7 @@ radius = 27.730848
 radius = 24.083189
 
 [node name="player_isometric" type="CharacterBody2D" groups=["player"]]
+y_sort_enabled = true
 script = ExtResource("1_60ovk")
 Bullet_Type = ExtResource("2_1xiy1")
 
