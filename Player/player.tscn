@@ -505,8 +505,6 @@ shape = SubResource("CircleShape2D_5htga")
 wait_time = 4.0
 one_shot = true
 
-[connection signal="fire_cannon_SFX" from="." to="CannonFireSFX" method="_on_player_fire_cannon_sfx"]
-[connection signal="playerHitSFX" from="." to="PlayerHurtSFX" method="_on_player_player_hit_sfx"]
 [connection signal="body_entered" from="DamageArea" to="." method="_on_damage_area_body_entered"]
 [connection signal="body_exited" from="DamageArea" to="." method="_on_damage_area_body_exited"]
 [connection signal="body_entered" from="Exp collection radius" to="." method="_on_exp_collection_radius_body_entered"]

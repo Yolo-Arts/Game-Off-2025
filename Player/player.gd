@@ -5,7 +5,7 @@ extends CharacterBody2D
 
 # movement related code
 @export_group("Movement Parameters")
-@export var base_speed: float = 400
+@export var base_speed: float = 500
 @export var max_speed: float = 700.0
 @export var min_turn_speed: float = 0.8  
 @export var max_turn_speed: float = 6.0  

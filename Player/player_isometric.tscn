@@ -25,6 +25,9 @@ radius = 24.083189
 y_sort_enabled = true
 script = ExtResource("1_60ovk")
 Bullet_Type = ExtResource("2_1xiy1")
+base_speed = 200.0
+turn_acceleration = 0.5
+acceleration = 0.8
 
 [node name="boat" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_fphli")
