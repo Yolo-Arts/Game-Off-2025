@@ -71,7 +71,7 @@ wait_time = 0.5
 one_shot = true
 
 [node name="drift" type="Timer" parent="."]
-wait_time = 1.4
+wait_time = 2.0
 one_shot = true
 
 [connection signal="area_entered" from="exp_collection_radius" to="." method="_on_exp_collection_radius_area_entered"]
