@@ -1,9 +1,8 @@
-[gd_scene load_steps=14 format=4 uid="uid://3xc21ujc0r2q"]
+[gd_scene load_steps=13 format=4 uid="uid://3xc21ujc0r2q"]
 
 [ext_resource type="TileSet" uid="uid://b34gp3nmiu6lb" path="res://Assets/isometric_tileset.tres" id="1_dwvs6"]
 [ext_resource type="Shader" uid="uid://b4oixuorco5vd" path="res://Shaders/water.gdshader" id="2_muhai"]
 [ext_resource type="Shader" uid="uid://ciydayxuyc20o" path="res://Shaders/cloud.gdshader" id="3_x6bg1"]
-[ext_resource type="PackedScene" uid="uid://cpx0xphjgp1lt" path="res://Shaders/cloud.tscn" id="4_acsde"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_x6bg1"]
 
@@ -95,9 +94,3 @@ offset_top = -1514.0
 offset_right = 1810.0
 offset_bottom = 1575.0
 texture = SubResource("NoiseTexture2D_led5k")
-
-[node name="cloud" parent="." instance=ExtResource("4_acsde")]
-offset_left = -1658.5452
-offset_top = -1481.0001
-offset_right = 1772.5452
-offset_bottom = 1541.9999
