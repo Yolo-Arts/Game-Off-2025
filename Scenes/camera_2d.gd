@@ -9,14 +9,21 @@ var _previous_x = 0.0
 var _previous_y = 0.0
 var _last_offset = Vector2(0, 0)
 
-var normal_zoom: Vector2 = Vector2(0.5, 0.5)
-var max_zoom_in: Vector2 = Vector2(0.65, 0.65)
-var max_zoom_out: Vector2 = Vector2(0.45, 0.45)
+#var normal_zoom: Vector2 = Vector2(zoom.x, zoom.y)
+#var max_zoom_in: Vector2 = Vector2(zoom.x + 0.15, zoom.y + 0.15)
+#var max_zoom_out: Vector2 = Vector2(zoom.x - 0.05, zoom.x - 0.05)
+
+var normal_zoom: Vector2
+var max_zoom_in: Vector2
+var max_zoom_out: Vector2
 
 var zoom_tween: Tween
 
 func _ready():
-	zoom = normal_zoom
+	print("zoom of x at the beginning is: ", zoom.x)
+	normal_zoom = zoom
+	max_zoom_in = normal_zoom + Vector2(0.15, 0.15)
+	max_zoom_out = normal_zoom - Vector2(0.05, 0.05)
 	set_process(true)
 
 # Shake with decreasing intensity while there's time remaining.
