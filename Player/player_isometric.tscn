@@ -4,6 +4,12 @@
 [ext_resource type="Resource" uid="uid://bgntu42b22hqi" path="res://Resources/Bullet types/Double_Shot.tres" id="2_1xiy1"]
 [ext_resource type="Texture2D" uid="uid://bjchrxewdcwy2" path="res://Player/boat_spritesheet2.png" id="2_evufl"]
 [ext_resource type="Shader" uid="uid://dhfkgyvufew58" path="res://Shaders/shock_damage.gdshader" id="3_5y3gb"]
+[ext_resource type="AudioStream" uid="uid://bbo0dxfs3wbnj" path="res://sounds/playerHurt1.sfxr" id="3_amulb"]
+[ext_resource type="AudioStream" uid="uid://db6pcdv5k26es" path="res://sounds/playerHurt2.sfxr" id="4_qif08"]
+[ext_resource type="AudioStream" uid="uid://bcdx1wnye1sbw" path="res://sounds/playerHurt3.sfxr" id="5_r0ntv"]
+[ext_resource type="AudioStream" uid="uid://d0bs1a2x8outq" path="res://sounds/cannon_fire.sfxr" id="8_b0dan"]
+[ext_resource type="Script" uid="uid://c1a3da1a17ig8" path="res://Player/cannon_fire_sfx.gd" id="9_w5xkq"]
+[ext_resource type="Script" uid="uid://octyfubw21an" path="res://Player/player_hurt_sfx.gd" id="10_606xv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fphli"]
 shader = ExtResource("3_5y3gb")
@@ -70,5 +76,12 @@ debug_color = Color(0.70196074, 0.51001835, 0, 0.41960785)
 wait_time = 0.5
 one_shot = true
 
+[node name="drift" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[connection signal="fire_cannon_SFX" from="." to="CannonFireSFX" method="_on_player_isometric_fire_cannon_sfx"]
+[connection signal="playerHitSFX" from="." to="PlayerHurtSFX" method="_on_player_isometric_player_hit_sfx"]
 [connection signal="area_entered" from="exp_collection_radius" to="." method="_on_exp_collection_radius_area_entered"]
 [connection signal="body_entered" from="DamageAreaIso" to="." method="_on_damage_area_iso_body_entered"]
+[connection signal="timeout" from="drift" to="." method="_on_drift_timeout"]
