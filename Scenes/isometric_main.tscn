@@ -264,3 +264,6 @@ texture = SubResource("GradientTexture1D_7tq1b")
 libraries = {
 &"": SubResource("AnimationLibrary_oiwry")
 }
+
+[connection signal="zoom_in" from="player_isometric" to="player_isometric/Camera2D" method="_on_player_isometric_zoom_in"]
+[connection signal="zoom_out" from="player_isometric" to="player_isometric/Camera2D" method="_on_player_isometric_zoom_out"]

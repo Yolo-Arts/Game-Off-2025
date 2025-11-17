@@ -4,6 +4,9 @@ extends Player
 @export var isometric_angle: float = 30.0 
 var isometric_transform: Transform2D
 
+signal zoom_in
+signal zoom_out
+
 func _ready():
 	health = 100
 	#Globals.player_died.connect(dead_player)
@@ -23,23 +26,36 @@ func _unhandled_input(event):
 		SoundManager.play_CannonFire()
 		shoot()
 
+@export var boost_decay: float = 7
+
 func _physics_process(delta) -> void:
 	if drift_value >= 1:
-		drift_value -= 100 * delta * 8
+		# (higher boost decay = lower distance traveled)
+		drift_value -= 100 * delta * boost_decay
 	
 	if can_drift == true:
 		if Input.is_action_just_released("turn_left") or Input.is_action_just_released("turn_right"):
+			zoom_out.emit()
 			drift_value += 1000
 			can_drift = false
 			print("drifting")
+	
 	if Input.is_action_just_pressed("turn_left"):
 		drift.start()
-		if Input.is_action_just_released("turn_left"):
-			drift.stop()
+		#zoom_in.emit()
+		#print("zoom in")
+	if Input.is_action_just_released("turn_left"):
+		drift.stop()
+		#zoom_out.emit()
+		#print("zoom out")
 	if Input.is_action_just_pressed("turn_right"):
 		drift.start()
-		if Input.is_action_just_released("turn_right"):
-			drift.stop()
+		#zoom_in.emit()
+		#print("zoom in")
+	if Input.is_action_just_released("turn_right"):
+		drift.stop()
+		#zoom_out.emit()
+		#print("zoom out")
 	
 	if !isDead:
 		var turn_direction = 0.0
@@ -162,4 +178,5 @@ func player_hit():
 
 func _on_drift_timeout() -> void:
 	can_drift = true
+	zoom_in.emit()
 	print("driftable")
