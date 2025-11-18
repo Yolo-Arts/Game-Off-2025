@@ -3,7 +3,7 @@ extends Node
 #level up
 var level = 0
 var total_exp = 0
-var level_threshold = 5
+var level_threshold = 2
 
 
 signal exp_updated(current_exp: float, target_exp: float)

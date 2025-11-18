@@ -71,4 +71,6 @@ theme_override_font_sizes/font_size = 146
 text = "Paused"
 
 [connection signal="button_down" from="MarginContainer/MarginContainer/VBoxContainer/Continue" to="." method="_on_continue_button_down"]
+[connection signal="mouse_entered" from="MarginContainer/MarginContainer/VBoxContainer/Continue" to="." method="_on_continue_mouse_entered"]
 [connection signal="button_down" from="MarginContainer/MarginContainer/VBoxContainer/Restart" to="." method="_on_restart_button_down"]
+[connection signal="mouse_entered" from="MarginContainer/MarginContainer/VBoxContainer/Restart" to="." method="_on_restart_mouse_entered"]

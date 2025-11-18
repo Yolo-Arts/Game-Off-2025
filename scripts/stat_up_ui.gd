@@ -27,8 +27,13 @@ func _process(_delta: float) -> void:
 	pass     
 
 func _on_button_pressed() -> void:
+	SoundManager.play_UpgradeUnlock()
 	# pause game and allow options to choose from
 	if get_tree().paused == true:
 		get_tree().paused = false
 		Stat_up.apply_upgrade(player)
 		get_tree().get_first_node_in_group("Upgrade_UI").visible = false 
+
+
+func _on_button_mouse_entered() -> void:
+	SoundManager.UI_ButtonHovered()

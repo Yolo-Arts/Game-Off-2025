@@ -7,6 +7,7 @@ func _ready() -> void:
 
 
 func _on_player_level_up():
+	SoundManager.play_LevelUp()
 	get_tree().paused = true    
 	visible = true  
 

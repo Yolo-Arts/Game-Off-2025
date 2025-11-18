@@ -34,21 +34,6 @@ colors = PackedColorArray(0.035858154, 0.13177991, 0.1953125, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_12xn0"]
 gradient = SubResource("Gradient_adlvt")
 
-[sub_resource type="Animation" id="Animation_12xn0"]
-resource_name = "close-transition"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TextureRect:material:shader_parameter/progress")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [2.06, -0.095]
-}
-
 [sub_resource type="Animation" id="Animation_upsow"]
 length = 0.001
 tracks/0/type = "value"
@@ -62,6 +47,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [2.06]
+}
+
+[sub_resource type="Animation" id="Animation_12xn0"]
+resource_name = "close-transition"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [2.06, -0.095]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lingh"]
@@ -495,4 +495,5 @@ libraries = {
 &"": SubResource("AnimationLibrary_lingh")
 }
 
+[connection signal="mouse_entered" from="Control/Scoreboard/VBoxContainer/Scoreboard/RestartMargin/Restart" to="." method="_on_restart_mouse_entered"]
 [connection signal="pressed" from="Control/Scoreboard/VBoxContainer/Scoreboard/RestartMargin/Restart" to="." method="_on_restart_pressed"]

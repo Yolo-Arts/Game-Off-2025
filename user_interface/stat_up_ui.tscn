@@ -38,4 +38,5 @@ horizontal_alignment = 1
 [node name="Button" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 
+[connection signal="mouse_entered" from="VBoxContainer/Button" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]
