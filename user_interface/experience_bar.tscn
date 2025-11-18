@@ -14,6 +14,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="ProgressBar" type="ProgressBar" parent="MarginContainer"]
+modulate = Color(1, 0.890625, 0, 1)
 layout_mode = 2
 size_flags_vertical = 8
 max_value = 1.0
