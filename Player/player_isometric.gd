@@ -100,7 +100,8 @@ func _physics_process(delta) -> void:
 		# Wall collisions:
 		var collision = move_and_collide(velocity * delta)
 		if collision:
-			animation_player.play("bounce")
+			#TODO ADD BACK BOUNCE ANIMATION
+			#animation_player.play("bounce")
 			var normal = collision.get_normal()
 			velocity = velocity.bounce(normal) * bounce_dampening
 			rotation = velocity.angle()

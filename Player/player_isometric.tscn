@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://deqnmjpt3dxgb"]
+[gd_scene load_steps=10 format=3 uid="uid://deqnmjpt3dxgb"]
 
 [ext_resource type="Script" uid="uid://bg21p6igd7lvn" path="res://Player/player_isometric.gd" id="1_60ovk"]
 [ext_resource type="Resource" uid="uid://bgntu42b22hqi" path="res://Resources/Bullet types/Double_Shot.tres" id="2_1xiy1"]
@@ -21,8 +21,12 @@ radius = 27.730848
 [sub_resource type="CircleShape2D" id="CircleShape2D_eoyfg"]
 radius = 24.083189
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_qgbdv"]
+radius = 21.023796
+
 [node name="player_isometric" type="CharacterBody2D" groups=["player"]]
 y_sort_enabled = true
+collision_mask = 9
 script = ExtResource("1_60ovk")
 Bullet_Type = ExtResource("2_1xiy1")
 base_speed = 200.0
@@ -33,7 +37,7 @@ material = SubResource("ShaderMaterial_fphli")
 texture = ExtResource("2_evufl")
 hframes = 45
 vframes = 8
-frame = 230
+frame = 359
 
 [node name="CannonLeft" type="Marker2D" parent="."]
 position = Vector2(20, 16)
@@ -75,6 +79,10 @@ one_shot = true
 [node name="drift" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 19)
+shape = SubResource("CircleShape2D_qgbdv")
 
 [connection signal="area_entered" from="exp_collection_radius" to="." method="_on_exp_collection_radius_area_entered"]
 [connection signal="body_entered" from="DamageAreaIso" to="." method="_on_damage_area_iso_body_entered"]
