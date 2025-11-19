@@ -60,26 +60,33 @@ func on_difficulty_increased(difficulty: int):
 	
 	match difficulty:
 		1:
-			pass
+			Globals.update_score("WAVES_SURVIVED")
+			
 		2:
-			pass
+			Globals.update_score("WAVES_SURVIVED")
 		3:
+			Globals.update_score("WAVES_SURVIVED")
 			enemy_table.add_item(2, 10)
 			enemy_count += 1
 		4:
+			Globals.update_score("WAVES_SURVIVED")
 			enemy_table.remove_item(0)
 		5:
+			Globals.update_score("WAVES_SURVIVED")
 			enemy_count += 1
 		6:
+			Globals.update_score("WAVES_SURVIVED")
 			enemy_count += 1
 			enemy_table.add_item(3, 10)
 		7:
+			Globals.update_score("WAVES_SURVIVED")
 			enemy_count += 1
 		8:
-			pass
+			Globals.update_score("WAVES_SURVIVED")
 		9:
 			enemy_table.add_item(4, 10)
 		_:
+			Globals.update_score("WAVES_SURVIVED")
 			enemy_count += 1
 	
 	
