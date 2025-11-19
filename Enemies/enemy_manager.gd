@@ -63,13 +63,22 @@ func on_difficulty_increased(difficulty: int):
 			pass
 		2:
 			pass
-			#enemy_table.add_item(2, 10)
 		3:
+			enemy_table.add_item(2, 10)
 			enemy_count += 1
 		4:
 			enemy_table.remove_item(0)
 		5:
 			enemy_count += 1
+		6:
+			enemy_count += 1
+			enemy_table.add_item(3, 10)
+		7:
+			enemy_count += 1
+		8:
+			pass
+		9:
+			enemy_table.add_item(4, 10)
 		_:
 			enemy_count += 1
 	

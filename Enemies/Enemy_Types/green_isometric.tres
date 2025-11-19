@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="enemy_type" load_steps=3 format=3 uid="uid://dm54cgwnfqywy"]
+
+[ext_resource type="Script" uid="uid://bujng151akkyd" path="res://Resources/enemy_type.gd" id="1_7rp86"]
+[ext_resource type="Texture2D" uid="uid://bqk1j1fmrm7sv" path="res://Enemies/Sprites/enemy_ship_green_spritesheet.png" id="2_t6wge"]
+
+[resource]
+script = ExtResource("1_7rp86")
+texture = ExtResource("2_t6wge")
+damage = 10.0
+health = 30.0
+metadata/_custom_type_script = "uid://bujng151akkyd"

@@ -1,54 +1,77 @@
-[gd_scene load_steps=10 format=3 uid="uid://cwwekbcfo4hgu"]
+[gd_scene load_steps=11 format=3 uid="uid://cwwekbcfo4hgu"]
 
 [ext_resource type="Script" uid="uid://beiwt1l5yk3ny" path="res://user_interface/game_over.gd" id="1_bkg1s"]
 [ext_resource type="Theme" uid="uid://bi4882lo6q8km" path="res://user_interface/ThemeV2.tres" id="2_adlvt"]
-[ext_resource type="FontFile" uid="uid://b01tc6c8f4r8e" path="res://user_interface/Sprout Lands - UI Pack - Basic pack/fonts/pixelFont-7-8x14-sproutLands.ttf" id="3_12xn0"]
-[ext_resource type="Texture2D" uid="uid://by6ovf6y7qwd6" path="res://user_interface/ui_assets/Button_52x14.png" id="3_adlvt"]
+[ext_resource type="Script" uid="uid://b4hwrp8guiq8a" path="res://addons/shaker/shaker.gd" id="3_adlvt"]
+[ext_resource type="Shader" uid="uid://ydw2wifhpp88" path="res://Shaders/screenTransition.gdshader" id="4_12xn0"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ovv2v"]
-texture = ExtResource("3_adlvt")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_upsow"]
+shader = ExtResource("4_12xn0")
+shader_parameter/use_sprite_alpha = true
+shader_parameter/use_transition_texture = false
+shader_parameter/transition_type = 2
+shader_parameter/position = Vector2(0.5, 0.5)
+shader_parameter/invert = false
+shader_parameter/grid_size = Vector2(1, 1)
+shader_parameter/rotation_angle = 0.0
+shader_parameter/stagger = Vector2(0, 0)
+shader_parameter/stagger_frequency = Vector2i(2, 2)
+shader_parameter/flip_frequency = Vector2i(1, 1)
+shader_parameter/basic_feather = 0.0
+shader_parameter/use_mask_size = false
+shader_parameter/mask_size = Vector2(100, 100)
+shader_parameter/edges = 64
+shader_parameter/shape_feather = 0.1
+shader_parameter/sectors = 1
+shader_parameter/clock_feather = 0.0
+shader_parameter/progress = 2.06
+shader_parameter/progress_bias = Vector2(0, 0)
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tan1r"]
-texture = ExtResource("3_adlvt")
+[sub_resource type="Gradient" id="Gradient_adlvt"]
+offsets = PackedFloat32Array(0.005376344)
+colors = PackedColorArray(0.035858154, 0.13177991, 0.1953125, 1)
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_up85o"]
-texture = ExtResource("3_adlvt")
-expand_margin_left = 40.0
-expand_margin_right = 40.0
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_12xn0"]
+gradient = SubResource("Gradient_adlvt")
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_adlvt"]
-texture = ExtResource("3_adlvt")
-expand_margin_left = 40.0
-expand_margin_right = 40.0
+[sub_resource type="Animation" id="Animation_12xn0"]
+resource_name = "close-transition"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [2.06, -0.095]
+}
 
-[sub_resource type="Theme" id="Theme_67nrg"]
-Button/colors/font_color = Color(0.2, 0.12941177, 0.007843138, 1)
-Button/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
-Button/colors/font_focus_color = Color(0.95, 0.95, 0.95, 1)
-Button/colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
-Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
-Button/colors/font_outline_color = Color(0, 0, 0, 1)
-Button/colors/font_pressed_color = Color(1, 1, 1, 1)
-Button/colors/icon_disabled_color = Color(1, 1, 1, 0.4)
-Button/colors/icon_focus_color = Color(1, 1, 1, 1)
-Button/colors/icon_hover_color = Color(1, 1, 1, 1)
-Button/colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
-Button/colors/icon_normal_color = Color(1, 1, 1, 1)
-Button/colors/icon_pressed_color = Color(1, 1, 1, 1)
-Button/constants/align_to_largest_stylebox = 0
-Button/constants/h_separation = 4
-Button/constants/icon_max_width = 0
-Button/constants/outline_size = 0
-Button/font_sizes/font_size = 32
-Button/fonts/font = ExtResource("3_12xn0")
-Button/styles/disabled = SubResource("StyleBoxTexture_ovv2v")
-Button/styles/focus = SubResource("StyleBoxTexture_tan1r")
-Button/styles/hover = SubResource("StyleBoxTexture_up85o")
-Button/styles/normal = SubResource("StyleBoxTexture_adlvt")
-Button/styles/pressed = SubResource("StyleBoxTexture_adlvt")
+[sub_resource type="Animation" id="Animation_upsow"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2.06]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lingh"]
+_data = {
+&"RESET": SubResource("Animation_upsow"),
+&"close-transition": SubResource("Animation_12xn0")
+}
 
 [node name="GameOver" type="CanvasLayer"]
-layer = 4
+layer = 5
 script = ExtResource("1_bkg1s")
 
 [node name="Control" type="Control" parent="."]
@@ -58,12 +81,18 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(960, 540)
 
-[node name="MarginContainer" type="MarginContainer" parent="Control"]
+[node name="Shadow" type="MarginContainer" parent="Control"]
+modulate = Color(0.19215687, 0.19215687, 0.19215687, 0.48235294)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 12.0
+offset_right = 12.0
+offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 400
@@ -71,16 +100,16 @@ theme_override_constants/margin_top = 100
 theme_override_constants/margin_right = 400
 theme_override_constants/margin_bottom = 100
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Shadow"]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="WastedPanel" type="Panel" parent="Control/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(500, 150)
+[node name="WastedPanel" type="Panel" parent="Control/Shadow/VBoxContainer"]
+custom_minimum_size = Vector2(900, 150)
 layout_mode = 2
 theme = ExtResource("2_adlvt")
 
-[node name="WastedLabel" type="Label" parent="Control/MarginContainer/VBoxContainer/WastedPanel"]
+[node name="WastedLabel" type="Label" parent="Control/Shadow/VBoxContainer/WastedPanel"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -94,14 +123,14 @@ offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 96
-text = "WASTED"
+text = "W A S T E D"
 
-[node name="Scoreboard" type="Panel" parent="Control/MarginContainer/VBoxContainer"]
+[node name="Scoreboard" type="Panel" parent="Control/Shadow/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("2_adlvt")
 
-[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/VBoxContainer/Scoreboard"]
+[node name="MarginContainer" type="MarginContainer" parent="Control/Shadow/VBoxContainer/Scoreboard"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -112,14 +141,14 @@ offset_bottom = 40.0
 grow_horizontal = 2
 theme_override_constants/margin_top = 40
 
-[node name="Score_" type="Label" parent="Control/MarginContainer/VBoxContainer/Scoreboard/MarginContainer"]
+[node name="Score_" type="Label" parent="Control/Shadow/VBoxContainer/Scoreboard/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("2_adlvt")
 theme_override_font_sizes/font_size = 64
 text = "SCORE:"
 
-[node name="MarginContainer2" type="MarginContainer" parent="Control/MarginContainer/VBoxContainer/Scoreboard"]
+[node name="MarginContainer2" type="MarginContainer" parent="Control/Shadow/VBoxContainer/Scoreboard"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -129,118 +158,341 @@ grow_vertical = 2
 theme_override_constants/margin_top = 80
 theme_override_constants/margin_bottom = 80
 
-[node name="CategoriesAndScoresDivider" type="HBoxContainer" parent="Control/MarginContainer/VBoxContainer/Scoreboard/MarginContainer2"]
+[node name="CategoriesAndScoresDivider" type="HBoxContainer" parent="Control/Shadow/VBoxContainer/Scoreboard/MarginContainer2"]
 layout_mode = 2
 theme_override_constants/separation = 80
 alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider"]
+[node name="MarginContainer" type="MarginContainer" parent="Control/Shadow/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider"]
 layout_mode = 2
 
-[node name="ScoreCategories" type="VBoxContainer" parent="Control/MarginContainer/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider"]
+[node name="ScoreCategories" type="VBoxContainer" parent="Control/Shadow/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 theme_override_constants/separation = 40
 
-[node name="seconds survived" type="Label" parent="Control/MarginContainer/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider/ScoreCategories"]
+[node name="seconds survived" type="Label" parent="Control/Shadow/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider/ScoreCategories"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("2_adlvt")
 text = "Time survived:"
 
-[node name="shipwrecked" type="Label" parent="Control/MarginContainer/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider/ScoreCategories"]
+[node name="shipwrecked" type="Label" parent="Control/Shadow/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider/ScoreCategories"]
 layout_mode = 2
 theme = ExtResource("2_adlvt")
 text = "Enemies shipwrecked:"
 
-[node name="shipwrecked2" type="Label" parent="Control/MarginContainer/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider/ScoreCategories"]
+[node name="shipwrecked2" type="Label" parent="Control/Shadow/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider/ScoreCategories"]
 layout_mode = 2
 theme = ExtResource("2_adlvt")
 text = "Bounty:"
 
-[node name="waves_survived" type="Label" parent="Control/MarginContainer/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider/ScoreCategories"]
+[node name="waves_survived" type="Label" parent="Control/Shadow/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider/ScoreCategories"]
 layout_mode = 2
 theme = ExtResource("2_adlvt")
 text = "Waves Survived:"
 
-[node name="bosses_shipwrecked" type="Label" parent="Control/MarginContainer/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider/ScoreCategories"]
+[node name="bosses_shipwrecked" type="Label" parent="Control/Shadow/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider/ScoreCategories"]
 layout_mode = 2
 theme = ExtResource("2_adlvt")
 text = "Bosses Shipwrecked:"
 
-[node name="Total" type="Label" parent="Control/MarginContainer/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider/ScoreCategories"]
+[node name="Total" type="Label" parent="Control/Shadow/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider/ScoreCategories"]
 layout_mode = 2
 theme = ExtResource("2_adlvt")
 text = "Total:"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider"]
+[node name="ScorePoints" type="VBoxContainer" parent="Control/Shadow/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider"]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 40
 
-[node name="secondsScore" type="Label" parent="Control/MarginContainer/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider/VBoxContainer"]
-unique_name_in_owner = true
+[node name="secondsScore" type="Label" parent="Control/Shadow/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider/ScorePoints"]
 layout_mode = 2
 theme = ExtResource("2_adlvt")
 text = "Time survived:"
 horizontal_alignment = 2
 
-[node name="shipwreckedScore" type="Label" parent="Control/MarginContainer/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider/VBoxContainer"]
-unique_name_in_owner = true
+[node name="shipwreckedScore" type="Label" parent="Control/Shadow/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider/ScorePoints"]
 layout_mode = 2
 theme = ExtResource("2_adlvt")
 text = "Enemies shipwrecked:"
 horizontal_alignment = 2
 
-[node name="bountyScore" type="Label" parent="Control/MarginContainer/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider/VBoxContainer"]
-unique_name_in_owner = true
+[node name="bountyScore" type="Label" parent="Control/Shadow/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider/ScorePoints"]
 layout_mode = 2
 theme = ExtResource("2_adlvt")
 text = "Bounty:"
 horizontal_alignment = 2
 
-[node name="waves_survivedScore" type="Label" parent="Control/MarginContainer/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider/VBoxContainer"]
-unique_name_in_owner = true
+[node name="waves_survivedScore" type="Label" parent="Control/Shadow/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider/ScorePoints"]
 layout_mode = 2
 theme = ExtResource("2_adlvt")
 text = "Waves Survived:"
 horizontal_alignment = 2
 
-[node name="bosses_shipwreckedScore" type="Label" parent="Control/MarginContainer/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider/VBoxContainer"]
-unique_name_in_owner = true
+[node name="bosses_shipwreckedScore" type="Label" parent="Control/Shadow/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider/ScorePoints"]
 layout_mode = 2
 theme = ExtResource("2_adlvt")
 text = "Bosses Shipwrecked:"
 horizontal_alignment = 2
 
-[node name="total_score" type="Label" parent="Control/MarginContainer/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider/VBoxContainer"]
+[node name="total_score" type="Label" parent="Control/Shadow/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider/ScorePoints"]
+layout_mode = 2
+theme = ExtResource("2_adlvt")
+text = "TEST"
+horizontal_alignment = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="Control/Shadow/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider"]
+layout_mode = 2
+
+[node name="Scoreboard" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 400
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 400
+theme_override_constants/margin_bottom = 100
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Scoreboard"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="WastedPanel" type="Panel" parent="Control/Scoreboard/VBoxContainer"]
+custom_minimum_size = Vector2(900, 150)
+layout_mode = 2
+theme = ExtResource("2_adlvt")
+
+[node name="PanelContainer" type="PanelContainer" parent="Control/Scoreboard/VBoxContainer/WastedPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_adlvt")
+
+[node name="WastedLabel" type="Label" parent="Control/Scoreboard/VBoxContainer/WastedPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 96
+text = "W A S T E D"
+
+[node name="Scoreboard" type="Panel" parent="Control/Scoreboard/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_adlvt")
+
+[node name="PanelContainer2" type="PanelContainer" parent="Control/Scoreboard/VBoxContainer/Scoreboard"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_adlvt")
+
+[node name="MarginContainer2" type="MarginContainer" parent="Control/Scoreboard/VBoxContainer/Scoreboard"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Scoreboard/VBoxContainer/Scoreboard"]
+layout_mode = 0
+offset_right = 1110.0
+offset_bottom = 710.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/Scoreboard/VBoxContainer/Scoreboard/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 40
+
+[node name="Score_" type="Label" parent="Control/Scoreboard/VBoxContainer/Scoreboard/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_adlvt")
+theme_override_font_sizes/font_size = 64
+text = "SCORE:"
+
+[node name="VSeparator" type="VSeparator" parent="Control/Scoreboard/VBoxContainer/Scoreboard/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="CategoriesAndScoresDivider" type="HBoxContainer" parent="Control/Scoreboard/VBoxContainer/Scoreboard/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 80
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/Scoreboard/VBoxContainer/Scoreboard/VBoxContainer/CategoriesAndScoresDivider"]
+layout_mode = 2
+
+[node name="ScoreCategories" type="VBoxContainer" parent="Control/Scoreboard/VBoxContainer/Scoreboard/VBoxContainer/CategoriesAndScoresDivider"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 40
+
+[node name="seconds survived" type="Label" parent="Control/Scoreboard/VBoxContainer/Scoreboard/VBoxContainer/CategoriesAndScoresDivider/ScoreCategories"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("2_adlvt")
+text = "Time survived:"
+
+[node name="shipwrecked" type="Label" parent="Control/Scoreboard/VBoxContainer/Scoreboard/VBoxContainer/CategoriesAndScoresDivider/ScoreCategories"]
+layout_mode = 2
+theme = ExtResource("2_adlvt")
+text = "Enemies shipwrecked:"
+
+[node name="shipwrecked2" type="Label" parent="Control/Scoreboard/VBoxContainer/Scoreboard/VBoxContainer/CategoriesAndScoresDivider/ScoreCategories"]
+layout_mode = 2
+theme = ExtResource("2_adlvt")
+text = "Bounty:"
+
+[node name="waves_survived" type="Label" parent="Control/Scoreboard/VBoxContainer/Scoreboard/VBoxContainer/CategoriesAndScoresDivider/ScoreCategories"]
+layout_mode = 2
+theme = ExtResource("2_adlvt")
+text = "Waves Survived:"
+
+[node name="bosses_shipwrecked" type="Label" parent="Control/Scoreboard/VBoxContainer/Scoreboard/VBoxContainer/CategoriesAndScoresDivider/ScoreCategories"]
+layout_mode = 2
+theme = ExtResource("2_adlvt")
+text = "Bosses Shipwrecked:"
+
+[node name="ScorePoints" type="VBoxContainer" parent="Control/Scoreboard/VBoxContainer/Scoreboard/VBoxContainer/CategoriesAndScoresDivider"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 40
+
+[node name="secondsScore" type="Label" parent="Control/Scoreboard/VBoxContainer/Scoreboard/VBoxContainer/CategoriesAndScoresDivider/ScorePoints"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("2_adlvt")
-horizontal_alignment = 2
+text = "Time survived:"
 
-[node name="MarginContainer2" type="MarginContainer" parent="Control/MarginContainer/VBoxContainer/Scoreboard/MarginContainer2/CategoriesAndScoresDivider"]
+[node name="shipwreckedScore" type="Label" parent="Control/Scoreboard/VBoxContainer/Scoreboard/VBoxContainer/CategoriesAndScoresDivider/ScorePoints"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_adlvt")
+text = "Enemies shipwrecked:"
+
+[node name="bountyScore" type="Label" parent="Control/Scoreboard/VBoxContainer/Scoreboard/VBoxContainer/CategoriesAndScoresDivider/ScorePoints"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_adlvt")
+text = "Bounty:"
+
+[node name="waves_survivedScore" type="Label" parent="Control/Scoreboard/VBoxContainer/Scoreboard/VBoxContainer/CategoriesAndScoresDivider/ScorePoints"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_adlvt")
+text = "Waves Survived:"
+
+[node name="bosses_shipwreckedScore" type="Label" parent="Control/Scoreboard/VBoxContainer/Scoreboard/VBoxContainer/CategoriesAndScoresDivider/ScorePoints"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_adlvt")
+text = "Bosses Shipwrecked:"
+
+[node name="MarginContainer2" type="MarginContainer" parent="Control/Scoreboard/VBoxContainer/Scoreboard/VBoxContainer/CategoriesAndScoresDivider"]
 layout_mode = 2
 
-[node name="MarginContainer3" type="MarginContainer" parent="Control/MarginContainer/VBoxContainer/Scoreboard"]
+[node name="VSeparator2" type="VSeparator" parent="Control/Scoreboard/VBoxContainer/Scoreboard/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Scoreboard/VBoxContainer/Scoreboard/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 80
+alignment = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="Control/Scoreboard/VBoxContainer/Scoreboard/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="FinalScoreLabel" type="Label" parent="Control/Scoreboard/VBoxContainer/Scoreboard/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_adlvt")
+theme_override_font_sizes/font_size = 64
+text = "Final Score:"
+
+[node name="total_score" type="Label" parent="Control/Scoreboard/VBoxContainer/Scoreboard/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 2
+theme = ExtResource("2_adlvt")
+theme_override_font_sizes/font_size = 64
+text = "TEST"
+
+[node name="MarginContainer4" type="MarginContainer" parent="Control/Scoreboard/VBoxContainer/Scoreboard/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="RestartMargin" type="MarginContainer" parent="Control/Scoreboard/VBoxContainer/Scoreboard"]
+custom_minimum_size = Vector2(300, 100)
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -36.5
-offset_top = -50.0
-offset_right = 36.5
+offset_left = -150.0
+offset_top = -100.0
+offset_right = 150.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/margin_bottom = 30
 
-[node name="Restart" type="Button" parent="Control/MarginContainer/VBoxContainer/Scoreboard/MarginContainer3"]
+[node name="Restart" type="Button" parent="Control/Scoreboard/VBoxContainer/Scoreboard/RestartMargin"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-theme = SubResource("Theme_67nrg")
+theme = ExtResource("2_adlvt")
 text = "  Restart  "
 
-[connection signal="pressed" from="Control/MarginContainer/VBoxContainer/Scoreboard/MarginContainer3/Restart" to="." method="_on_restart_pressed"]
+[node name="Shaker" type="Node" parent="." node_paths=PackedStringArray("target_node")]
+script = ExtResource("3_adlvt")
+target_node = NodePath("../Control")
+target_property = &"rotation_degrees"
+min_value = 2.0
+max_value = -2.0
+constant = true
+metadata/_custom_type_script = "uid://b4hwrp8guiq8a"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = 3
+material = SubResource("ShaderMaterial_upsow")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture1D_12xn0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_lingh")
+}
+
+[connection signal="pressed" from="Control/Scoreboard/VBoxContainer/Scoreboard/RestartMargin/Restart" to="." method="_on_restart_pressed"]

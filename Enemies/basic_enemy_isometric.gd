@@ -51,7 +51,6 @@ func update_sprite_rotation(angle: float):
 func take_damage(damage: int):
 	health -= damage
 	self.animation_player.play("hit_flash")
-	playerHitSound.emit()
 	spawn_hit_explosion(self.position, Vector2(0,0))
 	if health <= health/2:
 		# TODO Make damaged texture
@@ -66,12 +65,12 @@ func take_damage(damage: int):
 		disable_hitbox() 
 		Globals.camera.shake(0.20, 15, 20)
 		Globals.update_score("ENEMY_SHIPWRECKED")
-		playSound.emit()
 		await get_tree().create_timer(2).timeout
 
 
 
 func spawn_death_explosion(pos: Vector2, normal: Vector2) -> void:
+	SoundManager.play_DeathExplosions()
 	var instance = DEATH_EXPLOSION.instantiate()
 	get_tree().get_current_scene().add_child(instance)
 	instance.global_position = pos
@@ -86,6 +85,7 @@ func spawn_dead_ship(pos: Vector2, normal:Vector2) -> void:
 	
 
 func spawn_hit_explosion(pos: Vector2, normal:Vector2) -> void:
+	SoundManager.play_EnemyHit()
 	var instance = HIT_EXPLOSION.instantiate()
 	add_child(instance)
 	instance.global_position = pos

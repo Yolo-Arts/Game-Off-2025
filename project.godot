@@ -18,15 +18,17 @@ config/icon="res://icon.svg"
 [autoload]
 
 Globals="*res://scripts/globals.gd"
+SoundManager="*res://sounds/sound_manager.tscn"
 
 [display]
 
 window/size/viewport_width=1910
 window/size/viewport_height=1080
+window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg", "res://addons/gdfxr/plugin.cfg", "res://addons/trail_2d/plugin.cfg")
+enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg", "res://addons/gdfxr/plugin.cfg", "res://addons/shaker/plugin.cfg", "res://addons/trail_2d/plugin.cfg")
 
 [file_customization]
 

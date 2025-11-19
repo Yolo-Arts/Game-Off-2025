@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=4 uid="uid://bbdxi1npt8301"]
+
+[ext_resource type="TileSet" uid="uid://bbjr3ryhlctpu" path="res://Assets/test_tilemap.tres" id="1_g4ujy"]
+
+[node name="testIsland1" type="Node2D"]
+y_sort_enabled = true
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+y_sort_enabled = true
+tile_map_data = PackedByteArray("AAA8AMT/AAAAAAAAAAA8AMP/AAAAAAAAAAA8AML/AAAAAAAAAAA7AMT/AAAAAAAAAAA7AMP/AAAAAAAAAAA7AML/AAAAAAAAAAA=")
+tile_set = ExtResource("1_g4ujy")
+
+[node name="TileMapLayer2" type="TileMapLayer" parent="."]
+z_index = 1
+y_sort_enabled = true
+tile_map_data = PackedByteArray("AAA6AMP/AAAAAAAAAAA8AMH/AAAAAAAAAAA7AMH/AAAAAAAAAAA7AML/AAAAAAAAAAA7AMP/AAAAAAAAAAA5AMP/AAAAAAAAAAA=")
+tile_set = ExtResource("1_g4ujy")
+
+[node name="TileMapLayer3" type="TileMapLayer" parent="."]
+z_index = 3
+y_sort_enabled = true
+tile_map_data = PackedByteArray("AAA5AML/AAAAAAAAAAA=")
+tile_set = ExtResource("1_g4ujy")
