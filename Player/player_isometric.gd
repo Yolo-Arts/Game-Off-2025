@@ -3,6 +3,9 @@ extends Player
 
 @export var isometric_angle: float = 30.0 
 var isometric_transform: Transform2D
+@onready var shoot_cooldown: Timer = $shootCooldown
+
+var can_shoot = true
 
 signal zoom_in
 signal zoom_out
@@ -22,9 +25,13 @@ func dead_player():
 	self.hide()
 
 func _unhandled_input(event):
-	if event.is_action_pressed("fire"):
+	if event.is_action_pressed("fire") && can_shoot:
 		SoundManager.play_CannonFire()
 		shoot()
+		can_shoot = false
+		shoot_cooldown.start()
+
+
 
 @export var boost_decay: float = 7
 
@@ -181,3 +188,7 @@ func _on_drift_timeout() -> void:
 	can_drift = true
 	zoom_in.emit()
 	print("driftable")
+
+
+func _on_shoot_cooldown_timeout() -> void:
+	can_shoot = true

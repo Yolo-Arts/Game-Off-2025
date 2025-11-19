@@ -36,5 +36,3 @@ func _on_exp_collected():
 	total_exp += 1
 	print(total_exp)
 	exp_updated.emit(total_exp, level_threshold)
-	
-	
