@@ -1,10 +1,17 @@
 class_name Default_bullet
 extends Bullet_type
 
-func shoot(cannonball: PackedScene, player:Player, isometric = false):
+func shoot(cannonball: PackedScene, player:Player, isometric = false, scale = 1.0):
 	
 	var bullet_instance = cannonball.instantiate()
 	var bullet_instance2 = cannonball.instantiate()
+	
+	bullet_instance.base_damage = player.damage
+	bullet_instance2.base_damage = player.damage
+	
+	bullet_instance.apply_scale(Vector2(scale, scale))
+	bullet_instance2.apply_scale(Vector2(scale, scale))
+
 	
 	player.get_parent().add_child(bullet_instance)
 	player.get_parent().add_child(bullet_instance2)

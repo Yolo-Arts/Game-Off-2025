@@ -8,4 +8,5 @@ script = ExtResource("1_x40an")
 image = ExtResource("1_nikhc")
 name = "Speed Up"
 description = "Increases speed"
+Weight = 2
 metadata/_custom_type_script = "uid://b27wf0pyfhg5p"

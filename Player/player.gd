@@ -2,7 +2,8 @@ class_name  Player
 extends CharacterBody2D
 
 @export var Bullet_Type: Bullet_type
-
+var damage = 10.0
+var cannonball_scale = 1.0
 # movement related code
 @export_group("Movement Parameters")
 @export var base_speed: float = 500
@@ -131,7 +132,7 @@ func _physics_process(delta) -> void:
 
 func shoot():
 	
-	Bullet_Type.shoot(cannonball, self, false)
+	Bullet_Type.shoot(cannonball, self, false, cannonball_scale)
 
 
 func spawn_cannon_particles(pos: Vector2, normal: Vector2) -> void:

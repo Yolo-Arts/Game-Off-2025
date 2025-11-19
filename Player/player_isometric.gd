@@ -1,6 +1,8 @@
 class_name Iso_player
 extends Player
 
+@onready var exp_collection_radius_shape: CollisionShape2D = $exp_collection_radius/exp_collection_radius_shape
+
 @export var isometric_angle: float = 30.0 
 var isometric_transform: Transform2D
 @onready var shoot_cooldown: Timer = $shootCooldown
@@ -133,7 +135,8 @@ func _physics_process(delta) -> void:
 
 
 func shoot():
-	Bullet_Type.shoot(cannonball, self, true)
+
+	Bullet_Type.shoot(cannonball, self, true, cannonball_scale)
 
 func spawn_cannon_particles(pos: Vector2, normal: Vector2) -> void:
 	var instance = cannon_fire.instantiate()

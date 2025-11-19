@@ -8,4 +8,5 @@ script = ExtResource("1_3d8p2")
 image = ExtResource("1_pa4gd")
 name = "Health Up"
 description = "Increases health"
+Weight = 3
 metadata/_custom_type_script = "uid://d4gv35wm8rxe"
