@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://xuhrxjj8flhn"]
+
+[ext_resource type="Script" uid="uid://dvqr2u41gnl36" path="res://user_interface/damage_numbers.gd" id="1_m2gho"]
+[ext_resource type="Theme" uid="uid://bi4882lo6q8km" path="res://user_interface/ThemeV2.tres" id="1_y0p8g"]
+
+[node name="DamageNumbers" type="Node2D"]
+z_index = 10
+script = ExtResource("1_m2gho")
+
+[node name="Label" type="Label" parent="."]
+custom_minimum_size = Vector2(500, 50)
+offset_left = -250.0
+offset_top = -25.0
+offset_right = 250.0
+offset_bottom = 25.0
+theme = ExtResource("1_y0p8g")
+text = "700"
+horizontal_alignment = 1
+vertical_alignment = 1

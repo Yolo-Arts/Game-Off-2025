@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://3bjbysn0exty" path="res://Enemies/Enemy_Types/red_isometric.tres" id="3_gwrt0"]
 [ext_resource type="Resource" uid="uid://dm54cgwnfqywy" path="res://Enemies/Enemy_Types/green_isometric.tres" id="4_4rfnd"]
 [ext_resource type="Resource" uid="uid://svmp2d2l0to4" path="res://Enemies/Enemy_Types/purple_isometric.tres" id="5_ql4d2"]
-[ext_resource type="Shader" path="res://Shaders/hit_flash.gdshader" id="5_r2gfe"]
+[ext_resource type="Shader" uid="uid://darti4k2he22i" path="res://Shaders/hit_flash.gdshader" id="5_r2gfe"]
 [ext_resource type="Texture2D" uid="uid://bhhya7080ahh8" path="res://Enemies/Sprites/enemy_ship_red_spritesheet.png" id="6_gwrt0"]
 [ext_resource type="Resource" uid="uid://bprcgrgyghoih" path="res://Enemies/Enemy_Types/orange_isometric.tres" id="6_sak5g"]
 

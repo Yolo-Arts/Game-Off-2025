@@ -4,6 +4,9 @@ class_name Enemy_iso
 #TODO FIX THE MOVEMENT SCRIPT SO THAT THEY ACTUALLY MOVE LIKE A BOAT 
 #FIXME Fix the hitboxes, they do not rotate with the enemy.
 
+const DAMAGE_NUMBERS = preload("uid://xuhrxjj8flhn")
+
+
 func _ready() -> void:
 	
 	if enemy_stats and enemy_stats.texture:
@@ -49,6 +52,12 @@ func update_sprite_rotation(angle: float):
 
 
 func take_damage(damage: int):
+	var damage_text = DAMAGE_NUMBERS.instantiate() as Node2D
+	get_tree().current_scene.add_child(damage_text)
+	
+	damage_text.global_position = global_position + Vector2(randi_range(-20, 20), randi_range(-90, -100))
+	damage_text.start(str(damage))
+	
 	health -= damage
 	self.animation_player.play("hit_flash")
 	spawn_hit_explosion(self.position, Vector2(0,0))

@@ -1,9 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://deqnmjpt3dxgb"]
+[gd_scene load_steps=11 format=3 uid="uid://deqnmjpt3dxgb"]
 
 [ext_resource type="Script" uid="uid://bg21p6igd7lvn" path="res://Player/player_isometric.gd" id="1_60ovk"]
-[ext_resource type="Resource" uid="uid://bgntu42b22hqi" path="res://Resources/Bullet types/Double_Shot.tres" id="2_1xiy1"]
 [ext_resource type="Texture2D" uid="uid://bjchrxewdcwy2" path="res://Player/boat_spritesheet2.png" id="2_evufl"]
+[ext_resource type="Script" uid="uid://3056ete8mbty" path="res://Resources/Bullet types/Double_shot.gd" id="2_qgbdv"]
 [ext_resource type="Shader" uid="uid://dhfkgyvufew58" path="res://Shaders/shock_damage.gdshader" id="3_5y3gb"]
+
+[sub_resource type="Resource" id="Resource_amulb"]
+script = ExtResource("2_qgbdv")
+metadata/_custom_type_script = "uid://3056ete8mbty"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fphli"]
 shader = ExtResource("3_5y3gb")
@@ -28,7 +32,7 @@ radius = 21.023796
 y_sort_enabled = true
 collision_mask = 9
 script = ExtResource("1_60ovk")
-Bullet_Type = ExtResource("2_1xiy1")
+Bullet_Type = SubResource("Resource_amulb")
 base_speed = 200.0
 turn_acceleration = 0.5
 
