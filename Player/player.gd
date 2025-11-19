@@ -55,9 +55,10 @@ func dead_player():
 		spawn_death_explosion(self.global_position)
 	self.hide()
 
-func _unhandled_input(event):
+func _input(event):
 	if event.is_action_pressed("fire"):
 		shoot()
+
 func _physics_process(delta) -> void:
 	if drift_value >= 0:
 		drift_value -=100

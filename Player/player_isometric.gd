@@ -5,6 +5,9 @@ extends Player
 var isometric_transform: Transform2D
 @onready var shoot_cooldown: Timer = $shootCooldown
 
+const RELOADING = preload("uid://c48542f6xe7d2")
+
+
 var can_shoot = true
 
 signal zoom_in
@@ -24,14 +27,20 @@ func dead_player():
 		spawn_death_explosion(self.global_position)
 	self.hide()
 
-func _unhandled_input(event):
-	if event.is_action_pressed("fire") && can_shoot:
-		SoundManager.play_CannonFire()
-		shoot()
-		can_shoot = false
-		shoot_cooldown.start()
+func _input(event):
+	if event.is_action_pressed("fire"):
+		if can_shoot:
+			SoundManager.play_CannonFire()
+			shoot()
+			can_shoot = false
+			shoot_cooldown.start()
+		else:
+			spawn_reload_text()
 
-
+func spawn_reload_text():
+	var text_instance = RELOADING.instantiate()
+	get_tree().current_scene.add_child(text_instance)
+	text_instance.global_position = self.global_position + Vector2(0, -80)
 
 @export var boost_decay: float = 7
 
@@ -124,7 +133,6 @@ func _physics_process(delta) -> void:
 
 
 func shoot():
-
 	Bullet_Type.shoot(cannonball, self, true)
 
 func spawn_cannon_particles(pos: Vector2, normal: Vector2) -> void:
