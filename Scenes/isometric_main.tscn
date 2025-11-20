@@ -195,6 +195,7 @@ position = Vector2(7635, -3234)
 
 [node name="Camera2D" parent="player_isometric" instance=ExtResource("2_pwvqx")]
 unique_name_in_owner = true
+zoom = Vector2(0.1, 0.1)
 
 [node name="EnemyManager" parent="." instance=ExtResource("7_0lw5m")]
 basic_enemy_scene = ExtResource("14_dlawb")

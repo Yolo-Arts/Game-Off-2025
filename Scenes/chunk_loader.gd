@@ -25,7 +25,7 @@ const MAP_SEGMENTS: Array[Resource] = [
 # Map to keep track of loaded scenes. Will be reused when player re-enters already explored position.
 var chunks_map: Dictionary[String, IslandClusters] = {}
 var queue_chunks: Array[String] = []
-var MAX_CHUNKS_LOADED: int = 2
+var MAX_CHUNKS_LOADED: int = 4
 
 @onready var parent_scene = $scene
 
