@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://h0hdesj12ofh"]
+[gd_scene load_steps=17 format=3 uid="uid://h0hdesj12ofh"]
 
 [ext_resource type="Script" uid="uid://62nijy3yjwul" path="res://Enemies/basic_enemy_isometric.gd" id="1_guxgk"]
 [ext_resource type="Resource" uid="uid://d1qpml40osw4y" path="res://Enemies/Enemy_Types/black_isometric.tres" id="2_sak5g"]
@@ -8,6 +8,7 @@
 [ext_resource type="Shader" path="res://Shaders/hit_flash.gdshader" id="5_r2gfe"]
 [ext_resource type="Texture2D" uid="uid://bhhya7080ahh8" path="res://Enemies/Sprites/enemy_ship_red_spritesheet.png" id="6_gwrt0"]
 [ext_resource type="Resource" uid="uid://bprcgrgyghoih" path="res://Enemies/Enemy_Types/orange_isometric.tres" id="6_sak5g"]
+[ext_resource type="PackedScene" uid="uid://3px7bwweehhp" path="res://Player/water_trail.tscn" id="9_sak5g"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qenpu"]
 shader = ExtResource("5_r2gfe")
@@ -113,6 +114,11 @@ libraries = {
 [node name="queue_free" type="Timer" parent="."]
 wait_time = 5.0
 one_shot = true
+
+[node name="WaterTrail" parent="." instance=ExtResource("9_sak5g")]
+position = Vector2(0, 43.94)
+width = 125.0
+max_points = 20
 
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
 [connection signal="timeout" from="queue_free" to="." method="_on_queue_free_timeout"]
