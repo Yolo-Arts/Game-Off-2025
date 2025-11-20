@@ -120,5 +120,6 @@ position = Vector2(0, 43.94)
 width = 125.0
 max_points = 20
 
+[connection signal="free_waterTrail" from="." to="WaterTrail" method="_on_basic_enemy_free_water_trail"]
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
 [connection signal="timeout" from="queue_free" to="." method="_on_queue_free_timeout"]

@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://di2muugmwbhu1"]
+
+[ext_resource type="Texture2D" uid="uid://nteeo1x4snbc" path="res://Assets/Particles/Particle.png" id="1_7f52w"]
+
+[sub_resource type="Curve" id="Curve_7f52w"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.60119045, 0.62921345), -1.8876408, -1.8876408, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_4tera"]
+width = 128
+curve = SubResource("Curve_7f52w")
+
+[sub_resource type="Gradient" id="Gradient_7f52w"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0, 0.4140625, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_4tera"]
+gradient = SubResource("Gradient_7f52w")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7f52w"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 14.559999
+initial_velocity_max = 58.25
+scale_min = 0.5
+scale_max = 1.1999999
+color_ramp = SubResource("GradientTexture1D_4tera")
+alpha_curve = SubResource("CurveTexture_4tera")
+
+[node name="BoostParticles" type="GPUParticles2D"]
+emitting = false
+amount = 64
+texture = ExtResource("1_7f52w")
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_7f52w")

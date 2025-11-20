@@ -38,6 +38,8 @@ var isDead = false
 var total_frames = 360
 var frame_offset = 0  
 
+signal free_waterTrail
+
 var rng = RandomNumberGenerator.new()
 
 func _ready() -> void:
@@ -110,6 +112,7 @@ func take_damage(damage: int):
 		spawn_exp_orb(self.position)
 		sprite.visible = false
 		isDead = true
+		free_waterTrail.emit()
 		disable_hitbox() 
 		Globals.camera.shake(0.20, 15, 20)
 		Globals.update_score("ENEMY_SHIPWRECKED")

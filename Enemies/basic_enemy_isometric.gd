@@ -90,6 +90,7 @@ func take_damage(damage: int):
 		#sprite.texture = enemy_stats.texture_damaged
 		speed = speed/2
 	if health < 0:
+		free_waterTrail.emit()
 		spawn_dead_ship(self.position, get_direction_to_player())
 		spawn_death_explosion(self.position, Vector2(0,0))
 		spawn_exp_orb(self.position)

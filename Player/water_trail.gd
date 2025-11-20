@@ -31,3 +31,7 @@ func _process(_delta):
 		
 		if get_point_count() > max_points:
 			remove_point(0)
+
+
+func _on_basic_enemy_free_water_trail() -> void:
+	queue_free()

@@ -14,6 +14,8 @@ const RELOADING = preload("uid://c48542f6xe7d2")
 
 var can_shoot = true
 
+signal boost_indcator_start
+signal boost
 signal zoom_in
 signal zoom_out
 
@@ -53,8 +55,10 @@ func _physics_process(delta) -> void:
 		drift_value -= 100 * delta * boost_decay
 	
 	if can_drift == true:
+		boost_indcator_start.emit()
 		if Input.is_action_just_released("turn_left") or Input.is_action_just_released("turn_right"):
 			zoom_out.emit()
+			boost.emit()
 			drift_value += 1000
 			can_drift = false
 			print("drifting")
