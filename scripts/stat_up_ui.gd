@@ -16,12 +16,7 @@ func _ready() -> void:
 	player = get_tree().get_first_node_in_group("player")
 	texture_rect.texture = Stat_up.image
 	button.text = Stat_up.name
-	description.text = Stat_up.description
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	pass     
+	description.text = Stat_up.description 
 
 func _on_button_pressed() -> void:
 	SoundManager.play_UpgradeUnlock()

@@ -30,6 +30,8 @@ alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+stretch_mode = 4
 
 [node name="Description" type="Label" parent="VBoxContainer"]
 layout_mode = 2

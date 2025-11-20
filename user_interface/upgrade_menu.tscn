@@ -6,7 +6,7 @@
 [ext_resource type="Resource" uid="uid://dohph3126ka40" path="res://Resources/Stat_ups/tres/Handling_Stat_up.tres" id="4_l5p68"]
 [ext_resource type="Script" uid="uid://cx0xqtau6rhsj" path="res://Resources/Stat_ups/Stat_up.gd" id="4_qrpwb"]
 [ext_resource type="Resource" uid="uid://cf3k7rqex6tj7" path="res://Resources/Stat_ups/tres/Collection_radius_stat_up.tres" id="5_hw28x"]
-[ext_resource type="Script" uid="uid://cg70lvhu2m8ls" path="res://user_interface/stat_picker.gd" id="5_l5p68"]
+[ext_resource type="Script" path="res://user_interface/stat_picker.gd" id="5_l5p68"]
 [ext_resource type="Resource" uid="uid://drnx6hr8xqkvv" path="res://Resources/Stat_ups/tres/damage_stat_up.tres" id="6_s7bs0"]
 [ext_resource type="Resource" uid="uid://7iejxasil351" path="res://Resources/Stat_ups/tres/Health_stat_up.tres" id="8_163pu"]
 [ext_resource type="Resource" uid="uid://hxju3ayitf60" path="res://Resources/Stat_ups/tres/Speed_stat_up.tres" id="10_ldfmy"]
