@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://oy6uunjy18"]
+[gd_scene load_steps=13 format=3 uid="uid://oy6uunjy18"]
 
 [ext_resource type="Script" uid="uid://r0qqura0dwvl" path="res://scripts/stat_up_ui.gd" id="1_0f4c1"]
 [ext_resource type="Resource" uid="uid://b2k3d3nv6iipi" path="res://Resources/Stat_ups/tres/Test1.tres" id="2_uxr3i"]
@@ -59,11 +59,94 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(1.5, 1.5)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Panel:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_re1gq"]
+resource_name = "out"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [Vector2(1.5, 1.5), Vector2(1.64, 1.64), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_p6hki"]
+resource_name = "selected_discard"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.6, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Panel:scale")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.32, 0.44),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [Vector2(1.5, 1.5), Vector2(2.005, 2.005), Vector2(1.675, 1.675)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cuk31"]
 _data = {
 &"RESET": SubResource("Animation_cuk31"),
-&"in": SubResource("Animation_ctttd")
+&"in": SubResource("Animation_ctttd"),
+&"out": SubResource("Animation_re1gq"),
+&"selected_discard": SubResource("Animation_p6hki")
 }
 
 [sub_resource type="Animation" id="Animation_f16cs"]
@@ -111,6 +194,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 script = ExtResource("1_0f4c1")
 Stat_up = ExtResource("2_uxr3i")
 
@@ -130,6 +214,7 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.5, 1.5)
 pivot_offset = Vector2(150, 225)
+mouse_default_cursor_shape = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel"]
 layout_mode = 1

@@ -39,16 +39,27 @@ func update():
 	description.text = Stat_up.description
 
 
-
-
 func select_upgrade():
 	SoundManager.play_UpgradeUnlock()
+	
+	for other_card in get_tree().get_nodes_in_group("upgrade"):
+		if other_card == self:
+			continue
+		other_card.play_discard()
+	
+	animation_player.play("selected_discard")
+	await get_tree().create_timer(1).timeout
+	
+	#print("animation finished")
+	
 	# pause game and allow options to choose from
 	if get_tree().paused == true:
 		get_tree().paused = false
 		Stat_up.apply_upgrade(player)
 		get_tree().get_first_node_in_group("Upgrade_UI").visible = false 
 
+func play_discard():
+	animation_player.play("out")
 
 func _on_panel_mouse_entered() -> void:
 	hover_animation.play("hover")
