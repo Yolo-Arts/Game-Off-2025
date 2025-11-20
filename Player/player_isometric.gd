@@ -13,7 +13,9 @@ const RELOADING = preload("uid://c48542f6xe7d2")
 
 
 var can_shoot = true
-
+var is_drifting = false
+var drift_cooldown_bar = false
+signal reset_drift_cooldown_bar
 signal boost_indcator_start
 signal boost
 signal zoom_in
@@ -54,7 +56,7 @@ func _physics_process(delta) -> void:
 		# (higher boost decay = lower distance traveled)
 		drift_value -= 100 * delta * boost_decay
 	
-	if can_drift == true:
+	if can_drift == true && drift_cooldown_bar == true:
 		boost_indcator_start.emit()
 		if Input.is_action_just_released("turn_left") or Input.is_action_just_released("turn_right"):
 			zoom_out.emit()
@@ -62,24 +64,29 @@ func _physics_process(delta) -> void:
 			drift_value += 1000
 			can_drift = false
 			print("drifting")
+			is_drifting = true
+			stop_is_drifting()
+			reset_drift_cooldown_bar.emit()
+			drift_cooldown_bar = false
 	
-	if Input.is_action_just_pressed("turn_left"):
-		drift.start()
-		#zoom_in.emit()
-		#print("zoom in")
-	if Input.is_action_just_released("turn_left"):
-		drift.stop()
-		#zoom_out.emit()
-		#print("zoom out")
-	if Input.is_action_just_pressed("turn_right"):
-		drift.start()
-		#zoom_in.emit()
-		#print("zoom in")
-	if Input.is_action_just_released("turn_right"):
-		drift.stop()
-		#zoom_out.emit()
-		#print("zoom out")
-	
+	if drift_cooldown_bar == true:
+		if Input.is_action_just_pressed("turn_left"):
+			drift.start()
+			#zoom_in.emit()
+			#print("zoom in")
+		if Input.is_action_just_released("turn_left"):
+			drift.stop()
+			#zoom_out.emit()
+			#print("zoom out")
+		if Input.is_action_just_pressed("turn_right"):
+			drift.start()
+			#zoom_in.emit()
+			#print("zoom in")
+		if Input.is_action_just_released("turn_right"):
+			drift.stop()
+			#zoom_out.emit()
+			#print("zoom out")
+		
 	if !isDead:
 		var turn_direction = 0.0
 		if Input.is_action_pressed("turn_left"):
@@ -127,7 +134,7 @@ func _physics_process(delta) -> void:
 		
 		velocity = velocity.lerp(ideal_velocity, momentum_factor * delta)
 		
-		#Wall collisions:
+		# Wall collisions
 		var collision = move_and_collide(velocity * delta)
 		if collision:
 			#TODO ADD BACK BOUNCE ANIMATION
@@ -137,15 +144,21 @@ func _physics_process(delta) -> void:
 			rotation = velocity.angle()
 			spawn_bounce_particles(collision.get_position(), normal)
 			Globals.camera.shake(0.15, 10, 5)
+			
 			move_and_slide()
-		
 		
 		if health <= 0:
 			isDead = true
 			dead_player()
 		
+		
 		update_sprite_rotation()
 
+func stop_is_drifting():
+	print("drift began")
+	await get_tree().create_timer(2.0).timeout
+	is_drifting = false
+	print("not drifting")
 
 func shoot():
 
@@ -193,7 +206,9 @@ func _on_exp_collection_radius_area_entered(area: Area2D) -> void:
 		area.player = self
 
 func _on_damage_area_iso_body_entered(body: Node2D) -> void:
-	if $damage_interval_timer.is_stopped() and body is Enemy:
+	if is_drifting:
+		return
+	elif $damage_interval_timer.is_stopped() and body is Enemy:
 		health -= body.enemy_stats.damage
 		self.player_hit()
 		print("hit")
@@ -216,3 +231,7 @@ func _on_drift_timeout() -> void:
 
 func _on_shoot_cooldown_timeout() -> void:
 	can_shoot = true
+
+
+func _on_drift_bar_player_can_drift() -> void:
+	drift_cooldown_bar = true

@@ -66,8 +66,8 @@ _data = {
 
 [node name="Basic_enemy" type="CharacterBody2D"]
 z_index = 1
-collision_layer = 2
-collision_mask = 14
+collision_layer = 34
+collision_mask = 46
 script = ExtResource("1_guxgk")
 enemy_types = Array[Resource]([ExtResource("2_sak5g"), ExtResource("3_gwrt0"), ExtResource("4_4rfnd"), ExtResource("5_ql4d2"), ExtResource("6_sak5g")])
 

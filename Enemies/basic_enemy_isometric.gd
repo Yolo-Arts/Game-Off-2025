@@ -8,6 +8,8 @@ class_name Enemy_iso
 # TODO ADD acceleration to the enemy_types resource for different levels of difficulty
 var acceleration: float = 1.2 
 
+var knockback_resistance: float = 10.0 
+
 # value slows the boat to a stop when player is dead.
 var friction: float = 1.5
 
@@ -56,7 +58,23 @@ func _physics_process(delta):
 			velocity = velocity.lerp(Vector2.ZERO, friction * delta)
 		
 		move_and_slide()
+		
+		# Knockback code
+		for i in get_slide_collision_count():
+			var collision = get_slide_collision(i)
+			var collider = collision.get_collider()
+			
+			if collider.is_in_group("player") && collider.is_drifting:
+				var bounce_force = 700
+				take_damage(20)
+				apply_knockback(collider.global_position, bounce_force)
+				Globals.camera.shake(0.5, 25, 25)
+			else:
+				apply_knockback(collider.global_position, 100)
 
+func apply_knockback(source_position: Vector2, force: float):
+	var direction_away = (global_position - source_position).normalized()
+	velocity += direction_away * (force / knockback_resistance)
 
 func get_direction_to_player():
 	player = get_tree().get_first_node_in_group("player")
