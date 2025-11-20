@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://b3imdjb1so30p"]
+[gd_scene load_steps=38 format=3 uid="uid://b3imdjb1so30p"]
 
 [ext_resource type="Script" uid="uid://wjiwydm880cx" path="res://Scenes/isometric_main.gd" id="1_1enjl"]
 [ext_resource type="PackedScene" uid="uid://cbag74ryx0pu8" path="res://Scenes/player_manager.tscn" id="2_dlawb"]
@@ -23,7 +23,6 @@
 [ext_resource type="PackedScene" uid="uid://bqc47rhr50tki" path="res://user_interface/healthbar.tscn" id="18_ifoba"]
 [ext_resource type="Shader" path="res://Shaders/screenTransition.gdshader" id="19_b21ex"]
 [ext_resource type="PackedScene" uid="uid://cpx0xphjgp1lt" path="res://Shaders/cloud.tscn" id="20_7tq1b"]
-[ext_resource type="PackedScene" uid="uid://3xc21ujc0r2q" path="res://Scenes/island_1.tscn" id="21_oiwry"]
 [ext_resource type="PackedScene" uid="uid://bmqqm41qob53n" path="res://user_interface/experience_bar.tscn" id="25_dppuq"]
 [ext_resource type="PackedScene" uid="uid://dn75ntkbbgxb2" path="res://user_interface/pause_menu.tscn" id="26_veftd"]
 
@@ -144,48 +143,7 @@ script = ExtResource("5_2y55o")
 
 [node name="scene" type="Node2D" parent="Node2D"]
 
-[node name="island1" parent="." instance=ExtResource("21_oiwry")]
-visible = false
-position = Vector2(-347, -2750)
-scale = Vector2(4, 4)
-
-[node name="island2" parent="." instance=ExtResource("21_oiwry")]
-visible = false
-position = Vector2(13673, -2750)
-scale = Vector2(4, 4)
-
-[node name="island3" parent="." instance=ExtResource("21_oiwry")]
-visible = false
-position = Vector2(27694, -2750)
-scale = Vector2(4, 4)
-
-[node name="island4" parent="." instance=ExtResource("21_oiwry")]
-visible = false
-position = Vector2(41714, -2750)
-scale = Vector2(4, 4)
-
-[node name="island5" parent="." instance=ExtResource("21_oiwry")]
-visible = false
-position = Vector2(-347, 9606)
-scale = Vector2(4, 4)
-
-[node name="island6" parent="." instance=ExtResource("21_oiwry")]
-visible = false
-position = Vector2(13673, 9606)
-scale = Vector2(4, 4)
-
-[node name="island7" parent="." instance=ExtResource("21_oiwry")]
-visible = false
-position = Vector2(27694, 9606)
-scale = Vector2(4, 4)
-
-[node name="island8" parent="." instance=ExtResource("21_oiwry")]
-visible = false
-position = Vector2(41714, 9606)
-scale = Vector2(4, 4)
-
 [node name="cloud" parent="." instance=ExtResource("20_7tq1b")]
-visible = false
 z_index = 7
 offset_left = -7517.9995
 offset_top = -9337.0

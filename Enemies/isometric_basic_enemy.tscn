@@ -79,17 +79,16 @@ hframes = 45
 vframes = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
+position = Vector2(0, 26)
 rotation = 1.5659956
 shape = SubResource("CapsuleShape2D_iioo1")
 
 [node name="Hitbox" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-visible = false
+position = Vector2(0, 25)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_4vdx4")
 debug_color = Color(0.5813112, 0, 0.70196074, 0.41960785)
@@ -98,11 +97,10 @@ debug_color = Color(0.5813112, 0, 0.70196074, 0.41960785)
 bus = &"SFX"
 
 [node name="Hurtbox" type="Area2D" parent="."]
-visible = false
 collision_layer = 2
 
 [node name="hurtShape" type="CollisionShape2D" parent="Hurtbox"]
-visible = false
+position = Vector2(0, 28)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_rcyh1")
 debug_color = Color(0.70196074, 0.6745404, 0, 0.41960785)
