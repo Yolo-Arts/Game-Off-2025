@@ -1,9 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://oy6uunjy18"]
+[gd_scene load_steps=14 format=3 uid="uid://oy6uunjy18"]
 
 [ext_resource type="Script" uid="uid://r0qqura0dwvl" path="res://scripts/stat_up_ui.gd" id="1_0f4c1"]
 [ext_resource type="Resource" uid="uid://b2k3d3nv6iipi" path="res://Resources/Stat_ups/tres/Test1.tres" id="2_uxr3i"]
 [ext_resource type="Texture2D" uid="uid://c12v3gr0dt8sm" path="res://icon.svg" id="3_4v5ft"]
 [ext_resource type="Theme" uid="uid://bi4882lo6q8km" path="res://user_interface/ThemeV2.tres" id="3_f16cs"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f16cs"]
 
 [sub_resource type="Animation" id="Animation_ctttd"]
 resource_name = "in"
@@ -227,6 +229,7 @@ grow_vertical = 2
 scale = Vector2(1.5, 1.5)
 pivot_offset = Vector2(150, 225)
 mouse_default_cursor_shape = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_f16cs")
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel"]
 layout_mode = 1
