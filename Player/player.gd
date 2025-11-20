@@ -13,8 +13,9 @@ var cannonball_scale = 1.0
 @export var turn_acceleration: float = 0.4
 @export var acceleration: float = 1.0
 @export var deceleration: float = 0.15
-@export var bounce_dampening: float = 0.7
+@export var bounce_dampening: float = 0.2
 @onready var drift:Timer = $drift
+@export var momentum_factor: float = 3.0  # Higher values = more momentum (more drift)
 
 # Cannons
 @onready var cannon_left = $CannonLeft

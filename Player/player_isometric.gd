@@ -9,6 +9,8 @@ var isometric_transform: Transform2D
 
 const RELOADING = preload("uid://c48542f6xe7d2")
 
+@export var boost_decay: float = 7
+
 
 var can_shoot = true
 
@@ -44,7 +46,6 @@ func spawn_reload_text():
 	get_tree().current_scene.add_child(text_instance)
 	text_instance.global_position = self.global_position + Vector2(0, -80)
 
-@export var boost_decay: float = 7
 
 func _physics_process(delta) -> void:
 	if drift_value >= 1:
@@ -111,11 +112,18 @@ func _physics_process(delta) -> void:
 		#velocity = forward_direction * current_speed
 		
 		# ISOMETRIC MOVEMENT: 
+		#var forward_direction = Vector2.RIGHT.rotated(rotation)
+		#var isometric_direction = isometric_transform * forward_direction
+		#velocity = isometric_direction * ( current_speed + drift_value)
+		
+		
 		var forward_direction = Vector2.RIGHT.rotated(rotation)
 		var isometric_direction = isometric_transform * forward_direction
-		velocity = isometric_direction * ( current_speed + drift_value)
+		var ideal_velocity = isometric_direction * (current_speed + drift_value)
 		
-		# Wall collisions:
+		velocity = velocity.lerp(ideal_velocity, momentum_factor * delta)
+		
+		#Wall collisions:
 		var collision = move_and_collide(velocity * delta)
 		if collision:
 			#TODO ADD BACK BOUNCE ANIMATION
@@ -126,7 +134,8 @@ func _physics_process(delta) -> void:
 			spawn_bounce_particles(collision.get_position(), normal)
 			Globals.camera.shake(0.15, 10, 5)
 			move_and_slide()
-			
+		
+		
 		if health <= 0:
 			isDead = true
 			dead_player()

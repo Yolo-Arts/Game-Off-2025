@@ -4,6 +4,13 @@ class_name Enemy_iso
 #TODO FIX THE MOVEMENT SCRIPT SO THAT THEY ACTUALLY MOVE LIKE A BOAT 
 #FIXME Fix the hitboxes, they do not rotate with the enemy.
 
+# Lower = Heavier boat (slides more). Higher = enemies have more control.
+# TODO ADD acceleration to the enemy_types resource for different levels of difficulty
+var acceleration: float = 1.2 
+
+# value slows the boat to a stop when player is dead.
+var friction: float = 1.5
+
 const DAMAGE_NUMBERS = preload("uid://xuhrxjj8flhn")
 
 
@@ -25,12 +32,29 @@ func set_enemy_type(enemy_type: int):
 	frame_offset = enemy_stats.frame_offset
 
 
-func _physics_process(_delta):
+#func _physics_process(_delta):
+	#if !isDead: 
+		#var direction = get_direction_to_player()
+		#velocity = direction * speed
+		#if direction:
+			#update_sprite_rotation(direction.angle())
+		#move_and_slide()
+
+func _physics_process(delta):
 	if !isDead: 
 		var direction = get_direction_to_player()
-		velocity = direction * speed
-		if direction:
-			update_sprite_rotation(direction.angle())
+		var target_velocity = Vector2.ZERO
+		
+		if direction != Vector2.ZERO:
+			target_velocity = direction * speed
+			velocity = velocity.lerp(target_velocity, acceleration * delta)
+			
+			if velocity.length() > 10:
+				update_sprite_rotation(velocity.angle())
+				
+		else:
+			velocity = velocity.lerp(Vector2.ZERO, friction * delta)
+		
 		move_and_slide()
 
 
