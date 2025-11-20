@@ -13,6 +13,7 @@ var stat_up_index2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	visible = false
 	Globals.player_level_up.connect(_on_player_level_up)
 	
 	for i in range(stat_up_list.size()):
@@ -35,6 +36,8 @@ func _on_player_level_up():
 	
 	stat_up_ui.update()
 	stat_up_ui_2.update()
+	stat_up_ui.animation_player.play("in")
+	stat_up_ui_2.animation_player.play("in")
 	
 	get_tree().paused = true    
 	visible = true  

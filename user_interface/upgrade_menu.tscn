@@ -13,7 +13,6 @@
 
 [node name="Upgrade_Menu" type="Control" groups=["Upgrade_UI"]]
 process_mode = 3
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
