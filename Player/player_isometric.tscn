@@ -1,9 +1,18 @@
-[gd_scene load_steps=9 format=3 uid="uid://deqnmjpt3dxgb"]
+[gd_scene load_steps=16 format=3 uid="uid://deqnmjpt3dxgb"]
 
 [ext_resource type="Script" uid="uid://bg21p6igd7lvn" path="res://Player/player_isometric.gd" id="1_60ovk"]
-[ext_resource type="Resource" uid="uid://bgntu42b22hqi" path="res://Resources/Bullet types/Double_Shot.tres" id="2_1xiy1"]
 [ext_resource type="Texture2D" uid="uid://bjchrxewdcwy2" path="res://Player/boat_spritesheet2.png" id="2_evufl"]
+[ext_resource type="Script" uid="uid://3056ete8mbty" path="res://Resources/Bullet types/Double_shot.gd" id="2_qgbdv"]
 [ext_resource type="Shader" uid="uid://dhfkgyvufew58" path="res://Shaders/shock_damage.gdshader" id="3_5y3gb"]
+[ext_resource type="PackedScene" uid="uid://3px7bwweehhp" path="res://Player/water_trail.tscn" id="5_amulb"]
+[ext_resource type="PackedScene" uid="uid://di2muugmwbhu1" path="res://Assets/Particles/boost_particles.tscn" id="6_qif08"]
+[ext_resource type="Script" uid="uid://dbjnldmb02swc" path="res://Assets/Particles/boost_particles.gd" id="7_r0ntv"]
+[ext_resource type="PackedScene" uid="uid://c47b8w26445qp" path="res://Assets/Particles/boost_indicator.tscn" id="8_t0vef"]
+[ext_resource type="Script" uid="uid://dbo22f2qfkc0d" path="res://Assets/Particles/boost_indicator.gd" id="9_fphli"]
+
+[sub_resource type="Resource" id="Resource_amulb"]
+script = ExtResource("2_qgbdv")
+metadata/_custom_type_script = "uid://3056ete8mbty"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fphli"]
 shader = ExtResource("3_5y3gb")
@@ -13,7 +22,7 @@ shader_parameter/frequecy = 30.0
 shader_parameter/progress = 0.999999977648
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1xiy1"]
-radius = 61.03278
+radius = 60.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k28l0"]
 radius = 27.730848
@@ -21,17 +30,27 @@ radius = 27.730848
 [sub_resource type="CircleShape2D" id="CircleShape2D_eoyfg"]
 radius = 24.083189
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_qgbdv"]
+radius = 21.023796
+
 [node name="player_isometric" type="CharacterBody2D" groups=["player"]]
+top_level = true
+z_index = 1
 y_sort_enabled = true
+collision_layer = 33
+collision_mask = 9
 script = ExtResource("1_60ovk")
-Bullet_Type = ExtResource("2_1xiy1")
+Bullet_Type = SubResource("Resource_amulb")
+max_turn_speed = 3.0
+turn_acceleration = 0.5
+deceleration = 0.0
 
 [node name="boat" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_fphli")
 texture = ExtResource("2_evufl")
 hframes = 45
 vframes = 8
-frame = 230
+frame = 359
 
 [node name="CannonLeft" type="Marker2D" parent="."]
 position = Vector2(20, 16)
@@ -46,7 +65,7 @@ visible = false
 collision_layer = 0
 collision_mask = 16
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="exp_collection_radius"]
+[node name="exp_collection_radius_shape" type="CollisionShape2D" parent="exp_collection_radius"]
 position = Vector2(4, 6)
 shape = SubResource("CircleShape2D_1xiy1")
 
@@ -70,5 +89,34 @@ debug_color = Color(0.70196074, 0.51001835, 0, 0.41960785)
 wait_time = 0.5
 one_shot = true
 
+[node name="drift" type="Timer" parent="."]
+wait_time = 1.6999999999999995
+one_shot = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 19)
+shape = SubResource("CircleShape2D_qgbdv")
+
+[node name="shootCooldown" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="WaterTrail" parent="." instance=ExtResource("5_amulb")]
+position = Vector2(0, 22.195)
+end_cap_mode = 2
+max_points = 15
+
+[node name="BoostParticles" parent="." instance=ExtResource("6_qif08")]
+top_level = true
+position = Vector2(0, 18)
+script = ExtResource("7_r0ntv")
+
+[node name="boostIndicator" parent="." instance=ExtResource("8_t0vef")]
+top_level = true
+script = ExtResource("9_fphli")
+
+[connection signal="boost" from="." to="BoostParticles" method="_on_player_isometric_boost"]
+[connection signal="boost_indcator_start" from="." to="boostIndicator" method="_on_player_isometric_boost_indcator_start"]
 [connection signal="area_entered" from="exp_collection_radius" to="." method="_on_exp_collection_radius_area_entered"]
 [connection signal="body_entered" from="DamageAreaIso" to="." method="_on_damage_area_iso_body_entered"]
+[connection signal="timeout" from="drift" to="." method="_on_drift_timeout"]
+[connection signal="timeout" from="shootCooldown" to="." method="_on_shoot_cooldown_timeout"]

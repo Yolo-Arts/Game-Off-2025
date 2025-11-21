@@ -7,7 +7,7 @@ var right_cannon_direction
 func _ready():
 	pass
 	
-func shoot(cannonball: PackedScene, player: Player, isometric = false):
+func shoot(cannonball: PackedScene, player: Player, isometric = false, scale = 1.0):
 	
 	pass
 

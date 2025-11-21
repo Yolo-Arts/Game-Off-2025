@@ -9,7 +9,21 @@ var _previous_x = 0.0
 var _previous_y = 0.0
 var _last_offset = Vector2(0, 0)
 
+#var normal_zoom: Vector2 = Vector2(zoom.x, zoom.y)
+#var max_zoom_in: Vector2 = Vector2(zoom.x + 0.15, zoom.y + 0.15)
+#var max_zoom_out: Vector2 = Vector2(zoom.x - 0.05, zoom.x - 0.05)
+
+var normal_zoom: Vector2
+var max_zoom_in: Vector2
+var max_zoom_out: Vector2
+
+var zoom_tween: Tween
+
 func _ready():
+	print("zoom of x at the beginning is: ", zoom.x)
+	normal_zoom = zoom
+	max_zoom_in = normal_zoom + Vector2(0.15, 0.15)
+	max_zoom_out = normal_zoom - Vector2(0.05, 0.05)
 	set_process(true)
 
 # Shake with decreasing intensity while there's time remaining.
@@ -54,3 +68,28 @@ func shake(duration, frequency, amplitude):
 	# Reset previous offset, if any.
 	set_offset(get_offset() - _last_offset)
 	_last_offset = Vector2(0, 0)
+
+
+func _on_player_isometric_zoom_in() -> void:
+	start_camera_tween(max_zoom_in, 1.5)
+
+func _on_player_isometric_zoom_out() -> void:
+	if zoom_tween and zoom_tween.is_running():
+		zoom_tween.kill()
+	
+	zoom_tween = create_tween()
+	zoom_tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	zoom_tween.tween_property(self, "zoom", max_zoom_out, 1)
+	zoom_tween.tween_property(self, "zoom", normal_zoom, 0.5)
+	
+	
+
+
+func start_camera_tween(target_zoom: Vector2, duration: float):
+	if zoom_tween and zoom_tween.is_running():
+		zoom_tween.kill()
+	
+	zoom_tween = create_tween()
+	zoom_tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	
+	zoom_tween.tween_property(self, "zoom", target_zoom, duration)

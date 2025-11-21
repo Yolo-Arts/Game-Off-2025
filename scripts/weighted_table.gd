@@ -34,3 +34,7 @@ func pick_item(exclude: Array = []):
 		iteration_sum += item["weight"]
 		if chosen_weight <= iteration_sum:
 			return item["item"]
+
+func get_length() -> int:
+	
+	return items.size()

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="damage_stat_up" load_steps=3 format=3 uid="uid://drnx6hr8xqkvv"]
+
+[ext_resource type="Script" uid="uid://ctortlq4yl2bm" path="res://Resources/Stat_ups/damade_up.gd" id="1_1mwep"]
+[ext_resource type="Texture2D" uid="uid://c12v3gr0dt8sm" path="res://icon.svg" id="1_ldafg"]
+
+[resource]
+script = ExtResource("1_1mwep")
+image = ExtResource("1_ldafg")
+name = "Damage up"
+description = "Increases damage"
+Weight = 2
+metadata/_custom_type_script = "uid://ctortlq4yl2bm"

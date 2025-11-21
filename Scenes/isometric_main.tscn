@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://b3imdjb1so30p"]
+[gd_scene load_steps=39 format=3 uid="uid://b3imdjb1so30p"]
 
 [ext_resource type="Script" uid="uid://wjiwydm880cx" path="res://Scenes/isometric_main.gd" id="1_1enjl"]
 [ext_resource type="PackedScene" uid="uid://cbag74ryx0pu8" path="res://Scenes/player_manager.tscn" id="2_dlawb"]
@@ -23,7 +23,9 @@
 [ext_resource type="PackedScene" uid="uid://bqc47rhr50tki" path="res://user_interface/healthbar.tscn" id="18_ifoba"]
 [ext_resource type="Shader" uid="uid://ydw2wifhpp88" path="res://Shaders/screenTransition.gdshader" id="19_b21ex"]
 [ext_resource type="PackedScene" uid="uid://cpx0xphjgp1lt" path="res://Shaders/cloud.tscn" id="20_7tq1b"]
-[ext_resource type="PackedScene" uid="uid://3xc21ujc0r2q" path="res://Scenes/island_1.tscn" id="21_oiwry"]
+[ext_resource type="PackedScene" uid="uid://bmqqm41qob53n" path="res://user_interface/experience_bar.tscn" id="25_dppuq"]
+[ext_resource type="PackedScene" uid="uid://br81uexsi3und" path="res://user_interface/drift_bar.tscn" id="26_40rgy"]
+[ext_resource type="PackedScene" uid="uid://dn75ntkbbgxb2" path="res://user_interface/pause_menu.tscn" id="26_veftd"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_wgbrh"]
 
@@ -142,48 +144,7 @@ script = ExtResource("5_2y55o")
 
 [node name="scene" type="Node2D" parent="Node2D"]
 
-[node name="island1" parent="." instance=ExtResource("21_oiwry")]
-visible = false
-position = Vector2(-347, -2750)
-scale = Vector2(4, 4)
-
-[node name="island2" parent="." instance=ExtResource("21_oiwry")]
-visible = false
-position = Vector2(13673, -2750)
-scale = Vector2(4, 4)
-
-[node name="island3" parent="." instance=ExtResource("21_oiwry")]
-visible = false
-position = Vector2(27694, -2750)
-scale = Vector2(4, 4)
-
-[node name="island4" parent="." instance=ExtResource("21_oiwry")]
-visible = false
-position = Vector2(41714, -2750)
-scale = Vector2(4, 4)
-
-[node name="island5" parent="." instance=ExtResource("21_oiwry")]
-visible = false
-position = Vector2(-347, 9606)
-scale = Vector2(4, 4)
-
-[node name="island6" parent="." instance=ExtResource("21_oiwry")]
-visible = false
-position = Vector2(13673, 9606)
-scale = Vector2(4, 4)
-
-[node name="island7" parent="." instance=ExtResource("21_oiwry")]
-visible = false
-position = Vector2(27694, 9606)
-scale = Vector2(4, 4)
-
-[node name="island8" parent="." instance=ExtResource("21_oiwry")]
-visible = false
-position = Vector2(41714, 9606)
-scale = Vector2(4, 4)
-
 [node name="cloud" parent="." instance=ExtResource("20_7tq1b")]
-visible = false
 z_index = 7
 offset_left = -7517.9995
 offset_top = -9337.0
@@ -241,9 +202,23 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = SubResource("GradientTexture1D_7tq1b")
+
+[node name="ExperienceBar" parent="UI" node_paths=PackedStringArray("player_manager") instance=ExtResource("25_dppuq")]
+player_manager = NodePath("../../Player_Manager")
+
+[node name="PauseMenu" parent="UI" instance=ExtResource("26_veftd")]
+
+[node name="DriftBar" parent="UI" instance=ExtResource("26_40rgy")]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_oiwry")
 }
+
+[connection signal="exp_updated" from="Player_Manager" to="UI/ExperienceBar" method="_on_player_manager_exp_updated"]
+[connection signal="reset_drift_cooldown_bar" from="player_isometric" to="UI/DriftBar" method="_on_player_isometric_reset_drift_cooldown_bar"]
+[connection signal="zoom_in" from="player_isometric" to="player_isometric/Camera2D" method="_on_player_isometric_zoom_in"]
+[connection signal="zoom_out" from="player_isometric" to="player_isometric/Camera2D" method="_on_player_isometric_zoom_out"]
+[connection signal="player_can_drift" from="UI/DriftBar" to="player_isometric" method="_on_drift_bar_player_can_drift"]

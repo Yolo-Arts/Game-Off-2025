@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=3 uid="uid://br81uexsi3und"]
+
+[ext_resource type="Script" uid="uid://cdpibsp82tcxd" path="res://user_interface/drift_bar.gd" id="1_3lja0"]
+[ext_resource type="Theme" uid="uid://bi4882lo6q8km" path="res://user_interface/ThemeV2.tres" id="2_nuu6d"]
+
+[node name="DriftBar" type="CanvasLayer"]
+script = ExtResource("1_3lja0")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="Control"]
+custom_minimum_size = Vector2(40, 400)
+layout_mode = 1
+offset_left = 90.0
+offset_top = 608.0
+offset_right = 130.0
+offset_bottom = 1008.0
+fill_mode = 3
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 90.0
+offset_top = 533.0
+offset_right = 328.0
+offset_bottom = 586.0
+theme = ExtResource("2_nuu6d")
+text = "Drift 
+Cooldown"

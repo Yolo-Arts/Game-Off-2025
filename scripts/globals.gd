@@ -29,13 +29,13 @@ enum POINTS_CATEGORIES  {
 	BOSSES_SHIPWRECKED = 250
 }
 
-#func _ready() -> void:
-	#UserInterface = get_parent().get_node("isometricMain").get_node("UI").get_node("UserInterface")
-	#my_timer.wait_time = INTERVAL
-	#my_timer.autostart = true
-	#my_timer.one_shot = false
-	#UserInterface.add_child(my_timer)
-	#my_timer.timeout.connect(_on_my_timer_timeout)
+func _ready() -> void:
+	UserInterface = get_parent()
+	my_timer.wait_time = INTERVAL
+	my_timer.autostart = true
+	my_timer.one_shot = false
+	UserInterface.add_child.call_deferred(my_timer)
+	my_timer.timeout.connect(_on_my_timer_timeout)
 	
 func _process(delta):
 	pass

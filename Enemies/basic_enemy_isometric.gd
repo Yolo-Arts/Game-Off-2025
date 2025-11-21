@@ -4,6 +4,18 @@ class_name Enemy_iso
 #TODO FIX THE MOVEMENT SCRIPT SO THAT THEY ACTUALLY MOVE LIKE A BOAT 
 #FIXME Fix the hitboxes, they do not rotate with the enemy.
 
+# Lower = Heavier boat (slides more). Higher = enemies have more control.
+# TODO ADD acceleration to the enemy_types resource for different levels of difficulty
+var acceleration: float = 1.2 
+
+var knockback_resistance: float = 10.0 
+
+# value slows the boat to a stop when player is dead.
+var friction: float = 1.5
+
+const DAMAGE_NUMBERS = preload("uid://xuhrxjj8flhn")
+
+
 func _ready() -> void:
 	
 	if enemy_stats and enemy_stats.texture:
@@ -22,14 +34,47 @@ func set_enemy_type(enemy_type: int):
 	frame_offset = enemy_stats.frame_offset
 
 
-func _physics_process(_delta):
+#func _physics_process(_delta):
+	#if !isDead: 
+		#var direction = get_direction_to_player()
+		#velocity = direction * speed
+		#if direction:
+			#update_sprite_rotation(direction.angle())
+		#move_and_slide()
+
+func _physics_process(delta):
 	if !isDead: 
 		var direction = get_direction_to_player()
-		velocity = direction * speed
-		if direction:
-			update_sprite_rotation(direction.angle())
+		var target_velocity = Vector2.ZERO
+		
+		if direction != Vector2.ZERO:
+			target_velocity = direction * speed
+			velocity = velocity.lerp(target_velocity, acceleration * delta)
+			
+			if velocity.length() > 10:
+				update_sprite_rotation(velocity.angle())
+				
+		else:
+			velocity = velocity.lerp(Vector2.ZERO, friction * delta)
+		
 		move_and_slide()
+		
+		# Knockback code
+		for i in get_slide_collision_count():
+			var collision = get_slide_collision(i)
+			var collider = collision.get_collider()
+			
+			if collider.is_in_group("player") && collider.is_drifting:
+				var bounce_force = 700
+				take_damage(20)
+				apply_knockback(collider.global_position, bounce_force)
+				Globals.camera.shake(0.5, 25, 25)
+			else:
+				apply_knockback(collider.global_position, 100)
 
+func apply_knockback(source_position: Vector2, force: float):
+	var direction_away = (global_position - source_position).normalized()
+	velocity += direction_away * (force / knockback_resistance)
 
 func get_direction_to_player():
 	player = get_tree().get_first_node_in_group("player")
@@ -49,6 +94,12 @@ func update_sprite_rotation(angle: float):
 
 
 func take_damage(damage: int):
+	var damage_text = DAMAGE_NUMBERS.instantiate() as Node2D
+	get_tree().current_scene.add_child(damage_text)
+	
+	damage_text.global_position = global_position + Vector2(randi_range(-20, 20), randi_range(-90, -100))
+	damage_text.start(str(damage))
+	
 	health -= damage
 	self.animation_player.play("hit_flash")
 	spawn_hit_explosion(self.position, Vector2(0,0))
@@ -57,6 +108,7 @@ func take_damage(damage: int):
 		#sprite.texture = enemy_stats.texture_damaged
 		speed = speed/2
 	if health < 0:
+		free_waterTrail.emit()
 		spawn_dead_ship(self.position, get_direction_to_player())
 		spawn_death_explosion(self.position, Vector2(0,0))
 		spawn_exp_orb(self.position)

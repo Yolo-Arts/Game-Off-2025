@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://c47b8w26445qp"]
+
+[ext_resource type="Texture2D" uid="uid://nteeo1x4snbc" path="res://Assets/Particles/Particle.png" id="1_efuoc"]
+
+[sub_resource type="Curve" id="Curve_efuoc"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.7321428, 0.7640449), -0.51017326, -0.51017326, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ybvhe"]
+width = 128
+curve = SubResource("Curve_efuoc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ybvhe"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 19.42
+initial_velocity_max = 67.96
+scale_min = 0.39999998
+scale_max = 0.5
+color = Color(1, 0.89331055, 0.40625, 1)
+alpha_curve = SubResource("CurveTexture_ybvhe")
+
+[node name="boostIndicator" type="GPUParticles2D"]
+emitting = false
+amount = 9
+texture = ExtResource("1_efuoc")
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.9
+process_material = SubResource("ParticleProcessMaterial_ybvhe")

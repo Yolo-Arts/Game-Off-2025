@@ -25,6 +25,7 @@ func _ready():
 	
 
 func _on_restart_pressed():
+	SoundManager.UI_ButtonPressed()
 	animation_player.play("close-transition")
 	await get_tree().create_timer(1).timeout
 	get_tree().change_scene_to_file("res://Scenes/isometric_main.tscn")
@@ -93,3 +94,7 @@ func set_label_number(number: int, label: Label) -> void:
 
 func screen_shake(duration: float, frequency: float, amplitude: float) -> void:
 	Globals.camera.shake(duration, frequency, amplitude)
+
+
+func _on_restart_mouse_entered() -> void:
+	SoundManager.UI_ButtonHovered()

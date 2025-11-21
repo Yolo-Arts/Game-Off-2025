@@ -1,0 +1,29 @@
+[gd_scene load_steps=7 format=3 uid="uid://3px7bwweehhp"]
+
+[ext_resource type="Shader" uid="uid://vib4f6fpy7ej" path="res://Shaders/water_trail.gdshader" id="1_wbxxe"]
+[ext_resource type="Texture2D" uid="uid://cikbbv4baacrp" path="res://Assets/water_trail_texture.png" id="2_ps3ps"]
+[ext_resource type="Script" uid="uid://c8rf4bpev7b0o" path="res://Player/water_trail.gd" id="3_1fjxj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t0vef"]
+shader = ExtResource("1_wbxxe")
+shader_parameter/speed = 1.0
+shader_parameter/transparency = 0.8
+
+[sub_resource type="Curve" id="Curve_amulb"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.39325845), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_amulb"]
+offsets = PackedFloat32Array(0, 0.33516484, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.15384616, 1, 1, 1, 1)
+
+[node name="WaterTrail" type="Line2D"]
+top_level = true
+material = SubResource("ShaderMaterial_t0vef")
+points = PackedVector2Array(-1, 26, -27, 26, -41, 26.445, -63, 26.445, -83, 27.445, -104, 27.445, -124, 27.445)
+width = 100.0
+width_curve = SubResource("Curve_amulb")
+gradient = SubResource("Gradient_amulb")
+texture = ExtResource("2_ps3ps")
+texture_mode = 2
+script = ExtResource("3_1fjxj")

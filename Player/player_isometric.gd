@@ -1,8 +1,25 @@
 class_name Iso_player
 extends Player
 
+@onready var exp_collection_radius_shape: CollisionShape2D = $exp_collection_radius/exp_collection_radius_shape
+
 @export var isometric_angle: float = 30.0 
 var isometric_transform: Transform2D
+@onready var shoot_cooldown: Timer = $shootCooldown
+
+const RELOADING = preload("uid://c48542f6xe7d2")
+
+@export var boost_decay: float = 7
+
+
+var can_shoot = true
+var is_drifting = false
+var drift_cooldown_bar = false
+signal reset_drift_cooldown_bar
+signal boost_indcator_start
+signal boost
+signal zoom_in
+signal zoom_out
 
 func _ready():
 	health = 100
@@ -18,12 +35,58 @@ func dead_player():
 		spawn_death_explosion(self.global_position)
 	self.hide()
 
-func _unhandled_input(event):
+func _input(event):
 	if event.is_action_pressed("fire"):
-		SoundManager.play_CannonFire()
-		shoot()
+		if can_shoot:
+			SoundManager.play_CannonFire()
+			shoot()
+			can_shoot = false
+			shoot_cooldown.start()
+		else:
+			spawn_reload_text()
+
+func spawn_reload_text():
+	var text_instance = RELOADING.instantiate()
+	get_tree().current_scene.add_child(text_instance)
+	text_instance.global_position = self.global_position + Vector2(0, -80)
+
 
 func _physics_process(delta) -> void:
+	if drift_value >= 1:
+		# (higher boost decay = lower distance traveled)
+		drift_value -= 100 * delta * boost_decay
+	
+	if can_drift == true && drift_cooldown_bar == true:
+		boost_indcator_start.emit()
+		if Input.is_action_just_released("turn_left") or Input.is_action_just_released("turn_right"):
+			zoom_out.emit()
+			boost.emit()
+			drift_value += 1000
+			can_drift = false
+			print("drifting")
+			is_drifting = true
+			stop_is_drifting()
+			reset_drift_cooldown_bar.emit()
+			drift_cooldown_bar = false
+	
+	if drift_cooldown_bar == true:
+		if Input.is_action_just_pressed("turn_left"):
+			drift.start()
+			#zoom_in.emit()
+			#print("zoom in")
+		if Input.is_action_just_released("turn_left"):
+			drift.stop()
+			#zoom_out.emit()
+			#print("zoom out")
+		if Input.is_action_just_pressed("turn_right"):
+			drift.start()
+			#zoom_in.emit()
+			#print("zoom in")
+		if Input.is_action_just_released("turn_right"):
+			drift.stop()
+			#zoom_out.emit()
+			#print("zoom out")
+		
 	if !isDead:
 		var turn_direction = 0.0
 		if Input.is_action_pressed("turn_left"):
@@ -60,31 +123,46 @@ func _physics_process(delta) -> void:
 		#velocity = forward_direction * current_speed
 		
 		# ISOMETRIC MOVEMENT: 
+		#var forward_direction = Vector2.RIGHT.rotated(rotation)
+		#var isometric_direction = isometric_transform * forward_direction
+		#velocity = isometric_direction * ( current_speed + drift_value)
+		
+		
 		var forward_direction = Vector2.RIGHT.rotated(rotation)
 		var isometric_direction = isometric_transform * forward_direction
-		velocity = isometric_direction * current_speed
+		var ideal_velocity = isometric_direction * (current_speed + drift_value)
 		
-		# Wall collisions:
+		velocity = velocity.lerp(ideal_velocity, momentum_factor * delta)
+		
+		# Wall collisions
 		var collision = move_and_collide(velocity * delta)
 		if collision:
-			animation_player.play("bounce")
+			#TODO ADD BACK BOUNCE ANIMATION
+			#animation_player.play("bounce")
 			var normal = collision.get_normal()
 			velocity = velocity.bounce(normal) * bounce_dampening
 			rotation = velocity.angle()
 			spawn_bounce_particles(collision.get_position(), normal)
 			Globals.camera.shake(0.15, 10, 5)
-			move_and_slide()
 			
+			move_and_slide()
+		
 		if health <= 0:
 			isDead = true
 			dead_player()
 		
+		
 		update_sprite_rotation()
 
+func stop_is_drifting():
+	print("drift began")
+	await get_tree().create_timer(2.0).timeout
+	is_drifting = false
+	print("not drifting")
 
 func shoot():
 
-	Bullet_Type.shoot(cannonball, self, true)
+	Bullet_Type.shoot(cannonball, self, true, cannonball_scale)
 
 func spawn_cannon_particles(pos: Vector2, normal: Vector2) -> void:
 	var instance = cannon_fire.instantiate()
@@ -128,7 +206,9 @@ func _on_exp_collection_radius_area_entered(area: Area2D) -> void:
 		area.player = self
 
 func _on_damage_area_iso_body_entered(body: Node2D) -> void:
-	if $damage_interval_timer.is_stopped() and body is Enemy:
+	if is_drifting:
+		return
+	elif $damage_interval_timer.is_stopped() and body is Enemy:
 		health -= body.enemy_stats.damage
 		self.player_hit()
 		print("hit")
@@ -142,3 +222,16 @@ func _on_damage_area_iso_body_entered(body: Node2D) -> void:
 
 func player_hit():
 	SoundManager.play_PlayerHurt()
+
+func _on_drift_timeout() -> void:
+	can_drift = true
+	zoom_in.emit()
+	print("driftable")
+
+
+func _on_shoot_cooldown_timeout() -> void:
+	can_shoot = true
+
+
+func _on_drift_bar_player_can_drift() -> void:
+	drift_cooldown_bar = true
