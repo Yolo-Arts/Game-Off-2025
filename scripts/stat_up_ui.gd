@@ -14,7 +14,6 @@ var player: Player
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	Globals.upgrading = true
 	animation_player.play("in")
 	# set up variables and grab player from group
 	player = get_tree().get_first_node_in_group("player")

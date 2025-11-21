@@ -28,6 +28,7 @@ func _ready() -> void:
 	stat_up_ui_2.update()
 
 func _on_player_level_up():
+	Globals.upgrading = true
 	SoundManager.play_LevelUp()
 	Engine.time_scale = 0.1
 	stat_up_index = item_table.pick_item()

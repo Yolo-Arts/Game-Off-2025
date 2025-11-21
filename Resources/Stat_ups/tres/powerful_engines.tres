@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="boost_power_stat_up" load_steps=3 format=3 uid="uid://bgbqw1u04sgxt"]
+[gd_resource type="Resource" script_class="powerful_engines_stat_up" load_steps=3 format=3 uid="uid://bgbqw1u04sgxt"]
 
 [ext_resource type="Texture2D" uid="uid://c12v3gr0dt8sm" path="res://icon.svg" id="1_d2b7x"]
 [ext_resource type="Script" uid="uid://btmdojtncxmpv" path="res://Resources/Stat_ups/powerful_engines.gd" id="2_d2b7x"]
