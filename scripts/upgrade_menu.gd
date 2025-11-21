@@ -29,6 +29,7 @@ func _ready() -> void:
 
 func _on_player_level_up():
 	SoundManager.play_LevelUp()
+	Engine.time_scale = 0.1
 	stat_up_index = item_table.pick_item()
 	stat_up_index2 = item_table.pick_item([stat_up_index])
 	stat_up_ui.Stat_up = stat_up_list[stat_up_index]
@@ -39,7 +40,7 @@ func _on_player_level_up():
 	stat_up_ui.animation_player.play("in")
 	stat_up_ui_2.animation_player.play("in")
 	
-	get_tree().paused = true    
+	#get_tree().paused = true    
 	visible = true  
 
 func _on_option_1_pressed() -> void:

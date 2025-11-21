@@ -73,5 +73,3 @@ layout_mode = 2
 [node name="Stat_picker" type="Node" parent="."]
 script = ExtResource("5_l5p68")
 stat_up_list = Array[ExtResource("4_qrpwb")]([ExtResource("5_hw28x"), ExtResource("6_s7bs0"), ExtResource("4_l5p68"), ExtResource("8_163pu"), ExtResource("3_h4tj8"), ExtResource("10_ldfmy")])
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

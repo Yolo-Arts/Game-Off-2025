@@ -9,6 +9,8 @@ var playerDied = false
 
 signal player_died
 
+var upgrading = false
+
 var my_timer: Timer = Timer.new()      
 const INTERVAL: float = 1
 var score = {

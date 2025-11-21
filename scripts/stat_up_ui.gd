@@ -14,6 +14,7 @@ var player: Player
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	Globals.upgrading = true
 	animation_player.play("in")
 	# set up variables and grab player from group
 	player = get_tree().get_first_node_in_group("player")
@@ -46,17 +47,26 @@ func select_upgrade():
 		if other_card == self:
 			continue
 		other_card.play_discard()
+		
+	if Engine.time_scale < 1.0:
+		animation_player.speed_scale = 1.0 / Engine.time_scale
+	else:
+		animation_player.speed_scale = 1.0
 	
 	animation_player.play("selected_discard")
-	await get_tree().create_timer(1).timeout
+	await get_tree().create_timer(0.1).timeout
+	Engine.time_scale= 1.0
 	
 	#print("animation finished")
 	
 	# pause game and allow options to choose from
-	if get_tree().paused == true:
-		get_tree().paused = false
-		Stat_up.apply_upgrade(player)
-		get_tree().get_first_node_in_group("Upgrade_UI").visible = false 
+	#if get_tree().paused == true:
+		#get_tree().paused = false
+		#Stat_up.apply_upgrade(player)
+		#get_tree().get_first_node_in_group("Upgrade_UI").visible = false 
+	Stat_up.apply_upgrade(player)
+	get_tree().get_first_node_in_group("Upgrade_UI").visible = false 
+	Globals.upgrading = false
 
 func play_discard():
 	animation_player.play("out")

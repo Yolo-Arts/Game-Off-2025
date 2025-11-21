@@ -285,11 +285,13 @@ autowrap_mode = 2
 libraries = {
 &"": SubResource("AnimationLibrary_cuk31")
 }
+speed_scale = 10.0
 
 [node name="HoverAnimation" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_ctttd")
 }
+speed_scale = 10.0
 
 [connection signal="gui_input" from="Panel" to="." method="_on_panel_gui_input"]
 [connection signal="mouse_entered" from="Panel" to="." method="_on_panel_mouse_entered"]
