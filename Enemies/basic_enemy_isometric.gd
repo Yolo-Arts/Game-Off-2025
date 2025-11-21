@@ -66,7 +66,7 @@ func _physics_process(delta):
 			
 			if collider.is_in_group("player") && collider.is_drifting:
 				var bounce_force = 700
-				take_damage(20)
+				take_damage(collider.ram_damage)
 				apply_knockback(collider.global_position, bounce_force)
 				Globals.camera.shake(0.5, 25, 25)
 			else:

@@ -16,6 +16,9 @@ var cannonball_scale = 1.0
 @export var bounce_dampening: float = 0.2
 @onready var drift:Timer = $drift
 @export var momentum_factor: float = 3.0  # Higher values = more momentum (more drift)
+@export var boost_decay: float = 7
+@export var drift_invulnerability: float = 2.0
+@export var ram_damage: float = 20.0
 
 # Cannons
 @onready var cannon_left = $CannonLeft
@@ -63,7 +66,7 @@ func _input(event):
 
 func _physics_process(delta) -> void:
 	if drift_value >= 0:
-		drift_value -=100
+		drift_value -=100 * delta * boost_decay
 		
 	
 	if can_drift == true:

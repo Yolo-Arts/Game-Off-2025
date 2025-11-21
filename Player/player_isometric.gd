@@ -9,8 +9,6 @@ var isometric_transform: Transform2D
 
 const RELOADING = preload("uid://c48542f6xe7d2")
 
-@export var boost_decay: float = 7
-
 
 var can_shoot = true
 var is_drifting = false
@@ -156,7 +154,7 @@ func _physics_process(delta) -> void:
 
 func stop_is_drifting():
 	print("drift began")
-	await get_tree().create_timer(2.0).timeout
+	await get_tree().create_timer(drift_invulnerability).timeout
 	is_drifting = false
 	print("not drifting")
 

@@ -26,7 +26,7 @@ func level_up():
 	# resume game
 	level += 1                 
 	Globals.player_level_up.emit()
-	level_threshold = 2*level_threshold
+	level_threshold += 2
 	print("level up")
 	total_exp = 0
 	exp_updated.emit(total_exp, level_threshold)
