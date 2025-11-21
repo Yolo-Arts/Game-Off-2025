@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="crows_nest_stat_up" load_steps=2 format=3 uid="uid://dfjbpgxypkjnl"]
+
+[ext_resource type="Script" uid="uid://dtd7e23wkrlxk" path="res://Resources/Stat_ups/crows_nest.gd" id="1_pwikv"]
+
+[resource]
+script = ExtResource("1_pwikv")
+name = "Crows Nest"
+description = "Improve vision by 10%"
+Weight = 40
+metadata/_custom_type_script = "uid://cx0xqtau6rhsj"

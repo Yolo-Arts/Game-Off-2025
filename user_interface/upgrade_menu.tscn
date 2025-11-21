@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://d38tjnetmpjft"]
+[gd_scene load_steps=13 format=3 uid="uid://d38tjnetmpjft"]
 
 [ext_resource type="Script" uid="uid://cjmocno1w2bko" path="res://scripts/upgrade_menu.gd" id="1_h4tj8"]
 [ext_resource type="PackedScene" uid="uid://oy6uunjy18" path="res://user_interface/stat_up_ui.tscn" id="2_l5p68"]
@@ -6,9 +6,11 @@
 [ext_resource type="Resource" uid="uid://dohph3126ka40" path="res://Resources/Stat_ups/tres/Handling_Stat_up.tres" id="4_l5p68"]
 [ext_resource type="Script" uid="uid://cx0xqtau6rhsj" path="res://Resources/Stat_ups/Stat_up.gd" id="4_qrpwb"]
 [ext_resource type="Resource" uid="uid://cf3k7rqex6tj7" path="res://Resources/Stat_ups/tres/Collection_radius_stat_up.tres" id="5_hw28x"]
-[ext_resource type="Script" path="res://user_interface/stat_picker.gd" id="5_l5p68"]
+[ext_resource type="Script" uid="uid://cg70lvhu2m8ls" path="res://user_interface/stat_picker.gd" id="5_l5p68"]
 [ext_resource type="Resource" uid="uid://drnx6hr8xqkvv" path="res://Resources/Stat_ups/tres/damage_stat_up.tres" id="6_s7bs0"]
 [ext_resource type="Resource" uid="uid://7iejxasil351" path="res://Resources/Stat_ups/tres/Health_stat_up.tres" id="8_163pu"]
+[ext_resource type="Theme" uid="uid://b70rftml1sway" path="res://user_interface/themev3.tres" id="9_hw28x"]
+[ext_resource type="Resource" uid="uid://dfjbpgxypkjnl" path="res://Resources/Stat_ups/tres/crows_nest.tres" id="9_s7bs0"]
 [ext_resource type="Resource" uid="uid://hxju3ayitf60" path="res://Resources/Stat_ups/tres/Speed_stat_up.tres" id="10_ldfmy"]
 
 [node name="Upgrade_Menu" type="Control" groups=["Upgrade_UI"]]
@@ -20,7 +22,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_h4tj8")
-stat_up_list = Array[ExtResource("4_qrpwb")]([ExtResource("5_hw28x"), ExtResource("6_s7bs0"), ExtResource("4_l5p68"), ExtResource("8_163pu"), ExtResource("3_h4tj8"), ExtResource("10_ldfmy")])
+stat_up_list = Array[ExtResource("4_qrpwb")]([ExtResource("5_hw28x"), ExtResource("6_s7bs0"), ExtResource("4_l5p68"), ExtResource("8_163pu"), ExtResource("3_h4tj8"), ExtResource("10_ldfmy"), ExtResource("9_s7bs0")])
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -29,6 +31,24 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/margin_top = 100
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme = ExtResource("9_hw28x")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 6
+theme_override_constants/shadow_offset_y = 6
+theme_override_font_sizes/font_size = 49
+text = "Choose an Upgrade!"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
 layout_mode = 2

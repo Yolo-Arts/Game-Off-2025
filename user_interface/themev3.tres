@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=10 format=3 uid="uid://b70rftml1sway"]
+[gd_resource type="Theme" load_steps=11 format=3 uid="uid://b70rftml1sway"]
 
 [ext_resource type="FontFile" uid="uid://cv7pwdxt4d0ma" path="res://Assets/fonts/PixulBrush.ttf" id="1_8dbgx"]
 [ext_resource type="Texture2D" uid="uid://dbsqe7jux23k6" path="res://Assets/Cryo's Mini GUI/Buttons/buttons_4x.png" id="2_yo73h"]
@@ -61,7 +61,19 @@ texture_margin_left = 12.0
 texture_margin_top = 12.0
 texture_margin_right = 12.0
 texture_margin_bottom = 12.0
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
 region_rect = Rect2(384, 0, 96, 96)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2tum0"]
+texture = ExtResource("3_6onn5")
+texture_margin_left = 36.0
+texture_margin_top = 35.0
+texture_margin_right = 36.0
+texture_margin_bottom = 36.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+region_rect = Rect2(128, 225, 128, 127)
 
 [resource]
 Button/colors/font_color = Color(0.2, 0.12941177, 0.007843138, 1)
@@ -101,3 +113,4 @@ Label/fonts/font = ExtResource("1_8dbgx")
 Label/styles/focus = SubResource("StyleBoxFlat_yo73h")
 Label/styles/normal = SubResource("StyleBoxEmpty_6onn5")
 Panel/styles/panel = SubResource("StyleBoxTexture_r3e8n")
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_2tum0")
