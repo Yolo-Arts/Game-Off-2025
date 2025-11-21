@@ -1,0 +1,103 @@
+[gd_resource type="Theme" load_steps=10 format=3 uid="uid://b70rftml1sway"]
+
+[ext_resource type="FontFile" uid="uid://cv7pwdxt4d0ma" path="res://Assets/fonts/PixulBrush.ttf" id="1_8dbgx"]
+[ext_resource type="Texture2D" uid="uid://dbsqe7jux23k6" path="res://Assets/Cryo's Mini GUI/Buttons/buttons_4x.png" id="2_yo73h"]
+[ext_resource type="Texture2D" uid="uid://cp2i8x5xmu138" path="res://Assets/Cryo's Mini GUI/GUI/GUI_4x.png" id="3_6onn5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8dbgx"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.3)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yo73h"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.75)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6onn5"]
+texture = ExtResource("2_yo73h")
+texture_margin_left = 8.0
+texture_margin_top = 12.0
+texture_margin_right = 7.0
+texture_margin_bottom = 16.0
+region_rect = Rect2(228, 0, 88, 64)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yo73h"]
+texture = ExtResource("2_yo73h")
+texture_margin_left = 8.0
+texture_margin_top = 12.0
+texture_margin_right = 7.0
+texture_margin_bottom = 16.0
+region_rect = Rect2(132, 0, 88, 64)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6onn5"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_r3e8n"]
+texture = ExtResource("3_6onn5")
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+region_rect = Rect2(384, 0, 96, 96)
+
+[resource]
+Button/colors/font_color = Color(0.2, 0.12941177, 0.007843138, 1)
+Button/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
+Button/colors/font_focus_color = Color(0.95, 0.95, 0.95, 1)
+Button/colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
+Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(1, 1, 1, 1)
+Button/colors/icon_disabled_color = Color(1, 1, 1, 0.4)
+Button/colors/icon_focus_color = Color(1, 1, 1, 1)
+Button/colors/icon_hover_color = Color(1, 1, 1, 1)
+Button/colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/icon_normal_color = Color(1, 1, 1, 1)
+Button/colors/icon_pressed_color = Color(1, 1, 1, 1)
+Button/constants/align_to_largest_stylebox = 0
+Button/constants/h_separation = 4
+Button/constants/icon_max_width = 0
+Button/constants/outline_size = 0
+Button/font_sizes/font_size = 16
+Button/fonts/font = ExtResource("1_8dbgx")
+Button/styles/disabled = SubResource("StyleBoxFlat_8dbgx")
+Button/styles/focus = SubResource("StyleBoxFlat_yo73h")
+Button/styles/hover = SubResource("StyleBoxTexture_6onn5")
+Button/styles/normal = SubResource("StyleBoxTexture_6onn5")
+Button/styles/pressed = SubResource("StyleBoxTexture_yo73h")
+Label/colors/font_color = Color(0.2, 0.12941177, 0.007843138, 1)
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/colors/font_shadow_color = Color(0, 0, 0, 0)
+Label/constants/line_spacing = 3
+Label/constants/outline_size = 0
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 1
+Label/constants/shadow_outline_size = 1
+Label/font_sizes/font_size = 24
+Label/fonts/font = ExtResource("1_8dbgx")
+Label/styles/focus = SubResource("StyleBoxFlat_yo73h")
+Label/styles/normal = SubResource("StyleBoxEmpty_6onn5")
+Panel/styles/panel = SubResource("StyleBoxTexture_r3e8n")
