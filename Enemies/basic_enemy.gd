@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 class_name Enemy
 
-#TODO FIX THE MOVEMENT SCRIPT SO THAT THEY ACTUALLY MOVE LIKE A BOAT 
+
 #FIXME Fix the hitboxes, they do not rotate with the enemy.
 
 var speed: float = 100.0  

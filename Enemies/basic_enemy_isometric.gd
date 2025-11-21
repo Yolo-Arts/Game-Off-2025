@@ -1,7 +1,6 @@
 extends Enemy
 class_name Enemy_iso
 
-#TODO FIX THE MOVEMENT SCRIPT SO THAT THEY ACTUALLY MOVE LIKE A BOAT 
 #FIXME Fix the hitboxes, they do not rotate with the enemy.
 
 # Lower = Heavier boat (slides more). Higher = enemies have more control.
@@ -94,6 +93,7 @@ func update_sprite_rotation(angle: float):
 
 
 func take_damage(damage: int):
+	
 	var damage_text = DAMAGE_NUMBERS.instantiate() as Node2D
 	get_tree().current_scene.add_child(damage_text)
 	
@@ -115,9 +115,13 @@ func take_damage(damage: int):
 		sprite.visible = false
 		isDead = true
 		disable_hitbox() 
-		Globals.camera.shake(0.20, 15, 20)
+		Signals.start_hitStop.emit(0.2, 0.3)
+		Globals.camera.shake(0.20, 35, 25)
 		Globals.update_score("ENEMY_SHIPWRECKED")
 		await get_tree().create_timer(2).timeout
+	else:
+		Signals.start_hitStop.emit(0.3, 0.1)
+		Globals.camera.shake(0.20, 15, 15)
 
 
 
