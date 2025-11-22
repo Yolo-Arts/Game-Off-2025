@@ -1,8 +1,22 @@
-[gd_scene load_steps=13 format=4 uid="uid://3p0f5obsqxgi"]
+[gd_scene load_steps=15 format=4 uid="uid://3p0f5obsqxgi"]
 
+[ext_resource type="Shader" uid="uid://c3mirkgxfhgtq" path="res://Shaders/stylised_water.gdshader" id="1_3bm7k"]
 [ext_resource type="TileSet" uid="uid://b34gp3nmiu6lb" path="res://Assets/isometric_tileset.tres" id="1_dwvs6"]
 [ext_resource type="Shader" uid="uid://b4oixuorco5vd" path="res://Shaders/water.gdshader" id="2_muhai"]
-[ext_resource type="Shader" path="res://Shaders/cloud.gdshader" id="3_x6bg1"]
+[ext_resource type="Shader" uid="uid://ciydayxuyc20o" path="res://Shaders/cloud.gdshader" id="3_x6bg1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m1roi"]
+shader = ExtResource("1_3bm7k")
+shader_parameter/OCTAVE = 3
+shader_parameter/mulscale = 20.16
+shader_parameter/height = 0.495
+shader_parameter/tide = 0.1
+shader_parameter/foamthickness = 0.1
+shader_parameter/timescale = 0.275
+shader_parameter/waterdeep = 0.3
+shader_parameter/WATER_COL = Color(0.4509804, 0.74509805, 0.827451, 1)
+shader_parameter/WATER2_COL = Color(0.2657318, 0.5057047, 0.83984375, 1)
+shader_parameter/FOAM_COL = Color(0.8125, 0.9609, 0.9648, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_x6bg1"]
 
@@ -22,13 +36,14 @@ shader_parameter/waterNoise = SubResource("NoiseTexture2D_x6bg1")
 shader_parameter/waterDistortionNoise = SubResource("NoiseTexture2D_acsde")
 shader_parameter/waterColor = Color(0.4509804, 0.74509805, 0.827451, 1)
 shader_parameter/colorCorection = 0.23999999463552
-shader_parameter/distortionForce = 0.02400000114
+shader_parameter/distortionForce = 0.0590000028025
 shader_parameter/WDBrightness = 0.85000001266602
 shader_parameter/WDFreq = 0.55000000819565
 shader_parameter/WDSize = 0.8000000268221
 shader_parameter/WDSpeed = 12.7500001750891
 shader_parameter/tiling = Vector2(5, 5)
-shader_parameter/offSetSpeed = Vector2(0.05, 0)
+shader_parameter/offSetSpeed = Vector2(0.02, 0.02)
+shader_parameter/offSetSpeed2 = Vector2(-0.01, 0.02)
 shader_parameter/backGroundDirX = 3.259879990946679e-09
 shader_parameter/backGroundDirY = -0.01999999769012001
 
@@ -56,6 +71,13 @@ color_ramp = SubResource("Gradient_x6bg1")
 
 [node name="island1" type="Node2D"]
 scale = Vector2(4, 4)
+
+[node name="WaterShader2" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_m1roi")
+offset_left = -1695.0
+offset_top = -1514.0
+offset_right = 1810.0
+offset_bottom = 1575.0
 
 [node name="underwater" type="TileMapLayer" parent="."]
 position = Vector2(-31, 64)

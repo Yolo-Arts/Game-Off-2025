@@ -19,7 +19,9 @@ class IslandClusters:
 
 # List of Map Segments to generate chunks. All island designs.
 const MAP_SEGMENTS: Array[Resource] = [
-	preload("res://Game_Objects/Islands/island_1_no_clouds.tscn")
+	preload("res://Game_Objects/Islands/island_1_no_clouds.tscn"),
+	#preload("res://Scenes/island_1.tscn")
+	
 ]
 
 # Map to keep track of loaded scenes. Will be reused when player re-enters already explored position.
