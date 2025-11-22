@@ -2,6 +2,8 @@ extends CanvasLayer
 
 
 @onready var progress_bar: ProgressBar = $Control/ProgressBar
+#@onready var progress_bar: TextureProgressBar = $Control/TextureProgressBar
+#@onready var progress_bar: TextureProgressBar = %TextureProgressBar
 
 var player: Iso_player
 signal player_can_drift

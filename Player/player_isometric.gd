@@ -43,6 +43,7 @@ func _input(event):
 		else:
 			spawn_reload_text()
 
+
 func spawn_reload_text():
 	var text_instance = RELOADING.instantiate()
 	get_tree().current_scene.add_child(text_instance)

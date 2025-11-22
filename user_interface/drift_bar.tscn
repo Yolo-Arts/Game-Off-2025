@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://br81uexsi3und"]
+[gd_scene load_steps=6 format=3 uid="uid://br81uexsi3und"]
 
 [ext_resource type="Script" uid="uid://cdpibsp82tcxd" path="res://user_interface/drift_bar.gd" id="1_3lja0"]
+[ext_resource type="Texture2D" uid="uid://cuo5dxvgyqquw" path="res://Assets/RetroInventoryScaled3X/Health_03.png" id="2_7tc6r"]
 [ext_resource type="Theme" uid="uid://bi4882lo6q8km" path="res://user_interface/ThemeV2.tres" id="2_nuu6d"]
+[ext_resource type="Texture2D" uid="uid://cbrpi4netrgq1" path="res://Assets/RetroInventoryScaled3X/Health_01_Bar03.png" id="3_evm0u"]
+[ext_resource type="Theme" uid="uid://b70rftml1sway" path="res://user_interface/themev3.tres" id="4_evm0u"]
 
 [node name="DriftBar" type="CanvasLayer"]
 script = ExtResource("1_3lja0")
@@ -14,16 +17,48 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ProgressBar" type="ProgressBar" parent="Control"]
-custom_minimum_size = Vector2(40, 400)
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Control"]
+unique_name_in_owner = true
 layout_mode = 1
-offset_left = 90.0
-offset_top = 608.0
-offset_right = 130.0
-offset_bottom = 1008.0
-fill_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = -228.0
+offset_right = 125.0
+offset_bottom = -180.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(2.5, 2)
+pivot_offset = Vector2(137, 24)
+value = 20.0
+nine_patch_stretch = true
+stretch_margin_left = 35
+stretch_margin_right = 35
+texture_under = ExtResource("2_7tc6r")
+texture_progress = ExtResource("3_evm0u")
+texture_progress_offset = Vector2(-24, 19.915)
+
+[node name="ProgressBar" type="ProgressBar" parent="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -273.0
+offset_top = -211.0
+offset_right = 252.0
+offset_bottom = -197.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("4_evm0u")
+show_percentage = false
 
 [node name="Label" type="Label" parent="Control"]
+visible = false
 layout_mode = 0
 offset_left = 90.0
 offset_top = 533.0

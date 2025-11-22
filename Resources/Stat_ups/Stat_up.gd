@@ -6,7 +6,8 @@ extends Resource
 @export_multiline var description: String
 @export var Weight:  int
 
-
+@export_enum("Passive", "Ability")
+var type = "Passive"
 
 func apply_upgrade(player: Player):
 	# applys stat upgrade to player
