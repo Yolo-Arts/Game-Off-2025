@@ -300,13 +300,15 @@ texture = SubResource("GradientTexture1D_7tq1b")
 [node name="ExperienceBar" parent="UI" node_paths=PackedStringArray("player_manager") instance=ExtResource("25_dppuq")]
 player_manager = NodePath("../../Player_Manager")
 
-[node name="PauseMenu" parent="UI" instance=ExtResource("26_veftd")]
-
 [node name="DriftBar" parent="UI" instance=ExtResource("26_40rgy")]
 
 [node name="HotBar" parent="UI" instance=ExtResource("27_40rgy")]
+mouse_filter = 1
 
 [node name="AbilityBar" parent="UI" instance=ExtResource("29_ne86t")]
+
+[node name="PauseMenu" parent="UI" instance=ExtResource("26_veftd")]
+layer = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

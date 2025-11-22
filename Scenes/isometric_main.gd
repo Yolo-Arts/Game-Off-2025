@@ -7,6 +7,7 @@ signal begin_game
 var game_began = true
 
 func _ready():
+	Globals.unlocked_upgrades = []
 	Engine.time_scale = 1.0
 	Signals.start_hitStop.connect(hit_stop)
 	Globals.camera = camera

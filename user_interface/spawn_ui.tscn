@@ -3,35 +3,6 @@
 [ext_resource type="Script" uid="uid://t44f3knfftma" path="res://user_interface/spawn_ui.gd" id="1_84skf"]
 [ext_resource type="Texture2D" uid="uid://cbg4emtd8cdb2" path="res://Assets/WaveDrifter3DText_export.png" id="1_en2mb"]
 
-[sub_resource type="Animation" id="Animation_en2mb"]
-resource_name = "floating"
-length = 4.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Control/TextureRect:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.2, 2.6666667, 4),
-"transitions": PackedFloat32Array(2, -2, -2, 2),
-"update": 0,
-"values": [Vector2(97.00001, 247), Vector2(97, 200), Vector2(97, 300), Vector2(97.00001, 247)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Control/TextureRect:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
 [sub_resource type="Animation" id="Animation_84skf"]
 length = 0.001
 tracks/0/type = "value"
@@ -86,6 +57,35 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
+[sub_resource type="Animation" id="Animation_en2mb"]
+resource_name = "floating"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/TextureRect:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.2, 2.6666667, 4),
+"transitions": PackedFloat32Array(2, -2, -2, 2),
+"update": 0,
+"values": [Vector2(97.00001, 247), Vector2(97, 200), Vector2(97, 300), Vector2(97.00001, 247)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/TextureRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nloar"]
 _data = {
 &"RESET": SubResource("Animation_84skf"),
@@ -103,6 +103,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="TextureRect" type="TextureRect" parent="Control"]
 layout_mode = 1
