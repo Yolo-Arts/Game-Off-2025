@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://b3imdjb1so30p"]
+[gd_scene load_steps=47 format=3 uid="uid://b3imdjb1so30p"]
 
 [ext_resource type="Script" uid="uid://wjiwydm880cx" path="res://Scenes/isometric_main.gd" id="1_1enjl"]
 [ext_resource type="PackedScene" uid="uid://cbag74ryx0pu8" path="res://Scenes/player_manager.tscn" id="2_dlawb"]
@@ -29,6 +29,7 @@
 [ext_resource type="PackedScene" uid="uid://clpfc5m24onjx" path="res://user_interface/hot_bar.tscn" id="27_40rgy"]
 [ext_resource type="Shader" uid="uid://cb3xbdufad64w" path="res://Shaders/shockwave.gdshader" id="28_jleb8"]
 [ext_resource type="PackedScene" uid="uid://c60diwu1u2ajo" path="res://user_interface/ability_bar.tscn" id="29_ne86t"]
+[ext_resource type="PackedScene" uid="uid://vn1chcv7m0l" path="res://user_interface/spawn_ui.tscn" id="30_lc8nd"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_wgbrh"]
 
@@ -55,6 +56,7 @@ shader_parameter/WDSize = 0.8000000268221
 shader_parameter/WDSpeed = 12.7500001750891
 shader_parameter/tiling = Vector2(5, 5)
 shader_parameter/offSetSpeed = Vector2(0.05, 0.05)
+shader_parameter/offSetSpeed2 = Vector2(-0.04, 0.02)
 shader_parameter/backGroundDirX = 3.259879990946679e-09
 shader_parameter/backGroundDirY = -0.03099999821262
 
@@ -65,6 +67,33 @@ shader_parameter/screen_size = Vector2(1910, 1080)
 shader_parameter/force = 0.0
 shader_parameter/size = 0.0
 shader_parameter/thickness = 0.0
+
+[sub_resource type="Animation" id="Animation_ne86t"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/force")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:material:shader_parameter/size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_jleb8"]
 resource_name = "Shockwave"
@@ -92,33 +121,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [0.0, 0.1, 0.3]
-}
-
-[sub_resource type="Animation" id="Animation_ne86t"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:material:shader_parameter/force")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:material:shader_parameter/size")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lc8nd"]
@@ -224,7 +226,7 @@ offset_right = -4729.4497
 offset_bottom = -8085.0
 
 [node name="player_isometric" parent="." instance=ExtResource("6_wgbrh")]
-position = Vector2(7635, -3234)
+position = Vector2(-383, -480)
 
 [node name="Camera2D" parent="player_isometric" instance=ExtResource("2_pwvqx")]
 unique_name_in_owner = true
@@ -309,6 +311,12 @@ libraries = {
 &"": SubResource("AnimationLibrary_oiwry")
 }
 
+[node name="SpawnUI" parent="." instance=ExtResource("30_lc8nd")]
+
+[connection signal="begin_game" from="." to="player_isometric" method="_on_isometric_main_begin_game"]
+[connection signal="begin_game" from="." to="EnemyManager" method="_on_isometric_main_begin_game"]
+[connection signal="begin_game" from="." to="WaveTimeManager" method="_on_isometric_main_begin_game"]
+[connection signal="begin_game" from="." to="SpawnUI" method="_on_isometric_main_begin_game"]
 [connection signal="exp_updated" from="Player_Manager" to="UI/ExperienceBar" method="_on_player_manager_exp_updated"]
 [connection signal="reset_drift_cooldown_bar" from="player_isometric" to="UI/DriftBar" method="_on_player_isometric_reset_drift_cooldown_bar"]
 [connection signal="zoom_in" from="player_isometric" to="player_isometric/Camera2D" method="_on_player_isometric_zoom_in"]
