@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://b3imdjb1so30p"]
+[gd_scene load_steps=46 format=3 uid="uid://b3imdjb1so30p"]
 
 [ext_resource type="Script" uid="uid://wjiwydm880cx" path="res://Scenes/isometric_main.gd" id="1_1enjl"]
 [ext_resource type="PackedScene" uid="uid://cbag74ryx0pu8" path="res://Scenes/player_manager.tscn" id="2_dlawb"]
@@ -26,6 +26,9 @@
 [ext_resource type="PackedScene" uid="uid://bmqqm41qob53n" path="res://user_interface/experience_bar.tscn" id="25_dppuq"]
 [ext_resource type="PackedScene" uid="uid://br81uexsi3und" path="res://user_interface/drift_bar.tscn" id="26_40rgy"]
 [ext_resource type="PackedScene" uid="uid://dn75ntkbbgxb2" path="res://user_interface/pause_menu.tscn" id="26_veftd"]
+[ext_resource type="PackedScene" uid="uid://clpfc5m24onjx" path="res://user_interface/hot_bar.tscn" id="27_40rgy"]
+[ext_resource type="Shader" uid="uid://cb3xbdufad64w" path="res://Shaders/shockwave.gdshader" id="28_jleb8"]
+[ext_resource type="PackedScene" uid="uid://c60diwu1u2ajo" path="res://user_interface/ability_bar.tscn" id="29_ne86t"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_wgbrh"]
 
@@ -54,6 +57,75 @@ shader_parameter/tiling = Vector2(5, 5)
 shader_parameter/offSetSpeed = Vector2(0.05, 0.05)
 shader_parameter/backGroundDirX = 3.259879990946679e-09
 shader_parameter/backGroundDirY = -0.03099999821262
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ne86t"]
+shader = ExtResource("28_jleb8")
+shader_parameter/global_position = Vector2(0, 0)
+shader_parameter/screen_size = Vector2(1910, 1080)
+shader_parameter/force = 0.0
+shader_parameter/size = 0.0
+shader_parameter/thickness = 0.0
+
+[sub_resource type="Animation" id="Animation_jleb8"]
+resource_name = "Shockwave"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/force")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.4666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:material:shader_parameter/size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.50540257, 0.99952555),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.1, 0.3]
+}
+
+[sub_resource type="Animation" id="Animation_ne86t"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/force")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:material:shader_parameter/size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lc8nd"]
+_data = {
+&"RESET": SubResource("Animation_ne86t"),
+&"Shockwave": SubResource("Animation_jleb8")
+}
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hvs2a"]
 shader = ExtResource("16_ixf2m")
@@ -170,11 +242,27 @@ wave_time_manager = NodePath("../WaveTimeManager")
 [node name="Upgrade_menu_UI" type="CanvasLayer" parent="."]
 layer = 11
 
-[node name="Upgrade_Menu" parent="Upgrade_menu_UI" instance=ExtResource("14_gvepe")]
+[node name="Upgrade_Menu" parent="Upgrade_menu_UI" node_paths=PackedStringArray("hotbar") instance=ExtResource("14_gvepe")]
+hotbar = NodePath("../../UI/AbilityBar")
 
 [node name="GameOver" parent="." instance=ExtResource("15_gvepe")]
 
 [node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Shockwave" type="ColorRect" parent="UI"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_ne86t")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Shockwave"]
+libraries = {
+&"": SubResource("AnimationLibrary_lc8nd")
+}
+speed_scale = 2.0
 
 [node name="UserInterface" type="Control" parent="UI"]
 layout_mode = 3
@@ -211,6 +299,10 @@ player_manager = NodePath("../../Player_Manager")
 [node name="PauseMenu" parent="UI" instance=ExtResource("26_veftd")]
 
 [node name="DriftBar" parent="UI" instance=ExtResource("26_40rgy")]
+
+[node name="HotBar" parent="UI" instance=ExtResource("27_40rgy")]
+
+[node name="AbilityBar" parent="UI" instance=ExtResource("29_ne86t")]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

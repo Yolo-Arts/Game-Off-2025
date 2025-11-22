@@ -13,6 +13,8 @@ extends Control
 
 var player: Player
 
+signal upgrade_selected(Stat_up)
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	animation_player.play("in")
@@ -56,7 +58,7 @@ func select_upgrade():
 		animation_player.speed_scale = 1.0
 	
 	animation_player.play("selected_discard")
-	await get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer(0.05).timeout
 	Engine.time_scale= 1.0
 	
 	#print("animation finished")
@@ -66,9 +68,11 @@ func select_upgrade():
 		#get_tree().paused = false
 		#Stat_up.apply_upgrade(player)
 		#get_tree().get_first_node_in_group("Upgrade_UI").visible = false 
-	Stat_up.apply_upgrade(player)
-	get_tree().get_first_node_in_group("Upgrade_UI").visible = false 
-	Globals.upgrading = false
+	upgrade_selected.emit(Stat_up)
+	
+	#Stat_up.apply_upgrade(player)
+	#get_tree().get_first_node_in_group("Upgrade_UI").visible = false 
+	#Globals.upgrading = false
 
 func play_discard():
 	animation_player.play("out")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://d38tjnetmpjft"]
+[gd_scene load_steps=16 format=3 uid="uid://d38tjnetmpjft"]
 
 [ext_resource type="Script" uid="uid://cjmocno1w2bko" path="res://scripts/upgrade_menu.gd" id="1_h4tj8"]
 [ext_resource type="PackedScene" uid="uid://oy6uunjy18" path="res://user_interface/stat_up_ui.tscn" id="2_l5p68"]
@@ -14,6 +14,7 @@
 [ext_resource type="Resource" uid="uid://bgbqw1u04sgxt" path="res://Resources/Stat_ups/tres/powerful_engines.tres" id="10_163pu"]
 [ext_resource type="Resource" uid="uid://hxju3ayitf60" path="res://Resources/Stat_ups/tres/Speed_stat_up.tres" id="10_ldfmy"]
 [ext_resource type="Resource" uid="uid://ccfryxxm40b6l" path="res://Resources/Stat_ups/tres/Boost_Power.tres" id="11_ldfmy"]
+[ext_resource type="Resource" uid="uid://f2rklnqjt65p" path="res://Resources/Stat_ups/tres/shockwave_ability.tres" id="12_qbaxy"]
 
 [node name="Upgrade_Menu" type="Control" groups=["Upgrade_UI"]]
 process_mode = 3
@@ -24,7 +25,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_h4tj8")
-stat_up_list = Array[ExtResource("4_qrpwb")]([ExtResource("5_hw28x"), ExtResource("6_s7bs0"), ExtResource("4_l5p68"), ExtResource("8_163pu"), ExtResource("3_h4tj8"), ExtResource("10_ldfmy"), ExtResource("9_s7bs0"), ExtResource("10_163pu"), ExtResource("11_ldfmy")])
+stat_up_list = Array[ExtResource("4_qrpwb")]([ExtResource("5_hw28x"), ExtResource("6_s7bs0"), ExtResource("4_l5p68"), ExtResource("8_163pu"), ExtResource("3_h4tj8"), ExtResource("10_ldfmy"), ExtResource("9_s7bs0"), ExtResource("10_163pu"), ExtResource("11_ldfmy"), ExtResource("12_qbaxy")])
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1

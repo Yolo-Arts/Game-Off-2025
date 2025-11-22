@@ -6,6 +6,10 @@ extends Player
 @export var isometric_angle: float = 30.0 
 var isometric_transform: Transform2D
 @onready var shoot_cooldown: Timer = $shootCooldown
+@onready var shockwave: ColorRect = %Shockwave
+@onready var shockwave_collision_shape: CollisionShape2D = $ShockwaveArea/ShockwaveCollisionShape
+
+
 
 const RELOADING = preload("uid://c48542f6xe7d2")
 
@@ -19,12 +23,21 @@ signal boost
 signal zoom_in
 signal zoom_out
 
+var shockwave_fired = false
+
 func _ready():
+	Globals.player = self
 	health = 100
 	#Globals.player_died.connect(dead_player)
 	
 	isometric_transform = Transform2D()
 	isometric_transform = isometric_transform.rotated(deg_to_rad(isometric_angle))
+	
+	Signals.shockwave_fired.connect(shockwave_ability)
+
+func shockwave_ability():
+	shockwave_fired = true
+	shockwave_collision_shape.disabled = false
 
 func dead_player():
 	Globals.player_died.emit()
@@ -42,6 +55,13 @@ func _input(event):
 			shoot_cooldown.start()
 		else:
 			spawn_reload_text()
+	if shockwave_fired == true:
+		shockwave_fired = false
+		shockwave_collision_shape.disabled = true
+		shockwave.material.set_shader_parameter("global_position", Vector2(1910/2, 1080/2))
+		if shockwave.has_node("AnimationPlayer"):
+			shockwave.get_node("AnimationPlayer").play("Shockwave")
+			
 
 
 func spawn_reload_text():
@@ -234,3 +254,10 @@ func _on_shoot_cooldown_timeout() -> void:
 
 func _on_drift_bar_player_can_drift() -> void:
 	drift_cooldown_bar = true
+
+
+func _on_shockwave_area_body_entered(body: Node2D) -> void:
+	print("body entered")
+	if body.has_method("take_damage"):
+		await get_tree().create_timer(0.5).timeout
+		body.take_damage(shockwave_damage)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://deqnmjpt3dxgb"]
+[gd_scene load_steps=17 format=3 uid="uid://deqnmjpt3dxgb"]
 
 [ext_resource type="Script" uid="uid://bg21p6igd7lvn" path="res://Player/player_isometric.gd" id="1_60ovk"]
 [ext_resource type="Texture2D" uid="uid://bjchrxewdcwy2" path="res://Player/boat_spritesheet2.png" id="2_evufl"]
@@ -13,6 +13,9 @@
 [sub_resource type="Resource" id="Resource_amulb"]
 script = ExtResource("2_qgbdv")
 metadata/_custom_type_script = "uid://3056ete8mbty"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fphli"]
+radius = 14.921549
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fphli"]
 shader = ExtResource("3_5y3gb")
@@ -44,6 +47,15 @@ Bullet_Type = SubResource("Resource_amulb")
 max_turn_speed = 3.0
 turn_acceleration = 0.5
 deceleration = 0.0
+
+[node name="ShockwaveArea" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="ShockwaveCollisionShape" type="CollisionShape2D" parent="ShockwaveArea"]
+scale = Vector2(41.015, 41.015)
+shape = SubResource("CircleShape2D_fphli")
+disabled = true
+debug_color = Color(0.071292885, 0, 0.70196074, 0.41960785)
 
 [node name="boat" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_fphli")
@@ -98,7 +110,6 @@ position = Vector2(0, 19)
 shape = SubResource("CircleShape2D_qgbdv")
 
 [node name="shootCooldown" type="Timer" parent="."]
-wait_time = 2.0
 
 [node name="WaterTrail" parent="." instance=ExtResource("5_amulb")]
 position = Vector2(0, 22.195)
@@ -116,6 +127,7 @@ script = ExtResource("9_fphli")
 
 [connection signal="boost" from="." to="BoostParticles" method="_on_player_isometric_boost"]
 [connection signal="boost_indcator_start" from="." to="boostIndicator" method="_on_player_isometric_boost_indcator_start"]
+[connection signal="body_entered" from="ShockwaveArea" to="." method="_on_shockwave_area_body_entered"]
 [connection signal="area_entered" from="exp_collection_radius" to="." method="_on_exp_collection_radius_area_entered"]
 [connection signal="body_entered" from="DamageAreaIso" to="." method="_on_damage_area_iso_body_entered"]
 [connection signal="timeout" from="drift" to="." method="_on_drift_timeout"]

@@ -5,7 +5,9 @@ extends TextureButton
 @onready var time: Label = $Time
 @onready var key: Label = %Key
 
+
 signal cast(ability_name)
+var ability: Ability = null
 
 var change_key = "":
 	set(value):
@@ -31,6 +33,8 @@ func _process(delta: float) -> void:
 
 
 func _on_pressed() -> void:
+	if not ability:
+		return
 	timer.start()
 	disabled = true
 	set_process(true)

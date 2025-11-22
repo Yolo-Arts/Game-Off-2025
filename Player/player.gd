@@ -49,6 +49,7 @@ var health = 100.00
 var can_drift = false
 var drift_value = 1
 var isDead = false
+var shockwave_damage = 15
 
 func _ready():
 	pass

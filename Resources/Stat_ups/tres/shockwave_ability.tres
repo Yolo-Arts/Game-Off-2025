@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ShockwaveAbility" load_steps=4 format=3 uid="uid://f2rklnqjt65p"]
+
+[ext_resource type="Script" uid="uid://b0s7nt75380fp" path="res://Resources/Stat_ups/AbilitiesFolder/ShockwaveAbility.gd" id="1_3hmdx"]
+[ext_resource type="PackedScene" uid="uid://chx8wjoxuvr8y" path="res://Resources/Stat_ups/AbilitiesFolder/shockwave_handler.tscn" id="1_877x6"]
+[ext_resource type="Texture2D" uid="uid://bd3u6bcfqb7x8" path="res://Assets/skill_icons/shockwaveV2-export.png" id="1_lntqh"]
+
+[resource]
+script = ExtResource("1_3hmdx")
+cooldown = 7.0
+icon = ExtResource("1_lntqh")
+ability_scene = ExtResource("1_877x6")
+image = ExtResource("1_lntqh")
+Weight = 400
+type = "Ability"
+is_unique = true
+metadata/_custom_type_script = "uid://b0s7nt75380fp"
