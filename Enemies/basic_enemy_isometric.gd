@@ -115,12 +115,12 @@ func take_damage(damage: int):
 		sprite.visible = false
 		isDead = true
 		disable_hitbox() 
-		Signals.start_hitStop.emit(0.2, 0.3)
+		Signals.start_hitStop.emit(0.2, 0.2)
 		Globals.camera.shake(0.20, 35, 25)
 		Globals.update_score("ENEMY_SHIPWRECKED")
 		await get_tree().create_timer(2).timeout
 	else:
-		Signals.start_hitStop.emit(0.3, 0.1)
+		Signals.start_hitStop.emit(0.3, 0.05)
 		Globals.camera.shake(0.20, 15, 15)
 
 
