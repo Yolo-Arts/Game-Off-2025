@@ -830,9 +830,13 @@ corner_radius_bottom_left = 6
 corner_detail = 6
 
 [sub_resource type="Gradient" id="Gradient_6onn5"]
+offsets = PackedFloat32Array(0, 0.38509318, 0.4347826, 0.8695652, 1)
+colors = PackedColorArray(0.043137264, 0.47328433, 0.57254905, 1, 0.042617798, 0.48700297, 0.57421875, 1, 0.117614746, 0.5753665, 0.734375, 1, 0.3100961, 0.8156668, 0.99128604, 1, 0.625, 0.92089844, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_r3e8n"]
 gradient = SubResource("Gradient_6onn5")
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0, 0)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gtk72"]
 texture = SubResource("GradientTexture2D_r3e8n")

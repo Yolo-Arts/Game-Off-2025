@@ -1,10 +1,39 @@
-[gd_scene load_steps=6 format=3 uid="uid://br81uexsi3und"]
+[gd_scene load_steps=13 format=3 uid="uid://br81uexsi3und"]
 
 [ext_resource type="Script" uid="uid://cdpibsp82tcxd" path="res://user_interface/drift_bar.gd" id="1_3lja0"]
 [ext_resource type="Texture2D" uid="uid://cuo5dxvgyqquw" path="res://Assets/RetroInventoryScaled3X/Health_03.png" id="2_7tc6r"]
 [ext_resource type="Theme" uid="uid://bi4882lo6q8km" path="res://user_interface/ThemeV2.tres" id="2_nuu6d"]
 [ext_resource type="Texture2D" uid="uid://cbrpi4netrgq1" path="res://Assets/RetroInventoryScaled3X/Health_01_Bar03.png" id="3_evm0u"]
 [ext_resource type="Theme" uid="uid://b70rftml1sway" path="res://user_interface/themev3.tres" id="4_evm0u"]
+[ext_resource type="Texture2D" uid="uid://nteeo1x4snbc" path="res://Assets/Particles/Particle.png" id="5_0lq6i"]
+[ext_resource type="Script" uid="uid://b4hwrp8guiq8a" path="res://addons/shaker/shaker.gd" id="7_nrxjj"]
+
+[sub_resource type="Gradient" id="Gradient_nrxjj"]
+offsets = PackedFloat32Array(0.42735043, 1)
+colors = PackedColorArray(0.3137255, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wricr"]
+gradient = SubResource("Gradient_nrxjj")
+
+[sub_resource type="Curve" id="Curve_v3kn2"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.49650353, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_wv3yw"]
+curve = SubResource("Curve_v3kn2")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wljja"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(350, 30, 1)
+spread = 180.0
+initial_velocity_min = 12.0
+initial_velocity_max = 32.0
+gravity = Vector3(0, -25, 0)
+scale_min = 0.7
+scale_max = 0.7
+scale_curve = SubResource("CurveTexture_wv3yw")
+color_ramp = SubResource("GradientTexture1D_wricr")
 
 [node name="DriftBar" type="CanvasLayer"]
 script = ExtResource("1_3lja0")
@@ -41,7 +70,19 @@ texture_under = ExtResource("2_7tc6r")
 texture_progress = ExtResource("3_evm0u")
 texture_progress_offset = Vector2(-24, 19.915)
 
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Control/TextureProgressBar"]
+unique_name_in_owner = true
+show_behind_parent = true
+position = Vector2(135.00002, 24.5)
+scale = Vector2(0.4, 0.5)
+emitting = false
+amount = 50
+texture = ExtResource("5_0lq6i")
+lifetime = 2.4
+process_material = SubResource("ParticleProcessMaterial_wljja")
+
 [node name="ProgressBar" type="ProgressBar" parent="Control"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -54,6 +95,7 @@ offset_right = 252.0
 offset_bottom = -197.0
 grow_horizontal = 2
 grow_vertical = 0
+pivot_offset = Vector2(262, 7)
 theme = ExtResource("4_evm0u")
 show_percentage = false
 
@@ -67,3 +109,21 @@ offset_bottom = 586.0
 theme = ExtResource("2_nuu6d")
 text = "Drift 
 Cooldown"
+
+[node name="Shaker" type="Node" parent="." node_paths=PackedStringArray("target_node")]
+script = ExtResource("7_nrxjj")
+target_node = NodePath("../Control/TextureProgressBar")
+target_property = &"rotation_degrees"
+min_value = -0.5
+max_value = 0.5
+constant = true
+metadata/_custom_type_script = "uid://b4hwrp8guiq8a"
+
+[node name="Shaker2" type="Node" parent="." node_paths=PackedStringArray("target_node")]
+script = ExtResource("7_nrxjj")
+target_node = NodePath("../Control/ProgressBar")
+target_property = &"rotation_degrees"
+min_value = -0.5
+max_value = 0.5
+constant = true
+metadata/_custom_type_script = "uid://b4hwrp8guiq8a"
