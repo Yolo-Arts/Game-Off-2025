@@ -9,6 +9,7 @@ extends Control
 @onready var texture_rect: TextureRect = %TextureRect
 #@onready var button: Button = %Button
 @onready var description: Label = %Description
+@onready var title: Label = %Title
 
 var player: Player
 
@@ -19,6 +20,7 @@ func _ready() -> void:
 	player = get_tree().get_first_node_in_group("player")
 	texture_rect.texture = Stat_up.image
 	#button.text = Stat_up.name
+	title.text = Stat_up.name
 	description.text = Stat_up.description 
 
 #func _on_button_pressed() -> void:
@@ -36,6 +38,7 @@ func _on_button_mouse_entered() -> void:
 func update():
 	texture_rect.texture = Stat_up.image
 	#button.text = Stat_up.name
+	title.text = Stat_up.name
 	description.text = Stat_up.description
 
 
