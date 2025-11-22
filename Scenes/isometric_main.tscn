@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://b3imdjb1so30p"]
+[gd_scene load_steps=48 format=3 uid="uid://b3imdjb1so30p"]
 
 [ext_resource type="Script" uid="uid://wjiwydm880cx" path="res://Scenes/isometric_main.gd" id="1_1enjl"]
 [ext_resource type="PackedScene" uid="uid://cbag74ryx0pu8" path="res://Scenes/player_manager.tscn" id="2_dlawb"]
@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://bqc47rhr50tki" path="res://user_interface/healthbar.tscn" id="18_ifoba"]
 [ext_resource type="Shader" uid="uid://ydw2wifhpp88" path="res://Shaders/screenTransition.gdshader" id="19_b21ex"]
 [ext_resource type="PackedScene" uid="uid://cpx0xphjgp1lt" path="res://Shaders/cloud.tscn" id="20_7tq1b"]
+[ext_resource type="Script" uid="uid://3cukdxaftfk6" path="res://Scenes/ui.gd" id="20_xqk4e"]
 [ext_resource type="PackedScene" uid="uid://bmqqm41qob53n" path="res://user_interface/experience_bar.tscn" id="25_dppuq"]
 [ext_resource type="PackedScene" uid="uid://br81uexsi3und" path="res://user_interface/drift_bar.tscn" id="26_40rgy"]
 [ext_resource type="PackedScene" uid="uid://dn75ntkbbgxb2" path="res://user_interface/pause_menu.tscn" id="26_veftd"]
@@ -250,6 +251,7 @@ hotbar = NodePath("../../UI/AbilityBar")
 [node name="GameOver" parent="." instance=ExtResource("15_gvepe")]
 
 [node name="UI" type="CanvasLayer" parent="."]
+script = ExtResource("20_xqk4e")
 
 [node name="Shockwave" type="ColorRect" parent="UI"]
 unique_name_in_owner = true
@@ -316,6 +318,7 @@ libraries = {
 [connection signal="begin_game" from="." to="player_isometric" method="_on_isometric_main_begin_game"]
 [connection signal="begin_game" from="." to="EnemyManager" method="_on_isometric_main_begin_game"]
 [connection signal="begin_game" from="." to="WaveTimeManager" method="_on_isometric_main_begin_game"]
+[connection signal="begin_game" from="." to="UI" method="_on_isometric_main_begin_game"]
 [connection signal="begin_game" from="." to="SpawnUI" method="_on_isometric_main_begin_game"]
 [connection signal="exp_updated" from="Player_Manager" to="UI/ExperienceBar" method="_on_player_manager_exp_updated"]
 [connection signal="reset_drift_cooldown_bar" from="player_isometric" to="UI/DriftBar" method="_on_player_isometric_reset_drift_cooldown_bar"]
