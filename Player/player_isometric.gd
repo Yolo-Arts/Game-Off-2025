@@ -23,6 +23,7 @@ signal boost
 signal zoom_in
 signal zoom_out
 
+var game_begin = false
 var shockwave_fired = false
 
 func _ready():
@@ -58,7 +59,7 @@ func _input(event):
 	if shockwave_fired == true:
 		shockwave_fired = false
 		shockwave_collision_shape.disabled = true
-		shockwave.material.set_shader_parameter("global_position", Vector2(1910/2, 1080/2))
+		shockwave.material.set_shader_parameter("global_position", Vector2(1910/2.0, 1080/2))
 		if shockwave.has_node("AnimationPlayer"):
 			shockwave.get_node("AnimationPlayer").play("Shockwave")
 			
@@ -71,107 +72,105 @@ func spawn_reload_text():
 
 
 func _physics_process(delta) -> void:
-	if drift_value >= 1:
-		# (higher boost decay = lower distance traveled)
-		drift_value -= 100 * delta * boost_decay
-	
-	if can_drift == true && drift_cooldown_bar == true:
-		boost_indcator_start.emit()
-		if Input.is_action_just_released("turn_left") or Input.is_action_just_released("turn_right"):
-			zoom_out.emit()
-			boost.emit()
-			drift_value += 1000
-			can_drift = false
-			print("drifting")
-			is_drifting = true
-			stop_is_drifting()
-			reset_drift_cooldown_bar.emit()
-			drift_cooldown_bar = false
-	
-	if drift_cooldown_bar == true:
-		if Input.is_action_just_pressed("turn_left"):
-			drift.start()
-			#zoom_in.emit()
-			#print("zoom in")
-		if Input.is_action_just_released("turn_left"):
-			drift.stop()
-			#zoom_out.emit()
-			#print("zoom out")
-		if Input.is_action_just_pressed("turn_right"):
-			drift.start()
-			#zoom_in.emit()
-			#print("zoom in")
-		if Input.is_action_just_released("turn_right"):
-			drift.stop()
-			#zoom_out.emit()
-			#print("zoom out")
+	if game_begin:
+		if drift_value >= 1:
+			# (higher boost decay = lower distance traveled)
+			drift_value -= 100 * delta * boost_decay
 		
-	if !isDead:
-		var turn_direction = 0.0
-		if Input.is_action_pressed("turn_left"):
-			turn_direction -= 1.0
-		if Input.is_action_pressed("turn_right"):
-			turn_direction += 1.0
-		
-		if turn_direction != 0.0:
-			turn_time += delta
-			var turn_factor = min(1.0, turn_time * turn_acceleration)
-			current_turn_speed = lerp(min_turn_speed, max_turn_speed, turn_factor)
+		if can_drift == true && drift_cooldown_bar == true:
+			boost_indcator_start.emit()
+			if Input.is_action_just_released("turn_left") or Input.is_action_just_released("turn_right"):
+				zoom_out.emit()
+				boost.emit()
+				drift_value += 1000
+				can_drift = false
+				print("drifting")
+				is_drifting = true
+				stop_is_drifting()
+				reset_drift_cooldown_bar.emit()
+				drift_cooldown_bar = false
 			
-			rotate(turn_direction * current_turn_speed * delta)
-		else:
-			turn_time = 0.0
-			current_turn_speed = min_turn_speed
-		
-		var target_speed = 0.0
-		var current_accel = 0.0
-
-		if Input.is_action_pressed("move_forward"):
-			if turn_direction != 0.0:
-				target_speed = base_speed
-				current_accel = deceleration 
+			
+		if drift_cooldown_bar == true:
+			
+			if Input.is_action_just_pressed("turn_left") or Input.is_action_just_pressed("turn_right"):
+				drift.start()
+				
+			elif Input.is_action_pressed("turn_left") or Input.is_action_pressed("turn_right"):
+				if drift.is_stopped() and can_drift == false:
+					can_drift = true
+					zoom_in.emit()
+					print("Instant Boost Ready (Held from previous state)")
+					
 			else:
-				target_speed = max_speed
-				current_accel = acceleration
-		else:
-			target_speed = base_speed
-			current_accel = acceleration 
-
-		current_speed = lerp(current_speed, target_speed, current_accel * delta)
-		#var forward_direction = Vector2.RIGHT.rotated(rotation)
-		#velocity = forward_direction * current_speed
-		
-		# ISOMETRIC MOVEMENT: 
-		#var forward_direction = Vector2.RIGHT.rotated(rotation)
-		#var isometric_direction = isometric_transform * forward_direction
-		#velocity = isometric_direction * ( current_speed + drift_value)
-		
-		
-		var forward_direction = Vector2.RIGHT.rotated(rotation)
-		var isometric_direction = isometric_transform * forward_direction
-		var ideal_velocity = isometric_direction * (current_speed + drift_value)
-		
-		velocity = velocity.lerp(ideal_velocity, momentum_factor * delta)
-		
-		# Wall collisions
-		var collision = move_and_collide(velocity * delta)
-		if collision:
-			#TODO ADD BACK BOUNCE ANIMATION
-			#animation_player.play("bounce")
-			var normal = collision.get_normal()
-			velocity = velocity.bounce(normal) * bounce_dampening
-			rotation = velocity.angle()
-			spawn_bounce_particles(collision.get_position(), normal)
-			Globals.camera.shake(0.15, 10, 5)
+				drift.stop()
 			
-			move_and_slide()
-		
-		if health <= 0:
-			isDead = true
-			dead_player()
-		
-		
-		update_sprite_rotation()
+		if !isDead:
+			var turn_direction = 0.0
+			if Input.is_action_pressed("turn_left"):
+				turn_direction -= 1.0
+			if Input.is_action_pressed("turn_right"):
+				turn_direction += 1.0
+			
+			if turn_direction != 0.0:
+				turn_time += delta
+				var turn_factor = min(1.0, turn_time * turn_acceleration)
+				current_turn_speed = lerp(min_turn_speed, max_turn_speed, turn_factor)
+				
+				rotate(turn_direction * current_turn_speed * delta)
+			else:
+				turn_time = 0.0
+				current_turn_speed = min_turn_speed
+			
+			var target_speed = 0.0
+			var current_accel = 0.0
+
+			if Input.is_action_pressed("move_forward"):
+				if turn_direction != 0.0:
+					target_speed = base_speed
+					current_accel = deceleration 
+				else:
+					target_speed = max_speed
+					current_accel = acceleration
+			else:
+				target_speed = base_speed
+				current_accel = acceleration 
+
+			current_speed = lerp(current_speed, target_speed, current_accel * delta)
+			#var forward_direction = Vector2.RIGHT.rotated(rotation)
+			#velocity = forward_direction * current_speed
+			
+			# ISOMETRIC MOVEMENT: 
+			#var forward_direction = Vector2.RIGHT.rotated(rotation)
+			#var isometric_direction = isometric_transform * forward_direction
+			#velocity = isometric_direction * ( current_speed + drift_value)
+			
+			
+			var forward_direction = Vector2.RIGHT.rotated(rotation)
+			var isometric_direction = isometric_transform * forward_direction
+			var ideal_velocity = isometric_direction * (current_speed + drift_value)
+			
+			velocity = velocity.lerp(ideal_velocity, momentum_factor * delta)
+			
+			# Wall collisions
+			var collision = move_and_collide(velocity * delta)
+			if collision:
+				#TODO ADD BACK BOUNCE ANIMATION
+				#animation_player.play("bounce")
+				var normal = collision.get_normal()
+				velocity = velocity.bounce(normal) * bounce_dampening
+				rotation = velocity.angle()
+				spawn_bounce_particles(collision.get_position(), normal)
+				Globals.camera.shake(0.15, 10, 5)
+				
+				move_and_slide()
+			
+			if health <= 0:
+				isDead = true
+				dead_player()
+			
+			
+			update_sprite_rotation()
 
 func stop_is_drifting():
 	print("drift began")
@@ -261,3 +260,7 @@ func _on_shockwave_area_body_entered(body: Node2D) -> void:
 	if body.has_method("take_damage"):
 		await get_tree().create_timer(0.5).timeout
 		body.take_damage(shockwave_damage)
+
+
+func _on_isometric_main_begin_game() -> void:
+	game_begin = true

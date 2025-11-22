@@ -16,9 +16,17 @@ var enemy_table = WeightedTable.new()
 var rng = RandomNumberGenerator.new()
 
 var enemy_count = 2
-var base_spawn_time
+var base_spawn_time = 10.0
 
-func _ready():
+
+func _on_isometric_main_begin_game() -> void:
+	timer.start()
+	start_game()
+
+func _ready() -> void:
+	wave_time_manager.difficulty_increased.connect(on_difficulty_increased)
+
+func start_game():
 	base_spawn_time = timer.wait_time
 	# This code adds the index of the enemy type to the enemy_table
 	# First param = index
@@ -31,7 +39,21 @@ func _ready():
 	
 	spawn_enemy(enemy_count)
 	
-	wave_time_manager.difficulty_increased.connect(on_difficulty_increased)
+
+#func _ready():
+	#base_spawn_time = timer.wait_time
+	## This code adds the index of the enemy type to the enemy_table
+	## First param = index
+	## Second param is the weight or probability of appearing
+	## So if the total weight of items in the enemy table is 100
+	## And enemy with index 5 has a weight of 50
+	## The enemy with index will have a  50% chance of spawning.
+	#enemy_table.add_item(0, 10)
+	#enemy_table.add_item(1, 10)
+	#
+	#spawn_enemy(enemy_count)
+	#
+	#wave_time_manager.difficulty_increased.connect(on_difficulty_increased)
 
 func spawn_enemy(enemy_num):
 	for i in range(enemy_num):
@@ -57,36 +79,21 @@ func spawn():
 func on_difficulty_increased(difficulty: int):
 	print("current difficulty: ",difficulty)
 	print("number of enemies spawned: ", enemy_count)
+	Globals.update_score("WAVES_SURVIVED")
 	
 	match difficulty:
-		1:
-			Globals.update_score("WAVES_SURVIVED")
-			
-		2:
-			Globals.update_score("WAVES_SURVIVED")
 		3:
-			Globals.update_score("WAVES_SURVIVED")
 			enemy_table.add_item(2, 10)
 			enemy_count += 1
-		4:
-			Globals.update_score("WAVES_SURVIVED")
-			enemy_table.remove_item(0)
-		5:
-			Globals.update_score("WAVES_SURVIVED")
-			enemy_count += 1
 		6:
-			Globals.update_score("WAVES_SURVIVED")
+			enemy_table.remove_item(0)
 			enemy_count += 1
 			enemy_table.add_item(3, 10)
-		7:
-			Globals.update_score("WAVES_SURVIVED")
-			enemy_count += 1
-		8:
-			Globals.update_score("WAVES_SURVIVED")
+			
 		9:
 			enemy_table.add_item(4, 10)
 		_:
-			Globals.update_score("WAVES_SURVIVED")
+			
 			enemy_count += 1
 	
 	
