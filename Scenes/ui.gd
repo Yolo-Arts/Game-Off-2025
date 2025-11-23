@@ -14,6 +14,7 @@ func _ready() -> void:
 
 
 func _on_isometric_main_begin_game() -> void:
+	await get_tree().create_timer(0.5).timeout
 	visible = true
 	hp.visible = true
 	drift_bar.visible = true
