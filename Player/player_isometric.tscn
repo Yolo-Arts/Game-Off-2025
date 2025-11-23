@@ -102,7 +102,6 @@ wait_time = 0.5
 one_shot = true
 
 [node name="drift" type="Timer" parent="."]
-wait_time = 1.6999999999999995
 one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

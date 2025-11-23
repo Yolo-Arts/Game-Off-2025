@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://5uuk0a30mfgy"]
+
+[ext_resource type="Theme" uid="uid://b70rftml1sway" path="res://user_interface/themev3.tres" id="1_dqy60"]
+[ext_resource type="PackedScene" uid="uid://gpjbad0hv6qx" path="res://user_interface/ability.tscn" id="2_xqhx7"]
+
+[node name="PanelContainer" type="PanelContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+theme = ExtResource("1_dqy60")
+
+[node name="Ability" parent="." instance=ExtResource("2_xqhx7")]
+layout_mode = 2
