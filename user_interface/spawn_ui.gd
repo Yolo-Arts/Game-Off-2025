@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var animation_player_2: AnimationPlayer = $AnimationPlayer2
 @onready var texture_rect: TextureRect = $Control/TextureRect
 @onready var controls: TextureRect = %Controls
 @onready var panel_container: PanelContainer = %ControlsContainer
@@ -13,7 +14,7 @@ extends CanvasLayer
 func _ready() -> void:
 	visible = true
 	animation_player.play("floating")
-	animation_player.play("scale")
+	animation_player_2.play("scale")
 
 func on_game_start():
 	var tween = create_tween()

@@ -257,3 +257,9 @@ libraries = {
 &"": SubResource("AnimationLibrary_nloar")
 }
 autoplay = "scale"
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_nloar")
+}
+autoplay = "scale"

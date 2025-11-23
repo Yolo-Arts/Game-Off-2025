@@ -285,18 +285,6 @@ position = Vector2(988.5, 557)
 scale = Vector2(16.445313, 9.703125)
 texture = ExtResource("6_0lw5m")
 
-[node name="ScreenTransition" type="CanvasLayer" parent="UI"]
-
-[node name="TextureRect" type="TextureRect" parent="UI/ScreenTransition"]
-material = SubResource("ShaderMaterial_7tq1b")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-texture = SubResource("GradientTexture1D_7tq1b")
-
 [node name="ExperienceBar" parent="UI" node_paths=PackedStringArray("player_manager") instance=ExtResource("25_dppuq")]
 player_manager = NodePath("../../Player_Manager")
 
@@ -309,6 +297,19 @@ mouse_filter = 1
 
 [node name="PauseMenu" parent="UI" instance=ExtResource("26_veftd")]
 layer = 3
+
+[node name="ScreenTransition" type="CanvasLayer" parent="UI"]
+layer = 11
+
+[node name="TextureRect" type="TextureRect" parent="UI/ScreenTransition"]
+material = SubResource("ShaderMaterial_7tq1b")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture1D_7tq1b")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
