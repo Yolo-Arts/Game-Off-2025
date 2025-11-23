@@ -3,6 +3,7 @@ extends Node
 var camera
 
 var unlocked_upgrades: Array[Statup] = []
+var active_cannonball_upgrades: Array[Statup] = []
 
 signal exp_collected
 signal player_level_up
@@ -11,7 +12,6 @@ var playerDied = false
 
 signal player_died
 var player: Player
-
 var upgrading = false
 
 var my_timer: Timer = Timer.new()      

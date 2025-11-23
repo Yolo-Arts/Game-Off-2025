@@ -77,8 +77,7 @@ func _on_card_selected(upgrade: Statup):
 
 func apply_upgrade(upgrade: Statup):
 	if upgrade is Ability and hotbar:
-		print("path 1")
 		hotbar.unlock_ability(upgrade)
 	else:
-		print("Path 2")
 		upgrade.apply_upgrade(Globals.player)
+		Globals.active_cannonball_upgrades.append(upgrade)

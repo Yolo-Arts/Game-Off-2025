@@ -4,6 +4,11 @@ extends Resource
 var left_cannon_direction
 var right_cannon_direction
 
+func apply_cannonball_upgrades(cannon_instance: Cannonball):
+	if not Globals.active_cannonball_upgrades.is_empty():
+		for upgrade in Globals.active_cannonball_upgrades:
+			upgrade.apply_cannonBall_upgrade(cannon_instance)
+
 func _ready():
 	pass
 	

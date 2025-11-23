@@ -2,7 +2,9 @@ class_name  Player
 extends CharacterBody2D
 
 @export var Bullet_Type: Bullet_type
-var damage = 10.0
+@onready var CANNONBALL = preload("uid://m1jsvblrkbdq")
+
+var damage = 20.0
 var cannonball_scale = 1.0
 # movement related code
 @export_group("Movement Parameters")
@@ -136,7 +138,6 @@ func _physics_process(delta) -> void:
 
 
 func shoot():
-	
 	Bullet_Type.shoot(cannonball, self, false, cannonball_scale)
 
 

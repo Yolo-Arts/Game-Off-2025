@@ -15,3 +15,5 @@ func apply_upgrade(player: Player):
 	# applys stat upgrade to player
 	pass
 	
+func apply_cannonBall_upgrade(cannonball: Cannonball):
+	pass

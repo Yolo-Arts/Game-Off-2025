@@ -1,18 +1,14 @@
-[gd_scene load_steps=17 format=3 uid="uid://deqnmjpt3dxgb"]
+[gd_scene load_steps=16 format=3 uid="uid://deqnmjpt3dxgb"]
 
 [ext_resource type="Script" uid="uid://bg21p6igd7lvn" path="res://Player/player_isometric.gd" id="1_60ovk"]
 [ext_resource type="Texture2D" uid="uid://bjchrxewdcwy2" path="res://Player/boat_spritesheet2.png" id="2_evufl"]
-[ext_resource type="Script" uid="uid://3056ete8mbty" path="res://Resources/Bullet types/Double_shot.gd" id="2_qgbdv"]
+[ext_resource type="Resource" uid="uid://j3tfs6h36efg" path="res://Resources/Bullet types/default_bullet.tres" id="2_fphli"]
 [ext_resource type="Shader" uid="uid://dhfkgyvufew58" path="res://Shaders/shock_damage.gdshader" id="3_5y3gb"]
 [ext_resource type="PackedScene" uid="uid://3px7bwweehhp" path="res://Player/water_trail.tscn" id="5_amulb"]
 [ext_resource type="PackedScene" uid="uid://di2muugmwbhu1" path="res://Assets/Particles/boost_particles.tscn" id="6_qif08"]
 [ext_resource type="Script" uid="uid://dbjnldmb02swc" path="res://Assets/Particles/boost_particles.gd" id="7_r0ntv"]
 [ext_resource type="PackedScene" uid="uid://c47b8w26445qp" path="res://Assets/Particles/boost_indicator.tscn" id="8_t0vef"]
 [ext_resource type="Script" uid="uid://dbo22f2qfkc0d" path="res://Assets/Particles/boost_indicator.gd" id="9_fphli"]
-
-[sub_resource type="Resource" id="Resource_amulb"]
-script = ExtResource("2_qgbdv")
-metadata/_custom_type_script = "uid://3056ete8mbty"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fphli"]
 radius = 14.921549
@@ -43,7 +39,7 @@ y_sort_enabled = true
 collision_layer = 33
 collision_mask = 9
 script = ExtResource("1_60ovk")
-Bullet_Type = SubResource("Resource_amulb")
+Bullet_Type = ExtResource("2_fphli")
 max_turn_speed = 3.0
 turn_acceleration = 0.5
 deceleration = 0.0
