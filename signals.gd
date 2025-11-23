@@ -7,3 +7,4 @@ signal start_hitStop
 
 
 signal shockwave_fired
+signal infinite_ammo

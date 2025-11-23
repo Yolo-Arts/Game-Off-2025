@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bj5bvlqtofppm"]
+
+[ext_resource type="Script" uid="uid://1503rkwd7ugv" path="res://Resources/Stat_ups/AbilitiesFolder/infinite_ammo_handler.gd" id="1_2eyld"]
+
+[node name="InfiniteAmmo_handler" type="Node"]
+script = ExtResource("1_2eyld")

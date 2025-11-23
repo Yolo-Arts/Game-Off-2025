@@ -8,5 +8,5 @@ script = ExtResource("1_fue4k")
 image = ExtResource("1_jh6qm")
 name = "Armor Piercing Cannons"
 description = "Cannonballs pierce through +1 Enemies"
-Weight = 400
+Weight = 2
 metadata/_custom_type_script = "uid://byh0dh8il0btx"

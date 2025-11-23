@@ -25,6 +25,8 @@ signal zoom_out
 
 var game_begin = false
 var shockwave_fired = false
+@onready var shoot_cooldown_time = shoot_cooldown.wait_time
+@onready var infinite_ammo_time = 0.05
 
 func _ready():
 	Globals.player = self
@@ -35,6 +37,12 @@ func _ready():
 	isometric_transform = isometric_transform.rotated(deg_to_rad(isometric_angle))
 	
 	Signals.shockwave_fired.connect(shockwave_ability)
+	Signals.infinite_ammo.connect(infiniteAmmo_ability)
+
+func infiniteAmmo_ability():
+	shoot_cooldown.wait_time = infinite_ammo_time
+	await get_tree().create_timer(5.0).timeout
+	shoot_cooldown.wait_time = shoot_cooldown_time
 
 func shockwave_ability():
 	shockwave_fired = true
