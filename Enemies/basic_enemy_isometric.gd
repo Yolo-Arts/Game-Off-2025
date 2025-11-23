@@ -22,6 +22,8 @@ func _ready() -> void:
 
 	if sprite.material:
 		sprite.material = sprite.material.duplicate()
+	Signals.time_freeze.connect(freeze)
+	Signals.time_freeze_disable.connect(unfreeze)
 
 func set_enemy_type(enemy_type: int):
 	if enemy_type >= enemy_types.size(): 
@@ -42,7 +44,7 @@ func set_enemy_type(enemy_type: int):
 		#move_and_slide()
 
 func _physics_process(delta):
-	if !isDead: 
+	if !isDead and can_move: 
 		var direction = get_direction_to_player()
 		var target_velocity = Vector2.ZERO
 		

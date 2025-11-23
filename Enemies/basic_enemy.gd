@@ -34,6 +34,7 @@ var enemy_stats: Resource
 
 var player = null
 var isDead = false
+var can_move = true
 
 var total_frames = 360
 var frame_offset = 0  
@@ -51,7 +52,10 @@ func _ready() -> void:
 
 	if sprite.material:
 		sprite.material = sprite.material.duplicate()
-
+	
+	Signals.time_freeze.connect(freeze)
+	Signals.time_freeze_disable.connect(unfreeze)
+	
 func set_enemy_type(enemy_type: int):
 	if enemy_type >= enemy_types.size(): 
 		return
@@ -61,7 +65,7 @@ func set_enemy_type(enemy_type: int):
 
 
 func _physics_process(_delta):
-	if !isDead: 
+	if !isDead and can_move: 
 		var direction = get_direction_to_player()
 		#var isometric_direction = isometric_transform * direction
 		#velocity = isometric_direction * speed
@@ -161,3 +165,9 @@ func disable_hitbox():
 
 func _on_queue_free_timeout() -> void:
 	self.queue_free()
+
+func freeze(_duration):
+	can_move = false
+
+func unfreeze():
+	can_move = true

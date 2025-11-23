@@ -8,11 +8,10 @@ var isometric_transform: Transform2D
 @onready var shoot_cooldown: Timer = $shootCooldown
 @onready var shockwave: ColorRect = %Shockwave
 @onready var shockwave_collision_shape: CollisionShape2D = $ShockwaveArea/ShockwaveCollisionShape
-
+@onready var hitbox: CollisionShape2D = $Hitbox
 
 
 const RELOADING = preload("uid://c48542f6xe7d2")
-
 
 var can_shoot = true
 var is_drifting = false
@@ -38,10 +37,21 @@ func _ready():
 	
 	Signals.shockwave_fired.connect(shockwave_ability)
 	Signals.infinite_ammo.connect(infiniteAmmo_ability)
+	Signals.time_freeze.connect(time_freeze_ability)
+	Signals.ghost_ship.connect(ghost_ship_ability)
 
-func infiniteAmmo_ability():
+func ghost_ship_ability(duration):
+	hitbox.disabled = true
+	await get_tree().create_timer(duration).timeout
+	hitbox.disabled = false
+
+func time_freeze_ability(duration):
+	await get_tree().create_timer(duration).timeout
+	Signals.time_freeze_disable.emit()
+
+func infiniteAmmo_ability(duration):
 	shoot_cooldown.wait_time = infinite_ammo_time
-	await get_tree().create_timer(5.0).timeout
+	await get_tree().create_timer(duration).timeout
 	shoot_cooldown.wait_time = shoot_cooldown_time
 
 func shockwave_ability():

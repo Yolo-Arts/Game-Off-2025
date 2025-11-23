@@ -7,4 +7,7 @@ signal start_hitStop
 
 
 signal shockwave_fired
-signal infinite_ammo
+signal infinite_ammo(duration: float)
+signal time_freeze(duration: float)
+signal time_freeze_disable
+signal ghost_ship(duration: float)

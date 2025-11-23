@@ -100,7 +100,7 @@ one_shot = true
 [node name="drift" type="Timer" parent="."]
 one_shot = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(0, 19)
 shape = SubResource("CircleShape2D_qgbdv")
 
