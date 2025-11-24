@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=3 uid="uid://dgatlx3brqvmv"]
+
+[ext_resource type="Texture2D" uid="uid://qm52ibs46mas" path="res://Assets/RetroInventoryScaled3X/Health_04.png" id="1_doihw"]
+[ext_resource type="Script" uid="uid://denloirrie5u0" path="res://user_interface/hpbar.gd" id="1_hv2af"]
+[ext_resource type="Texture2D" uid="uid://c4sxyidmpnyrt" path="res://Assets/RetroInventoryScaled3X/Health_04_Bar01.png" id="2_hv2af"]
+[ext_resource type="Texture2D" uid="uid://lrdaixc7n2vf" path="res://Assets/RetroInventoryScaled3X/Hearts_Red_5.png" id="3_3k41l"]
+[ext_resource type="Texture2D" uid="uid://cudc7qkjy87o3" path="res://Assets/RetroInventoryScaled3X/Hearts_Red_1.png" id="4_ynbln"]
+[ext_resource type="Texture2D" uid="uid://d0ae7d0gcekk" path="res://Assets/RetroInventoryScaled3X/Health_04_Bar06.png" id="5_xeyhu"]
+
+[node name="HPbarExperienceBar" type="CanvasLayer"]
+script = ExtResource("1_hv2af")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BaseIcon" type="TextureProgressBar" parent="Control"]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 41.0
+offset_right = 235.0
+offset_bottom = 89.0
+scale = Vector2(2, 2)
+texture_under = ExtResource("1_doihw")
+
+[node name="HealthProgress" type="TextureProgressBar" parent="Control"]
+layout_mode = 0
+offset_left = 139.0
+offset_top = 71.0
+offset_right = 331.0
+offset_bottom = 119.0
+scale = Vector2(2, 2)
+value = 100.0
+texture_progress = ExtResource("2_hv2af")
+
+[node name="HeartIcon" type="TextureProgressBar" parent="Control"]
+layout_mode = 0
+offset_left = 49.0
+offset_top = 41.0
+offset_right = 97.0
+offset_bottom = 89.0
+scale = Vector2(2, 2)
+value = 9.0
+fill_mode = 3
+texture_under = ExtResource("3_3k41l")
+texture_progress = ExtResource("4_ynbln")
+
+[node name="LevelProgress" type="TextureProgressBar" parent="Control"]
+layout_mode = 0
+offset_left = 85.0
+offset_top = 137.0
+offset_right = 125.0
+offset_bottom = 272.0
+scale = Vector2(2, 2)
+max_value = 1.0
+step = 0.01
+value = 1.0
+fill_mode = 3
+texture_progress = ExtResource("5_xeyhu")
