@@ -34,7 +34,7 @@ seamless = true
 shader = ExtResource("3_6xhdk")
 shader_parameter/waterNoise = SubResource("NoiseTexture2D_x6bg1")
 shader_parameter/waterDistortionNoise = SubResource("NoiseTexture2D_acsde")
-shader_parameter/waterColor = Color(0.4509804, 0.74509805, 0.827451, 1)
+shader_parameter/waterColor = Color(0.17337036, 0.7907851, 0.96484375, 1)
 shader_parameter/colorCorection = 0.23999999463552
 shader_parameter/distortionForce = 0.0590000028025
 shader_parameter/WDBrightness = 0.85000001266602
@@ -101,6 +101,7 @@ tile_map_data = PackedByteArray("AAAIAA4AAAANAAIAAAAIAA0AAAAMAAIAAAAJAA0AAAANAAI
 tile_set = ExtResource("2_xew13")
 
 [node name="WaterShader" type="ColorRect" parent="."]
+visible = false
 material = SubResource("ShaderMaterial_x6bg1")
 anchors_preset = 8
 anchor_left = 0.5
