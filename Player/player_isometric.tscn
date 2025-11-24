@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://deqnmjpt3dxgb"]
+[gd_scene load_steps=18 format=3 uid="uid://deqnmjpt3dxgb"]
 
 [ext_resource type="Script" uid="uid://bg21p6igd7lvn" path="res://Player/player_isometric.gd" id="1_60ovk"]
 [ext_resource type="Texture2D" uid="uid://bjchrxewdcwy2" path="res://Player/boat_spritesheet2.png" id="2_evufl"]
@@ -31,6 +31,15 @@ radius = 24.083189
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qgbdv"]
 radius = 21.023796
+
+[sub_resource type="Gradient" id="Gradient_lhces"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fphli"]
+gradient = SubResource("Gradient_lhces")
+fill = 1
+fill_from = Vector2(0.4957265, 0.508547)
+fill_to = Vector2(0.16666667, 0.8504273)
 
 [node name="player_isometric" type="CharacterBody2D" groups=["player"]]
 top_level = true
@@ -119,6 +128,15 @@ script = ExtResource("7_r0ntv")
 [node name="boostIndicator" parent="." instance=ExtResource("8_t0vef")]
 top_level = true
 script = ExtResource("9_fphli")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PointLight2D" type="PointLight2D" parent="CanvasLayer"]
+position = Vector2(960, 540)
+energy = 0.61
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_fphli")
+texture_scale = 25.39
 
 [connection signal="boost" from="." to="BoostParticles" method="_on_player_isometric_boost"]
 [connection signal="boost_indcator_start" from="." to="boostIndicator" method="_on_player_isometric_boost_indcator_start"]
