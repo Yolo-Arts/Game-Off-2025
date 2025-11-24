@@ -3,9 +3,10 @@ extends CanvasLayer
 # Base Icon does nothing.
 
 @export var player_manager: Node
-@onready var health_progress: TextureProgressBar = $Control/HealthProgress
-@onready var heart_icon: TextureProgressBar = $Control/HeartIcon
-@onready var level_progress: TextureProgressBar = $Control/LevelProgress
+@onready var health_progress: TextureProgressBar = %HealthProgress
+@onready var heart_icon: TextureProgressBar = %HeartIcon
+@onready var level_progress: TextureProgressBar = %LevelProgress
+@onready var shaker: Shaker = $Shaker
 
 var player: Iso_player
 
@@ -25,3 +26,8 @@ func _process(delta: float) -> void:
 func _on_player_manager_exp_updated(current_exp: float, target_exp: float) -> void:
 	var percent = current_exp / target_exp
 	level_progress.value = percent
+
+
+func _on_player_isometric_shake_hp_bar() -> void:
+	print("HP BAR SHAKEN")
+	shaker.start()

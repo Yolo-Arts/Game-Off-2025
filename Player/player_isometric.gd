@@ -231,6 +231,8 @@ func _on_exp_collection_radius_area_entered(area: Area2D) -> void:
 		area.collected = true
 		area.player = self
 
+signal shake_hp_bar
+
 func _on_damage_area_iso_body_entered(body: Node2D) -> void:
 	if is_drifting:
 		return
@@ -238,6 +240,7 @@ func _on_damage_area_iso_body_entered(body: Node2D) -> void:
 		health -= body.enemy_stats.damage
 		self.player_hit()
 		print("hit")
+		shake_hp_bar.emit()
 		#TODO ADD BACK HITSHOCK
 		#self.animation_player.play("hit_shock")
 		Globals.camera.shake(0.5, 25, 25)

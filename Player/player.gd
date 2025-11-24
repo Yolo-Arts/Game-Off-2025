@@ -166,10 +166,11 @@ func spawn_bounce_particles(pos: Vector2, normal: Vector2) -> void:
 	
 	
 
+
+
 func _on_damage_area_body_entered(body: Node2D) -> void:
 	if $damage_interval_timer.is_stopped() and body is Enemy:
 		health -= body.enemy_stats.damage
-
 		print("hit")
 		self.animation_player.play("hit_shock")
 		Globals.camera.shake(0.5, 15, 10)

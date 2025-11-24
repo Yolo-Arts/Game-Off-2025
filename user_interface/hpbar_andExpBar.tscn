@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dgatlx3brqvmv"]
+[gd_scene load_steps=8 format=3 uid="uid://dgatlx3brqvmv"]
 
 [ext_resource type="Texture2D" uid="uid://qm52ibs46mas" path="res://Assets/RetroInventoryScaled3X/Health_04.png" id="1_doihw"]
 [ext_resource type="Script" uid="uid://denloirrie5u0" path="res://user_interface/hpbar.gd" id="1_hv2af"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://lrdaixc7n2vf" path="res://Assets/RetroInventoryScaled3X/Hearts_Red_5.png" id="3_3k41l"]
 [ext_resource type="Texture2D" uid="uid://cudc7qkjy87o3" path="res://Assets/RetroInventoryScaled3X/Hearts_Red_1.png" id="4_ynbln"]
 [ext_resource type="Texture2D" uid="uid://d0ae7d0gcekk" path="res://Assets/RetroInventoryScaled3X/Health_04_Bar06.png" id="5_xeyhu"]
+[ext_resource type="Script" uid="uid://b4hwrp8guiq8a" path="res://addons/shaker/shaker.gd" id="7_2pbg6"]
 
 [node name="HPbarExperienceBar" type="CanvasLayer"]
 script = ExtResource("1_hv2af")
@@ -27,37 +28,46 @@ offset_bottom = 89.0
 scale = Vector2(2, 2)
 texture_under = ExtResource("1_doihw")
 
-[node name="HealthProgress" type="TextureProgressBar" parent="Control"]
+[node name="HealthProgress" type="TextureProgressBar" parent="Control/BaseIcon"]
+unique_name_in_owner = true
 layout_mode = 0
-offset_left = 139.0
-offset_top = 71.0
-offset_right = 331.0
-offset_bottom = 119.0
-scale = Vector2(2, 2)
+offset_left = 48.0
+offset_top = 15.0
+offset_right = 240.0
+offset_bottom = 63.0
 value = 100.0
 texture_progress = ExtResource("2_hv2af")
 
-[node name="HeartIcon" type="TextureProgressBar" parent="Control"]
+[node name="HeartIcon" type="TextureProgressBar" parent="Control/BaseIcon"]
+unique_name_in_owner = true
 layout_mode = 0
-offset_left = 49.0
-offset_top = 41.0
-offset_right = 97.0
-offset_bottom = 89.0
-scale = Vector2(2, 2)
+offset_left = 3.0
+offset_right = 51.0
+offset_bottom = 48.0
 value = 9.0
 fill_mode = 3
 texture_under = ExtResource("3_3k41l")
 texture_progress = ExtResource("4_ynbln")
 
-[node name="LevelProgress" type="TextureProgressBar" parent="Control"]
+[node name="LevelProgress" type="TextureProgressBar" parent="Control/BaseIcon"]
+unique_name_in_owner = true
 layout_mode = 0
-offset_left = 85.0
-offset_top = 137.0
-offset_right = 125.0
-offset_bottom = 272.0
-scale = Vector2(2, 2)
+offset_left = 21.0
+offset_top = 48.0
+offset_right = 61.0
+offset_bottom = 183.0
 max_value = 1.0
 step = 0.01
 value = 1.0
 fill_mode = 3
 texture_progress = ExtResource("5_xeyhu")
+
+[node name="Shaker" type="Node" parent="." node_paths=PackedStringArray("target_node")]
+script = ExtResource("7_2pbg6")
+target_node = NodePath("../Control/BaseIcon")
+target_property = &"rotation_degrees"
+min_value = -1.5
+max_value = 1.5
+constant = true
+duration = 0.5
+metadata/_custom_type_script = "uid://b4hwrp8guiq8a"
