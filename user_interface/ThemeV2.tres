@@ -1,7 +1,8 @@
-[gd_resource type="Theme" load_steps=12 format=3 uid="uid://bi4882lo6q8km"]
+[gd_resource type="Theme" load_steps=13 format=3 uid="uid://bi4882lo6q8km"]
 
 [ext_resource type="Texture2D" uid="uid://bngypyy031ecg" path="res://user_interface/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Sprite sheet for Basic Pack.png" id="1_6jhoh"]
 [ext_resource type="FontFile" uid="uid://b01tc6c8f4r8e" path="res://user_interface/Sprout Lands - UI Pack - Basic pack/fonts/pixelFont-7-8x14-sproutLands.ttf" id="1_aa4mt"]
+[ext_resource type="Texture2D" uid="uid://bxth4hgnrvp2l" path="res://Assets/RetroInventoryScaled3X/Inventory_9Slices.png" id="3_ask2h"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aa4mt"]
 content_margin_left = 4.0
@@ -92,12 +93,12 @@ texture_margin_bottom = 6.0
 region_rect = Rect2(163, 178, 90, 27)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ask2h"]
-texture = ExtResource("1_6jhoh")
-texture_margin_left = 7.0
-texture_margin_top = 7.0
-texture_margin_right = 7.0
-texture_margin_bottom = 7.0
-region_rect = Rect2(201, 57, 30, 30)
+texture = ExtResource("3_ask2h")
+texture_margin_left = 15.0
+texture_margin_top = 15.0
+texture_margin_right = 15.0
+texture_margin_bottom = 15.0
+region_rect = Rect2(0, 0, 96, 96)
 draw_center = false
 
 [resource]
