@@ -46,6 +46,7 @@ func infiniteAmmo_ability():
 
 func shockwave_ability():
 	shockwave_fired = true
+	await get_tree().create_timer(0.4).timeout
 	shockwave_collision_shape.disabled = false
 
 func dead_player():
@@ -66,10 +67,11 @@ func _input(event):
 			spawn_reload_text()
 	if shockwave_fired == true:
 		shockwave_fired = false
-		shockwave_collision_shape.disabled = true
 		shockwave.material.set_shader_parameter("global_position", Vector2(1910/2.0, 1080/2))
 		if shockwave.has_node("AnimationPlayer"):
 			shockwave.get_node("AnimationPlayer").play("Shockwave")
+		await get_tree().create_timer(0.4).timeout
+		shockwave_collision_shape.disabled = true
 			
 
 
