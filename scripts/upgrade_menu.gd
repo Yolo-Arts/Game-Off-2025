@@ -2,6 +2,7 @@ extends Control
 
 @onready var stat_up_ui: Stat_ui = $PanelContainer/HBoxContainer/CenterContainer2/Stat_up_UI
 @onready var stat_up_ui_2: Stat_ui = $PanelContainer/HBoxContainer/CenterContainer/Stat_up_UI2
+@onready var particles: GPUParticles2D = $GPUParticles2D
 
 # TODO when music is implemented, add an audio effect to change the way it sounds during an upgrade
 
@@ -14,6 +15,7 @@ var stat_up_index2
 
 
 func _ready() -> void:
+	particles.emitting = false
 	visible = false
 	Globals.player_level_up.connect(_on_player_level_up)
 	
@@ -32,6 +34,7 @@ func _ready() -> void:
 	stat_up_ui_2.update()
 
 func _on_player_level_up():
+	particles.emitting = true
 	Globals.upgrading = true
 	SoundManager.play_LevelUp()
 	Engine.time_scale = 0.05
@@ -73,6 +76,7 @@ func _on_card_selected(upgrade: Statup):
 	
 	apply_upgrade(upgrade)
 	visible = false
+	particles.emitting = false
 	Globals.upgrading = false
 
 func apply_upgrade(upgrade: Statup):
