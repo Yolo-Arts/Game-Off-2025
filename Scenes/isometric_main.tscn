@@ -1,10 +1,11 @@
-[gd_scene load_steps=48 format=3 uid="uid://b3imdjb1so30p"]
+[gd_scene load_steps=49 format=3 uid="uid://b3imdjb1so30p"]
 
 [ext_resource type="Script" uid="uid://wjiwydm880cx" path="res://Scenes/isometric_main.gd" id="1_1enjl"]
 [ext_resource type="PackedScene" uid="uid://cbag74ryx0pu8" path="res://Scenes/player_manager.tscn" id="2_dlawb"]
 [ext_resource type="PackedScene" uid="uid://2sw5s3fxyqo3" path="res://Scenes/camera_2d.tscn" id="2_pwvqx"]
 [ext_resource type="Script" uid="uid://d0kecd4amk3cw" path="res://Scenes/chunk_loader.gd" id="5_2y55o"]
 [ext_resource type="Shader" uid="uid://b4oixuorco5vd" path="res://Shaders/water.gdshader" id="5_504xn"]
+[ext_resource type="Script" uid="uid://bkq7jmltaqsb6" path="res://Scenes/time_cycle_manager.gd" id="5_yj477"]
 [ext_resource type="Texture2D" uid="uid://c12v3gr0dt8sm" path="res://icon.svg" id="6_0lw5m"]
 [ext_resource type="PackedScene" uid="uid://deqnmjpt3dxgb" path="res://Player/player_isometric.tscn" id="6_wgbrh"]
 [ext_resource type="PackedScene" uid="uid://brjyeo32vgcfh" path="res://Enemies/enemy_manager.tscn" id="7_0lw5m"]
@@ -214,6 +215,13 @@ scale = Vector2(20, 20)
 texture = ExtResource("6_0lw5m")
 stretch_mode = 1
 
+[node name="TimeCycleManager" type="Node" parent="."]
+script = ExtResource("5_yj477")
+
+[node name="TimeCycle" type="CanvasModulate" parent="."]
+unique_name_in_owner = true
+color = Color(0.40234375, 0.40234375, 0.40234375, 1)
+
 [node name="Node2D" type="Node2D" parent="."]
 script = ExtResource("5_2y55o")
 
@@ -277,6 +285,8 @@ offset_bottom = 40.0
 [node name="HPbarAndEXPBar" parent="UI" node_paths=PackedStringArray("player_manager") instance=ExtResource("22_yj477")]
 player_manager = NodePath("../../Player_Manager")
 
+[node name="PauseButton" parent="UI" instance=ExtResource("30_xqk4e")]
+
 [node name="Grayscale" type="CanvasLayer" parent="UI"]
 script = ExtResource("16_hvs2a")
 
@@ -293,8 +303,6 @@ visible = false
 mouse_filter = 1
 
 [node name="AbilityBar" parent="UI" instance=ExtResource("29_ne86t")]
-
-[node name="PauseButton" parent="UI" instance=ExtResource("30_xqk4e")]
 
 [node name="PauseMenu" parent="UI" instance=ExtResource("26_veftd")]
 layer = 3
@@ -329,5 +337,5 @@ libraries = {
 [connection signal="shake_hp_bar" from="player_isometric" to="UI/HPbarAndEXPBar" method="_on_player_isometric_shake_hp_bar"]
 [connection signal="zoom_in" from="player_isometric" to="player_isometric/Camera2D" method="_on_player_isometric_zoom_in"]
 [connection signal="zoom_out" from="player_isometric" to="player_isometric/Camera2D" method="_on_player_isometric_zoom_out"]
-[connection signal="player_can_drift" from="UI/DriftBar" to="player_isometric" method="_on_drift_bar_player_can_drift"]
 [connection signal="paused_pressed" from="UI/PauseButton" to="UI/PauseMenu" method="_on_pause_button_paused_pressed"]
+[connection signal="player_can_drift" from="UI/DriftBar" to="player_isometric" method="_on_drift_bar_player_can_drift"]

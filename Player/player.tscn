@@ -516,7 +516,7 @@ one_shot = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="PointLight2D" type="PointLight2D" parent="CanvasLayer"]
+[node name="PointLight2D" type="PointLight2D" parent="CanvasLayer" groups=["player_light"]]
 position = Vector2(960, 540)
 energy = 0.61
 shadow_enabled = true
