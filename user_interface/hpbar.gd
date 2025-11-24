@@ -7,6 +7,7 @@ extends CanvasLayer
 @onready var heart_icon: TextureProgressBar = %HeartIcon
 @onready var level_progress: TextureProgressBar = %LevelProgress
 @onready var shaker: Shaker = $Shaker
+@onready var hp_particles: GPUParticles2D = $Control/BaseIcon/HpParticles
 
 var player: Iso_player
 
@@ -21,6 +22,12 @@ func _process(delta: float) -> void:
 	health_progress.max_value = player.player_max_health
 	heart_icon.max_value = player.player_max_health
 	#hp_label.text = "HP: " + str(player.health)
+	
+	if health_progress.value < health_progress.max_value * 0.25:
+		shaker.start()
+		hp_particles.emitting = true
+	else: 
+		hp_particles.emitting = false
 
 
 func _on_player_manager_exp_updated(current_exp: float, target_exp: float) -> void:

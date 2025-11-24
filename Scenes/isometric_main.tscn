@@ -285,16 +285,17 @@ offset_bottom = 40.0
 [node name="HPbarAndEXPBar" parent="UI" node_paths=PackedStringArray("player_manager") instance=ExtResource("22_yj477")]
 player_manager = NodePath("../../Player_Manager")
 
-[node name="PauseButton" parent="UI" instance=ExtResource("30_xqk4e")]
-
 [node name="Grayscale" type="CanvasLayer" parent="UI"]
 script = ExtResource("16_hvs2a")
 
 [node name="Sprite2D" type="Sprite2D" parent="UI/Grayscale"]
+z_index = 3
 material = SubResource("ShaderMaterial_hvs2a")
 position = Vector2(988.5, 557)
 scale = Vector2(16.445313, 9.703125)
 texture = ExtResource("6_0lw5m")
+
+[node name="PauseButton" parent="UI" instance=ExtResource("30_xqk4e")]
 
 [node name="DriftBar" parent="UI" instance=ExtResource("26_40rgy")]
 visible = false

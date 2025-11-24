@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dgatlx3brqvmv"]
+[gd_scene load_steps=14 format=3 uid="uid://dgatlx3brqvmv"]
 
 [ext_resource type="Texture2D" uid="uid://qm52ibs46mas" path="res://Assets/RetroInventoryScaled3X/Health_04.png" id="1_doihw"]
 [ext_resource type="Script" uid="uid://denloirrie5u0" path="res://user_interface/hpbar.gd" id="1_hv2af"]
@@ -7,6 +7,33 @@
 [ext_resource type="Texture2D" uid="uid://cudc7qkjy87o3" path="res://Assets/RetroInventoryScaled3X/Hearts_Red_1.png" id="4_ynbln"]
 [ext_resource type="Texture2D" uid="uid://d0ae7d0gcekk" path="res://Assets/RetroInventoryScaled3X/Health_04_Bar06.png" id="5_xeyhu"]
 [ext_resource type="Script" uid="uid://b4hwrp8guiq8a" path="res://addons/shaker/shaker.gd" id="7_2pbg6"]
+[ext_resource type="Texture2D" uid="uid://bopex10lmjama" path="res://Assets/white_square.png" id="7_ce3fm"]
+
+[sub_resource type="Gradient" id="Gradient_63ruo"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_gfbru"]
+gradient = SubResource("Gradient_63ruo")
+
+[sub_resource type="Curve" id="Curve_7mb52"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ot78t"]
+curve = SubResource("Curve_7mb52")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vhohf"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(150, 28.81, 1)
+spread = 180.0
+initial_velocity_min = 30.3
+initial_velocity_max = 103.03
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_ot78t")
+color = Color(1, 0.23137255, 0.09803922, 1)
+color_ramp = SubResource("GradientTexture1D_gfbru")
 
 [node name="HPbarExperienceBar" type="CanvasLayer"]
 script = ExtResource("1_hv2af")
@@ -61,6 +88,15 @@ step = 0.01
 value = 1.0
 fill_mode = 3
 texture_progress = ExtResource("5_xeyhu")
+
+[node name="HpParticles" type="GPUParticles2D" parent="Control/BaseIcon"]
+show_behind_parent = true
+position = Vector2(118, 19.5)
+scale = Vector2(0.5, 0.5)
+emitting = false
+amount = 24
+texture = ExtResource("7_ce3fm")
+process_material = SubResource("ParticleProcessMaterial_vhohf")
 
 [node name="Shaker" type="Node" parent="." node_paths=PackedStringArray("target_node")]
 script = ExtResource("7_2pbg6")
