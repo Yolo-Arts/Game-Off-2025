@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://h0hdesj12ofh"]
+[gd_scene load_steps=18 format=3 uid="uid://h0hdesj12ofh"]
 
 [ext_resource type="Script" uid="uid://62nijy3yjwul" path="res://Enemies/basic_enemy_isometric.gd" id="1_guxgk"]
 [ext_resource type="Resource" uid="uid://d1qpml40osw4y" path="res://Enemies/Enemy_Types/black_isometric.tres" id="2_sak5g"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bhhya7080ahh8" path="res://Enemies/Sprites/enemy_ship_red_spritesheet.png" id="6_gwrt0"]
 [ext_resource type="Resource" uid="uid://bprcgrgyghoih" path="res://Enemies/Enemy_Types/orange_isometric.tres" id="6_sak5g"]
 [ext_resource type="PackedScene" uid="uid://3px7bwweehhp" path="res://Player/water_trail.tscn" id="9_sak5g"]
+[ext_resource type="Script" uid="uid://b6nehexp0o6px" path="res://Enemies/camera_culling.gd" id="10_gwrt0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qenpu"]
 shader = ExtResource("5_r2gfe")
@@ -120,7 +121,8 @@ position = Vector2(0, 43.94)
 width = 125.0
 max_points = 20
 
-[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+[node name="CameraCulling" type="Node" parent="."]
+script = ExtResource("10_gwrt0")
 
 [connection signal="free_waterTrail" from="." to="WaterTrail" method="_on_basic_enemy_free_water_trail"]
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]

@@ -110,7 +110,7 @@ func _physics_process(delta) -> void:
 				if drift.is_stopped() and can_drift == false:
 					can_drift = true
 					zoom_in.emit()
-					print("Instant Boost Ready (Held from previous state)")
+					print("Instant Boost Ready")
 					
 			else:
 				drift.stop()
