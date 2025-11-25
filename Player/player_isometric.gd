@@ -55,6 +55,8 @@ func dead_player():
 	for i in range(0, 5):
 		spawn_death_explosion(self.global_position)
 	self.hide()
+	get_tree().paused = true
+
 
 func _input(event):
 	if event.is_action_pressed("fire"):
