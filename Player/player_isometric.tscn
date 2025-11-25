@@ -34,14 +34,14 @@ radius = 24.083189
 radius = 21.023796
 
 [sub_resource type="Gradient" id="Gradient_lhces"]
-offsets = PackedFloat32Array(0, 0.5082873)
+offsets = PackedFloat32Array(0, 0.8453039)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_fphli"]
 gradient = SubResource("Gradient_lhces")
 fill = 1
 fill_from = Vector2(0.4957265, 0.508547)
-fill_to = Vector2(0.31196582, 0.7094017)
+fill_to = Vector2(0.17094018, 0.85470086)
 
 [node name="player_isometric" type="CharacterBody2D" groups=["player"]]
 top_level = true
@@ -131,15 +131,13 @@ script = ExtResource("7_r0ntv")
 top_level = true
 script = ExtResource("9_fphli")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
 [node name="PointLight2D" type="PointLight2D" parent="." groups=["player_light"]]
 position = Vector2(-9, -7)
 energy = 0.61
 shadow_enabled = true
 shadow_filter_smooth = 3.4
 texture = SubResource("GradientTexture2D_fphli")
-texture_scale = 27.31
+texture_scale = 32.39
 script = ExtResource("10_1xiy1")
 
 [connection signal="boost" from="." to="BoostParticles" method="_on_player_isometric_boost"]
