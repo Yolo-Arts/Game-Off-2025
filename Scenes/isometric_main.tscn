@@ -249,6 +249,7 @@ layer = 11
 hotbar = NodePath("../../UI/AbilityBar")
 
 [node name="GameOver" parent="." instance=ExtResource("15_gvepe")]
+process_mode = 3
 
 [node name="UI" type="CanvasLayer" parent="."]
 script = ExtResource("20_xqk4e")

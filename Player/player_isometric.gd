@@ -28,6 +28,7 @@ var shockwave_fired = false
 @onready var infinite_ammo_time = 0.05
 
 func _ready():
+	get_tree().paused = false
 	Globals.player = self
 	health = 100
 	#Globals.player_died.connect(dead_player)
@@ -64,6 +65,8 @@ func dead_player():
 	for i in range(0, 5):
 		spawn_death_explosion(self.global_position)
 	self.hide()
+	get_tree().paused = true
+
 
 func _input(event):
 	if event.is_action_pressed("fire"):
