@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CameraZoom_StatUp" load_steps=3 format=3 uid="uid://dfjbpgxypkjnl"]
 
-[ext_resource type="Texture2D" uid="uid://c8dh54jnogv0a" path="res://Assets/skill_icons/crowsNest.png" id="1_n2035"]
+[ext_resource type="Texture2D" uid="uid://c12v3gr0dt8sm" path="res://icon.svg" id="1_n2035"]
 [ext_resource type="Script" uid="uid://dtd7e23wkrlxk" path="res://Resources/Stat_ups/crows_nest.gd" id="1_pwikv"]
 
 [resource]

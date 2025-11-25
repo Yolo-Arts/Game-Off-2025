@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dle2poylya83p"]
+[gd_scene load_steps=28 format=3 uid="uid://dle2poylya83p"]
 
 [ext_resource type="Script" uid="uid://c8cpssj7vjehk" path="res://Player/player.gd" id="1_k53q1"]
 [ext_resource type="Texture2D" uid="uid://b8s48xncdlhd4" path="res://Assets/kenney_pirate-pack/PNG/Default size/Ship parts/hullLarge (1).png" id="1_l8h54"]
@@ -404,15 +404,6 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_5htga"]
 radius = 73.00685
 
-[sub_resource type="Gradient" id="Gradient_3bm7k"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_apopc"]
-gradient = SubResource("Gradient_3bm7k")
-fill = 1
-fill_from = Vector2(0.4957265, 0.508547)
-fill_to = Vector2(0.16666667, 0.8504273)
-
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 material = SubResource("ShaderMaterial_00tjw")
 collision_layer = 3
@@ -513,15 +504,6 @@ shape = SubResource("CircleShape2D_5htga")
 [node name="drift" type="Timer" parent="."]
 wait_time = 4.0
 one_shot = true
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="PointLight2D" type="PointLight2D" parent="CanvasLayer" groups=["player_light"]]
-position = Vector2(960, 540)
-energy = 0.61
-shadow_enabled = true
-texture = SubResource("GradientTexture2D_apopc")
-texture_scale = 25.39
 
 [connection signal="body_entered" from="DamageArea" to="." method="_on_damage_area_body_entered"]
 [connection signal="body_exited" from="DamageArea" to="." method="_on_damage_area_body_exited"]

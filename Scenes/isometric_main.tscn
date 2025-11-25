@@ -1,11 +1,10 @@
-[gd_scene load_steps=49 format=3 uid="uid://b3imdjb1so30p"]
+[gd_scene load_steps=48 format=3 uid="uid://b3imdjb1so30p"]
 
 [ext_resource type="Script" uid="uid://wjiwydm880cx" path="res://Scenes/isometric_main.gd" id="1_1enjl"]
 [ext_resource type="PackedScene" uid="uid://cbag74ryx0pu8" path="res://Scenes/player_manager.tscn" id="2_dlawb"]
 [ext_resource type="PackedScene" uid="uid://2sw5s3fxyqo3" path="res://Scenes/camera_2d.tscn" id="2_pwvqx"]
 [ext_resource type="Script" uid="uid://d0kecd4amk3cw" path="res://Scenes/chunk_loader.gd" id="5_2y55o"]
 [ext_resource type="Shader" uid="uid://b4oixuorco5vd" path="res://Shaders/water.gdshader" id="5_504xn"]
-[ext_resource type="Script" uid="uid://bkq7jmltaqsb6" path="res://Scenes/time_cycle_manager.gd" id="5_yj477"]
 [ext_resource type="Texture2D" uid="uid://c12v3gr0dt8sm" path="res://icon.svg" id="6_0lw5m"]
 [ext_resource type="PackedScene" uid="uid://deqnmjpt3dxgb" path="res://Player/player_isometric.tscn" id="6_wgbrh"]
 [ext_resource type="PackedScene" uid="uid://brjyeo32vgcfh" path="res://Enemies/enemy_manager.tscn" id="7_0lw5m"]
@@ -20,18 +19,18 @@
 [ext_resource type="PackedScene" uid="uid://cwwekbcfo4hgu" path="res://user_interface/game_over.tscn" id="15_gvepe"]
 [ext_resource type="Resource" uid="uid://bprcgrgyghoih" path="res://Enemies/Enemy_Types/orange_isometric.tres" id="16_dppuq"]
 [ext_resource type="Script" uid="uid://dt41mbv4yvwkl" path="res://Scenes/grayscale.gd" id="16_hvs2a"]
-[ext_resource type="Shader" uid="uid://c3xdyeo558avw" path="res://Shaders/grayscale.gdshader" id="16_ixf2m"]
-[ext_resource type="Shader" path="res://Shaders/screenTransition.gdshader" id="19_b21ex"]
+[ext_resource type="Shader" path="res://Shaders/grayscale.gdshader" id="16_ixf2m"]
+[ext_resource type="PackedScene" uid="uid://bqc47rhr50tki" path="res://user_interface/healthbar.tscn" id="18_ifoba"]
+[ext_resource type="Shader" uid="uid://ydw2wifhpp88" path="res://Shaders/screenTransition.gdshader" id="19_b21ex"]
 [ext_resource type="PackedScene" uid="uid://cpx0xphjgp1lt" path="res://Shaders/cloud.tscn" id="20_7tq1b"]
 [ext_resource type="Script" uid="uid://3cukdxaftfk6" path="res://Scenes/ui.gd" id="20_xqk4e"]
-[ext_resource type="PackedScene" uid="uid://dgatlx3brqvmv" path="res://user_interface/hpbar_andExpBar.tscn" id="22_yj477"]
+[ext_resource type="PackedScene" uid="uid://bmqqm41qob53n" path="res://user_interface/experience_bar.tscn" id="25_dppuq"]
 [ext_resource type="PackedScene" uid="uid://br81uexsi3und" path="res://user_interface/drift_bar.tscn" id="26_40rgy"]
 [ext_resource type="PackedScene" uid="uid://dn75ntkbbgxb2" path="res://user_interface/pause_menu.tscn" id="26_veftd"]
 [ext_resource type="PackedScene" uid="uid://clpfc5m24onjx" path="res://user_interface/hot_bar.tscn" id="27_40rgy"]
 [ext_resource type="Shader" uid="uid://cb3xbdufad64w" path="res://Shaders/shockwave.gdshader" id="28_jleb8"]
 [ext_resource type="PackedScene" uid="uid://c60diwu1u2ajo" path="res://user_interface/ability_bar.tscn" id="29_ne86t"]
 [ext_resource type="PackedScene" uid="uid://vn1chcv7m0l" path="res://user_interface/spawn_ui.tscn" id="30_lc8nd"]
-[ext_resource type="PackedScene" uid="uid://6du57t1guvah" path="res://user_interface/pause_button.tscn" id="30_xqk4e"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_wgbrh"]
 
@@ -215,13 +214,6 @@ scale = Vector2(20, 20)
 texture = ExtResource("6_0lw5m")
 stretch_mode = 1
 
-[node name="TimeCycleManager" type="Node" parent="."]
-script = ExtResource("5_yj477")
-
-[node name="TimeCycle" type="CanvasModulate" parent="."]
-unique_name_in_owner = true
-color = Color(0.40234375, 0.40234375, 0.40234375, 1)
-
 [node name="Node2D" type="Node2D" parent="."]
 script = ExtResource("5_2y55o")
 
@@ -282,34 +274,18 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="HPbarAndEXPBar" parent="UI" node_paths=PackedStringArray("player_manager") instance=ExtResource("22_yj477")]
-player_manager = NodePath("../../Player_Manager")
+[node name="HP" parent="UI" instance=ExtResource("18_ifoba")]
 
 [node name="Grayscale" type="CanvasLayer" parent="UI"]
 script = ExtResource("16_hvs2a")
 
 [node name="Sprite2D" type="Sprite2D" parent="UI/Grayscale"]
-z_index = 3
 material = SubResource("ShaderMaterial_hvs2a")
 position = Vector2(988.5, 557)
 scale = Vector2(16.445313, 9.703125)
 texture = ExtResource("6_0lw5m")
 
-[node name="PauseButton" parent="UI" instance=ExtResource("30_xqk4e")]
-
-[node name="DriftBar" parent="UI" instance=ExtResource("26_40rgy")]
-visible = false
-
-[node name="HotBar" parent="UI" instance=ExtResource("27_40rgy")]
-mouse_filter = 1
-
-[node name="AbilityBar" parent="UI" instance=ExtResource("29_ne86t")]
-
-[node name="PauseMenu" parent="UI" instance=ExtResource("26_veftd")]
-layer = 3
-
 [node name="ScreenTransition" type="CanvasLayer" parent="UI"]
-layer = 11
 
 [node name="TextureRect" type="TextureRect" parent="UI/ScreenTransition"]
 material = SubResource("ShaderMaterial_7tq1b")
@@ -320,6 +296,19 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 texture = SubResource("GradientTexture1D_7tq1b")
+
+[node name="ExperienceBar" parent="UI" node_paths=PackedStringArray("player_manager") instance=ExtResource("25_dppuq")]
+player_manager = NodePath("../../Player_Manager")
+
+[node name="DriftBar" parent="UI" instance=ExtResource("26_40rgy")]
+
+[node name="HotBar" parent="UI" instance=ExtResource("27_40rgy")]
+mouse_filter = 1
+
+[node name="AbilityBar" parent="UI" instance=ExtResource("29_ne86t")]
+
+[node name="PauseMenu" parent="UI" instance=ExtResource("26_veftd")]
+layer = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -333,10 +322,8 @@ libraries = {
 [connection signal="begin_game" from="." to="WaveTimeManager" method="_on_isometric_main_begin_game"]
 [connection signal="begin_game" from="." to="UI" method="_on_isometric_main_begin_game"]
 [connection signal="begin_game" from="." to="SpawnUI" method="_on_isometric_main_begin_game"]
-[connection signal="exp_updated" from="Player_Manager" to="UI/HPbarAndEXPBar" method="_on_player_manager_exp_updated"]
+[connection signal="exp_updated" from="Player_Manager" to="UI/ExperienceBar" method="_on_player_manager_exp_updated"]
 [connection signal="reset_drift_cooldown_bar" from="player_isometric" to="UI/DriftBar" method="_on_player_isometric_reset_drift_cooldown_bar"]
-[connection signal="shake_hp_bar" from="player_isometric" to="UI/HPbarAndEXPBar" method="_on_player_isometric_shake_hp_bar"]
 [connection signal="zoom_in" from="player_isometric" to="player_isometric/Camera2D" method="_on_player_isometric_zoom_in"]
 [connection signal="zoom_out" from="player_isometric" to="player_isometric/Camera2D" method="_on_player_isometric_zoom_out"]
-[connection signal="paused_pressed" from="UI/PauseButton" to="UI/PauseMenu" method="_on_pause_button_paused_pressed"]
 [connection signal="player_can_drift" from="UI/DriftBar" to="player_isometric" method="_on_drift_bar_player_can_drift"]

@@ -41,8 +41,3 @@ func _on_continue_mouse_entered() -> void:
 
 func _on_restart_mouse_entered() -> void:
 	SoundManager.UI_ButtonHovered()
-
-
-func _on_pause_button_paused_pressed() -> void:
-	self.visible = true
-	pause()
