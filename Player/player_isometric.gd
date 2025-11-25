@@ -29,6 +29,7 @@ var shockwave_fired = false
 @onready var infinite_ammo_time = 0.05
 
 func _ready():
+	get_tree().paused = false
 	Globals.player = self
 	health = 100
 	#Globals.player_died.connect(dead_player)
