@@ -8,7 +8,9 @@ var isometric_transform: Transform2D
 @onready var shoot_cooldown: Timer = $shootCooldown
 @onready var shockwave: ColorRect = %Shockwave
 @onready var shockwave_collision_shape: CollisionShape2D = $ShockwaveArea/ShockwaveCollisionShape
-@onready var hitbox: CollisionShape2D = $Hitbox
+
+@onready var hitbox: CollisionShape2D = $DamageAreaIso/CollisionShape2D
+@onready var hitbox2: CollisionShape2D = $Hitbox
 
 
 const RELOADING = preload("uid://c48542f6xe7d2")
@@ -43,9 +45,11 @@ func _ready():
 
 func ghost_ship_ability(duration):
 	hitbox.disabled = true
+	hitbox2.disabled = true
 	await get_tree().create_timer(duration).timeout
 	hitbox.disabled = false
-
+	hitbox2.disabled = false
+	
 func time_freeze_ability(duration):
 	await get_tree().create_timer(duration).timeout
 	Signals.time_freeze_disable.emit()

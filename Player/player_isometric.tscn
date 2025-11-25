@@ -84,7 +84,6 @@ rotation = -1.048381
 shape = SubResource("CircleShape2D_k28l0")
 
 [node name="DamageAreaIso" type="Area2D" parent="."]
-visible = false
 collision_layer = 2
 collision_mask = 2
 
