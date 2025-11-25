@@ -56,6 +56,7 @@ func infiniteAmmo_ability(duration):
 
 func shockwave_ability():
 	shockwave_fired = true
+	await get_tree().create_timer(0.4).timeout
 	shockwave_collision_shape.disabled = false
 
 func dead_player():
@@ -76,10 +77,11 @@ func _input(event):
 			spawn_reload_text()
 	if shockwave_fired == true:
 		shockwave_fired = false
-		shockwave_collision_shape.disabled = true
 		shockwave.material.set_shader_parameter("global_position", Vector2(1910/2.0, 1080/2))
 		if shockwave.has_node("AnimationPlayer"):
 			shockwave.get_node("AnimationPlayer").play("Shockwave")
+		await get_tree().create_timer(0.4).timeout
+		shockwave_collision_shape.disabled = true
 			
 
 
@@ -118,7 +120,7 @@ func _physics_process(delta) -> void:
 				if drift.is_stopped() and can_drift == false:
 					can_drift = true
 					zoom_in.emit()
-					print("Instant Boost Ready (Held from previous state)")
+					print("Instant Boost Ready")
 					
 			else:
 				drift.stop()
@@ -241,6 +243,8 @@ func _on_exp_collection_radius_area_entered(area: Area2D) -> void:
 		area.collected = true
 		area.player = self
 
+signal shake_hp_bar
+
 func _on_damage_area_iso_body_entered(body: Node2D) -> void:
 	if is_drifting:
 		return
@@ -248,6 +252,7 @@ func _on_damage_area_iso_body_entered(body: Node2D) -> void:
 		health -= body.enemy_stats.damage
 		self.player_hit()
 		print("hit")
+		shake_hp_bar.emit()
 		#TODO ADD BACK HITSHOCK
 		#self.animation_player.play("hit_shock")
 		Globals.camera.shake(0.5, 25, 25)

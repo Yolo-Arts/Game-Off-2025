@@ -21,3 +21,9 @@ z_index = 3
 y_sort_enabled = true
 tile_map_data = PackedByteArray("AAA5AML/AAAAAAAAAAA=")
 tile_set = ExtResource("1_g4ujy")
+
+[node name="TileMapLayer4" type="TileMapLayer" parent="."]
+z_index = 4
+y_sort_enabled = true
+tile_map_data = PackedByteArray("AAA4AMH/AAAAAAAAAAA5AMP/AAAAAAAAAAA6AML/AAAAAAAAAAA=")
+tile_set = ExtResource("1_g4ujy")
