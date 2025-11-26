@@ -11,3 +11,5 @@ signal infinite_ammo(duration: float)
 signal time_freeze(duration: float)
 signal time_freeze_disable
 signal ghost_ship(duration: float)
+signal magnetic_balls(duration: float)
+signal laser_beam

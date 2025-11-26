@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="faster_reload" load_steps=3 format=3 uid="uid://drcdgpb75l57j"]
+
+[ext_resource type="Script" uid="uid://5bjve3kbgp5d" path="res://Resources/Stat_ups/faster_reload.gd" id="1_74kc2"]
+[ext_resource type="Texture2D" uid="uid://c12v3gr0dt8sm" path="res://icon.svg" id="1_bav8w"]
+
+[resource]
+script = ExtResource("1_74kc2")
+image = ExtResource("1_bav8w")
+name = "Faster Reload"
+description = "speeds up reload time"
+Weight = 2
+metadata/_custom_type_script = "uid://5bjve3kbgp5d"

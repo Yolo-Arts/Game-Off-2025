@@ -11,7 +11,7 @@ extends Control
 var item_table = WeightedTable.new()
 var stat_up_index
 var stat_up_index2
-
+var selected = true
 
 func _ready() -> void:
 	visible = false
@@ -30,6 +30,9 @@ func _ready() -> void:
 	
 	stat_up_ui.update()
 	stat_up_ui_2.update()
+
+func _process(_delta):
+	pass
 
 func _on_player_level_up():
 	Globals.upgrading = true
@@ -55,6 +58,10 @@ func _on_player_level_up():
 	
 	#get_tree().paused = true    
 	visible = true  
+	await get_tree().create_timer(0.05).timeout
+	stat_up_ui.selected = false
+	stat_up_ui_2.selected = false
+	selected = false
 
 #func _on_option_1_pressed() -> void:
 	#apply_upgrade(stat_up_list[stat_up_index])
@@ -68,6 +75,9 @@ func _on_player_level_up():
 	#visible = false
 
 func _on_card_selected(upgrade: Statup):
+	selected = true
+	await get_tree().create_timer(0.05).timeout
+	Engine.time_scale= 1.0
 	if upgrade.is_unique:
 		Globals.unlocked_upgrades.append(upgrade)
 	
@@ -81,3 +91,13 @@ func apply_upgrade(upgrade: Statup):
 	else:
 		upgrade.apply_upgrade(Globals.player)
 		Globals.active_cannonball_upgrades.append(upgrade)
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("turn_left") and !selected:
+		stat_up_ui.select_upgrade()
+		stat_up_ui_2.selected = true
+		selected = true
+	if event.is_action_pressed("turn_right") and !selected:
+		stat_up_ui_2.select_upgrade()
+		stat_up_ui.selected = true
+		selected = true

@@ -8,6 +8,7 @@ var isometric_transform: Transform2D
 @onready var shoot_cooldown: Timer = $shootCooldown
 @onready var shockwave: ColorRect = %Shockwave
 @onready var shockwave_collision_shape: CollisionShape2D = $ShockwaveArea/ShockwaveCollisionShape
+@onready var laser_beam: Area2D = $Laser_beam
 
 @onready var hitbox: CollisionShape2D = $DamageAreaIso/CollisionShape2D
 @onready var hitbox2: CollisionShape2D = $Hitbox
@@ -42,6 +43,19 @@ func _ready():
 	Signals.infinite_ammo.connect(infiniteAmmo_ability)
 	Signals.time_freeze.connect(time_freeze_ability)
 	Signals.ghost_ship.connect(ghost_ship_ability)
+	Signals.magnetic_balls.connect(magnetic_balls_ability)
+	Signals.laser_beam.connect(Laser_beam_ability)
+
+func magnetic_balls_ability(duration):
+	pass
+
+func Laser_beam_ability(duration):
+	laser_beam.visible = true
+	laser_beam.monitoring = true
+	await get_tree().create_timer(duration).timeout
+	laser_beam.visible = false
+	laser_beam.monitoring = false
+	
 
 func ghost_ship_ability(duration):
 	hitbox.disabled = true
