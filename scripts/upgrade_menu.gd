@@ -80,6 +80,8 @@ func _on_card_selected(upgrade: Statup):
 	Engine.time_scale= 1.0
 	if upgrade.is_unique:
 		Globals.unlocked_upgrades.append(upgrade)
+		if upgrade.type == "Bullet Type":
+			Globals.active_cannonball_upgrades.append(upgrade)
 	
 	apply_upgrade(upgrade)
 	visible = false
@@ -90,7 +92,6 @@ func apply_upgrade(upgrade: Statup):
 		hotbar.unlock_ability(upgrade)
 	else:
 		upgrade.apply_upgrade(Globals.player)
-		Globals.active_cannonball_upgrades.append(upgrade)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("turn_left") and !selected:
