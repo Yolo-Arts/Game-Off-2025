@@ -19,6 +19,8 @@ fill_from = Vector2(0.53846157, 0.50427353)
 fill_to = Vector2(0.8333333, 0.18803419)
 
 [node name="Exp_Orb" type="Area2D"]
+z_index = 2
+y_sort_enabled = true
 scale = Vector2(0.5, 0.5)
 collision_layer = 16
 collision_priority = 3.0
