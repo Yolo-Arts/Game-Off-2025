@@ -219,7 +219,7 @@ func stop_is_drifting():
 
 func shoot():
 
-	Bullet_Type.shoot(cannonball, self, true, cannonball_scale)
+	Bullet_Type.shoot(cannonball_shot, self, true, cannonball_scale)
 
 func spawn_cannon_particles(pos: Vector2, normal: Vector2) -> void:
 	var instance = cannon_fire.instantiate()
