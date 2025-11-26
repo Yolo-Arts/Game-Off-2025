@@ -5,13 +5,77 @@ extends Player
 
 @export var isometric_angle: float = 30.0 
 var isometric_transform: Transform2D
+@onready var shoot_cooldown: Timer = $shootCooldown
+@onready var shockwave: ColorRect = %Shockwave
+@onready var shockwave_collision_shape: CollisionShape2D = $ShockwaveArea/ShockwaveCollisionShape
+@onready var laser_beam: Area2D = $Laser_beam
+
+@onready var hitbox: CollisionShape2D = $DamageAreaIso/CollisionShape2D
+@onready var hitbox2: CollisionShape2D = $Hitbox
+
+
+const RELOADING = preload("uid://c48542f6xe7d2")
+
+var can_shoot = true
+var is_drifting = false
+var drift_cooldown_bar = false
+signal reset_drift_cooldown_bar
+signal boost_indcator_start
+signal boost
+signal zoom_in
+signal zoom_out
+
+var game_begin = false
+var shockwave_fired = false
+@onready var shoot_cooldown_time = shoot_cooldown.wait_time
+@onready var infinite_ammo_time = 0.05
 
 func _ready():
+	get_tree().paused = false
+	Globals.player = self
 	health = 100
 	#Globals.player_died.connect(dead_player)
 	
 	isometric_transform = Transform2D()
 	isometric_transform = isometric_transform.rotated(deg_to_rad(isometric_angle))
+	
+	Signals.shockwave_fired.connect(shockwave_ability)
+	Signals.infinite_ammo.connect(infiniteAmmo_ability)
+	Signals.time_freeze.connect(time_freeze_ability)
+	Signals.ghost_ship.connect(ghost_ship_ability)
+	Signals.magnetic_balls.connect(magnetic_balls_ability)
+	Signals.laser_beam.connect(Laser_beam_ability)
+
+func magnetic_balls_ability(duration):
+	pass
+
+func Laser_beam_ability(duration):
+	laser_beam.visible = true
+	laser_beam.monitoring = true
+	await get_tree().create_timer(duration).timeout
+	laser_beam.visible = false
+	laser_beam.monitoring = false
+	
+
+func ghost_ship_ability(duration):
+	hitbox.disabled = true
+	hitbox2.disabled = true
+	await get_tree().create_timer(duration).timeout
+	hitbox.disabled = false
+	hitbox2.disabled = false
+	
+func time_freeze_ability(duration):
+	await get_tree().create_timer(duration).timeout
+	Signals.time_freeze_disable.emit()
+
+func infiniteAmmo_ability(duration):
+	shoot_cooldown.wait_time = infinite_ammo_time
+	await get_tree().create_timer(duration).timeout
+	shoot_cooldown.wait_time = shoot_cooldown_time
+
+func shockwave_ability():
+	shockwave_fired = true
+	shockwave_collision_shape.disabled = false
 
 func dead_player():
 	Globals.player_died.emit()
@@ -19,70 +83,139 @@ func dead_player():
 	for i in range(0, 5):
 		spawn_death_explosion(self.global_position)
 	self.hide()
+	get_tree().paused = true
 
-func _unhandled_input(event):
+
+func _input(event):
 	if event.is_action_pressed("fire"):
-		SoundManager.play_CannonFire()
-		shoot()
+		if can_shoot:
+			SoundManager.play_CannonFire()
+			shoot()
+			can_shoot = false
+			shoot_cooldown.start()
+		else:
+			spawn_reload_text()
+	if shockwave_fired == true:
+		shockwave_fired = false
+		shockwave_collision_shape.disabled = true
+		shockwave.material.set_shader_parameter("global_position", Vector2(1910/2.0, 1080/2))
+		if shockwave.has_node("AnimationPlayer"):
+			shockwave.get_node("AnimationPlayer").play("Shockwave")
+			
+
+
+func spawn_reload_text():
+	var text_instance = RELOADING.instantiate()
+	get_tree().current_scene.add_child(text_instance)
+	text_instance.global_position = self.global_position + Vector2(0, -80)
+
 
 func _physics_process(delta) -> void:
-	if !isDead:
-		var turn_direction = 0.0
-		if Input.is_action_pressed("turn_left"):
-			turn_direction -= 1.0
-		if Input.is_action_pressed("turn_right"):
-			turn_direction += 1.0
+	if game_begin:
+		if drift_value >= 1:
+			# (higher boost decay = lower distance traveled)
+			drift_value -= 100 * delta * boost_decay
 		
-		if turn_direction != 0.0:
-			turn_time += delta
-			var turn_factor = min(1.0, turn_time * turn_acceleration)
-			current_turn_speed = lerp(min_turn_speed, max_turn_speed, turn_factor)
+		if can_drift == true && drift_cooldown_bar == true:
+			boost_indcator_start.emit()
+			if Input.is_action_just_released("turn_left") or Input.is_action_just_released("turn_right"):
+				zoom_out.emit()
+				boost.emit()
+				drift_value += 1000
+				can_drift = false
+				print("drifting")
+				is_drifting = true
+				stop_is_drifting()
+				reset_drift_cooldown_bar.emit()
+				drift_cooldown_bar = false
 			
-			rotate(turn_direction * current_turn_speed * delta)
-		else:
-			turn_time = 0.0
-			current_turn_speed = min_turn_speed
-		
-		var target_speed = 0.0
-		var current_accel = 0.0
-
-		if Input.is_action_pressed("move_forward"):
-			if turn_direction != 0.0:
-				target_speed = base_speed
-				current_accel = deceleration 
+			
+		if drift_cooldown_bar == true:
+			
+			if Input.is_action_just_pressed("turn_left") or Input.is_action_just_pressed("turn_right"):
+				drift.start()
+				
+			elif Input.is_action_pressed("turn_left") or Input.is_action_pressed("turn_right"):
+				if drift.is_stopped() and can_drift == false:
+					can_drift = true
+					zoom_in.emit()
+					print("Instant Boost Ready (Held from previous state)")
+					
 			else:
-				target_speed = max_speed
-				current_accel = acceleration
-		else:
-			target_speed = base_speed
-			current_accel = acceleration 
-
-		current_speed = lerp(current_speed, target_speed, current_accel * delta)
-		#var forward_direction = Vector2.RIGHT.rotated(rotation)
-		#velocity = forward_direction * current_speed
-		
-		# ISOMETRIC MOVEMENT: 
-		var forward_direction = Vector2.RIGHT.rotated(rotation)
-		var isometric_direction = isometric_transform * forward_direction
-		velocity = isometric_direction * current_speed
-		
-		# Wall collisions:
-		var collision = move_and_collide(velocity * delta)
-		if collision:
-			animation_player.play("bounce")
-			var normal = collision.get_normal()
-			velocity = velocity.bounce(normal) * bounce_dampening
-			rotation = velocity.angle()
-			spawn_bounce_particles(collision.get_position(), normal)
-			Globals.camera.shake(0.15, 10, 5)
-			move_and_slide()
+				drift.stop()
 			
-		if health <= 0:
-			isDead = true
-			dead_player()
-		
-		update_sprite_rotation()
+		if !isDead:
+			var turn_direction = 0.0
+			if Input.is_action_pressed("turn_left"):
+				turn_direction -= 1.0
+			if Input.is_action_pressed("turn_right"):
+				turn_direction += 1.0
+			
+			if turn_direction != 0.0:
+				turn_time += delta
+				var turn_factor = min(1.0, turn_time * turn_acceleration)
+				current_turn_speed = lerp(min_turn_speed, max_turn_speed, turn_factor)
+				
+				rotate(turn_direction * current_turn_speed * delta)
+			else:
+				turn_time = 0.0
+				current_turn_speed = min_turn_speed
+			
+			var target_speed = 0.0
+			var current_accel = 0.0
 
+			if Input.is_action_pressed("move_forward"):
+				if turn_direction != 0.0:
+					target_speed = base_speed
+					current_accel = deceleration 
+				else:
+					target_speed = max_speed
+					current_accel = acceleration
+			else:
+				target_speed = base_speed
+				current_accel = acceleration 
+
+			current_speed = lerp(current_speed, target_speed, current_accel * delta)
+			#var forward_direction = Vector2.RIGHT.rotated(rotation)
+			#velocity = forward_direction * current_speed
+			
+			# ISOMETRIC MOVEMENT: 
+			#var forward_direction = Vector2.RIGHT.rotated(rotation)
+			#var isometric_direction = isometric_transform * forward_direction
+			#velocity = isometric_direction * ( current_speed + drift_value)
+			
+			
+			var forward_direction = Vector2.RIGHT.rotated(rotation)
+			var isometric_direction = isometric_transform * forward_direction
+			var ideal_velocity = isometric_direction * (current_speed + drift_value)
+			
+			velocity = velocity.lerp(ideal_velocity, momentum_factor * delta)
+			
+			# Wall collisions
+			var collision = move_and_collide(velocity * delta)
+			if collision:
+				#TODO ADD BACK BOUNCE ANIMATION
+				#animation_player.play("bounce")
+				var normal = collision.get_normal()
+				velocity = velocity.bounce(normal) * bounce_dampening
+				rotation = velocity.angle()
+				spawn_bounce_particles(collision.get_position(), normal)
+				Globals.camera.shake(0.15, 10, 5)
+				
+				move_and_slide()
+			
+			if health <= 0:
+				isDead = true
+				dead_player()
+			
+			
+			update_sprite_rotation()
+
+func stop_is_drifting():
+	print("drift began")
+	await get_tree().create_timer(drift_invulnerability).timeout
+	is_drifting = false
+	print("not drifting")
 
 func shoot():
 
@@ -130,7 +263,9 @@ func _on_exp_collection_radius_area_entered(area: Area2D) -> void:
 		area.player = self
 
 func _on_damage_area_iso_body_entered(body: Node2D) -> void:
-	if $damage_interval_timer.is_stopped() and body is Enemy:
+	if is_drifting:
+		return
+	elif $damage_interval_timer.is_stopped() and body is Enemy:
 		health -= body.enemy_stats.damage
 		self.player_hit()
 		print("hit")
@@ -144,3 +279,27 @@ func _on_damage_area_iso_body_entered(body: Node2D) -> void:
 
 func player_hit():
 	SoundManager.play_PlayerHurt()
+
+func _on_drift_timeout() -> void:
+	can_drift = true
+	zoom_in.emit()
+	print("driftable")
+
+
+func _on_shoot_cooldown_timeout() -> void:
+	can_shoot = true
+
+
+func _on_drift_bar_player_can_drift() -> void:
+	drift_cooldown_bar = true
+
+
+func _on_shockwave_area_body_entered(body: Node2D) -> void:
+	print("body entered")
+	if body.has_method("take_damage"):
+		await get_tree().create_timer(0.5).timeout
+		body.take_damage(shockwave_damage)
+
+
+func _on_isometric_main_begin_game() -> void:
+	game_begin = true

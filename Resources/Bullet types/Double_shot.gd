@@ -10,6 +10,11 @@ func shoot(cannonball: PackedScene, player:Player, isometric = false, scale = 1.
 	var bullet_instance3 = cannonball.instantiate()
 	var bullet_instance4 = cannonball.instantiate()
 	
+	apply_cannonball_upgrades(bullet_instance)
+	apply_cannonball_upgrades(bullet_instance2)
+	apply_cannonball_upgrades(bullet_instance3)
+	apply_cannonball_upgrades(bullet_instance4)
+	
 	bullet_instance.base_damage = player.damage
 	bullet_instance2.base_damage = player.damage
 	bullet_instance3.base_damage = player.damage

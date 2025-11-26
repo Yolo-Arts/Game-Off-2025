@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cjqdhk1yxoc0h"]
+[gd_scene load_steps=30 format=3 uid="uid://cjqdhk1yxoc0h"]
 
 [ext_resource type="Script" uid="uid://cy5j6mtf0cjtq" path="res://sounds/sound_manager.gd" id="1_a1hhe"]
 [ext_resource type="AudioStream" uid="uid://cwde2y4bxpmji" path="res://sounds/death_explosion1.sfxr" id="1_f05am"]
@@ -9,6 +9,19 @@
 [ext_resource type="AudioStream" uid="uid://bbo0dxfs3wbnj" path="res://sounds/playerHurt1.sfxr" id="6_yvcp5"]
 [ext_resource type="AudioStream" uid="uid://db6pcdv5k26es" path="res://sounds/playerHurt2.sfxr" id="7_a1hhe"]
 [ext_resource type="AudioStream" uid="uid://bcdx1wnye1sbw" path="res://sounds/playerHurt3.sfxr" id="8_pp33v"]
+[ext_resource type="AudioStream" uid="uid://cwmkbho44l0ek" path="res://sounds/UI_SFX/Wood Block1.mp3" id="10_x2es2"]
+[ext_resource type="AudioStream" uid="uid://dfjq2842alfhk" path="res://sounds/UI_SFX/Wood Block2.mp3" id="11_q5sbw"]
+[ext_resource type="AudioStream" uid="uid://dlr3cmylixhq" path="res://sounds/UI_SFX/Minimalist1.mp3" id="13_nsvqk"]
+[ext_resource type="AudioStream" uid="uid://dnb7edouvih8r" path="res://sounds/UI_SFX/Minimalist2.mp3" id="14_x1rkp"]
+[ext_resource type="AudioStream" uid="uid://bs5qhle2dbkfh" path="res://sounds/UI_SFX/Minimalist3.mp3" id="15_k4366"]
+[ext_resource type="AudioStream" uid="uid://tfdyh8c5drua" path="res://sounds/UI_SFX/Minimalist4.mp3" id="16_150ry"]
+[ext_resource type="AudioStream" uid="uid://c5fcb4n6ximnm" path="res://sounds/UI_SFX/Minimalist5.mp3" id="17_ogm50"]
+[ext_resource type="AudioStream" uid="uid://duhdbgmoxhrq7" path="res://sounds/UI_SFX/Minimalist6.mp3" id="18_2o6ll"]
+[ext_resource type="AudioStream" uid="uid://cpe50vo7dqps2" path="res://sounds/UI_SFX/Minimalist7.mp3" id="19_eyuff"]
+[ext_resource type="AudioStream" uid="uid://b8q2qofefua7m" path="res://sounds/UI_SFX/Minimalist8.mp3" id="20_w7ljr"]
+[ext_resource type="AudioStream" uid="uid://b3irssg4m0aik" path="res://sounds/Collect 4.ogg" id="20_x1rkp"]
+[ext_resource type="AudioStream" uid="uid://b56hlpycm5x1f" path="res://sounds/Collect 5.ogg" id="21_k4366"]
+[ext_resource type="AudioStream" uid="uid://bkyy3jqlnxvoa" path="res://sounds/LevelUp.ogg" id="22_k4366"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_8a8qv"]
 random_pitch = 1.51
@@ -35,7 +48,33 @@ stream_0/stream = ExtResource("6_yvcp5")
 stream_1/stream = ExtResource("7_a1hhe")
 stream_2/stream = ExtResource("8_pp33v")
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_bx4wv"]
+playback_mode = 2
+streams_count = 2
+stream_0/stream = ExtResource("10_x2es2")
+stream_1/stream = ExtResource("11_q5sbw")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_u5kly"]
+playback_mode = 2
+random_pitch = 1.1
+streams_count = 8
+stream_0/stream = ExtResource("13_nsvqk")
+stream_1/stream = ExtResource("14_x1rkp")
+stream_2/stream = ExtResource("15_k4366")
+stream_3/stream = ExtResource("16_150ry")
+stream_4/stream = ExtResource("17_ogm50")
+stream_5/stream = ExtResource("18_2o6ll")
+stream_6/stream = ExtResource("19_eyuff")
+stream_7/stream = ExtResource("20_w7ljr")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ab86g"]
+random_pitch = 1.2
+streams_count = 2
+stream_0/stream = ExtResource("20_x1rkp")
+stream_1/stream = ExtResource("21_k4366")
+
 [node name="SoundManager" type="Node"]
+process_mode = 3
 script = ExtResource("1_a1hhe")
 
 [node name="CannonFire" type="AudioStreamPlayer" parent="."]
@@ -56,3 +95,20 @@ stream = SubResource("AudioStreamRandomizer_0v1q7")
 volume_db = -4.913
 
 [node name="UI_SFX" type="Node" parent="."]
+
+[node name="ButtonPressed" type="AudioStreamPlayer" parent="UI_SFX"]
+stream = SubResource("AudioStreamRandomizer_bx4wv")
+bus = &"SFX"
+
+[node name="ButtonHover" type="AudioStreamPlayer" parent="UI_SFX"]
+stream = SubResource("AudioStreamRandomizer_u5kly")
+bus = &"SFX"
+
+[node name="UpgradeUnlock" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_ab86g")
+bus = &"SFX"
+
+[node name="LevelUp" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("22_k4366")
+pitch_scale = 1.2
+bus = &"SFX"

@@ -6,6 +6,9 @@ func shoot(cannonball: PackedScene, player:Player, isometric = false, scale = 1.
 	var bullet_instance = cannonball.instantiate()
 	var bullet_instance2 = cannonball.instantiate()
 	
+	apply_cannonball_upgrades(bullet_instance)
+	apply_cannonball_upgrades(bullet_instance2)
+	
 	bullet_instance.base_damage = player.damage
 	bullet_instance2.base_damage = player.damage
 	
@@ -48,6 +51,9 @@ func iso_shoot(cannonball: PackedScene, player: Player):
 	var bullet_instance = cannonball.instantiate()
 	var bullet_instance2 = cannonball.instantiate()
 	
+	apply_cannonball_upgrades(bullet_instance)
+	apply_cannonball_upgrades(bullet_instance2)
+	
 	player.get_parent().add_child(bullet_instance)
 	player.get_parent().add_child(bullet_instance2)
 
@@ -82,4 +88,3 @@ func spawn_cannon_particles(pos: Vector2, normal: Vector2, player: Player):
 	player.add_child(instance)
 	instance.global_position = pos
 	instance.rotation = normal.angle()
-	player.fire_cannon_SFX.emit()

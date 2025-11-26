@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdwjaggyrthgi"]
+
+[ext_resource type="Script" uid="uid://b82egxkc5d8iu" path="res://Resources/Stat_ups/AbilitiesFolder/Laser_beam/Laser_beam_handler.gd" id="1_8q1oe"]
+
+[node name="LaserBeamHandler" type="Node"]
+script = ExtResource("1_8q1oe")

@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://clpfc5m24onjx"]
+
+[ext_resource type="PackedScene" uid="uid://c60diwu1u2ajo" path="res://user_interface/ability_bar.tscn" id="1_7ry1b"]
+[ext_resource type="PackedScene" uid="uid://br81uexsi3und" path="res://user_interface/drift_bar.tscn" id="3_3jspy"]
+
+[node name="HotBar" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AbilityBar" parent="." instance=ExtResource("1_7ry1b")]
+layout_mode = 0
+anchors_preset = 0
+
+[node name="DriftBar" parent="." instance=ExtResource("3_3jspy")]
+visible = false

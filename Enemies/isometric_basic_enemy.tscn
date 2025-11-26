@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://h0hdesj12ofh"]
+[gd_scene load_steps=17 format=3 uid="uid://h0hdesj12ofh"]
 
 [ext_resource type="Script" uid="uid://62nijy3yjwul" path="res://Enemies/basic_enemy_isometric.gd" id="1_guxgk"]
 [ext_resource type="Resource" uid="uid://d1qpml40osw4y" path="res://Enemies/Enemy_Types/black_isometric.tres" id="2_sak5g"]
@@ -8,6 +8,7 @@
 [ext_resource type="Shader" path="res://Shaders/hit_flash.gdshader" id="5_r2gfe"]
 [ext_resource type="Texture2D" uid="uid://bhhya7080ahh8" path="res://Enemies/Sprites/enemy_ship_red_spritesheet.png" id="6_gwrt0"]
 [ext_resource type="Resource" uid="uid://bprcgrgyghoih" path="res://Enemies/Enemy_Types/orange_isometric.tres" id="6_sak5g"]
+[ext_resource type="PackedScene" uid="uid://3px7bwweehhp" path="res://Player/water_trail.tscn" id="9_sak5g"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qenpu"]
 shader = ExtResource("5_r2gfe")
@@ -65,8 +66,8 @@ _data = {
 
 [node name="Basic_enemy" type="CharacterBody2D"]
 z_index = 1
-collision_layer = 2
-collision_mask = 14
+collision_layer = 34
+collision_mask = 46
 script = ExtResource("1_guxgk")
 enemy_types = Array[Resource]([ExtResource("2_sak5g"), ExtResource("3_gwrt0"), ExtResource("4_4rfnd"), ExtResource("5_ql4d2"), ExtResource("6_sak5g")])
 
@@ -79,17 +80,16 @@ hframes = 45
 vframes = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
+position = Vector2(0, 26)
 rotation = 1.5659956
 shape = SubResource("CapsuleShape2D_iioo1")
 
 [node name="Hitbox" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-visible = false
+position = Vector2(0, 25)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_4vdx4")
 debug_color = Color(0.5813112, 0, 0.70196074, 0.41960785)
@@ -98,11 +98,10 @@ debug_color = Color(0.5813112, 0, 0.70196074, 0.41960785)
 bus = &"SFX"
 
 [node name="Hurtbox" type="Area2D" parent="."]
-visible = false
 collision_layer = 2
 
 [node name="hurtShape" type="CollisionShape2D" parent="Hurtbox"]
-visible = false
+position = Vector2(0, 28)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_rcyh1")
 debug_color = Color(0.70196074, 0.6745404, 0, 0.41960785)
@@ -116,5 +115,11 @@ libraries = {
 wait_time = 5.0
 one_shot = true
 
+[node name="WaterTrail" parent="." instance=ExtResource("9_sak5g")]
+position = Vector2(0, 43.94)
+width = 125.0
+max_points = 20
+
+[connection signal="free_waterTrail" from="." to="WaterTrail" method="_on_basic_enemy_free_water_trail"]
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
 [connection signal="timeout" from="queue_free" to="." method="_on_queue_free_timeout"]

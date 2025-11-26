@@ -2,18 +2,25 @@ class_name  Player
 extends CharacterBody2D
 
 @export var Bullet_Type: Bullet_type
-var damage = 10.0
+@onready var CANNONBALL = preload("uid://m1jsvblrkbdq")
+
+var damage = 20.0
 var cannonball_scale = 1.0
 # movement related code
 @export_group("Movement Parameters")
-@export var base_speed: float = 400
+@export var base_speed: float = 500
 @export var max_speed: float = 700.0
 @export var min_turn_speed: float = 0.8  
 @export var max_turn_speed: float = 6.0  
 @export var turn_acceleration: float = 0.4
-@export var acceleration: float = 1.0
+@export var acceleration: float = 5.0
 @export var deceleration: float = 0.15
-@export var bounce_dampening: float = 0.7
+@export var bounce_dampening: float = 1
+@onready var drift:Timer = $drift
+@export var momentum_factor: float = 3.0  # Higher values = more momentum (more drift)
+@export var boost_decay: float = 14
+@export var drift_invulnerability: float = 2.0
+@export var ram_damage: float = 15.0
 
 # Cannons
 @onready var cannon_left = $CannonLeft
@@ -41,8 +48,10 @@ var current_turn_speed: float = min_turn_speed
 var turn_time: float = 0.0 
 var player_max_health = 100.0
 var health = 100.00
-
+var can_drift = false
+var drift_value = 1
 var isDead = false
+var shockwave_damage = 15
 
 func _ready():
 	pass
@@ -54,10 +63,28 @@ func dead_player():
 		spawn_death_explosion(self.global_position)
 	self.hide()
 
-func _unhandled_input(event):
+func _input(event):
 	if event.is_action_pressed("fire"):
 		shoot()
+
 func _physics_process(delta) -> void:
+	if drift_value >= 0:
+		drift_value -=100 * delta * boost_decay
+		
+	
+	if can_drift == true:
+		if Input.is_action_just_released("turn_left") or Input.is_action_just_released("turn_right"):
+			drift_value = 10000
+			can_drift = false
+			print("drifting")
+	if Input.is_action_just_pressed("turn_left"):
+		drift.start()
+		if Input.is_action_just_released("turn_left"):
+			drift.stop()
+	if Input.is_action_just_pressed("turn_right"):
+		drift.start()
+		if Input.is_action_just_released("turn_right"):
+			drift.stop()
 	
 	if !isDead:
 		var turn_direction = 0.0
@@ -92,7 +119,7 @@ func _physics_process(delta) -> void:
 
 		current_speed = lerp(current_speed, target_speed, current_accel * delta)
 		var forward_direction = Vector2.RIGHT.rotated(rotation)
-		velocity = forward_direction * current_speed
+		velocity = forward_direction * current_speed * drift_value
 		
 		# Wall collisions:
 		var collision = move_and_collide(velocity * delta)
@@ -111,7 +138,6 @@ func _physics_process(delta) -> void:
 
 
 func shoot():
-	
 	Bullet_Type.shoot(cannonball, self, false, cannonball_scale)
 
 
@@ -157,3 +183,8 @@ func _on_exp_collection_radius_body_entered(body: Node2D) -> void:
 	if body is Exp_Orb:
 		Globals.exp_collected.emit()
 		body.queue_free()
+
+
+func _on_drift_timeout() -> void:
+	can_drift = true
+	print("driftable")

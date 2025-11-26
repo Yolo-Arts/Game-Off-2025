@@ -14,6 +14,8 @@ extends CanvasLayer
 
 @onready var shaker = $Shaker
 @onready var animation_player = $AnimationPlayer
+@onready var restart_margin: MarginContainer = %RestartMargin
+
 
 
 func _ready():
@@ -25,6 +27,7 @@ func _ready():
 	
 
 func _on_restart_pressed():
+	SoundManager.UI_ButtonPressed()
 	animation_player.play("close-transition")
 	await get_tree().create_timer(1).timeout
 	get_tree().change_scene_to_file("res://Scenes/isometric_main.tscn")
@@ -54,7 +57,7 @@ func hide_stats() -> void:
 		child.self_modulate.a = 0.0
 	final_score_label.self_modulate.a = 0.0
 	total_score_label.self_modulate.a = 0.0
-	$Control/Scoreboard/VBoxContainer/Scoreboard/RestartMargin.modulate.a = 0.0
+	restart_margin.modulate.a = 0.0
 
 func animate_stats() -> void:
 	var tween: Tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
@@ -84,8 +87,8 @@ func animate_stats() -> void:
 	
 	tween.tween_interval(1.0)
 	
-	tween.tween_property($Control/Scoreboard/VBoxContainer/Scoreboard/RestartMargin, "position:y", 610, 0.3).from(get_viewport().size.y)
-	tween.parallel().tween_property($Control/Scoreboard/VBoxContainer/Scoreboard/RestartMargin, "modulate:a", 1.0, 0.1).from(0.0)
+	tween.tween_property(restart_margin, "position:y", 610, 0.3).from(get_viewport().size.y)
+	tween.parallel().tween_property(restart_margin, "modulate:a", 1.0, 0.1).from(0.0)
 	#tween.tween_callback($Control/Scoreboard/VBoxContainer/Scoreboard/RestartMargin/Restart.grab_focus)
 
 func set_label_number(number: int, label: Label) -> void:
@@ -93,3 +96,7 @@ func set_label_number(number: int, label: Label) -> void:
 
 func screen_shake(duration: float, frequency: float, amplitude: float) -> void:
 	Globals.camera.shake(duration, frequency, amplitude)
+
+
+func _on_restart_mouse_entered() -> void:
+	SoundManager.UI_ButtonHovered()

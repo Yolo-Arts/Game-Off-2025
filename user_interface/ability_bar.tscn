@@ -1,0 +1,52 @@
+[gd_scene load_steps=3 format=3 uid="uid://c60diwu1u2ajo"]
+
+[ext_resource type="Script" uid="uid://brlsplv31kd7i" path="res://user_interface/ability_bar.gd" id="1_75t28"]
+[ext_resource type="PackedScene" uid="uid://gpjbad0hv6qx" path="res://user_interface/ability.tscn" id="2_yybls"]
+
+[node name="AbilityBar" type="HBoxContainer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("1_75t28")
+
+[node name="Ability" parent="." instance=ExtResource("2_yybls")]
+layout_mode = 2
+
+[node name="Ability2" parent="." instance=ExtResource("2_yybls")]
+visible = false
+layout_mode = 2
+
+[node name="Ability3" parent="." instance=ExtResource("2_yybls")]
+visible = false
+layout_mode = 2
+
+[node name="Ability4" parent="." instance=ExtResource("2_yybls")]
+visible = false
+layout_mode = 2
+
+[node name="Ability5" parent="." instance=ExtResource("2_yybls")]
+visible = false
+layout_mode = 2
+
+[node name="Ability6" parent="." instance=ExtResource("2_yybls")]
+visible = false
+layout_mode = 2
+
+[node name="Ability7" parent="." instance=ExtResource("2_yybls")]
+visible = false
+layout_mode = 2
+
+[node name="Ability8" parent="." instance=ExtResource("2_yybls")]
+visible = false
+layout_mode = 2
+
+[node name="Ability9" parent="." instance=ExtResource("2_yybls")]
+visible = false
+layout_mode = 2

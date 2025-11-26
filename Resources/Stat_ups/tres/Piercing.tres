@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="PierceCannonballStrategy" load_steps=3 format=3 uid="uid://cvisr7wr5sfol"]
+
+[ext_resource type="Script" uid="uid://byh0dh8il0btx" path="res://Resources/Stat_ups/piercing.gd" id="1_fue4k"]
+[ext_resource type="Texture2D" uid="uid://c12v3gr0dt8sm" path="res://icon.svg" id="1_jh6qm"]
+
+[resource]
+script = ExtResource("1_fue4k")
+image = ExtResource("1_jh6qm")
+name = "Armor Piercing Cannons"
+description = "Cannonballs pierce through +1 Enemies"
+Weight = 2
+metadata/_custom_type_script = "uid://byh0dh8il0btx"

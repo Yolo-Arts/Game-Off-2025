@@ -1,0 +1,87 @@
+[gd_scene load_steps=7 format=3 uid="uid://gpjbad0hv6qx"]
+
+[ext_resource type="Texture2D" uid="uid://bd3u6bcfqb7x8" path="res://Assets/skill_icons/shockwaveV2-export.png" id="1_a6u5u"]
+[ext_resource type="Script" uid="uid://dm6gugded18bu" path="res://user_interface/ability.gd" id="2_a6u5u"]
+[ext_resource type="Texture2D" uid="uid://bopex10lmjama" path="res://Assets/white_square.png" id="2_owgrm"]
+[ext_resource type="Theme" uid="uid://b70rftml1sway" path="res://user_interface/themev3.tres" id="3_owgrm"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_a6u5u"]
+
+[sub_resource type="Shortcut" id="Shortcut_2fld5"]
+events = [SubResource("InputEventKey_a6u5u")]
+
+[node name="Ability" type="TextureButton"]
+custom_minimum_size = Vector2(128, 128)
+offset_right = 128.0
+offset_bottom = 128.0
+shortcut = SubResource("Shortcut_2fld5")
+texture_normal = ExtResource("1_a6u5u")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("2_a6u5u")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+layout_mode = 1
+offset_right = 129.0
+offset_bottom = 128.0
+step = 0.05
+fill_mode = 5
+nine_patch_stretch = true
+texture_progress = ExtResource("2_owgrm")
+tint_progress = Color(0.1254902, 0.1254902, 0.1254902, 0.7647059)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="Time" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("3_owgrm")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(34.49, 34.595)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 0.955
+offset_top = -43.42
+offset_right = 40.955
+offset_bottom = -3.4199295
+grow_vertical = 0
+color = Color(0.2, 0.12941177, 0.007843138, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+theme_override_constants/margin_left = 11
+
+[node name="Key" type="Label" parent="MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("3_owgrm")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 24
+vertical_alignment = 2
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

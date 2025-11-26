@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://ccfryxxm40b6l"]
+
+[ext_resource type="Texture2D" uid="uid://c12v3gr0dt8sm" path="res://icon.svg" id="1_ec07d"]
+[ext_resource type="Script" uid="uid://dam2js2ppjicl" path="res://Resources/Stat_ups/boost_damage.gd" id="2_ec07d"]
+
+[resource]
+script = ExtResource("2_ec07d")
+image = ExtResource("1_ec07d")
+name = "Boost Power"
+description = "Increases Ramming power by 25%"
+Weight = 2
+metadata/_custom_type_script = "uid://cx0xqtau6rhsj"

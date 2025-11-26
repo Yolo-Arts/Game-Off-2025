@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 class_name Enemy
 
-#TODO FIX THE MOVEMENT SCRIPT SO THAT THEY ACTUALLY MOVE LIKE A BOAT 
+
 #FIXME Fix the hitboxes, they do not rotate with the enemy.
 
 var speed: float = 100.0  
@@ -34,9 +34,12 @@ var enemy_stats: Resource
 
 var player = null
 var isDead = false
+var can_move = true
 
 var total_frames = 360
 var frame_offset = 0  
+
+signal free_waterTrail
 
 var rng = RandomNumberGenerator.new()
 
@@ -49,7 +52,10 @@ func _ready() -> void:
 
 	if sprite.material:
 		sprite.material = sprite.material.duplicate()
-
+	
+	Signals.time_freeze.connect(freeze)
+	Signals.time_freeze_disable.connect(unfreeze)
+	
 func set_enemy_type(enemy_type: int):
 	if enemy_type >= enemy_types.size(): 
 		return
@@ -59,7 +65,7 @@ func set_enemy_type(enemy_type: int):
 
 
 func _physics_process(_delta):
-	if !isDead: 
+	if !isDead and can_move: 
 		var direction = get_direction_to_player()
 		#var isometric_direction = isometric_transform * direction
 		#velocity = isometric_direction * speed
@@ -110,6 +116,7 @@ func take_damage(damage: int):
 		spawn_exp_orb(self.position)
 		sprite.visible = false
 		isDead = true
+		free_waterTrail.emit()
 		disable_hitbox() 
 		Globals.camera.shake(0.20, 15, 20)
 		Globals.update_score("ENEMY_SHIPWRECKED")
@@ -158,3 +165,9 @@ func disable_hitbox():
 
 func _on_queue_free_timeout() -> void:
 	self.queue_free()
+
+func freeze(_duration):
+	can_move = false
+
+func unfreeze():
+	can_move = true

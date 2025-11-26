@@ -7,4 +7,3 @@ script = ExtResource("1_r048n")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 600.0
-autostart = true

@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://cwwekbcfo4hgu"]
+[gd_scene load_steps=12 format=3 uid="uid://cwwekbcfo4hgu"]
 
 [ext_resource type="Script" uid="uid://beiwt1l5yk3ny" path="res://user_interface/game_over.gd" id="1_bkg1s"]
 [ext_resource type="Theme" uid="uid://bi4882lo6q8km" path="res://user_interface/ThemeV2.tres" id="2_adlvt"]
 [ext_resource type="Script" uid="uid://b4hwrp8guiq8a" path="res://addons/shaker/shaker.gd" id="3_adlvt"]
+[ext_resource type="Theme" uid="uid://b70rftml1sway" path="res://user_interface/themev3.tres" id="3_upsow"]
 [ext_resource type="Shader" uid="uid://ydw2wifhpp88" path="res://Shaders/screenTransition.gdshader" id="4_12xn0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_upsow"]
@@ -34,21 +35,6 @@ colors = PackedColorArray(0.035858154, 0.13177991, 0.1953125, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_12xn0"]
 gradient = SubResource("Gradient_adlvt")
 
-[sub_resource type="Animation" id="Animation_12xn0"]
-resource_name = "close-transition"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TextureRect:material:shader_parameter/progress")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [2.06, -0.095]
-}
-
 [sub_resource type="Animation" id="Animation_upsow"]
 length = 0.001
 tracks/0/type = "value"
@@ -62,6 +48,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [2.06]
+}
+
+[sub_resource type="Animation" id="Animation_12xn0"]
+resource_name = "close-transition"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [2.06, -0.095]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lingh"]
@@ -84,6 +85,7 @@ grow_vertical = 2
 pivot_offset = Vector2(960, 540)
 
 [node name="Shadow" type="MarginContainer" parent="Control"]
+visible = false
 modulate = Color(0.19215687, 0.19215687, 0.19215687, 0.48235294)
 layout_mode = 1
 anchors_preset = 15
@@ -122,6 +124,7 @@ offset_right = 20.0
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("3_upsow")
 theme_override_font_sizes/font_size = 96
 text = "W A S T E D"
 
@@ -263,212 +266,197 @@ theme_override_constants/margin_bottom = 100
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="WastedPanel" type="Panel" parent="Control/Scoreboard/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="Control/Scoreboard/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_upsow")
+
+[node name="WastedPanel" type="Panel" parent="Control/Scoreboard/VBoxContainer/PanelContainer"]
 custom_minimum_size = Vector2(900, 150)
 layout_mode = 2
-theme = ExtResource("2_adlvt")
+theme = ExtResource("3_upsow")
 
-[node name="PanelContainer" type="PanelContainer" parent="Control/Scoreboard/VBoxContainer/WastedPanel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("2_adlvt")
-
-[node name="WastedLabel" type="Label" parent="Control/Scoreboard/VBoxContainer/WastedPanel"]
+[node name="WastedLabel" type="Label" parent="Control/Scoreboard/VBoxContainer/PanelContainer/WastedPanel"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
+offset_left = -256.5
+offset_top = -41.695
+offset_right = 256.5
+offset_bottom = 66.30502
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 96
+theme = ExtResource("3_upsow")
+theme_override_colors/font_color = Color(0.2, 0.12941177, 0.007843138, 1)
+theme_override_constants/shadow_offset_x = 6
+theme_override_constants/shadow_offset_y = 6
+theme_override_font_sizes/font_size = 66
 text = "W A S T E D"
 
-[node name="Scoreboard" type="Panel" parent="Control/Scoreboard/VBoxContainer"]
+[node name="PanelContainer2" type="PanelContainer" parent="Control/Scoreboard/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("2_adlvt")
+theme = ExtResource("3_upsow")
 
-[node name="PanelContainer2" type="PanelContainer" parent="Control/Scoreboard/VBoxContainer/Scoreboard"]
+[node name="Scoreboard" type="Panel" parent="Control/Scoreboard/VBoxContainer/PanelContainer2"]
+custom_minimum_size = Vector2(0, 701.625)
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("3_upsow")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Scoreboard/VBoxContainer/PanelContainer2/Scoreboard"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -489.0
+offset_right = 489.0
+offset_bottom = 705.0
 grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("2_adlvt")
+theme_override_constants/separation = -1
 
-[node name="MarginContainer2" type="MarginContainer" parent="Control/Scoreboard/VBoxContainer/Scoreboard"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/Scoreboard/VBoxContainer/Scoreboard"]
-layout_mode = 0
-offset_right = 1110.0
-offset_bottom = 710.0
-
-[node name="MarginContainer" type="MarginContainer" parent="Control/Scoreboard/VBoxContainer/Scoreboard/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Control/Scoreboard/VBoxContainer/PanelContainer2/Scoreboard/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_top = 40
 
-[node name="Score_" type="Label" parent="Control/Scoreboard/VBoxContainer/Scoreboard/VBoxContainer/MarginContainer"]
+[node name="Score_" type="Label" parent="Control/Scoreboard/VBoxContainer/PanelContainer2/Scoreboard/VBoxContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme = ExtResource("2_adlvt")
-theme_override_font_sizes/font_size = 64
-text = "SCORE:"
+theme = ExtResource("3_upsow")
+theme_override_font_sizes/font_size = 34
+text = "Score:"
 
-[node name="VSeparator" type="VSeparator" parent="Control/Scoreboard/VBoxContainer/Scoreboard/VBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="Control/Scoreboard/VBoxContainer/PanelContainer2/Scoreboard/VBoxContainer"]
 modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(0, 60)
+custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
-[node name="CategoriesAndScoresDivider" type="HBoxContainer" parent="Control/Scoreboard/VBoxContainer/Scoreboard/VBoxContainer"]
+[node name="CategoriesAndScoresDivider" type="HBoxContainer" parent="Control/Scoreboard/VBoxContainer/PanelContainer2/Scoreboard/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 80
-alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="Control/Scoreboard/VBoxContainer/Scoreboard/VBoxContainer/CategoriesAndScoresDivider"]
+[node name="MarginContainer" type="MarginContainer" parent="Control/Scoreboard/VBoxContainer/PanelContainer2/Scoreboard/VBoxContainer/CategoriesAndScoresDivider"]
 layout_mode = 2
 
-[node name="ScoreCategories" type="VBoxContainer" parent="Control/Scoreboard/VBoxContainer/Scoreboard/VBoxContainer/CategoriesAndScoresDivider"]
+[node name="ScoreCategories" type="VBoxContainer" parent="Control/Scoreboard/VBoxContainer/PanelContainer2/Scoreboard/VBoxContainer/CategoriesAndScoresDivider"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 theme_override_constants/separation = 40
 
-[node name="seconds survived" type="Label" parent="Control/Scoreboard/VBoxContainer/Scoreboard/VBoxContainer/CategoriesAndScoresDivider/ScoreCategories"]
+[node name="seconds survived" type="Label" parent="Control/Scoreboard/VBoxContainer/PanelContainer2/Scoreboard/VBoxContainer/CategoriesAndScoresDivider/ScoreCategories"]
 layout_mode = 2
 size_flags_horizontal = 0
-theme = ExtResource("2_adlvt")
+theme = ExtResource("3_upsow")
 text = "Time survived:"
 
-[node name="shipwrecked" type="Label" parent="Control/Scoreboard/VBoxContainer/Scoreboard/VBoxContainer/CategoriesAndScoresDivider/ScoreCategories"]
+[node name="shipwrecked" type="Label" parent="Control/Scoreboard/VBoxContainer/PanelContainer2/Scoreboard/VBoxContainer/CategoriesAndScoresDivider/ScoreCategories"]
 layout_mode = 2
-theme = ExtResource("2_adlvt")
+theme = ExtResource("3_upsow")
 text = "Enemies shipwrecked:"
 
-[node name="shipwrecked2" type="Label" parent="Control/Scoreboard/VBoxContainer/Scoreboard/VBoxContainer/CategoriesAndScoresDivider/ScoreCategories"]
+[node name="shipwrecked2" type="Label" parent="Control/Scoreboard/VBoxContainer/PanelContainer2/Scoreboard/VBoxContainer/CategoriesAndScoresDivider/ScoreCategories"]
 layout_mode = 2
-theme = ExtResource("2_adlvt")
+theme = ExtResource("3_upsow")
 text = "Bounty:"
 
-[node name="waves_survived" type="Label" parent="Control/Scoreboard/VBoxContainer/Scoreboard/VBoxContainer/CategoriesAndScoresDivider/ScoreCategories"]
+[node name="waves_survived" type="Label" parent="Control/Scoreboard/VBoxContainer/PanelContainer2/Scoreboard/VBoxContainer/CategoriesAndScoresDivider/ScoreCategories"]
 layout_mode = 2
-theme = ExtResource("2_adlvt")
+theme = ExtResource("3_upsow")
 text = "Waves Survived:"
 
-[node name="bosses_shipwrecked" type="Label" parent="Control/Scoreboard/VBoxContainer/Scoreboard/VBoxContainer/CategoriesAndScoresDivider/ScoreCategories"]
+[node name="bosses_shipwrecked" type="Label" parent="Control/Scoreboard/VBoxContainer/PanelContainer2/Scoreboard/VBoxContainer/CategoriesAndScoresDivider/ScoreCategories"]
 layout_mode = 2
-theme = ExtResource("2_adlvt")
+theme = ExtResource("3_upsow")
 text = "Bosses Shipwrecked:"
 
-[node name="ScorePoints" type="VBoxContainer" parent="Control/Scoreboard/VBoxContainer/Scoreboard/VBoxContainer/CategoriesAndScoresDivider"]
+[node name="ScorePoints" type="VBoxContainer" parent="Control/Scoreboard/VBoxContainer/PanelContainer2/Scoreboard/VBoxContainer/CategoriesAndScoresDivider"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 theme_override_constants/separation = 40
 
-[node name="secondsScore" type="Label" parent="Control/Scoreboard/VBoxContainer/Scoreboard/VBoxContainer/CategoriesAndScoresDivider/ScorePoints"]
+[node name="secondsScore" type="Label" parent="Control/Scoreboard/VBoxContainer/PanelContainer2/Scoreboard/VBoxContainer/CategoriesAndScoresDivider/ScorePoints"]
 unique_name_in_owner = true
 layout_mode = 2
-theme = ExtResource("2_adlvt")
+theme = ExtResource("3_upsow")
 text = "Time survived:"
 
-[node name="shipwreckedScore" type="Label" parent="Control/Scoreboard/VBoxContainer/Scoreboard/VBoxContainer/CategoriesAndScoresDivider/ScorePoints"]
+[node name="shipwreckedScore" type="Label" parent="Control/Scoreboard/VBoxContainer/PanelContainer2/Scoreboard/VBoxContainer/CategoriesAndScoresDivider/ScorePoints"]
 unique_name_in_owner = true
 layout_mode = 2
-theme = ExtResource("2_adlvt")
+theme = ExtResource("3_upsow")
 text = "Enemies shipwrecked:"
 
-[node name="bountyScore" type="Label" parent="Control/Scoreboard/VBoxContainer/Scoreboard/VBoxContainer/CategoriesAndScoresDivider/ScorePoints"]
+[node name="bountyScore" type="Label" parent="Control/Scoreboard/VBoxContainer/PanelContainer2/Scoreboard/VBoxContainer/CategoriesAndScoresDivider/ScorePoints"]
 unique_name_in_owner = true
 layout_mode = 2
-theme = ExtResource("2_adlvt")
+theme = ExtResource("3_upsow")
 text = "Bounty:"
 
-[node name="waves_survivedScore" type="Label" parent="Control/Scoreboard/VBoxContainer/Scoreboard/VBoxContainer/CategoriesAndScoresDivider/ScorePoints"]
+[node name="waves_survivedScore" type="Label" parent="Control/Scoreboard/VBoxContainer/PanelContainer2/Scoreboard/VBoxContainer/CategoriesAndScoresDivider/ScorePoints"]
 unique_name_in_owner = true
 layout_mode = 2
-theme = ExtResource("2_adlvt")
+theme = ExtResource("3_upsow")
 text = "Waves Survived:"
 
-[node name="bosses_shipwreckedScore" type="Label" parent="Control/Scoreboard/VBoxContainer/Scoreboard/VBoxContainer/CategoriesAndScoresDivider/ScorePoints"]
+[node name="bosses_shipwreckedScore" type="Label" parent="Control/Scoreboard/VBoxContainer/PanelContainer2/Scoreboard/VBoxContainer/CategoriesAndScoresDivider/ScorePoints"]
 unique_name_in_owner = true
 layout_mode = 2
-theme = ExtResource("2_adlvt")
+theme = ExtResource("3_upsow")
 text = "Bosses Shipwrecked:"
 
-[node name="MarginContainer2" type="MarginContainer" parent="Control/Scoreboard/VBoxContainer/Scoreboard/VBoxContainer/CategoriesAndScoresDivider"]
+[node name="MarginContainer2" type="MarginContainer" parent="Control/Scoreboard/VBoxContainer/PanelContainer2/Scoreboard/VBoxContainer/CategoriesAndScoresDivider"]
 layout_mode = 2
 
-[node name="VSeparator2" type="VSeparator" parent="Control/Scoreboard/VBoxContainer/Scoreboard/VBoxContainer"]
+[node name="VSeparator2" type="VSeparator" parent="Control/Scoreboard/VBoxContainer/PanelContainer2/Scoreboard/VBoxContainer"]
 modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(0, 60)
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/Scoreboard/VBoxContainer/Scoreboard/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Scoreboard/VBoxContainer/PanelContainer2/Scoreboard/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 80
 alignment = 1
 
-[node name="MarginContainer3" type="MarginContainer" parent="Control/Scoreboard/VBoxContainer/Scoreboard/VBoxContainer/HBoxContainer"]
+[node name="MarginContainer3" type="MarginContainer" parent="Control/Scoreboard/VBoxContainer/PanelContainer2/Scoreboard/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="FinalScoreLabel" type="Label" parent="Control/Scoreboard/VBoxContainer/Scoreboard/VBoxContainer/HBoxContainer"]
+[node name="FinalScoreLabel" type="Label" parent="Control/Scoreboard/VBoxContainer/PanelContainer2/Scoreboard/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("2_adlvt")
-theme_override_font_sizes/font_size = 64
+theme = ExtResource("3_upsow")
+theme_override_font_sizes/font_size = 54
 text = "Final Score:"
 
-[node name="total_score" type="Label" parent="Control/Scoreboard/VBoxContainer/Scoreboard/VBoxContainer/HBoxContainer"]
+[node name="total_score" type="Label" parent="Control/Scoreboard/VBoxContainer/PanelContainer2/Scoreboard/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 2
-theme = ExtResource("2_adlvt")
+theme = ExtResource("3_upsow")
 theme_override_font_sizes/font_size = 64
 text = "TEST"
 
-[node name="MarginContainer4" type="MarginContainer" parent="Control/Scoreboard/VBoxContainer/Scoreboard/VBoxContainer/HBoxContainer"]
+[node name="MarginContainer4" type="MarginContainer" parent="Control/Scoreboard/VBoxContainer/PanelContainer2/Scoreboard/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="RestartMargin" type="MarginContainer" parent="Control/Scoreboard/VBoxContainer/Scoreboard"]
-custom_minimum_size = Vector2(300, 100)
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -150.0
-offset_top = -100.0
-offset_right = 150.0
-grow_horizontal = 2
-grow_vertical = 0
+[node name="RestartMargin" type="MarginContainer" parent="Control/Scoreboard/VBoxContainer/PanelContainer2/Scoreboard/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
 theme_override_constants/margin_bottom = 30
 
-[node name="Restart" type="Button" parent="Control/Scoreboard/VBoxContainer/Scoreboard/RestartMargin"]
+[node name="Restart" type="Button" parent="Control/Scoreboard/VBoxContainer/PanelContainer2/Scoreboard/VBoxContainer/RestartMargin"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-theme = ExtResource("2_adlvt")
-text = "  Restart  "
+size_flags_horizontal = 4
+theme = ExtResource("3_upsow")
+theme_override_font_sizes/font_size = 31
+text = "   Restart   "
 
 [node name="Shaker" type="Node" parent="." node_paths=PackedStringArray("target_node")]
 script = ExtResource("3_adlvt")
@@ -495,4 +483,5 @@ libraries = {
 &"": SubResource("AnimationLibrary_lingh")
 }
 
-[connection signal="pressed" from="Control/Scoreboard/VBoxContainer/Scoreboard/RestartMargin/Restart" to="." method="_on_restart_pressed"]
+[connection signal="mouse_entered" from="Control/Scoreboard/VBoxContainer/PanelContainer2/Scoreboard/VBoxContainer/RestartMargin/Restart" to="." method="_on_restart_mouse_entered"]
+[connection signal="pressed" from="Control/Scoreboard/VBoxContainer/PanelContainer2/Scoreboard/VBoxContainer/RestartMargin/Restart" to="." method="_on_restart_pressed"]
