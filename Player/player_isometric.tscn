@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://deqnmjpt3dxgb"]
+[gd_scene load_steps=19 format=3 uid="uid://deqnmjpt3dxgb"]
 
 [ext_resource type="Script" uid="uid://bg21p6igd7lvn" path="res://Player/player_isometric.gd" id="1_60ovk"]
 [ext_resource type="Texture2D" uid="uid://bjchrxewdcwy2" path="res://Player/boat_spritesheet2.png" id="2_evufl"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://dbjnldmb02swc" path="res://Assets/Particles/boost_particles.gd" id="7_r0ntv"]
 [ext_resource type="PackedScene" uid="uid://c47b8w26445qp" path="res://Assets/Particles/boost_indicator.tscn" id="8_t0vef"]
 [ext_resource type="Script" uid="uid://dbo22f2qfkc0d" path="res://Assets/Particles/boost_indicator.gd" id="9_fphli"]
+[ext_resource type="Script" uid="uid://co7jgwfc8vm2q" path="res://Player/point_light_2d.gd" id="10_1xiy1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fphli"]
 radius = 14.921549
@@ -31,6 +32,16 @@ radius = 24.083189
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qgbdv"]
 radius = 21.023796
+
+[sub_resource type="Gradient" id="Gradient_lhces"]
+offsets = PackedFloat32Array(0, 0.8453039)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fphli"]
+gradient = SubResource("Gradient_lhces")
+fill = 1
+fill_from = Vector2(0.4957265, 0.508547)
+fill_to = Vector2(0.17094018, 0.85470086)
 
 [node name="player_isometric" type="CharacterBody2D" groups=["player"]]
 top_level = true
@@ -119,6 +130,15 @@ script = ExtResource("7_r0ntv")
 [node name="boostIndicator" parent="." instance=ExtResource("8_t0vef")]
 top_level = true
 script = ExtResource("9_fphli")
+
+[node name="PointLight2D" type="PointLight2D" parent="." groups=["player_light"]]
+position = Vector2(-9, -7)
+energy = 0.61
+shadow_enabled = true
+shadow_filter_smooth = 3.4
+texture = SubResource("GradientTexture2D_fphli")
+texture_scale = 32.39
+script = ExtResource("10_1xiy1")
 
 [connection signal="boost" from="." to="BoostParticles" method="_on_player_isometric_boost"]
 [connection signal="boost_indcator_start" from="." to="boostIndicator" method="_on_player_isometric_boost_indcator_start"]

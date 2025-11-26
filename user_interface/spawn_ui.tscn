@@ -1,7 +1,36 @@
-[gd_scene load_steps=7 format=3 uid="uid://vn1chcv7m0l"]
+[gd_scene load_steps=18 format=3 uid="uid://vn1chcv7m0l"]
 
 [ext_resource type="Script" uid="uid://t44f3knfftma" path="res://user_interface/spawn_ui.gd" id="1_84skf"]
 [ext_resource type="Texture2D" uid="uid://cbg4emtd8cdb2" path="res://Assets/WaveDrifter3DText_export.png" id="1_en2mb"]
+[ext_resource type="Texture2D" uid="uid://cdrhmomp8ivku" path="res://Assets/StartScreenGradient.png" id="2_ff6gw"]
+[ext_resource type="Texture2D" uid="uid://cmjk2pnq1vti4" path="res://Assets/Particles/particle2.png" id="2_nryyr"]
+[ext_resource type="Texture2D" uid="uid://bsknk36gbders" path="res://Assets/Controls Sheet.png" id="3_nloar"]
+[ext_resource type="Theme" uid="uid://b70rftml1sway" path="res://user_interface/themev3.tres" id="3_p73be"]
+[ext_resource type="Texture2D" uid="uid://hmgbtyo0cjcb" path="res://Assets/pxkw_enter.png" id="7_wy6kp"]
+
+[sub_resource type="Gradient" id="Gradient_nryyr"]
+colors = PackedColorArray(0.38671875, 1, 0.97125244, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wy6kp"]
+gradient = SubResource("Gradient_nryyr")
+
+[sub_resource type="Curve" id="Curve_wy6kp"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.8686082, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_yepd5"]
+curve = SubResource("Curve_wy6kp")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_u65y2"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, 540, 0)
+emission_shape = 3
+emission_box_extents = Vector3(1, 540, 1)
+initial_velocity_min = 212.12
+initial_velocity_max = 746.26996
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_yepd5")
+color_ramp = SubResource("GradientTexture1D_wy6kp")
 
 [sub_resource type="Animation" id="Animation_84skf"]
 length = 0.001
@@ -28,6 +57,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Control/BeginContainer:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_nloar"]
@@ -86,11 +127,29 @@ tracks/1/keys = {
 "values": [true]
 }
 
+[sub_resource type="Animation" id="Animation_wy6kp"]
+resource_name = "scale"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/BeginContainer:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 1.1), Vector2(1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nloar"]
 _data = {
 &"RESET": SubResource("Animation_84skf"),
 &"disappear": SubResource("Animation_nloar"),
-&"floating": SubResource("Animation_en2mb")
+&"floating": SubResource("Animation_en2mb"),
+&"scale": SubResource("Animation_wy6kp")
 }
 
 [node name="SpawnUI" type="CanvasLayer"]
@@ -105,6 +164,20 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Control"]
+position = Vector2(-72, 0)
+amount = 40
+texture = ExtResource("2_nryyr")
+preprocess = 2.0
+speed_scale = 0.1
+process_material = SubResource("ParticleProcessMaterial_u65y2")
+
+[node name="Gradient" type="TextureRect" parent="Control"]
+layout_mode = 0
+offset_right = 1000.0
+offset_bottom = 1080.0
+texture = ExtResource("2_ff6gw")
+
 [node name="TextureRect" type="TextureRect" parent="Control"]
 layout_mode = 1
 anchors_preset = 4
@@ -118,7 +191,75 @@ grow_vertical = 2
 scale = Vector2(3, 3)
 texture = ExtResource("1_en2mb")
 
+[node name="ControlsContainer" type="PanelContainer" parent="Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -819.0
+offset_top = -535.5
+offset_right = -47.0
+offset_bottom = 535.5
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(0.9, 0.9)
+pivot_offset = Vector2(386, 535.5)
+theme = ExtResource("3_p73be")
+
+[node name="Controls" type="TextureRect" parent="Control/ControlsContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("3_nloar")
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="Control"]
+position = Vector2(-72, 0)
+amount = 20
+texture = ExtResource("2_nryyr")
+preprocess = 2.0
+speed_scale = 0.1
+process_material = SubResource("ParticleProcessMaterial_u65y2")
+
+[node name="BeginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 0
+offset_left = 1134.0
+offset_top = 898.0
+offset_right = 1834.0
+offset_bottom = 992.0
+pivot_offset = Vector2(350, 47)
+size_flags_vertical = 8
+theme_override_constants/margin_bottom = 30
+
+[node name="Label" type="Label" parent="Control/BeginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("3_p73be")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 28
+text = "Press               to begin!"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/BeginContainer"]
+layout_mode = 2
+theme_override_constants/margin_right = 60
+
+[node name="TextureRect" type="TextureRect" parent="Control/BeginContainer/MarginContainer"]
+custom_minimum_size = Vector2(128, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("7_wy6kp")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_nloar")
 }
+autoplay = "scale"
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_nloar")
+}
+autoplay = "scale"
