@@ -235,6 +235,12 @@ func _on_exp_collection_radius_area_entered(area: Area2D) -> void:
 	if area is Exp_Orb:
 		area.collected = true
 		area.player = self
+	if area is Repair:
+		if health + 30 > player_max_health:
+			health = player_max_health
+		else:
+			health += 30
+		area.queue_free()
 
 signal shake_hp_bar
 

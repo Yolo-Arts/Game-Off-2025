@@ -1,4 +1,4 @@
-class_name Exp_Orb
+class_name Repair
 extends Area2D
 
 var velocity = Vector2(0, 0)
@@ -7,11 +7,6 @@ var speed = 0
 var player: Player
 var collected = false
 var direction_to_player = Vector2(0,0)
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-
-	pass # Replace with function body.
 	
 func _physics_process(delta: float) -> void:
 	if collected:
@@ -22,12 +17,11 @@ func _physics_process(delta: float) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is Player:
-		Globals.exp_collected.emit()
-		queue_free()
+		Signals.repair_collected.emit()
 	return
 
 func get_direction_to_player():
 	if player:
 		var direction = (player.global_position - global_position).normalized()
 		return direction
-	return Vector2.ZERO  # Return zero vector if no player found
+	return Vector2.ZERO  

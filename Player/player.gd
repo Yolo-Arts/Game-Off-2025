@@ -184,6 +184,12 @@ func _on_exp_collection_radius_body_entered(body: Node2D) -> void:
 	if body is Exp_Orb:
 		Globals.exp_collected.emit()
 		body.queue_free()
+	if body is Repair:
+		Signals.repair_collected.emit()
+		if health + 30 > player_max_health:
+			health = player_max_health
+		else:
+			health += 30
 
 
 func _on_drift_timeout() -> void:

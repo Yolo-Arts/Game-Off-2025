@@ -1,10 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://84edigyryvvl"]
+[gd_scene load_steps=6 format=3 uid="uid://84edigyryvvl"]
 
 [ext_resource type="Script" uid="uid://dkv5vtm8so2tk" path="res://scripts/exp_orb.gd" id="1_sdqly"]
-[ext_resource type="Texture2D" uid="uid://nteeo1x4snbc" path="res://Assets/Particles/Particle.png" id="2_fssch"]
+[ext_resource type="Texture2D" uid="uid://cmdymc2fctgps" path="res://Assets/exp_orb.png" id="2_sdqly"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4wvqj"]
 radius = 27.018513
+
+[sub_resource type="Gradient" id="Gradient_sdqly"]
+offsets = PackedFloat32Array(0, 0.6101695, 1)
+colors = PackedColorArray(0.8678589, 0.4897461, 0.921875, 1, 0.89884114, 0.6093819, 0.94019246, 0.7655367, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fssch"]
+gradient = SubResource("Gradient_sdqly")
+width = 63
+height = 63
+fill = 1
+fill_from = Vector2(0.53846157, 0.50427353)
+fill_to = Vector2(0.8333333, 0.18803419)
 
 [node name="Exp_Orb" type="Area2D"]
 scale = Vector2(0.5, 0.5)
@@ -16,6 +28,12 @@ script = ExtResource("1_sdqly")
 shape = SubResource("CircleShape2D_4wvqj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_fssch")
+texture = ExtResource("2_sdqly")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0.91764706, 0.4392157, 1, 1)
+energy = 0.7
+texture = SubResource("GradientTexture2D_fssch")
+texture_scale = 3.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

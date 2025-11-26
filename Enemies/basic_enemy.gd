@@ -14,6 +14,7 @@ const DEAD_SHIP = preload("uid://cjqp43sw23woi")
 const EXP_ORB = preload("res://Scenes/exp_orb.tscn")
 const HIT_EXPLOSION = preload("uid://bk5p2f8p57tdj")
 const SHIP__4_ = preload("uid://dtggqs3n2orf8")
+const REPAIR_TOOL = preload("uid://d2ljupmutpso2")
 
 
 @onready var sprite = $Sprite2D
@@ -110,6 +111,8 @@ func take_damage(damage: int):
 		spawn_dead_ship(self.position, get_direction_to_player())
 		spawn_death_explosion(self.position, Vector2(0,0))
 		spawn_exp_orb(self.position)
+		if randi() % 5 + 1 == 1:
+			spawn_repair_tool(self.position)
 		sprite.visible = false
 		isDead = true
 		free_waterTrail.emit()
@@ -140,6 +143,11 @@ func spawn_hit_explosion(pos: Vector2, normal:Vector2) -> void:
 
 func spawn_exp_orb(pos: Vector2):
 	var instance = EXP_ORB.instantiate()
+	get_tree().get_current_scene().call_deferred("add_child", instance)
+	instance.global_position = pos
+
+func spawn_repair_tool(pos: Vector2):
+	var instance = REPAIR_TOOL.instantiate()
 	get_tree().get_current_scene().call_deferred("add_child", instance)
 	instance.global_position = pos
 
