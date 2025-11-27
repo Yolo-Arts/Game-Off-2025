@@ -13,3 +13,5 @@ signal time_freeze_disable
 signal ghost_ship(duration: float)
 signal magnetic_balls(duration: float)
 signal laser_beam
+
+signal repair_collected

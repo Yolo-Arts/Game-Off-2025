@@ -114,6 +114,8 @@ func take_damage(damage: int):
 		spawn_dead_ship(self.position, get_direction_to_player())
 		spawn_death_explosion(self.position, Vector2(0,0))
 		spawn_exp_orb(self.position)
+		if randi() % 50 + 1 == 1:
+			spawn_repair_tool(self.position)
 		sprite.visible = false
 		isDead = true
 		disable_hitbox() 
