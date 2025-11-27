@@ -9,5 +9,5 @@ texture = ExtResource("2_a382p")
 speed = 1000.0
 damage = 15.0
 health = 50.0
-acceleration = 1.5
+acceleration = 1.4
 metadata/_custom_type_script = "uid://bujng151akkyd"

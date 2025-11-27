@@ -9,10 +9,13 @@
 [ext_resource type="Script" uid="uid://dbjnldmb02swc" path="res://Assets/Particles/boost_particles.gd" id="7_r0ntv"]
 [ext_resource type="PackedScene" uid="uid://c47b8w26445qp" path="res://Assets/Particles/boost_indicator.tscn" id="8_t0vef"]
 [ext_resource type="Script" uid="uid://dbo22f2qfkc0d" path="res://Assets/Particles/boost_indicator.gd" id="9_fphli"]
-[ext_resource type="Script" uid="uid://co7jgwfc8vm2q" path="res://Player/point_light_2d.gd" id="10_1xiy1"]
+[ext_resource type="Script" path="res://Player/point_light_2d.gd" id="10_1xiy1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fphli"]
 radius = 14.921549
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1xiy1"]
+radius = 97.04638
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fphli"]
 shader = ExtResource("3_5y3gb")
@@ -20,9 +23,6 @@ shader_parameter/shock_color = Color(1, 0, 0, 1)
 shader_parameter/amplitude = 15.0
 shader_parameter/frequecy = 30.0
 shader_parameter/progress = 0.999999977648
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_1xiy1"]
-radius = 60.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k28l0"]
 radius = 27.730848
@@ -64,6 +64,15 @@ shape = SubResource("CircleShape2D_fphli")
 disabled = true
 debug_color = Color(0.071292885, 0, 0.70196074, 0.41960785)
 
+[node name="exp_collection_radius" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="exp_collection_radius_shape" type="CollisionShape2D" parent="exp_collection_radius"]
+position = Vector2(4, 6)
+shape = SubResource("CircleShape2D_1xiy1")
+debug_color = Color(0, 0.70196074, 0.2906556, 0.41960785)
+
 [node name="boat" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_fphli")
 texture = ExtResource("2_evufl")
@@ -78,15 +87,6 @@ position = Vector2(20, 16)
 position = Vector2(-19, 16)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-
-[node name="exp_collection_radius" type="Area2D" parent="."]
-visible = false
-collision_layer = 0
-collision_mask = 16
-
-[node name="exp_collection_radius_shape" type="CollisionShape2D" parent="exp_collection_radius"]
-position = Vector2(4, 6)
-shape = SubResource("CircleShape2D_1xiy1")
 
 [node name="CollisionShapeForEnv" type="CollisionShape2D" parent="."]
 visible = false
