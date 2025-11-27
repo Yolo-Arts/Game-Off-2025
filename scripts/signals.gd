@@ -4,7 +4,7 @@ extends Node
 # timescale is like YouTube playback speed.
 # Duration is how long the freeze is for
 signal start_hitStop
-
+signal collect_all_exp(player:Player)
 
 signal shockwave_fired
 signal infinite_ammo(duration: float)

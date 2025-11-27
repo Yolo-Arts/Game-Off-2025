@@ -3,15 +3,15 @@ extends Bullet_type
 
 
 
-func shoot(cannonball_shot: PackedScene, player:Player, isometric = false, scale = 1.0):
-	
+func shoot(cannonball_scene: PackedScene, player:Player, isometric = false, scale = 1.0):
+	var cannonball_shot = cannonball_scene.instantiate()
 	var upgraded_cannon_ball = apply_cannonball_upgrades(cannonball_shot)
-	var upgraded_cannon_ball2 = apply_cannonball_upgrades(cannonball_shot)
+	var upgraded_cannon_ball2 = upgraded_cannon_ball.duplicate()
 	
-	var bullet_instance = upgraded_cannon_ball.instantiate()
-	var bullet_instance2 = upgraded_cannon_ball2.instantiate()
+	var bullet_instance = upgraded_cannon_ball
+	var bullet_instance2 = upgraded_cannon_ball2
 	
-	print(bullet_instance.get_children())
+	print(bullet_instance.get_cannonballs())
 	
 	#var left_bullets :Array[Cannonball]
 	#var right_bullets :Array[Cannonball]
