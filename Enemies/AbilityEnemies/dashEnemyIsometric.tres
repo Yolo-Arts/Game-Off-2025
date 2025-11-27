@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="enemy_type" load_steps=3 format=3 uid="uid://ysqdaqmx1hac"]
+
+[ext_resource type="Script" uid="uid://bujng151akkyd" path="res://Resources/enemy_type.gd" id="1_eo2k5"]
+[ext_resource type="Texture2D" uid="uid://cmf7b24wpemq1" path="res://Enemies/Sprites/enemy_ship_purple_spritesheet.png" id="2_4laio"]
+
+[resource]
+script = ExtResource("1_eo2k5")
+texture = ExtResource("2_4laio")
+speed = 500.0
+damage = 15.0
+acceleration = 10.0
+can_dash = true
+dash_speed = 700.0
+dash_duration = 0.7
+dash_cooldown = 2.0
+metadata/_custom_type_script = "uid://bujng151akkyd"

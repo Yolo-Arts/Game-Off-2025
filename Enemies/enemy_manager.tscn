@@ -1,9 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://brjyeo32vgcfh"]
+[gd_scene load_steps=3 format=3 uid="uid://brjyeo32vgcfh"]
 
 [ext_resource type="Script" uid="uid://m76y16vg58jb" path="res://Enemies/enemy_manager.gd" id="1_md8k8"]
+[ext_resource type="PackedScene" uid="uid://34fhm4pp3113" path="res://Enemies/basic_enemy.tscn" id="2_77gwh"]
 
 [node name="EnemyManager" type="Node"]
 script = ExtResource("1_md8k8")
+basic_enemy_scene = ExtResource("2_77gwh")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 20.0

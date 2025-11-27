@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://b3imdjb1so30p"]
+[gd_scene load_steps=51 format=3 uid="uid://b3imdjb1so30p"]
 
 [ext_resource type="Script" uid="uid://wjiwydm880cx" path="res://Scenes/isometric_main.gd" id="1_1enjl"]
 [ext_resource type="PackedScene" uid="uid://cbag74ryx0pu8" path="res://Scenes/player_manager.tscn" id="2_dlawb"]
@@ -20,8 +20,9 @@
 [ext_resource type="PackedScene" uid="uid://cwwekbcfo4hgu" path="res://user_interface/game_over.tscn" id="15_gvepe"]
 [ext_resource type="Resource" uid="uid://bprcgrgyghoih" path="res://Enemies/Enemy_Types/orange_isometric.tres" id="16_dppuq"]
 [ext_resource type="Script" uid="uid://dt41mbv4yvwkl" path="res://Scenes/grayscale.gd" id="16_hvs2a"]
-[ext_resource type="Shader" uid="uid://c3xdyeo558avw" path="res://Shaders/grayscale.gdshader" id="16_ixf2m"]
-[ext_resource type="Shader" path="res://Shaders/screenTransition.gdshader" id="19_b21ex"]
+[ext_resource type="Shader" path="res://Shaders/grayscale.gdshader" id="16_ixf2m"]
+[ext_resource type="Resource" uid="uid://ysqdaqmx1hac" path="res://Enemies/AbilityEnemies/dashEnemyIsometric.tres" id="18_4lvfn"]
+[ext_resource type="Shader" uid="uid://ydw2wifhpp88" path="res://Shaders/screenTransition.gdshader" id="19_b21ex"]
 [ext_resource type="PackedScene" uid="uid://cpx0xphjgp1lt" path="res://Shaders/cloud.tscn" id="20_7tq1b"]
 [ext_resource type="Script" uid="uid://3cukdxaftfk6" path="res://Scenes/ui.gd" id="20_xqk4e"]
 [ext_resource type="PackedScene" uid="uid://dgatlx3brqvmv" path="res://user_interface/hpbar_andExpBar.tscn" id="22_yj477"]
@@ -32,6 +33,7 @@
 [ext_resource type="PackedScene" uid="uid://c60diwu1u2ajo" path="res://user_interface/ability_bar.tscn" id="29_ne86t"]
 [ext_resource type="PackedScene" uid="uid://vn1chcv7m0l" path="res://user_interface/spawn_ui.tscn" id="30_lc8nd"]
 [ext_resource type="PackedScene" uid="uid://6du57t1guvah" path="res://user_interface/pause_button.tscn" id="30_xqk4e"]
+[ext_resource type="PackedScene" uid="uid://bewlchyk4ofw4" path="res://Enemies/dash_isometric_enemy.tscn" id="33_oqk4o"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_wgbrh"]
 
@@ -243,10 +245,10 @@ zoom = Vector2(0.7, 0.7)
 
 [node name="EnemyManager" parent="." instance=ExtResource("7_0lw5m")]
 basic_enemy_scene = ExtResource("14_dlawb")
-enemy_types = Array[Resource]([ExtResource("9_yws0v"), ExtResource("10_dlawb"), ExtResource("14_ga6nx"), ExtResource("15_2y55o"), ExtResource("16_dppuq")])
+dash_enemy_scene = ExtResource("33_oqk4o")
+enemy_types = Array[Resource]([ExtResource("9_yws0v"), ExtResource("10_dlawb"), ExtResource("14_ga6nx"), ExtResource("15_2y55o"), ExtResource("16_dppuq"), ExtResource("18_4lvfn")])
 
-[node name="WaveAndTimeUI" parent="." node_paths=PackedStringArray("wave_time_manager") instance=ExtResource("8_gpok4")]
-wave_time_manager = NodePath("../WaveTimeManager")
+[node name="WaveAndTimeUI" parent="." instance=ExtResource("8_gpok4")]
 
 [node name="WaveTimeManager" parent="." instance=ExtResource("9_ynplv")]
 

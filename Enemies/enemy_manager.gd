@@ -4,6 +4,8 @@ const SPAWN_RADIUS = 900
 var swapper_index = 0
 
 @export var basic_enemy_scene: PackedScene
+@export var dash_enemy_scene: PackedScene
+
 @export var enemy_types: Array[Resource]
 
 @export var initial_wave_time: float = 20.0 # How long the first wave lasts
@@ -61,7 +63,15 @@ func spawn_enemy(enemy_num):
 
 func spawn():
 	var enemy_type_index = enemy_table.pick_item()
-	var enemy = basic_enemy_scene.instantiate() as Enemy_iso
+	var enemy_stats = enemy_types[enemy_type_index]
+	var enemy_scene = basic_enemy_scene
+	if enemy_stats.can_dash:
+		print("Enemy can dash")
+		enemy_scene = dash_enemy_scene
+	else:
+		print("Enemy cannot dash")
+	
+	var enemy = enemy_scene.instantiate() as Enemy_iso
 	#enemy.died.connect(_on_enemy_died)
 	
 	enemy.set_enemy_type(enemy_type_index)
@@ -81,6 +91,7 @@ func spawn():
 func setup_wave_for_difficulty(current_difficulty: int):
 	match current_difficulty:
 		0:
+			enemy_table.add_item(5, 30)
 			enemy_count = 15
 			spawn_interval = 2.0
 			wave_length = 30
@@ -140,7 +151,7 @@ func _on_timer_timeout():
 	if wave_timer.time_left > 0:
 		spawn() 
 
-
+#region get_spawn_position()
 func get_spawn_position():
 	var player = get_tree().get_first_node_in_group("player") as Node2D
 	if player == null:
@@ -161,3 +172,4 @@ func get_spawn_position():
 			random_direction = random_direction.rotated(deg_to_rad(90))
 	
 	return spawn_position
+#endregion
