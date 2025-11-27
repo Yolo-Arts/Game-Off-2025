@@ -91,7 +91,6 @@ func spawn():
 func setup_wave_for_difficulty(current_difficulty: int):
 	match current_difficulty:
 		0:
-			enemy_table.add_item(5, 30)
 			enemy_count = 15
 			spawn_interval = 2.0
 			wave_length = 30
@@ -106,21 +105,27 @@ func setup_wave_for_difficulty(current_difficulty: int):
 			spawn_interval = 0.8
 			wave_length = 10
 		6:
+			enemy_table.add_item(5, 15)
 			enemy_count = 15
 			spawn_interval = 0.2
-			wave_length = 20
+			wave_length = 40
 			
 		7, 8, 9:
 			enemy_table.remove_item(0) 
 			enemy_table.add_item(2, 20) 
-			enemy_count = 15
-			spawn_interval = 0.8
+			enemy_count = 25
+			spawn_interval = 1.0
 			
-		10, 11, 12, 13:
+		10:
+			enemy_table.remove_item(1) 
 			enemy_table.add_item(3, 10) 
-			enemy_count = 18
-			spawn_interval = 0.7
-			
+			enemy_count = 25
+			spawn_interval = 1
+			wave_length = 25
+		11, 12, 13:
+			enemy_count = 25
+			spawn_interval = 1
+			wave_length = 25
 		14, 15, 16, 17:
 			enemy_table.add_item(4, 15) 
 			enemy_count = 22

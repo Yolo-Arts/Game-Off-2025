@@ -6,11 +6,11 @@
 [resource]
 script = ExtResource("1_eo2k5")
 texture = ExtResource("2_4laio")
-speed = 500.0
+speed = 800.0
 damage = 15.0
 acceleration = 10.0
 can_dash = true
-dash_speed = 700.0
+dash_speed = 1000.0
 dash_duration = 0.7
-dash_cooldown = 2.0
+dash_cooldown = 7.0
 metadata/_custom_type_script = "uid://bujng151akkyd"
