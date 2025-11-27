@@ -20,18 +20,18 @@ extends CanvasLayer
 
 func _ready():
 	Globals.player_died.connect(display_scores)
-	
+	$TextureRect.hide()
 	
 	# FIXME Variables for testing score tween. Comment them out later
 	#Globals.score["PER_SECOND_SURVIVED"] = 500
 	
 
 func _on_restart_pressed():
+	$TextureRect.show()
 	SoundManager.UI_ButtonPressed()
 	animation_player.play("close-transition")
 	await get_tree().create_timer(1).timeout
-	get_tree().change_scene_to_file("res://Scenes/isometric_main.tscn")
-
+	get_tree().reload_current_scene()
 
 
 var total_score = 0
