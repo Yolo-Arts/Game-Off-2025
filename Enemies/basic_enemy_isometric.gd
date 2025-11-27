@@ -1,6 +1,8 @@
 extends Enemy
 class_name Enemy_iso
 
+signal died
+
 #FIXME Fix the hitboxes, they do not rotate with the enemy.
 
 # Lower = Heavier boat (slides more). Higher = enemies have more control.
@@ -120,6 +122,7 @@ func take_damage(damage: int):
 		#Signals.start_hitStop.emit(0.2, 0.2)
 		Globals.camera.shake(0.20, 35, 25)
 		Globals.update_score("ENEMY_SHIPWRECKED")
+		died.emit()
 		await get_tree().create_timer(2).timeout
 	else:
 		Signals.start_hitStop.emit(0.3, 0.1)

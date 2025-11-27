@@ -1,119 +1,140 @@
 extends Node
 
-const SPAWN_RADIUS = 700
+const SPAWN_RADIUS = 900
 var swapper_index = 0
 
 @export var basic_enemy_scene: PackedScene
 @export var enemy_types: Array[Resource]
-var enemy_stats: Resource
-@onready var timer = $Timer
-@onready var wave_time_manager: Node = $"../WaveTimeManager"
+
+@export var initial_wave_time: float = 20.0 # How long the first wave lasts
+@export var time_reduction_per_difficulty: float = 1.0 
+var wave_length: float = 20 # Used to define manually how long the wave will be inside the match statement
+
+@onready var timer = $Timer 
+@onready var wave_timer = $WaveTimer 
+#@onready var wave_time_manager: Node = $"../WaveTimeManager" 
 
 @onready var ENEMY_SPAWN_INDICATOR = preload("uid://dx4o5mretwoae")
 
 var enemy_table = WeightedTable.new()
-
 var rng = RandomNumberGenerator.new()
 
-var enemy_count = 2
+var enemy_count = 10
 var base_spawn_time = 10.0
+var spawn_interval: float = 2
 
+
+# wave tracking
+#var enemies_in_current_wave: int = 0
+#var enemies_defeated_in_current_wave: int = 0
+var difficulty = 0
 
 func _on_isometric_main_begin_game() -> void:
-	timer.start()
 	start_game()
 
 func _ready() -> void:
-	wave_time_manager.difficulty_increased.connect(on_difficulty_increased)
+	enemy_table.add_item(0, 10)
 
 func start_game():
-	base_spawn_time = timer.wait_time
-	# This code adds the index of the enemy type to the enemy_table
-	# First param = index
-	# Second param is the weight or probability of appearing
-	# So if the total weight of items in the enemy table is 100
-	# And enemy with index 5 has a weight of 50
-	# The enemy with index will have a  50% chance of spawning.
-	enemy_table.add_item(0, 10)
-	enemy_table.add_item(1, 10)
+	start_next_wave()
+
+func start_next_wave():
+	print("--- Starting Wave ", difficulty + 1, " ---")
+	
+	#enemies_in_current_wave = enemy_count
+	#enemies_defeated_in_current_wave = 0
+	
+	setup_wave_for_difficulty(difficulty)
+	
+	#var current_wave_time = initial_wave_time - (difficulty * time_reduction_per_difficulty)
+	#current_wave_time = wave_length
+	wave_timer.wait_time = wave_length
+	wave_timer.start()
+	print("Wave timer set to: ", wave_timer.wait_time, " seconds")
 	
 	spawn_enemy(enemy_count)
-	
-
-#func _ready():
-	#base_spawn_time = timer.wait_time
-	## This code adds the index of the enemy type to the enemy_table
-	## First param = index
-	## Second param is the weight or probability of appearing
-	## So if the total weight of items in the enemy table is 100
-	## And enemy with index 5 has a weight of 50
-	## The enemy with index will have a  50% chance of spawning.
-	#enemy_table.add_item(0, 10)
-	#enemy_table.add_item(1, 10)
-	#
-	#spawn_enemy(enemy_count)
-	#
-	#wave_time_manager.difficulty_increased.connect(on_difficulty_increased)
 
 func spawn_enemy(enemy_num):
 	for i in range(enemy_num):
 		spawn()
-		await get_tree().create_timer(0.2).timeout
+		await get_tree().create_timer(spawn_interval).timeout
 
 func spawn():
-		var enemy_type_index = enemy_table.pick_item()
-		var enemy = basic_enemy_scene.instantiate() as Enemy_iso
-		
-		enemy.set_enemy_type(enemy_type_index)
-		enemy.global_position = get_spawn_position()
-		
-		var instance = ENEMY_SPAWN_INDICATOR.instantiate()
-		get_parent().add_child.call_deferred(instance)
-		instance.global_position = enemy.global_position
-		await get_tree().create_timer(1.7).timeout
-		#await get_tree().create_timer(0.2).timeout
-		get_parent().add_child.call_deferred(enemy)
+	var enemy_type_index = enemy_table.pick_item()
+	var enemy = basic_enemy_scene.instantiate() as Enemy_iso
+	#enemy.died.connect(_on_enemy_died)
+	
+	enemy.set_enemy_type(enemy_type_index)
+	enemy.global_position = get_spawn_position()
+	
+	var instance = ENEMY_SPAWN_INDICATOR.instantiate()
+	get_parent().add_child.call_deferred(instance)
+	instance.global_position = enemy.global_position
+	await get_tree().create_timer(1.7).timeout
+	get_parent().add_child.call_deferred(enemy)
 
-func on_difficulty_increased(difficulty: int):
-	print("current difficulty: ",difficulty)
-	print("number of enemies spawned: ", enemy_count)
-	Globals.update_score("WAVES_SURVIVED")
-	
-	match difficulty:
-		3:
-			enemy_table.add_item(2, 10)
-			enemy_count += 1
-		6:
-			enemy_table.remove_item(0)
-			enemy_count += 1
-			enemy_table.add_item(3, 10)
+#func _on_enemy_died():
+	#enemies_defeated_in_current_wave += 1
+	#print("Enemy defeated. (", enemies_defeated_in_current_wave, "/", enemies_in_current_wave, ")")
+
+
+func setup_wave_for_difficulty(current_difficulty: int):
+	match current_difficulty:
+		0:
+			enemy_count = 15
+			spawn_interval = 2.0
+			wave_length = 30
+		1, 2:
+			enemy_count = 15
+			spawn_interval = 1.5
+			wave_length = 30
 			
-		9:
-			enemy_table.add_item(4, 10)
+		3, 4, 5:
+			enemy_table.add_item(1, 15) 
+			enemy_count = 12
+			spawn_interval = 1.0
+			
+		6, 7, 8, 9:
+			enemy_table.remove_item(0) 
+			enemy_table.add_item(2, 20) 
+			enemy_count = 15
+			spawn_interval = 0.8
+			
+		10, 11, 12, 13:
+			enemy_table.add_item(3, 10) 
+			enemy_count = 18
+			spawn_interval = 0.7
+			
+		14, 15, 16, 17:
+			enemy_table.add_item(4, 15) 
+			enemy_count = 22
+			spawn_interval = 0.6
+			
+		18, 19, 20:
+			enemy_count = 25
+			spawn_interval = 0.5
 		_:
-			
-			enemy_count += 1
+			enemy_count += 2
+			spawn_interval = max(0.4, spawn_interval - 0.05)
+
+func _on_wave_timer_timeout():
+	wave_timer.stop() 
 	
+	difficulty += 1
+	Globals.update_score("WAVES_SURVIVED")
+	setup_wave_for_difficulty(difficulty)
 	
-	var time_off = 0.2 * difficulty
-	time_off = min(time_off, 8.0)  
-	timer.wait_time = base_spawn_time - time_off
-	print(base_spawn_time - time_off)
-	timer.start()
+	# After the match, start the next wave
+	start_next_wave()
 
 func _on_timer_timeout():
 	var player = get_tree().get_first_node_in_group("player") as Node2D
 	if player == null:
 		return
 	
-	spawn_enemy(enemy_count)
-	
-	#enemy.set_enemy_type(swapper_index)
-	#
-	#if swapper_index == 0:
-		#swapper_index = 1
-	#else: 
-		#swapper_index = 0
+	if wave_timer.time_left > 0:
+		spawn() 
+
 
 func get_spawn_position():
 	var player = get_tree().get_first_node_in_group("player") as Node2D

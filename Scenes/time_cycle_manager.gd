@@ -1,7 +1,7 @@
 # day_night_cycle.gd
 extends Node
 
-const DAY_DURATION_IN_SECONDS: float = 60.0
+const DAY_DURATION_IN_SECONDS: float = 120.0
 
 const NOON_COLOR: Color = Color(1.0, 1.0, 0.95)
 const NIGHT_COLOR: Color = Color(0.375, 0.375, 0.375, 1.0)
