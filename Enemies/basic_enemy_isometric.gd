@@ -5,9 +5,8 @@ signal died
 
 #FIXME Fix the hitboxes, they do not rotate with the enemy.
 
-# Lower = Heavier boat (slides more). Higher = enemies have more control.
-# TODO ADD acceleration to the enemy_types resource for different levels of difficulty
-var acceleration: float = 1.2 
+
+
 
 var knockback_resistance: float = 10.0 
 
@@ -33,6 +32,7 @@ func set_enemy_type(enemy_type: int):
 	health = enemy_stats.health
 	total_frames = enemy_stats.total_frames
 	frame_offset = enemy_stats.frame_offset
+	acceleration = enemy_stats.acceleration
 
 
 #func _physics_process(_delta):

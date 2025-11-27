@@ -19,6 +19,7 @@ class_name enemy_type
 
 @export var damage: float
 @export var health: float
+@export var acceleration: float = 1.2
 
 enum types {
 	SLOW,

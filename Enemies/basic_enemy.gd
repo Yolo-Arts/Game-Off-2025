@@ -36,6 +36,9 @@ var enemy_stats: Resource
 var player = null
 var isDead = false
 
+# Lower = Heavier boat (slides more). Higher = enemies have more control.
+var acceleration: float = 1.2 
+
 var total_frames = 360
 var frame_offset = 0  
 
