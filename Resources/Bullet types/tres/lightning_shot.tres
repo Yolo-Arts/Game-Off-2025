@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="lightning_shot" load_steps=3 format=3 uid="uid://c7aiibaf5grjj"]
+
+[ext_resource type="Script" uid="uid://cpiy6ghwhqksj" path="res://Resources/Bullet types/Lightning shot.gd" id="1_elro2"]
+[ext_resource type="Texture2D" uid="uid://c12v3gr0dt8sm" path="res://icon.svg" id="1_gnjdm"]
+
+[resource]
+script = ExtResource("1_elro2")
+image = ExtResource("1_gnjdm")
+name = "Lightning sin a bottle"
+description = "After making contact with an enemy chains to the next closest enemy "
+Weight = 1000
+type = "Bullet Type"
+is_unique = true
+metadata/_custom_type_script = "uid://cpiy6ghwhqksj"

@@ -12,6 +12,7 @@ extends Control
 @onready var title: Label = %Title
 
 var player: Player
+var selected = true
 
 signal upgrade_selected(Stat_up)
 
@@ -45,6 +46,7 @@ func update():
 
 
 func select_upgrade():
+	selected = true
 	SoundManager.play_UpgradeUnlock()
 	
 	for other_card in get_tree().get_nodes_in_group("upgrade"):
@@ -58,8 +60,8 @@ func select_upgrade():
 		animation_player.speed_scale = 1.0
 	
 	animation_player.play("selected_discard")
-	await get_tree().create_timer(0.05).timeout
-	Engine.time_scale= 1.0
+	
+	upgrade_selected.emit(Stat_up)
 	
 	#print("animation finished")
 	
@@ -68,7 +70,7 @@ func select_upgrade():
 		#get_tree().paused = false
 		#Stat_up.apply_upgrade(player)
 		#get_tree().get_first_node_in_group("Upgrade_UI").visible = false 
-	upgrade_selected.emit(Stat_up)
+	
 	
 	#Stat_up.apply_upgrade(player)
 	#get_tree().get_first_node_in_group("Upgrade_UI").visible = false 
@@ -80,8 +82,9 @@ func play_discard():
 func _on_panel_mouse_entered() -> void:
 	hover_animation.play("hover")
 
-
 func _on_panel_gui_input(event: InputEvent) -> void:
-	if event.is_action_pressed("left_click"):
+	if event.is_action_pressed("left_click") and !selected:
 		select_upgrade()
+		
+		
 	

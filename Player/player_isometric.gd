@@ -8,6 +8,7 @@ var isometric_transform: Transform2D
 @onready var shoot_cooldown: Timer = $shootCooldown
 @onready var shockwave: ColorRect = %Shockwave
 @onready var shockwave_collision_shape: CollisionShape2D = $ShockwaveArea/ShockwaveCollisionShape
+@onready var laser_beam: Area2D = $Laser_beam
 
 @onready var hitbox: CollisionShape2D = $DamageAreaIso/CollisionShape2D
 @onready var hitbox2: CollisionShape2D = $Hitbox
@@ -42,6 +43,19 @@ func _ready():
 	Signals.infinite_ammo.connect(infiniteAmmo_ability)
 	Signals.time_freeze.connect(time_freeze_ability)
 	Signals.ghost_ship.connect(ghost_ship_ability)
+	Signals.magnetic_balls.connect(magnetic_balls_ability)
+	Signals.laser_beam.connect(Laser_beam_ability)
+
+func magnetic_balls_ability(duration):
+	pass
+
+func Laser_beam_ability(duration):
+	laser_beam.visible = true
+	laser_beam.monitoring = true
+	await get_tree().create_timer(duration).timeout
+	laser_beam.visible = false
+	laser_beam.monitoring = false
+	
 
 func ghost_ship_ability(duration):
 	hitbox.disabled = true
@@ -104,7 +118,7 @@ func _physics_process(delta) -> void:
 		
 		if can_drift == true && drift_cooldown_bar == true:
 			boost_indcator_start.emit()
-			if Input.is_action_just_released("turn_left") or Input.is_action_just_released("turn_right"):
+			if Input.is_action_just_pressed("left_shift"):
 				zoom_out.emit()
 				boost.emit()
 				drift_value += 1000
@@ -205,7 +219,7 @@ func stop_is_drifting():
 
 func shoot():
 
-	Bullet_Type.shoot(cannonball, self, true, cannonball_scale)
+	Bullet_Type.shoot(cannonball_shot, self, true, cannonball_scale)
 
 func spawn_cannon_particles(pos: Vector2, normal: Vector2) -> void:
 	var instance = cannon_fire.instantiate()
@@ -247,6 +261,12 @@ func _on_exp_collection_radius_area_entered(area: Area2D) -> void:
 	if area is Exp_Orb:
 		area.collected = true
 		area.player = self
+	if area is Repair:
+		if health + 30 > player_max_health:
+			health = player_max_health
+		else:
+			health += 30
+		area.queue_free()
 
 func _on_damage_area_iso_body_entered(body: Node2D) -> void:
 	if is_drifting:

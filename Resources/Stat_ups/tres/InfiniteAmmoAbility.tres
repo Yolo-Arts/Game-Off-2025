@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="InfiniteAmmo" load_steps=4 format=3 uid="uid://7p0pxpacwpao"]
 
 [ext_resource type="Texture2D" uid="uid://dy3al60lr33j3" path="res://Assets/skill_icons/InfiniteAmmoAbility.png" id="1_38xoh"]
-[ext_resource type="Script" uid="uid://chwy8tovpc6ij" path="res://Resources/Stat_ups/AbilitiesFolder/InfiniteAmmo.gd" id="1_o3b3r"]
-[ext_resource type="PackedScene" uid="uid://bj5bvlqtofppm" path="res://Resources/Stat_ups/AbilitiesFolder/infinite_ammo_handler.tscn" id="1_vbfxr"]
+[ext_resource type="Script" uid="uid://chwy8tovpc6ij" path="res://Resources/Stat_ups/AbilitiesFolder/infinite_ammo/InfiniteAmmo.gd" id="1_o3b3r"]
+[ext_resource type="PackedScene" uid="uid://bj5bvlqtofppm" path="res://Resources/Stat_ups/AbilitiesFolder/infinite_ammo/infinite_ammo_handler.tscn" id="1_vbfxr"]
 
 [resource]
 script = ExtResource("1_o3b3r")
@@ -10,5 +10,6 @@ cooldown = 15.0
 icon = ExtResource("1_38xoh")
 ability_scene = ExtResource("1_vbfxr")
 image = ExtResource("1_38xoh")
+type = "Ability"
 is_unique = true
 metadata/_custom_type_script = "uid://chwy8tovpc6ij"

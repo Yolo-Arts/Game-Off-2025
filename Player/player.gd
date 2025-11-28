@@ -2,7 +2,7 @@ class_name  Player
 extends CharacterBody2D
 
 @export var Bullet_Type: Bullet_type
-@onready var CANNONBALL = preload("uid://m1jsvblrkbdq")
+@onready var CANNONBALL_SHOT = preload("uid://bnh5hl3deg8ec")
 
 var damage = 20.0
 var cannonball_scale = 1.0
@@ -28,7 +28,7 @@ var cannonball_scale = 1.0
 
 
 # Cannonball
-@onready var cannonball = preload("uid://m1jsvblrkbdq")
+@onready var cannonball_shot = preload("uid://bnh5hl3deg8ec")
 
 @onready var animation_player = $AnimationPlayer
 
@@ -138,7 +138,7 @@ func _physics_process(delta) -> void:
 
 
 func shoot():
-	Bullet_Type.shoot(cannonball, self, false, cannonball_scale)
+	Bullet_Type.shoot(cannonball_shot, self, false, cannonball_scale)
 
 
 func spawn_cannon_particles(pos: Vector2, normal: Vector2) -> void:
@@ -183,6 +183,12 @@ func _on_exp_collection_radius_body_entered(body: Node2D) -> void:
 	if body is Exp_Orb:
 		Globals.exp_collected.emit()
 		body.queue_free()
+	if body is Repair:
+		Signals.repair_collected.emit()
+		if health + 30 > player_max_health:
+			health = player_max_health
+		else:
+			health += 30
 
 
 func _on_drift_timeout() -> void:

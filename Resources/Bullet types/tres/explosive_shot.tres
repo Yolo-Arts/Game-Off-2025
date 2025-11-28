@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="explosive_shot" load_steps=3 format=3 uid="uid://cux08qe7cec60"]
+
+[ext_resource type="Script" uid="uid://belhwq06a3g7o" path="res://Resources/Bullet types/Explosive_upgrade.gd" id="1_1e45u"]
+[ext_resource type="Texture2D" uid="uid://c12v3gr0dt8sm" path="res://icon.svg" id="1_sxt0r"]
+
+[resource]
+script = ExtResource("1_1e45u")
+image = ExtResource("1_sxt0r")
+name = "Explosive Shot"
+description = "Shots explode on contact"
+Weight = 10
+type = "Bullet Type"
+is_unique = true
+metadata/_custom_type_script = "uid://belhwq06a3g7o"
