@@ -118,7 +118,7 @@ func _physics_process(delta) -> void:
 		
 		if can_drift == true && drift_cooldown_bar == true:
 			boost_indcator_start.emit()
-			if Input.is_action_just_released("turn_left") or Input.is_action_just_released("turn_right"):
+			if Input.is_action_just_pressed("left_shift"):
 				zoom_out.emit()
 				boost.emit()
 				drift_value += 1000
