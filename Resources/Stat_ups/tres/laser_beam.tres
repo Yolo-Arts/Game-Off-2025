@@ -9,5 +9,6 @@ script = ExtResource("1_3uuq5")
 icon = ExtResource("2_3bevr")
 ability_scene = ExtResource("1_errty")
 image = ExtResource("2_3bevr")
+type = "Ability"
 is_unique = true
 metadata/_custom_type_script = "uid://n8pwqdgr46xd"

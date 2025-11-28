@@ -12,6 +12,8 @@ var item_table = WeightedTable.new()
 var stat_up_index
 var stat_up_index2
 var selected = true
+const MAX_ABILITIES = 3
+const MAX_BULLET_TYPES = 3
 
 func _ready() -> void:
 	visible = false
@@ -20,13 +22,16 @@ func _ready() -> void:
 	stat_up_ui.upgrade_selected.connect(_on_card_selected)
 	stat_up_ui_2.upgrade_selected.connect(_on_card_selected)
 	
-	for i in range(stat_up_list.size()):
-		item_table.add_item(i, stat_up_list[i].Weight)
+	for upgrade in stat_up_list:
+		item_table.add_item(upgrade, upgrade.Weight)
 	
-	stat_up_index = item_table.pick_item()
-	stat_up_index2 = item_table.pick_item([stat_up_index])
-	stat_up_ui.Stat_up = stat_up_list[stat_up_index]
-	stat_up_ui_2.Stat_up = stat_up_list[stat_up_index2]
+	#stat_up_index = item_table.pick_item()
+	#stat_up_index2 = item_table.pick_item([stat_up_index])
+	#stat_up_ui.Stat_up = stat_up_list[stat_up_index]
+	#stat_up_ui_2.Stat_up = stat_up_list[stat_up_index2]
+	
+	stat_up_ui.Stat_up = item_table.pick_item()
+	stat_up_ui_2.Stat_up = item_table.pick_item([stat_up_ui.Stat_up])
 	
 	stat_up_ui.update()
 	stat_up_ui_2.update()
@@ -39,17 +44,20 @@ func _on_player_level_up():
 	SoundManager.play_LevelUp()
 	Engine.time_scale = 0.05
 	
-	item_table = WeightedTable.new()
+	#item_table = WeightedTable.new()
+	#
+	#for i in range(stat_up_list.size()):
+		#var current_upgrade = stat_up_list[i]
+		#if not Globals.unlocked_upgrades.has(current_upgrade):
+			#item_table.add_item(i, current_upgrade.Weight)
 	
-	for i in range(stat_up_list.size()):
-		var current_upgrade = stat_up_list[i]
-		if not Globals.unlocked_upgrades.has(current_upgrade):
-			item_table.add_item(i, current_upgrade.Weight)
+	#stat_up_index = item_table.pick_item()
+	#stat_up_index2 = item_table.pick_item([stat_up_index])
+	#stat_up_ui.Stat_up = stat_up_list[stat_up_index]
+	#stat_up_ui_2.Stat_up = stat_up_list[stat_up_index2]
 	
-	stat_up_index = item_table.pick_item()
-	stat_up_index2 = item_table.pick_item([stat_up_index])
-	stat_up_ui.Stat_up = stat_up_list[stat_up_index]
-	stat_up_ui_2.Stat_up = stat_up_list[stat_up_index2]
+	stat_up_ui.Stat_up = item_table.pick_item()
+	stat_up_ui_2.Stat_up = item_table.pick_item([stat_up_ui.Stat_up])
 	
 	stat_up_ui.update()
 	stat_up_ui_2.update()
@@ -78,10 +86,16 @@ func _on_card_selected(upgrade: Statup):
 	selected = true
 	await get_tree().create_timer(0.05).timeout
 	Engine.time_scale= 1.0
-	if upgrade.is_unique:
-		Globals.unlocked_upgrades.append(upgrade)
-		if upgrade.type == "Bullet Type":
-			Globals.active_cannonball_upgrades.append(upgrade)
+	if upgrade.type == "Ability":
+		Globals.unlocked_abilities.append(upgrade)
+		item_table.remove_item(upgrade)
+		if Globals.unlocked_abilities.size() >= MAX_ABILITIES:
+			remove_other_abilities(Globals.unlocked_abilities)
+		
+	if upgrade.type == "Bullet Type":
+		Globals.active_cannonball_upgrades.append(upgrade)
+		if Globals.active_cannonball_upgrades.size() >= MAX_BULLET_TYPES:
+			remove_other_bullet_types(Globals.active_cannonball_upgrades)
 	
 	apply_upgrade(upgrade)
 	visible = false
@@ -102,3 +116,26 @@ func _unhandled_input(event: InputEvent) -> void:
 		stat_up_ui_2.select_upgrade()
 		stat_up_ui.selected = true
 		selected = true
+
+func remove_other_bullet_types(unlocked_bullet_types: Array[Statup]):
+	
+	var removal_list = []
+	for upgrade in stat_up_list:
+		if upgrade.type == "Bullet Type" and !unlocked_bullet_types.has(upgrade):
+			removal_list.append(upgrade)
+	
+	for item in removal_list:
+		item_table.remove_item(item)
+	pass
+	
+func remove_other_abilities(Unlocked_abilities: Array[Statup]):
+	var removal_list = []
+	for upgrade in stat_up_list:
+		
+		if upgrade.type == "Ability" and !Unlocked_abilities.has(upgrade):
+			removal_list.append(upgrade)
+	
+	for item in removal_list:
+		item_table.remove_item(item)
+	pass
+	

@@ -10,5 +10,6 @@ cooldown = 15.0
 icon = ExtResource("1_38xoh")
 ability_scene = ExtResource("1_vbfxr")
 image = ExtResource("1_38xoh")
+type = "Ability"
 is_unique = true
 metadata/_custom_type_script = "uid://chwy8tovpc6ij"

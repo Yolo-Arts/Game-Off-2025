@@ -2,7 +2,7 @@ extends Node
 
 var camera
 
-var unlocked_upgrades: Array[Statup] = []
+var unlocked_abilities: Array[Statup] = []
 var active_cannonball_upgrades: Array[Statup] = []
 
 signal exp_collected
