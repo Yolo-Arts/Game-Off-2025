@@ -1,11 +1,12 @@
 extends Enemy
 class_name Enemy_iso
 
+signal died
+
 #FIXME Fix the hitboxes, they do not rotate with the enemy.
 
-# Lower = Heavier boat (slides more). Higher = enemies have more control.
-# TODO ADD acceleration to the enemy_types resource for different levels of difficulty
-var acceleration: float = 1.2 
+
+
 
 var knockback_resistance: float = 10.0 
 
@@ -33,6 +34,7 @@ func set_enemy_type(enemy_type: int):
 	health = enemy_stats.health
 	total_frames = enemy_stats.total_frames
 	frame_offset = enemy_stats.frame_offset
+	acceleration = enemy_stats.acceleration
 
 
 #func _physics_process(_delta):
@@ -122,6 +124,7 @@ func take_damage(damage: int):
 		#Signals.start_hitStop.emit(0.2, 0.2)
 		Globals.camera.shake(0.20, 35, 25)
 		Globals.update_score("ENEMY_SHIPWRECKED")
+		died.emit()
 		await get_tree().create_timer(2).timeout
 	else:
 		Signals.start_hitStop.emit(0.3, 0.1)

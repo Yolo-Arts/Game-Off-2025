@@ -17,8 +17,20 @@ class_name enemy_type
 
 @export var speed: float = 400.0
 
-@export var damage: float
-@export var health: float
+@export var damage: float = 10
+@export var health: float = 20
+@export var acceleration: float = 1.2
+
+@export var can_dash: bool = false
+@export var dash_speed: float = 800.0
+@export var dash_duration: float = 0.5
+@export var dash_cooldown: float = 3.0
+
+@export var can_shoot: bool = false
+@export var shoot_cooldown: float = 5.0
+@export var shoot_damage: float = 15.0
+@export var shoot_range: float = 500.0  
+@export var projectile_speed: float = 400.0
 
 enum types {
 	SLOW,

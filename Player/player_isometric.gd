@@ -280,6 +280,8 @@ func _on_damage_area_iso_body_entered(body: Node2D) -> void:
 		Globals.camera.shake(0.5, 25, 25)
 		print("Player Health: ", health, "Damaged by: ", body.enemy_stats.type)
 		$damage_interval_timer.start()
+	elif $damage_interval_timer.is_stopped() and body is Enemy_Bullet:
+		print("hit by enemy bullet")
 	else:
 		print("Damage on cooldown")
 
@@ -309,3 +311,10 @@ func _on_shockwave_area_body_entered(body: Node2D) -> void:
 
 func _on_isometric_main_begin_game() -> void:
 	game_begin = true
+
+func take_damage(damage):
+	if $damage_interval_timer.is_stopped():
+		health -= damage
+		shake_hp_bar.emit()
+		Globals.camera.shake(0.5, 25, 25)
+		$damage_interval_timer.start()
