@@ -88,6 +88,7 @@ left_click={
 2d_physics/layer_4="terrain"
 2d_physics/layer_5="EXP"
 2d_physics/layer_6="knockback_layer"
+2d_physics/layer_8="bullet_layer"
 
 [rendering]
 

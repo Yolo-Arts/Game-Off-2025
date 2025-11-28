@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="enemy_type" load_steps=3 format=3 uid="uid://dnwb10yqffs0m"]
+
+[ext_resource type="Script" uid="uid://bujng151akkyd" path="res://Resources/enemy_type.gd" id="1_qitju"]
+[ext_resource type="Texture2D" uid="uid://bv3fyys57wxdx" path="res://Enemies/Sprites/enemy_ship_orange_spritesheet.png" id="2_6132s"]
+
+[resource]
+script = ExtResource("1_qitju")
+texture = ExtResource("2_6132s")
+speed = 600.0
+acceleration = 0.9
+can_shoot = true
+shoot_range = 900.0
+projectile_speed = 900.0
+metadata/_custom_type_script = "uid://bujng151akkyd"

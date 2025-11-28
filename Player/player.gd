@@ -176,6 +176,8 @@ func _on_damage_area_body_entered(body: Node2D) -> void:
 		Globals.camera.shake(0.5, 15, 10)
 		print("Player Health: ", health, "Damaged by: ", body.enemy_stats.type)
 		$damage_interval_timer.start()
+	elif $damage_interval_timer.is_stopped() and body is Enemy_Bullet:
+		print("hit by enemy bullet")
 	else:
 		print("Damage on cooldown")
 

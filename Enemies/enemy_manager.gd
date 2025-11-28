@@ -5,6 +5,7 @@ var swapper_index = 0
 
 @export var basic_enemy_scene: PackedScene
 @export var dash_enemy_scene: PackedScene
+@export var projectile_enemy_scene: PackedScene
 
 @export var enemy_types: Array[Resource]
 
@@ -68,6 +69,8 @@ func spawn():
 	if enemy_stats.can_dash:
 		print("Enemy can dash")
 		enemy_scene = dash_enemy_scene
+	elif enemy_stats.can_shoot:
+		enemy_scene = projectile_enemy_scene
 	else:
 		print("Enemy cannot dash")
 	
@@ -91,6 +94,7 @@ func spawn():
 func setup_wave_for_difficulty(current_difficulty: int):
 	match current_difficulty:
 		0:
+			enemy_table.add_item(6, 15)
 			enemy_count = 15
 			spawn_interval = 2.0
 			wave_length = 30

@@ -1,0 +1,14 @@
+[gd_scene load_steps=5 format=3 uid="uid://bxgdqokymc1io"]
+
+[ext_resource type="PackedScene" uid="uid://h0hdesj12ofh" path="res://Enemies/isometric_basic_enemy.tscn" id="1_roo25"]
+[ext_resource type="Script" uid="uid://djvp4uaynplrs" path="res://Enemies/projectile_isometric_enemy.gd" id="2_7mh3x"]
+[ext_resource type="PackedScene" uid="uid://b8mkrqjumpy0x" path="res://Enemies/enemy_projectile.tscn" id="3_i4ycg"]
+[ext_resource type="Resource" uid="uid://dnwb10yqffs0m" path="res://Enemies/AbilityEnemies/projectileEnemyIsometric.tres" id="3_y1dmx"]
+
+[node name="Projectile_Isometric_Enemy" instance=ExtResource("1_roo25")]
+collision_mask = 174
+script = ExtResource("2_7mh3x")
+projectile_scene = ExtResource("3_i4ycg")
+enemy_types = Array[Resource]([ExtResource("3_y1dmx")])
+
+[node name="ShootTimer" type="Timer" parent="." index="9"]
