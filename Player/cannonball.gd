@@ -4,6 +4,7 @@ extends Area2D
 @export var max_pierce := 1
 @export var speed = 700
 var base_damage = 10
+var chain = 0
 
 # In the scenario we use resources to manage bullet types
 @export var bullet: Resource
@@ -36,8 +37,18 @@ func _on_body_entered(body):
 	if current_pierce_count >= max_pierce:
 		queue_free()
 	
+		
 	if body.has_method("take_damage"):
 		body.take_damage(base_damage)
+
+	while chain > 0:
+		if explosion_area.get_overlapping_bodies().size() > 1:
+			var furthest_enemy = find_furthest_enemy(body)
+			global_position = furthest_enemy.global_position
+			await get_tree().create_timer(0.001).timeout
+			furthest_enemy.take_damage(base_damage)
+		chain -= 1
+		
 	if explosive:
 		explode()
 
@@ -48,3 +59,20 @@ func explode():
 		if enemy.has_method("take_damage"):
 			enemy.take_damage(base_damage)
 			
+func find_furthest_enemy(exclude: Enemy_iso) -> Enemy_iso:
+	var nearby_enemies = explosion_area.get_overlapping_bodies()
+	var furthest_index = 0
+	var furthest_distance = 0.0
+	var current_distance
+	
+	for enemy in nearby_enemies:
+		if enemy == exclude:
+			continue
+		var index = nearby_enemies.find(enemy)
+		current_distance = (global_position.distance_squared_to(enemy.global_position))
+		if furthest_distance <= current_distance:
+			furthest_distance = current_distance
+			furthest_index = index
+			
+	
+	return nearby_enemies[furthest_index]

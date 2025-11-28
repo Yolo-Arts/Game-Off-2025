@@ -8,6 +8,6 @@ script = ExtResource("2_hl68p")
 image = ExtResource("1_hl68p")
 name = "Double shot"
 description = "Doubles the number of shots"
-Weight = 1000
+Weight = 10
 type = "Bullet Type"
 is_unique = true

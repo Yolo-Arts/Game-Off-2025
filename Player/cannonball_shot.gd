@@ -1,6 +1,7 @@
 extends Node2D
 class_name Cannonball_shot
-	
+
+
 func get_cannonballs() -> Array[Node]:
 	return get_children()
 
@@ -30,5 +31,7 @@ func add_cannonball(amount:int, spread: float):
 		var index = cannonballs.find(cannonball_i)
 		cannonball_i.position += Vector2(0,(length - (index+1))*spread - (length-1)*spread/2)
 		
-		
+func set_lightning(lightning_chain: int):
+	for cannonball in get_cannonballs():
+		cannonball.chain = lightning_chain
 	
