@@ -5,7 +5,7 @@ extends Area2D
 @export var speed = 700
 var base_damage = 10
 var chain = 0
-
+var tween: Tween
 # In the scenario we use resources to manage bullet types
 @export var bullet: Resource
 @onready var sprite = $Sprite2D
@@ -26,27 +26,28 @@ func _ready():
 func _physics_process(delta):
 	#if !bullet:
 		#return
+
 	position += direction * speed * delta
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	queue_free()
 
 func _on_body_entered(body):
-	current_pierce_count += 1
+	if chain == 0:
+		current_pierce_count += 1
 	
-	if current_pierce_count >= max_pierce:
+	if current_pierce_count >= max_pierce and !is_chainable():
 		queue_free()
 	
 		
 	if body.has_method("take_damage"):
 		body.take_damage(base_damage)
 
-	while chain > 0:
-		if explosion_area.get_overlapping_bodies().size() > 1:
-			var furthest_enemy = find_furthest_enemy(body)
-			global_position = furthest_enemy.global_position
-			await get_tree().create_timer(0.001).timeout
-			furthest_enemy.take_damage(base_damage)
+	while is_chainable():
+		var furthest_enemy = find_furthest_enemy(body)
+		tween = create_tween()
+		tween.tween_property(self, "global_position", furthest_enemy.global_position, 0.05)
+		await tween.finished
 		chain -= 1
 		
 	if explosive:
@@ -76,3 +77,9 @@ func find_furthest_enemy(exclude: Enemy_iso) -> Enemy_iso:
 			
 	
 	return nearby_enemies[furthest_index]
+
+func is_chainable() -> bool:
+	if explosion_area.get_overlapping_bodies().size() > 1 and chain > 0:
+		return true
+	else:
+		return false
