@@ -22,8 +22,8 @@ func shoot(cannonball_scene: PackedScene, player:Player, isometric = false, scal
 	bullet_instance.set_cannonball_damage(player.damage)
 	bullet_instance2.set_cannonball_damage(player.damage)
 	
-	bullet_instance.apply_scale(Vector2(scale, scale))
-	bullet_instance2.apply_scale(Vector2(scale, scale))
+	bullet_instance.set_cannonball_scale(Vector2(scale, scale))
+	bullet_instance2.set_cannonball_scale(Vector2(scale, scale))
 
 	
 	player.get_parent().add_child(bullet_instance)

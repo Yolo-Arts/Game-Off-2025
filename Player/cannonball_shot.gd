@@ -12,6 +12,11 @@ func set_cannonball_damage(damage: float):
 	for ball in get_children():
 		ball.base_damage = damage
 
+func set_cannonball_scale(scale: Vector2):
+	for ball in get_cannonballs():
+		ball.apply_scale(scale)
+		#ball.explosion_area.apply_scale(Vector2(0.5, 0.5))
+
 func set_cannonball_direction(direction: Vector2):
 	for ball in get_children():
 		ball.direction = direction
