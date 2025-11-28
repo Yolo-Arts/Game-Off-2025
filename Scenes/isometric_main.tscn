@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://2sw5s3fxyqo3" path="res://Scenes/camera_2d.tscn" id="2_pwvqx"]
 [ext_resource type="Script" uid="uid://d0kecd4amk3cw" path="res://Scenes/chunk_loader.gd" id="5_2y55o"]
 [ext_resource type="Shader" uid="uid://b4oixuorco5vd" path="res://Shaders/water.gdshader" id="5_504xn"]
-[ext_resource type="Script" uid="uid://dih701ldj41ee" path="res://Scenes/time_cycle_manager.gd" id="5_yj477"]
+[ext_resource type="Script" path="res://Scenes/time_cycle_manager.gd" id="5_yj477"]
 [ext_resource type="Texture2D" uid="uid://c12v3gr0dt8sm" path="res://icon.svg" id="6_0lw5m"]
 [ext_resource type="PackedScene" uid="uid://deqnmjpt3dxgb" path="res://Player/player_isometric.tscn" id="6_wgbrh"]
 [ext_resource type="PackedScene" uid="uid://brjyeo32vgcfh" path="res://Enemies/enemy_manager.tscn" id="7_0lw5m"]
