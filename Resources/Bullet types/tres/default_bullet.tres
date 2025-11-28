@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://j3tfs6h36efg"]
+[gd_resource type="Resource" script_class="Default_bullet" load_steps=2 format=3 uid="uid://j3tfs6h36efg"]
 
 [ext_resource type="Script" uid="uid://bo6vq6co3j2ya" path="res://Resources/Bullet types/Default_Bullet.gd" id="1_ku80e"]
 

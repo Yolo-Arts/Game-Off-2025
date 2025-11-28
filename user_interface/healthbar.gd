@@ -9,7 +9,7 @@ var player: Iso_player
 func _ready():
 	player = get_tree().get_first_node_in_group("player") as Iso_player
 
-#
+
 func _process(delta: float) -> void:
 	health_bar.value = player.health
 	hp_label.text = "HP: " + str(player.health)

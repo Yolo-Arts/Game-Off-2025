@@ -24,6 +24,7 @@ signal boost_indcator_start
 signal boost
 signal zoom_in
 signal zoom_out
+signal shake_hp_bar
 
 var game_begin = false
 var shockwave_fired = false

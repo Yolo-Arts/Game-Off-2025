@@ -1,11 +1,10 @@
-[gd_scene load_steps=53 format=3 uid="uid://b3imdjb1so30p"]
+[gd_scene load_steps=52 format=3 uid="uid://b3imdjb1so30p"]
 
 [ext_resource type="Script" uid="uid://wjiwydm880cx" path="res://Scenes/isometric_main.gd" id="1_1enjl"]
 [ext_resource type="PackedScene" uid="uid://cbag74ryx0pu8" path="res://Scenes/player_manager.tscn" id="2_dlawb"]
 [ext_resource type="PackedScene" uid="uid://2sw5s3fxyqo3" path="res://Scenes/camera_2d.tscn" id="2_pwvqx"]
 [ext_resource type="Script" uid="uid://d0kecd4amk3cw" path="res://Scenes/chunk_loader.gd" id="5_2y55o"]
 [ext_resource type="Shader" uid="uid://b4oixuorco5vd" path="res://Shaders/water.gdshader" id="5_504xn"]
-[ext_resource type="Script" uid="uid://dih701ldj41ee" path="res://Scenes/time_cycle_manager.gd" id="5_yj477"]
 [ext_resource type="Texture2D" uid="uid://c12v3gr0dt8sm" path="res://icon.svg" id="6_0lw5m"]
 [ext_resource type="PackedScene" uid="uid://deqnmjpt3dxgb" path="res://Player/player_isometric.tscn" id="6_wgbrh"]
 [ext_resource type="PackedScene" uid="uid://brjyeo32vgcfh" path="res://Enemies/enemy_manager.tscn" id="7_0lw5m"]
@@ -23,10 +22,11 @@
 [ext_resource type="Script" uid="uid://dt41mbv4yvwkl" path="res://Scenes/grayscale.gd" id="16_hvs2a"]
 [ext_resource type="Shader" uid="uid://c3xdyeo558avw" path="res://Shaders/grayscale.gdshader" id="16_ixf2m"]
 [ext_resource type="Resource" uid="uid://ysqdaqmx1hac" path="res://Enemies/AbilityEnemies/dashEnemyIsometric.tres" id="18_4lvfn"]
-[ext_resource type="Shader" path="res://Shaders/screenTransition.gdshader" id="19_b21ex"]
+[ext_resource type="Shader" uid="uid://ydw2wifhpp88" path="res://Shaders/screenTransition.gdshader" id="19_b21ex"]
 [ext_resource type="Resource" uid="uid://dnwb10yqffs0m" path="res://Enemies/AbilityEnemies/projectileEnemyIsometric.tres" id="19_bntkt"]
 [ext_resource type="PackedScene" uid="uid://cpx0xphjgp1lt" path="res://Shaders/cloud.tscn" id="20_7tq1b"]
 [ext_resource type="Script" uid="uid://3cukdxaftfk6" path="res://Scenes/ui.gd" id="20_xqk4e"]
+[ext_resource type="PackedScene" uid="uid://bqc47rhr50tki" path="res://user_interface/healthbar.tscn" id="25_bntkt"]
 [ext_resource type="PackedScene" uid="uid://bmqqm41qob53n" path="res://user_interface/experience_bar.tscn" id="25_dppuq"]
 [ext_resource type="PackedScene" uid="uid://br81uexsi3und" path="res://user_interface/drift_bar.tscn" id="26_40rgy"]
 [ext_resource type="PackedScene" uid="uid://dn75ntkbbgxb2" path="res://user_interface/pause_menu.tscn" id="26_veftd"]
@@ -34,7 +34,6 @@
 [ext_resource type="Shader" uid="uid://cb3xbdufad64w" path="res://Shaders/shockwave.gdshader" id="28_jleb8"]
 [ext_resource type="PackedScene" uid="uid://c60diwu1u2ajo" path="res://user_interface/ability_bar.tscn" id="29_ne86t"]
 [ext_resource type="PackedScene" uid="uid://vn1chcv7m0l" path="res://user_interface/spawn_ui.tscn" id="30_lc8nd"]
-[ext_resource type="PackedScene" uid="uid://6du57t1guvah" path="res://user_interface/pause_button.tscn" id="30_xqk4e"]
 [ext_resource type="PackedScene" uid="uid://bewlchyk4ofw4" path="res://Enemies/dash_isometric_enemy.tscn" id="33_oqk4o"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_wgbrh"]
@@ -219,10 +218,10 @@ scale = Vector2(20, 20)
 texture = ExtResource("6_0lw5m")
 stretch_mode = 1
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="Chunk Loader" type="Node2D" parent="."]
 script = ExtResource("5_2y55o")
 
-[node name="scene" type="Node2D" parent="Node2D"]
+[node name="scene" type="Node2D" parent="Chunk Loader"]
 
 [node name="cloud" parent="." instance=ExtResource("20_7tq1b")]
 z_index = 7
@@ -260,6 +259,8 @@ process_mode = 3
 [node name="UI" type="CanvasLayer" parent="."]
 script = ExtResource("20_xqk4e")
 
+[node name="HP" parent="UI" instance=ExtResource("25_bntkt")]
+
 [node name="Shockwave" type="ColorRect" parent="UI"]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_ne86t")
@@ -280,8 +281,6 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-
-[node name="HP" parent="UI" instance=ExtResource("18_ifoba")]
 
 [node name="Grayscale" type="CanvasLayer" parent="UI"]
 script = ExtResource("16_hvs2a")
