@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bsknk36gbders"
-path="res://.godot/imported/Controls Sheet.png-1eb3d527d6869397e9de3ee2b798221a.ctex"
+uid="uid://cbg4emtd8cdb2"
+path="res://.godot/imported/WaveDrifter3DText_export.png-c727ed81b74882b8ffb896937d13ae7d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Controls Sheet.png"
-dest_files=["res://.godot/imported/Controls Sheet.png-1eb3d527d6869397e9de3ee2b798221a.ctex"]
+source_file="res://Assets/StartScreen/WaveDrifter3DText_export.png"
+dest_files=["res://.godot/imported/WaveDrifter3DText_export.png-c727ed81b74882b8ffb896937d13ae7d.ctex"]
 
 [params]
 

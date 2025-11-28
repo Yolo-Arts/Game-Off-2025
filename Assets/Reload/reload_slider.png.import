@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cbg4emtd8cdb2"
-path="res://.godot/imported/WaveDrifter3DText_export.png-c090cbcf8d98d623185b18e549824b0a.ctex"
+uid="uid://dth3mtkn478dg"
+path="res://.godot/imported/reload_slider.png-7c09d39332184de60d9fe762d7463124.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/WaveDrifter3DText_export.png"
-dest_files=["res://.godot/imported/WaveDrifter3DText_export.png-c090cbcf8d98d623185b18e549824b0a.ctex"]
+source_file="res://Assets/Reload/reload_slider.png"
+dest_files=["res://.godot/imported/reload_slider.png-7c09d39332184de60d9fe762d7463124.ctex"]
 
 [params]
 

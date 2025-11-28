@@ -1,0 +1,85 @@
+[gd_scene load_steps=7 format=3 uid="uid://y1prd0dx6cak"]
+
+[ext_resource type="Texture2D" uid="uid://coa0porcgdtx8" path="res://Assets/Reload/reload_ui.png" id="1_3et0b"]
+[ext_resource type="Script" uid="uid://sthct2u7mthr" path="res://user_interface/reload_ui.gd" id="1_ovl5j"]
+[ext_resource type="Texture2D" uid="uid://dth3mtkn478dg" path="res://Assets/Reload/reload_slider.png" id="2_ovl5j"]
+
+[sub_resource type="Animation" id="Animation_3et0b"]
+resource_name = "reload"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ParentReloadUI/ReloadSlider:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-7, -8), Vector2(6.5, -8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ParentReloadUI:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_ovl5j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ParentReloadUI/ReloadSlider:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-7, -8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ParentReloadUI:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m1iko"]
+_data = {
+&"RESET": SubResource("Animation_ovl5j"),
+&"reload": SubResource("Animation_3et0b")
+}
+
+[node name="ReloadUI" type="Node"]
+script = ExtResource("1_ovl5j")
+
+[node name="ParentReloadUI" type="Node2D" parent="."]
+position = Vector2(960, 540)
+scale = Vector2(8, 8)
+
+[node name="ReloadBG" type="Sprite2D" parent="ParentReloadUI"]
+position = Vector2(0, -8)
+texture = ExtResource("1_3et0b")
+
+[node name="ReloadSlider" type="Sprite2D" parent="ParentReloadUI"]
+position = Vector2(-7, -8)
+texture = ExtResource("2_ovl5j")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_m1iko")
+}

@@ -1,12 +1,12 @@
 [gd_scene load_steps=18 format=3 uid="uid://vn1chcv7m0l"]
 
 [ext_resource type="Script" uid="uid://t44f3knfftma" path="res://user_interface/spawn_ui.gd" id="1_84skf"]
-[ext_resource type="Texture2D" uid="uid://cbg4emtd8cdb2" path="res://Assets/WaveDrifter3DText_export.png" id="1_en2mb"]
-[ext_resource type="Texture2D" uid="uid://cdrhmomp8ivku" path="res://Assets/StartScreenGradient.png" id="2_ff6gw"]
+[ext_resource type="Texture2D" uid="uid://cbg4emtd8cdb2" path="res://Assets/StartScreen/WaveDrifter3DText_export.png" id="1_en2mb"]
+[ext_resource type="Texture2D" uid="uid://cdrhmomp8ivku" path="res://Assets/StartScreen/StartScreenGradient.png" id="2_ff6gw"]
 [ext_resource type="Texture2D" uid="uid://cmjk2pnq1vti4" path="res://Assets/Particles/particle2.png" id="2_nryyr"]
-[ext_resource type="Texture2D" uid="uid://bsknk36gbders" path="res://Assets/Controls Sheet.png" id="3_nloar"]
+[ext_resource type="Texture2D" uid="uid://bsknk36gbders" path="res://Assets/StartScreen/Controls Sheet.png" id="3_nloar"]
 [ext_resource type="Theme" uid="uid://b70rftml1sway" path="res://user_interface/themev3.tres" id="3_p73be"]
-[ext_resource type="Texture2D" uid="uid://hmgbtyo0cjcb" path="res://Assets/pxkw_enter.png" id="7_wy6kp"]
+[ext_resource type="Texture2D" uid="uid://hmgbtyo0cjcb" path="res://Assets/StartScreen/pxkw_enter.png" id="7_wy6kp"]
 
 [sub_resource type="Gradient" id="Gradient_nryyr"]
 colors = PackedColorArray(0.38671875, 1, 0.97125244, 1, 1, 1, 1, 0)

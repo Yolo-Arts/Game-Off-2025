@@ -8,6 +8,7 @@ var isometric_transform: Transform2D
 @onready var shoot_cooldown: Timer = $shootCooldown
 @onready var shockwave: ColorRect = %Shockwave
 @onready var shockwave_collision_shape: CollisionShape2D = $ShockwaveArea/ShockwaveCollisionShape
+@onready var reload_ui: Node = $ReloadUI
 
 
 
@@ -65,9 +66,12 @@ func _input(event):
 			SoundManager.play_CannonFire()
 			shoot()
 			can_shoot = false
+			reload_ui.play()
 			shoot_cooldown.start()
+			SoundManager.play_reload()
 		else:
-			spawn_reload_text()
+			return
+			#spawn_reload_text()
 	if shockwave_fired == true:
 		shockwave_fired = false
 		shockwave.material.set_shader_parameter("global_position", Vector2(1910/2.0, 1080/2))
@@ -78,10 +82,12 @@ func _input(event):
 			
 
 
-func spawn_reload_text():
-	var text_instance = RELOADING.instantiate()
-	get_tree().current_scene.add_child(text_instance)
-	text_instance.global_position = self.global_position + Vector2(0, -80)
+#region spawn_reload_text (REMOVED)
+#func spawn_reload_text():
+	#var text_instance = RELOADING.instantiate()
+	#get_tree().current_scene.add_child(text_instance)
+	#text_instance.global_position = self.global_position + Vector2(0, -80)
+#endregion
 
 
 func _physics_process(delta) -> void:

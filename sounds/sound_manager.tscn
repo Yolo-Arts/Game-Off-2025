@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://cjqdhk1yxoc0h"]
+[gd_scene load_steps=32 format=3 uid="uid://cjqdhk1yxoc0h"]
 
 [ext_resource type="Script" uid="uid://cy5j6mtf0cjtq" path="res://sounds/sound_manager.gd" id="1_a1hhe"]
 [ext_resource type="AudioStream" uid="uid://cwde2y4bxpmji" path="res://sounds/death_explosion1.sfxr" id="1_f05am"]
@@ -22,6 +22,7 @@
 [ext_resource type="AudioStream" uid="uid://b3irssg4m0aik" path="res://sounds/Collect 4.ogg" id="20_x1rkp"]
 [ext_resource type="AudioStream" uid="uid://b56hlpycm5x1f" path="res://sounds/Collect 5.ogg" id="21_k4366"]
 [ext_resource type="AudioStream" uid="uid://bkyy3jqlnxvoa" path="res://sounds/LevelUp.ogg" id="22_k4366"]
+[ext_resource type="AudioStream" uid="uid://cdxbingt6d0yr" path="res://sounds/1911-reload-6248.mp3" id="23_150ry"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_8a8qv"]
 random_pitch = 1.51
@@ -73,6 +74,12 @@ streams_count = 2
 stream_0/stream = ExtResource("20_x1rkp")
 stream_1/stream = ExtResource("21_k4366")
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ogm50"]
+random_pitch = 1.2
+random_volume_offset_db = 0.33
+streams_count = 1
+stream_0/stream = ExtResource("23_150ry")
+
 [node name="SoundManager" type="Node"]
 process_mode = 3
 script = ExtResource("1_a1hhe")
@@ -112,3 +119,7 @@ bus = &"SFX"
 stream = ExtResource("22_k4366")
 pitch_scale = 1.2
 bus = &"SFX"
+
+[node name="Reload" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_ogm50")
+bus = &"Bullet_Reload"

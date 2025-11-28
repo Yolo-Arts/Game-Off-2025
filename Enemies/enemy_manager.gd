@@ -71,8 +71,6 @@ func spawn():
 		enemy_scene = dash_enemy_scene
 	elif enemy_stats.can_shoot:
 		enemy_scene = projectile_enemy_scene
-	else:
-		print("Enemy cannot dash")
 	
 	var enemy = enemy_scene.instantiate() as Enemy_iso
 	#enemy.died.connect(_on_enemy_died)
@@ -109,9 +107,9 @@ func setup_wave_for_difficulty(current_difficulty: int):
 			wave_length = 10
 		6:
 			enemy_table.add_item(5, 15)
-			enemy_count = 15
+			enemy_count = 18
 			spawn_interval = 0.2
-			wave_length = 40
+			wave_length = 30
 			
 		7, 8, 9:
 			enemy_table.remove_item(0) 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://deqnmjpt3dxgb"]
+[gd_scene load_steps=20 format=3 uid="uid://deqnmjpt3dxgb"]
 
 [ext_resource type="Script" uid="uid://bg21p6igd7lvn" path="res://Player/player_isometric.gd" id="1_60ovk"]
 [ext_resource type="Texture2D" uid="uid://bjchrxewdcwy2" path="res://Player/boat_spritesheet2.png" id="2_evufl"]
@@ -9,7 +9,8 @@
 [ext_resource type="Script" uid="uid://dbjnldmb02swc" path="res://Assets/Particles/boost_particles.gd" id="7_r0ntv"]
 [ext_resource type="PackedScene" uid="uid://c47b8w26445qp" path="res://Assets/Particles/boost_indicator.tscn" id="8_t0vef"]
 [ext_resource type="Script" uid="uid://dbo22f2qfkc0d" path="res://Assets/Particles/boost_indicator.gd" id="9_fphli"]
-[ext_resource type="Script" uid="uid://co7jgwfc8vm2q" path="res://Player/point_light_2d.gd" id="10_1xiy1"]
+[ext_resource type="Script" path="res://Player/point_light_2d.gd" id="10_1xiy1"]
+[ext_resource type="PackedScene" uid="uid://y1prd0dx6cak" path="res://user_interface/reload_ui.tscn" id="11_k28l0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fphli"]
 radius = 14.921549
@@ -137,6 +138,8 @@ shadow_filter_smooth = 3.4
 texture = SubResource("GradientTexture2D_fphli")
 texture_scale = 32.39
 script = ExtResource("10_1xiy1")
+
+[node name="ReloadUI" parent="." instance=ExtResource("11_k28l0")]
 
 [connection signal="boost" from="." to="BoostParticles" method="_on_player_isometric_boost"]
 [connection signal="boost_indcator_start" from="." to="boostIndicator" method="_on_player_isometric_boost_indcator_start"]

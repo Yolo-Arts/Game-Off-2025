@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cdrhmomp8ivku"
-path="res://.godot/imported/StartScreenGradient.png-74590f0336a8c156fb51d68f664f9ac3.ctex"
+uid="uid://bsknk36gbders"
+path="res://.godot/imported/Controls Sheet.png-9775dca1f1d31966b78f9ce5a3a04a52.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/StartScreenGradient.png"
-dest_files=["res://.godot/imported/StartScreenGradient.png-74590f0336a8c156fb51d68f664f9ac3.ctex"]
+source_file="res://Assets/StartScreen/Controls Sheet.png"
+dest_files=["res://.godot/imported/Controls Sheet.png-9775dca1f1d31966b78f9ce5a3a04a52.ctex"]
 
 [params]
 

@@ -8,6 +8,7 @@ extends Node
 @onready var button_hover: AudioStreamPlayer = $UI_SFX/ButtonHover
 @onready var upgrade_unlock: AudioStreamPlayer = $UpgradeUnlock
 @onready var level_up: AudioStreamPlayer = $LevelUp
+@onready var reload: AudioStreamPlayer = $Reload
 
 
 
@@ -34,3 +35,6 @@ func play_UpgradeUnlock():
 
 func play_LevelUp():
 	level_up.play()
+
+func play_reload():
+	reload.play()
