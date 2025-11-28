@@ -61,17 +61,18 @@ func dead_player():
 
 
 func _input(event):
-	if event.is_action_pressed("fire"):
-		if can_shoot:
-			SoundManager.play_CannonFire()
-			shoot()
-			can_shoot = false
-			reload_ui.play()
-			shoot_cooldown.start()
-			SoundManager.play_reload()
-		else:
-			return
-			#spawn_reload_text()
+	if game_begin:
+		if event.is_action_pressed("fire"):
+			if can_shoot:
+				SoundManager.play_CannonFire()
+				shoot()
+				can_shoot = false
+				reload_ui.play()
+				shoot_cooldown.start()
+				SoundManager.play_reload()
+			else:
+				return
+				#spawn_reload_text()
 	if shockwave_fired == true:
 		shockwave_fired = false
 		shockwave.material.set_shader_parameter("global_position", Vector2(1910/2.0, 1080/2))
