@@ -1,14 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://bxgdqokymc1io"]
+[gd_scene load_steps=11 format=3 uid="uid://bxgdqokymc1io"]
 
 [ext_resource type="PackedScene" uid="uid://h0hdesj12ofh" path="res://Enemies/isometric_basic_enemy.tscn" id="1_roo25"]
-[ext_resource type="Script" path="res://Enemies/projectile_isometric_enemy.gd" id="2_7mh3x"]
+[ext_resource type="Script" uid="uid://djvp4uaynplrs" path="res://Enemies/projectile_isometric_enemy.gd" id="2_7mh3x"]
 [ext_resource type="PackedScene" uid="uid://b8mkrqjumpy0x" path="res://Enemies/enemy_projectile.tscn" id="3_i4ycg"]
 [ext_resource type="Resource" uid="uid://dnwb10yqffs0m" path="res://Enemies/AbilityEnemies/projectileEnemyIsometric.tres" id="3_y1dmx"]
+[ext_resource type="Resource" uid="uid://d1qpml40osw4y" path="res://Enemies/Enemy_Types/black_isometric.tres" id="4_hi7df"]
+[ext_resource type="Resource" uid="uid://3bjbysn0exty" path="res://Enemies/Enemy_Types/red_isometric.tres" id="5_qpt1c"]
+[ext_resource type="Resource" uid="uid://dm54cgwnfqywy" path="res://Enemies/Enemy_Types/green_isometric.tres" id="6_cu553"]
+[ext_resource type="Resource" uid="uid://svmp2d2l0to4" path="res://Enemies/Enemy_Types/purple_isometric.tres" id="7_k7xna"]
+[ext_resource type="Resource" uid="uid://bprcgrgyghoih" path="res://Enemies/Enemy_Types/orange_isometric.tres" id="8_1rx6l"]
+[ext_resource type="Resource" uid="uid://ysqdaqmx1hac" path="res://Enemies/AbilityEnemies/dashEnemyIsometric.tres" id="9_x2vxc"]
 
 [node name="Projectile_Isometric_Enemy" instance=ExtResource("1_roo25")]
 collision_mask = 174
 script = ExtResource("2_7mh3x")
 projectile_scene = ExtResource("3_i4ycg")
-enemy_types = Array[Resource]([ExtResource("3_y1dmx")])
+enemy_types = Array[Resource]([ExtResource("4_hi7df"), ExtResource("5_qpt1c"), ExtResource("6_cu553"), ExtResource("7_k7xna"), ExtResource("8_1rx6l"), ExtResource("9_x2vxc"), ExtResource("3_y1dmx")])
 
 [node name="ShootTimer" type="Timer" parent="." index="8"]

@@ -1,15 +1,21 @@
-[gd_scene load_steps=7 format=3 uid="uid://bewlchyk4ofw4"]
+[gd_scene load_steps=13 format=3 uid="uid://bewlchyk4ofw4"]
 
 [ext_resource type="PackedScene" uid="uid://h0hdesj12ofh" path="res://Enemies/isometric_basic_enemy.tscn" id="1_6k4ts"]
 [ext_resource type="Script" uid="uid://dyms33o4j0blm" path="res://Enemies/dash_isometric_enemy.gd" id="2_magd3"]
+[ext_resource type="Resource" uid="uid://d1qpml40osw4y" path="res://Enemies/Enemy_Types/black_isometric.tres" id="3_2dvho"]
 [ext_resource type="Resource" uid="uid://ysqdaqmx1hac" path="res://Enemies/AbilityEnemies/dashEnemyIsometric.tres" id="3_magd3"]
+[ext_resource type="Resource" uid="uid://3bjbysn0exty" path="res://Enemies/Enemy_Types/red_isometric.tres" id="4_qcmfv"]
 [ext_resource type="PackedScene" uid="uid://bu0akexxfytwy" path="res://Assets/Particles/dash_warning.tscn" id="4_r04sw"]
+[ext_resource type="Resource" uid="uid://dm54cgwnfqywy" path="res://Enemies/Enemy_Types/green_isometric.tres" id="5_mwars"]
 [ext_resource type="PackedScene" uid="uid://bx6gp2g3j17xc" path="res://Assets/Particles/boost_particles_white.tscn" id="5_y7xkd"]
+[ext_resource type="Resource" uid="uid://svmp2d2l0to4" path="res://Enemies/Enemy_Types/purple_isometric.tres" id="6_hlgdi"]
 [ext_resource type="PackedScene" uid="uid://c47b8w26445qp" path="res://Assets/Particles/boost_indicator.tscn" id="6_qqkc0"]
+[ext_resource type="Resource" uid="uid://bprcgrgyghoih" path="res://Enemies/Enemy_Types/orange_isometric.tres" id="7_bguae"]
+[ext_resource type="Resource" uid="uid://dnwb10yqffs0m" path="res://Enemies/AbilityEnemies/projectileEnemyIsometric.tres" id="9_sxuss"]
 
 [node name="DashEnemy" instance=ExtResource("1_6k4ts")]
 script = ExtResource("2_magd3")
-enemy_types = Array[Resource]([ExtResource("3_magd3")])
+enemy_types = Array[Resource]([ExtResource("3_2dvho"), ExtResource("4_qcmfv"), ExtResource("5_mwars"), ExtResource("6_hlgdi"), ExtResource("7_bguae"), ExtResource("3_magd3"), ExtResource("9_sxuss")])
 
 [node name="DashWarning" parent="." index="0" instance=ExtResource("4_r04sw")]
 visible = false

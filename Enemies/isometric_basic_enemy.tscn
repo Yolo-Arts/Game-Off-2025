@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bhhya7080ahh8" path="res://Enemies/Sprites/enemy_ship_red_spritesheet.png" id="6_gwrt0"]
 [ext_resource type="Resource" uid="uid://bprcgrgyghoih" path="res://Enemies/Enemy_Types/orange_isometric.tres" id="6_sak5g"]
 [ext_resource type="Resource" uid="uid://ysqdaqmx1hac" path="res://Enemies/AbilityEnemies/dashEnemyIsometric.tres" id="7_7g3qa"]
+[ext_resource type="Resource" uid="uid://dnwb10yqffs0m" path="res://Enemies/AbilityEnemies/projectileEnemyIsometric.tres" id="8_7g3qa"]
 [ext_resource type="PackedScene" uid="uid://3px7bwweehhp" path="res://Player/water_trail.tscn" id="9_sak5g"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qenpu"]
@@ -70,7 +71,7 @@ z_index = 1
 collision_layer = 34
 collision_mask = 46
 script = ExtResource("1_guxgk")
-enemy_types = Array[Resource]([ExtResource("2_sak5g"), ExtResource("3_gwrt0"), ExtResource("4_4rfnd"), ExtResource("5_ql4d2"), ExtResource("6_sak5g"), ExtResource("7_7g3qa")])
+enemy_types = Array[Resource]([ExtResource("2_sak5g"), ExtResource("3_gwrt0"), ExtResource("4_4rfnd"), ExtResource("5_ql4d2"), ExtResource("6_sak5g"), ExtResource("7_7g3qa"), ExtResource("8_7g3qa")])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_qenpu")

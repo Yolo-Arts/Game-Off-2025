@@ -5,9 +5,6 @@ signal died
 
 #FIXME Fix the hitboxes, they do not rotate with the enemy.
 
-
-
-
 var knockback_resistance: float = 10.0 
 
 # value slows the boat to a stop when player is dead.
