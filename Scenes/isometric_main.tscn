@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://b3imdjb1so30p"]
+[gd_scene load_steps=55 format=3 uid="uid://b3imdjb1so30p"]
 
 [ext_resource type="Script" uid="uid://wjiwydm880cx" path="res://Scenes/isometric_main.gd" id="1_1enjl"]
 [ext_resource type="PackedScene" uid="uid://cbag74ryx0pu8" path="res://Scenes/player_manager.tscn" id="2_dlawb"]
@@ -33,8 +33,10 @@
 [ext_resource type="PackedScene" uid="uid://clpfc5m24onjx" path="res://user_interface/hot_bar.tscn" id="27_40rgy"]
 [ext_resource type="Shader" uid="uid://cb3xbdufad64w" path="res://Shaders/shockwave.gdshader" id="28_jleb8"]
 [ext_resource type="PackedScene" uid="uid://c60diwu1u2ajo" path="res://user_interface/ability_bar.tscn" id="29_ne86t"]
+[ext_resource type="PackedScene" uid="uid://qyff8bnvs86u" path="res://user_interface/wasted.tscn" id="30_8id1w"]
 [ext_resource type="PackedScene" uid="uid://vn1chcv7m0l" path="res://user_interface/spawn_ui.tscn" id="30_lc8nd"]
 [ext_resource type="PackedScene" uid="uid://6du57t1guvah" path="res://user_interface/pause_button.tscn" id="30_xqk4e"]
+[ext_resource type="Script" uid="uid://cve2bs8ia2t0q" path="res://user_interface/wasted.gd" id="31_urm01"]
 [ext_resource type="PackedScene" uid="uid://bewlchyk4ofw4" path="res://Enemies/dash_isometric_enemy.tscn" id="33_oqk4o"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_wgbrh"]
@@ -300,6 +302,10 @@ material = SubResource("ShaderMaterial_hvs2a")
 position = Vector2(988.5, 557)
 scale = Vector2(16.445313, 9.703125)
 texture = ExtResource("6_0lw5m")
+
+[node name="WastedLabel" parent="UI" instance=ExtResource("30_8id1w")]
+visible = false
+script = ExtResource("31_urm01")
 
 [node name="PauseButton" parent="UI" instance=ExtResource("30_xqk4e")]
 

@@ -3,6 +3,7 @@ extends Node2D
 @onready var game_over: CanvasLayer = $GameOver
 @onready var animation_player = $AnimationPlayer
 @onready var drift_bar: CanvasLayer = $UI/DriftBar
+@onready var wasted_label: CanvasLayer = $UI/WastedLabel
 
 signal begin_game
 var game_began = true
@@ -20,6 +21,7 @@ func _ready():
 	Globals.camera = camera
 	Globals.camera.zoom = Vector2(1.5, 1.5)
 	game_over.visible = false
+	wasted_label.visible = false
 	Globals.player_died.connect(show_game_over_screen)
 	animation_player.play('transition')
 	SoundManager.start_bgm()
