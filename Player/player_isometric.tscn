@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://deqnmjpt3dxgb"]
+[gd_scene load_steps=25 format=3 uid="uid://deqnmjpt3dxgb"]
 
 [ext_resource type="Script" uid="uid://bg21p6igd7lvn" path="res://Player/player_isometric.gd" id="1_60ovk"]
 [ext_resource type="Texture2D" uid="uid://bjchrxewdcwy2" path="res://Player/boat_spritesheet2.png" id="2_evufl"]
@@ -9,8 +9,9 @@
 [ext_resource type="Script" uid="uid://dbjnldmb02swc" path="res://Assets/Particles/boost_particles.gd" id="7_r0ntv"]
 [ext_resource type="PackedScene" uid="uid://c47b8w26445qp" path="res://Assets/Particles/boost_indicator.tscn" id="8_t0vef"]
 [ext_resource type="Script" uid="uid://dbo22f2qfkc0d" path="res://Assets/Particles/boost_indicator.gd" id="9_fphli"]
-[ext_resource type="Script" uid="uid://co7jgwfc8vm2q" path="res://Player/point_light_2d.gd" id="10_1xiy1"]
+[ext_resource type="Script" path="res://Player/point_light_2d.gd" id="10_1xiy1"]
 [ext_resource type="PackedScene" uid="uid://y1prd0dx6cak" path="res://user_interface/reload_ui.tscn" id="11_k28l0"]
+[ext_resource type="Shader" uid="uid://p2wayu5l5hwl" path="res://Shaders/vignette.gdshader" id="12_eoyfg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fphli"]
 radius = 14.921549
@@ -28,6 +29,67 @@ shader_parameter/amplitude = 15.0
 shader_parameter/frequecy = 30.0
 shader_parameter/progress = 0.999999977648
 
+[sub_resource type="Animation" id="Animation_eoyfg"]
+resource_name = "red_hit_flash"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/redScreenFlash:material:shader_parameter/vignette_intensity")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [0.0, 0.5, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/redScreenFlash:material:shader_parameter/vignette_opacity")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.03333333, 0.36666667, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.5, 0.5, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_5y3gb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/redScreenFlash:material:shader_parameter/vignette_intensity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/redScreenFlash:material:shader_parameter/vignette_opacity")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ht2xh"]
+_data = {
+&"RESET": SubResource("Animation_5y3gb"),
+&"red_hit_flash": SubResource("Animation_eoyfg")
+}
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_k28l0"]
 radius = 27.730848
 
@@ -43,6 +105,12 @@ gradient = SubResource("Gradient_lhces")
 fill = 1
 fill_from = Vector2(0.4957265, 0.508547)
 fill_to = Vector2(0.17094018, 0.85470086)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5y3gb"]
+shader = ExtResource("12_eoyfg")
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.0
+shader_parameter/vignette_rgb = Color(1, 0, 0, 1)
 
 [node name="player_isometric" type="CharacterBody2D" groups=["player"]]
 top_level = true
@@ -97,6 +165,9 @@ position = Vector2(20, 16)
 position = Vector2(-19, 16)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ht2xh")
+}
 
 [node name="CollisionShapeForEnv" type="CollisionShape2D" parent="."]
 position = Vector2(-2.980234e-07, 10.000001)
@@ -140,6 +211,16 @@ texture_scale = 32.39
 script = ExtResource("10_1xiy1")
 
 [node name="ReloadUI" parent="." instance=ExtResource("11_k28l0")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="redScreenFlash" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_5y3gb")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [connection signal="boost" from="." to="BoostParticles" method="_on_player_isometric_boost"]
 [connection signal="boost_indcator_start" from="." to="boostIndicator" method="_on_player_isometric_boost_indcator_start"]

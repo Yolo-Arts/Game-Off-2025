@@ -9,6 +9,7 @@ var isometric_transform: Transform2D
 @onready var shockwave_collision_shape: CollisionShape2D = $ShockwaveArea/ShockwaveCollisionShape
 @onready var reload_ui: Node = $ReloadUI
 @onready var shockwave: ColorRect = %Shockwave
+@onready var red_screen_flash: AnimationPlayer = $AnimationPlayer
 
 
 const RELOADING = preload("uid://c48542f6xe7d2")
@@ -51,6 +52,8 @@ func shockwave_ability():
 	shockwave_collision_shape.disabled = false
 
 func dead_player():
+	SoundManager.stop_heartBeat()
+	disable_hitbox()
 	Globals.player_died.emit()
 	isDead = true
 	Globals.camera.shake(5, 23, 15)
@@ -264,6 +267,7 @@ func _on_damage_area_iso_body_entered(body: Node2D) -> void:
 	elif $damage_interval_timer.is_stopped() and body is Enemy:
 		health -= body.enemy_stats.damage
 		self.player_hit()
+		red_screen_flash.play("red_hit_flash")
 		print("hit")
 		shake_hp_bar.emit()
 		#TODO ADD BACK HITSHOCK
@@ -305,7 +309,29 @@ func _on_isometric_main_begin_game() -> void:
 
 func take_damage(damage):
 	if $damage_interval_timer.is_stopped():
+		red_screen_flash.play("red_hit_flash")
 		health -= damage
 		shake_hp_bar.emit()
 		Globals.camera.shake(0.5, 25, 25)
 		$damage_interval_timer.start()
+
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
+@onready var collision_shape_for_env: CollisionShape2D = $CollisionShapeForEnv
+@onready var damage_area_iso: Area2D = $DamageAreaIso
+@onready var exp_collection_radius: Area2D = $exp_collection_radius
+
+
+
+func disable_hitbox():
+	if collision_shape_2d:
+		collision_shape_2d.set_deferred("disabled", true)
+		collision_shape_2d.queue_free()
+	if collision_shape_for_env:
+		collision_shape_for_env.set_deferred("monitorable", false)
+		collision_shape_for_env.queue_free()
+	if damage_area_iso:
+		damage_area_iso.set_deferred("monitorable", false)
+		damage_area_iso.queue_free()
+	if exp_collection_radius:
+		exp_collection_radius.set_deferred("disabled", true)
+		exp_collection_radius.queue_free()

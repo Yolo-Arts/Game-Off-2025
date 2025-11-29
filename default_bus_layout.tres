@@ -1,4 +1,4 @@
-[gd_resource type="AudioBusLayout" load_steps=9 format=3 uid="uid://by3oywtx1dppy"]
+[gd_resource type="AudioBusLayout" load_steps=10 format=3 uid="uid://by3oywtx1dppy"]
 
 [sub_resource type="AudioEffectReverb" id="AudioEffectReverb_j3pel"]
 resource_name = "Reverb"
@@ -24,6 +24,10 @@ resource_name = "Panner"
 [sub_resource type="AudioEffectFilter" id="AudioEffectFilter_g28q7"]
 resource_name = "Filter"
 resonance = 0.08
+
+[sub_resource type="AudioEffectAmplify" id="AudioEffectAmplify_j3pel"]
+resource_name = "Amplify"
+volume_db = 5.0
 
 [resource]
 bus/1/name = &"SFX"
@@ -56,7 +60,15 @@ bus/3/name = &"BGM"
 bus/3/solo = false
 bus/3/mute = false
 bus/3/bypass_fx = false
-bus/3/volume_db = 0.0
+bus/3/volume_db = -3.3268216
 bus/3/send = &"Master"
 bus/3/effect/0/effect = SubResource("AudioEffectFilter_g28q7")
 bus/3/effect/0/enabled = false
+bus/4/name = &"HeartBeat"
+bus/4/solo = false
+bus/4/mute = false
+bus/4/bypass_fx = false
+bus/4/volume_db = 5.028986
+bus/4/send = &"SFX"
+bus/4/effect/0/effect = SubResource("AudioEffectAmplify_j3pel")
+bus/4/effect/0/enabled = true

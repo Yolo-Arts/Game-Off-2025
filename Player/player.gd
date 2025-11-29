@@ -21,6 +21,7 @@ var cannonball_scale = 1.0
 @export var boost_decay: float = 14
 @export var drift_invulnerability: float = 2.0
 @export var ram_damage: float = 15.0
+@export_group("", "")
 
 # Cannons
 @onready var cannon_left = $CannonLeft
@@ -37,7 +38,7 @@ var cannonball_scale = 1.0
 @export var cannon_fire: PackedScene = preload("uid://do1jur5t8qgko") 
 const DEATH_EXPLOSION = preload("uid://da1djwy4cr28t")
 const BOUNCE_PARTICLES = preload("uid://mr7hf4xv0s7j")
-
+@export_group("", "")
 
 # Sounds
 #signal fire_cannon_SFX
@@ -47,7 +48,7 @@ var current_speed: float = 300.0
 var current_turn_speed: float = min_turn_speed  
 var turn_time: float = 0.0 
 var player_max_health = 100.0
-var health = 100.00
+@export var health = 100.00
 var can_drift = false
 var drift_value = 1
 var isDead = false
