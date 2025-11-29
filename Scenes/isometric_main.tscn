@@ -1,7 +1,7 @@
 [gd_scene load_steps=52 format=3 uid="uid://b3imdjb1so30p"]
 
 [ext_resource type="Script" uid="uid://wjiwydm880cx" path="res://Scenes/isometric_main.gd" id="1_1enjl"]
-[ext_resource type="PackedScene" uid="uid://cbag74ryx0pu8" path="res://Scenes/player_manager.tscn" id="2_dlawb"]
+[ext_resource type="PackedScene" path="res://Scenes/player_manager.tscn" id="2_dlawb"]
 [ext_resource type="PackedScene" uid="uid://2sw5s3fxyqo3" path="res://Scenes/camera_2d.tscn" id="2_pwvqx"]
 [ext_resource type="Script" uid="uid://d0kecd4amk3cw" path="res://Scenes/chunk_loader.gd" id="5_2y55o"]
 [ext_resource type="Shader" uid="uid://b4oixuorco5vd" path="res://Shaders/water.gdshader" id="5_504xn"]

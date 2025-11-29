@@ -35,6 +35,7 @@ func set_enemy_type(enemy_type: int):
 	total_frames = enemy_stats.total_frames
 	frame_offset = enemy_stats.frame_offset
 	acceleration = enemy_stats.acceleration
+	player_offset = rng.randi_range(0, 7)
 
 
 #func _physics_process(_delta):
@@ -82,9 +83,45 @@ func apply_knockback(source_position: Vector2, force: float):
 func get_direction_to_player():
 	player = get_tree().get_first_node_in_group("player")
 	if player:
-		var direction = (player.global_position - global_position).normalized()
+		var player_global_position_offset = _off_set_player_position()
+		var direction = (player_global_position_offset - global_position).normalized()
 		return direction
 	return Vector2.ZERO  # Return zero vector if no player found
+	
+func _off_set_player_position(): 
+	var PIXELS = reduce_pixel_by_relative_distance()
+	match player_offset: 
+		0: 
+			var vectorOffSet = Vector2(1,0)
+			return player.global_position + (vectorOffSet*PIXELS)
+		1: 
+			var vectorOffSet = Vector2(0,1)
+			return player.global_position + (vectorOffSet*PIXELS)
+		2:
+			var vectorOffSet = Vector2(-1,0)
+			return player.global_position + (vectorOffSet*PIXELS)
+		3:
+			var vectorOffSet = Vector2(0,-1)
+			return player.global_position + (vectorOffSet*PIXELS)
+		4: 
+			var vectorOffSet = Vector2(1,1)
+			return player.global_position + (vectorOffSet*PIXELS)
+		5: 
+			var vectorOffSet = Vector2(1,-1)
+			return player.global_position + (vectorOffSet*PIXELS)
+		6:
+			var vectorOffSet = Vector2(-1,1)
+			return player.global_position + (vectorOffSet*PIXELS)
+		7:
+			var vectorOffSet = Vector2(-1,-1)
+			return player.global_position + (vectorOffSet*PIXELS)
+			
+func reduce_pixel_by_relative_distance():
+	var distance_away = global_position.distance_to(player.global_position)
+	if distance_away < 100: 
+		return 0
+	else: 
+		return 100
 
 func update_sprite_rotation(angle: float):
 	var deg = rad_to_deg(angle)
