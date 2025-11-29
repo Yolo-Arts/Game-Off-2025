@@ -35,6 +35,8 @@ func _ready() -> void:
 
 func _on_player_level_up():
 	if Globals.playerDied:
+		print("Player upgraded but they are dead.")
+		Engine.time_scale = 1.0
 		return
 	else:
 		SoundManager.stop_bgm()

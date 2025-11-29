@@ -52,8 +52,8 @@ func update_score(points_scored_category):
 
 func _on_playerDied():
 	print("player died")
-	player_died.emit()
 	playerDied = true
+	player_died.emit()
 	print("Final Score %s" % score)
 	
 	
