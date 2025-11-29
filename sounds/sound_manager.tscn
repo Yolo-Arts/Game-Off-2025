@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://cjqdhk1yxoc0h"]
+[gd_scene load_steps=43 format=3 uid="uid://cjqdhk1yxoc0h"]
 
 [ext_resource type="Script" uid="uid://cy5j6mtf0cjtq" path="res://sounds/sound_manager.gd" id="1_a1hhe"]
 [ext_resource type="AudioStream" uid="uid://cwde2y4bxpmji" path="res://sounds/death_explosion1.sfxr" id="1_f05am"]
@@ -30,6 +30,7 @@
 [ext_resource type="AudioStream" uid="uid://bmgudkvv87eoa" path="res://sounds/scoreboard/score_hit.sfxr" id="28_u5kly"]
 [ext_resource type="AudioStream" uid="uid://b5bvystflt620" path="res://sounds/heartbeat-single-383748.mp3" id="29_iql4y"]
 [ext_resource type="AudioStream" uid="uid://cptryce1cd4df" path="res://sounds/enemy_cannonball_hit_but_player_is_drifting.sfxr" id="30_0ep21"]
+[ext_resource type="AudioStream" uid="uid://cn5ey7ynpa16k" path="res://sounds/war-horn-sfx-319881.mp3" id="31_jue7o"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_8a8qv"]
 random_pitch = 1.51
@@ -173,3 +174,7 @@ bus = &"HeartBeat"
 [node name="EnemyCannonBallHitButPlayerIsDrifting" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_jue7o")
 pitch_scale = 1.1
+
+[node name="WarHorn" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("31_jue7o")
+bus = &"WarHorn"

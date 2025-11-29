@@ -1,4 +1,4 @@
-[gd_resource type="AudioBusLayout" load_steps=10 format=3 uid="uid://by3oywtx1dppy"]
+[gd_resource type="AudioBusLayout" load_steps=11 format=3 uid="uid://by3oywtx1dppy"]
 
 [sub_resource type="AudioEffectReverb" id="AudioEffectReverb_j3pel"]
 resource_name = "Reverb"
@@ -28,6 +28,9 @@ resonance = 0.08
 [sub_resource type="AudioEffectAmplify" id="AudioEffectAmplify_j3pel"]
 resource_name = "Amplify"
 volume_db = 5.0
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_g28q7"]
+resource_name = "Reverb"
 
 [resource]
 bus/1/name = &"SFX"
@@ -72,3 +75,11 @@ bus/4/volume_db = 5.028986
 bus/4/send = &"SFX"
 bus/4/effect/0/effect = SubResource("AudioEffectAmplify_j3pel")
 bus/4/effect/0/enabled = true
+bus/5/name = &"WarHorn"
+bus/5/solo = false
+bus/5/mute = false
+bus/5/bypass_fx = false
+bus/5/volume_db = 0.0
+bus/5/send = &"SFX"
+bus/5/effect/0/effect = SubResource("AudioEffectReverb_g28q7")
+bus/5/effect/0/enabled = true
