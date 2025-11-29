@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://cjqdhk1yxoc0h"]
+[gd_scene load_steps=38 format=3 uid="uid://cjqdhk1yxoc0h"]
 
 [ext_resource type="Script" uid="uid://cy5j6mtf0cjtq" path="res://sounds/sound_manager.gd" id="1_a1hhe"]
 [ext_resource type="AudioStream" uid="uid://cwde2y4bxpmji" path="res://sounds/death_explosion1.sfxr" id="1_f05am"]
@@ -27,6 +27,7 @@
 [ext_resource type="AudioStream" uid="uid://bonxy282y6v1h" path="res://sounds/upgrades_SFX/TAPE STOP_15.wav" id="25_2o6ll"]
 [ext_resource type="AudioStream" uid="uid://catemaelxarrq" path="res://sounds/upgrades_SFX/LOAD_CASSETTE_08.wav" id="25_eyuff"]
 [ext_resource type="AudioStream" uid="uid://d0sne1g7v6m28" path="res://sounds/upgrades_SFX/REMOVE_CASSETTE_07.wav" id="26_w7ljr"]
+[ext_resource type="AudioStream" uid="uid://bmgudkvv87eoa" path="res://sounds/scoreboard/score_hit.sfxr" id="28_u5kly"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_8a8qv"]
 random_pitch = 1.51
@@ -83,6 +84,11 @@ random_pitch = 1.2
 random_volume_offset_db = 0.33
 streams_count = 1
 stream_0/stream = ExtResource("23_150ry")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_iql4y"]
+random_pitch = 1.2
+streams_count = 1
+stream_0/stream = ExtResource("28_u5kly")
 
 [node name="SoundManager" type="Node"]
 process_mode = 3
@@ -144,3 +150,6 @@ bus = &"SFX"
 stream = ExtResource("25_2o6ll")
 pitch_scale = 0.15
 bus = &"SFX"
+
+[node name="Score_Hit" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_iql4y")

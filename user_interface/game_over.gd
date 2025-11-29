@@ -52,6 +52,7 @@ func display_scores():
 	total_score_label.text = str(total_score)
 	
 	animate_stats()
+	play_SFX()
 
 func hide_stats() -> void:
 	for child in score_categories.get_children():
@@ -103,3 +104,15 @@ func screen_shake(duration: float, frequency: float, amplitude: float) -> void:
 
 func _on_restart_mouse_entered() -> void:
 	SoundManager.UI_ButtonHovered()
+
+func play_SFX():
+	await get_tree().create_timer(0.25).timeout
+	for i in range(score_points.get_child_count()):
+		SoundManager.play_scoreHit()
+		await get_tree().create_timer(0.25).timeout
+	await get_tree().create_timer(0.25).timeout
+	for i in range(score_points.get_child_count() - 1):
+		SoundManager.play_scoreHit()
+		await get_tree().create_timer(0.75).timeout
+	await get_tree().create_timer(0.5).timeout
+	SoundManager.play_scoreHit()

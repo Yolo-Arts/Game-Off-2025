@@ -13,6 +13,7 @@ extends Node
 @onready var load_cassette: AudioStreamPlayer = $Load_Cassette
 @onready var remove_cassette: AudioStreamPlayer = $Remove_Cassette
 @onready var music_stop: AudioStreamPlayer = $Music_Stop
+@onready var score_hit: AudioStreamPlayer = $Score_Hit
 
 func play_CannonFire():
 	cannon_fire.play()
@@ -66,3 +67,6 @@ func stop_bgm():
 func play_lose_game():
 	bgm_1.stream_paused = true
 	music_stop.play()
+
+func play_scoreHit():
+	score_hit.play()

@@ -105,10 +105,11 @@ func start_camera_tween(target_zoom: Vector2, duration: float):
 		zoom_tween.tween_property(self, "zoom", target_zoom, duration)
 
 func dead_zoom():
+	pass
 	#await get_tree().create_timer(1.6).timeout
-	deadPlayer = true
-	if zoom_tween and zoom_tween.is_running():
-		zoom_tween.kill()
-	
-	zoom_tween = create_tween()
-	zoom_tween.tween_property(self, "zoom", Vector2(3.0, 3.0), 1.0)
+	#deadPlayer = true
+	#if zoom_tween and zoom_tween.is_running():
+		#zoom_tween.kill()
+	#
+	#zoom_tween = create_tween()
+	#zoom_tween.tween_property(self, "zoom", Vector2(3.0, 3.0), 1.0)

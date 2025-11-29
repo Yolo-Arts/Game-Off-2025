@@ -34,31 +34,34 @@ func _ready() -> void:
 	stat_up_ui_2.update()
 
 func _on_player_level_up():
-	SoundManager.stop_bgm()
-	particles.emitting = true
-	Globals.upgrading = true
-	SoundManager.play_LevelUp()
-	Engine.time_scale = 0.05
-	
-	item_table = WeightedTable.new()
-	
-	for i in range(stat_up_list.size()):
-		var current_upgrade = stat_up_list[i]
-		if not Globals.unlocked_upgrades.has(current_upgrade):
-			item_table.add_item(i, current_upgrade.Weight)
-	
-	stat_up_index = item_table.pick_item()
-	stat_up_index2 = item_table.pick_item([stat_up_index])
-	stat_up_ui.Stat_up = stat_up_list[stat_up_index]
-	stat_up_ui_2.Stat_up = stat_up_list[stat_up_index2]
-	
-	stat_up_ui.update()
-	stat_up_ui_2.update()
-	stat_up_ui.animation_player.play("in")
-	stat_up_ui_2.animation_player.play("in")
-	
-	#get_tree().paused = true    
-	visible = true  
+	if Globals.playerDied:
+		return
+	else:
+		SoundManager.stop_bgm()
+		particles.emitting = true
+		Globals.upgrading = true
+		SoundManager.play_LevelUp()
+		Engine.time_scale = 0.05
+		
+		item_table = WeightedTable.new()
+		
+		for i in range(stat_up_list.size()):
+			var current_upgrade = stat_up_list[i]
+			if not Globals.unlocked_upgrades.has(current_upgrade):
+				item_table.add_item(i, current_upgrade.Weight)
+		
+		stat_up_index = item_table.pick_item()
+		stat_up_index2 = item_table.pick_item([stat_up_index])
+		stat_up_ui.Stat_up = stat_up_list[stat_up_index]
+		stat_up_ui_2.Stat_up = stat_up_list[stat_up_index2]
+		
+		stat_up_ui.update()
+		stat_up_ui_2.update()
+		stat_up_ui.animation_player.play("in")
+		stat_up_ui_2.animation_player.play("in")
+		
+		#get_tree().paused = true    
+		visible = true  
 
 #func _on_option_1_pressed() -> void:
 	#apply_upgrade(stat_up_list[stat_up_index])
