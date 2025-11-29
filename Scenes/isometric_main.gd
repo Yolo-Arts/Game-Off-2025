@@ -4,6 +4,7 @@ extends Node2D
 @onready var animation_player = $AnimationPlayer
 @onready var drift_bar: CanvasLayer = $UI/DriftBar
 @onready var wasted_label: CanvasLayer = $UI/WastedLabel
+@onready var upgrade_menu_ui: CanvasLayer = $Upgrade_menu_UI
 
 signal begin_game
 var game_began = true
@@ -38,6 +39,7 @@ func _input(event: InputEvent) -> void:
 
 func show_game_over_screen():
 	#Globals.camera.zoom = Vector2(3.0, 3.0) 
+	upgrade_menu_ui.visible = false
 	drift_bar.visible = false
 	await get_tree().create_timer(5.0).timeout
 	game_over.visible = true
