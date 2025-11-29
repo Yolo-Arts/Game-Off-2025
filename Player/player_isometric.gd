@@ -6,10 +6,9 @@ extends Player
 @export var isometric_angle: float = 30.0 
 var isometric_transform: Transform2D
 @onready var shoot_cooldown: Timer = $shootCooldown
-@onready var shockwave: ColorRect = %Shockwave
 @onready var shockwave_collision_shape: CollisionShape2D = $ShockwaveArea/ShockwaveCollisionShape
 @onready var reload_ui: Node = $ReloadUI
-
+@onready var shockwave: ColorRect = %Shockwave
 
 
 const RELOADING = preload("uid://c48542f6xe7d2")

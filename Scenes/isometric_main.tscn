@@ -1,10 +1,9 @@
-[gd_scene load_steps=54 format=3 uid="uid://b3imdjb1so30p"]
+[gd_scene load_steps=48 format=3 uid="uid://b3imdjb1so30p"]
 
 [ext_resource type="Script" uid="uid://wjiwydm880cx" path="res://Scenes/isometric_main.gd" id="1_1enjl"]
 [ext_resource type="PackedScene" uid="uid://cbag74ryx0pu8" path="res://Scenes/player_manager.tscn" id="2_dlawb"]
 [ext_resource type="PackedScene" uid="uid://2sw5s3fxyqo3" path="res://Scenes/camera_2d.tscn" id="2_pwvqx"]
 [ext_resource type="Script" uid="uid://d0kecd4amk3cw" path="res://Scenes/chunk_loader.gd" id="5_2y55o"]
-[ext_resource type="Shader" uid="uid://b4oixuorco5vd" path="res://Shaders/water.gdshader" id="5_504xn"]
 [ext_resource type="Script" uid="uid://bkq7jmltaqsb6" path="res://Scenes/time_cycle_manager.gd" id="5_yj477"]
 [ext_resource type="Texture2D" uid="uid://c12v3gr0dt8sm" path="res://icon.svg" id="6_0lw5m"]
 [ext_resource type="PackedScene" uid="uid://deqnmjpt3dxgb" path="res://Player/player_isometric.tscn" id="6_wgbrh"]
@@ -25,7 +24,6 @@
 [ext_resource type="Resource" uid="uid://ysqdaqmx1hac" path="res://Enemies/AbilityEnemies/dashEnemyIsometric.tres" id="18_4lvfn"]
 [ext_resource type="Shader" uid="uid://ydw2wifhpp88" path="res://Shaders/screenTransition.gdshader" id="19_b21ex"]
 [ext_resource type="Resource" uid="uid://dnwb10yqffs0m" path="res://Enemies/AbilityEnemies/projectileEnemyIsometric.tres" id="19_bntkt"]
-[ext_resource type="PackedScene" uid="uid://cpx0xphjgp1lt" path="res://Shaders/cloud.tscn" id="20_7tq1b"]
 [ext_resource type="Script" uid="uid://3cukdxaftfk6" path="res://Scenes/ui.gd" id="20_xqk4e"]
 [ext_resource type="PackedScene" uid="uid://dgatlx3brqvmv" path="res://user_interface/hpbar_andExpBar.tscn" id="22_yj477"]
 [ext_resource type="PackedScene" uid="uid://br81uexsi3und" path="res://user_interface/drift_bar.tscn" id="26_40rgy"]
@@ -37,35 +35,7 @@
 [ext_resource type="PackedScene" uid="uid://vn1chcv7m0l" path="res://user_interface/spawn_ui.tscn" id="30_lc8nd"]
 [ext_resource type="PackedScene" uid="uid://6du57t1guvah" path="res://user_interface/pause_button.tscn" id="30_xqk4e"]
 [ext_resource type="PackedScene" uid="uid://bewlchyk4ofw4" path="res://Enemies/dash_isometric_enemy.tscn" id="33_oqk4o"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_wgbrh"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gpok4"]
-noise = SubResource("FastNoiseLite_wgbrh")
-seamless = true
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_ynplv"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5drxr"]
-noise = SubResource("FastNoiseLite_ynplv")
-seamless = true
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_j2xfm"]
-shader = ExtResource("5_504xn")
-shader_parameter/waterNoise = SubResource("NoiseTexture2D_5drxr")
-shader_parameter/waterDistortionNoise = SubResource("NoiseTexture2D_gpok4")
-shader_parameter/waterColor = Color(0.4509804, 0.74509805, 0.827451, 1)
-shader_parameter/colorCorection = 0.23999999463552
-shader_parameter/distortionForce = 0.0250000011875
-shader_parameter/WDBrightness = 0.95000001415614
-shader_parameter/WDFreq = 0.55000000819565
-shader_parameter/WDSize = 0.8000000268221
-shader_parameter/WDSpeed = 12.7500001750891
-shader_parameter/tiling = Vector2(5, 5)
-shader_parameter/offSetSpeed = Vector2(0.05, 0.05)
-shader_parameter/offSetSpeed2 = Vector2(-0.04, 0.02)
-shader_parameter/backGroundDirX = 3.259879990946679e-09
-shader_parameter/backGroundDirY = -0.03099999821262
+[ext_resource type="Script" uid="uid://bidsifwynuixy" path="res://Scenes/randomised_spawning.gd" id="38_urm01"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ne86t"]
 shader = ExtResource("28_jleb8")
@@ -209,16 +179,8 @@ script = ExtResource("1_1enjl")
 
 [node name="Player_Manager" parent="." instance=ExtResource("2_dlawb")]
 
-[node name="WaterShader" type="TextureRect" parent="."]
-visible = false
-material = SubResource("ShaderMaterial_j2xfm")
-offset_left = -26027.0
-offset_top = -15930.0
-offset_right = -17914.0
-offset_bottom = -13302.0
-scale = Vector2(20, 20)
-texture = ExtResource("6_0lw5m")
-stretch_mode = 1
+[node name="RandomisedSpawning" type="Node" parent="."]
+script = ExtResource("38_urm01")
 
 [node name="TimeCycleManager" type="Node" parent="."]
 script = ExtResource("5_yj477")
@@ -231,13 +193,6 @@ color = Color(0.40234375, 0.40234375, 0.40234375, 1)
 script = ExtResource("5_2y55o")
 
 [node name="scene" type="Node2D" parent="Node2D"]
-
-[node name="cloud" parent="." instance=ExtResource("20_7tq1b")]
-z_index = 7
-offset_left = -7517.9995
-offset_top = -9337.0
-offset_right = -4729.4497
-offset_bottom = -8085.0
 
 [node name="player_isometric" parent="." instance=ExtResource("6_wgbrh")]
 position = Vector2(-383, -480)
