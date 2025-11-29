@@ -31,7 +31,7 @@ func _on_restart_pressed():
 	SoundManager.UI_ButtonPressed()
 	animation_player.play("close-transition")
 	await get_tree().create_timer(1).timeout
-	get_tree().reload_current_scene()
+	get_tree().change_scene_to_file("res://user_interface/loading_screen.tscn")
 
 
 var total_score = 0
