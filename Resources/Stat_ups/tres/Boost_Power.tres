@@ -1,7 +1,7 @@
 [gd_resource type="Resource" load_steps=3 format=3 uid="uid://ccfryxxm40b6l"]
 
-[ext_resource type="Texture2D" uid="uid://dekfhk50w11cp" path="res://Assets/skill_icons/BoostPower.png" id="1_ec07d"]
-[ext_resource type="Script" uid="uid://dam2js2ppjicl" path="res://Resources/Stat_ups/boost_damage.gd" id="2_ec07d"]
+[ext_resource type="Texture2D" uid="uid://c12v3gr0dt8sm" path="res://icon.svg" id="1_ec07d"]
+[ext_resource type="Script" uid="uid://dam2js2ppjicl" path="res://Resources/Stat_ups/scripts/boost_damage.gd" id="2_ec07d"]
 
 [resource]
 script = ExtResource("2_ec07d")

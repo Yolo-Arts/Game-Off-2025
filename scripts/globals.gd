@@ -2,7 +2,7 @@ extends Node
 
 var camera
 
-var unlocked_upgrades: Array[Statup] = []
+var unlocked_abilities: Array[Statup] = []
 var active_cannonball_upgrades: Array[Statup] = []
 
 signal exp_collected
@@ -42,10 +42,8 @@ func _ready() -> void:
 	UserInterface.add_child.call_deferred(my_timer)
 	my_timer.timeout.connect(_on_my_timer_timeout)
 	
-func _process(delta):
-	pass
 
-		
+
 func _on_my_timer_timeout():
 	update_score("PER_SECOND_SURVIVED")
 
@@ -57,4 +55,5 @@ func _on_playerDied():
 	player_died.emit()
 	playerDied = true
 	print("Final Score %s" % score)
+	
 	

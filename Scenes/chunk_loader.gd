@@ -19,10 +19,7 @@ class IslandClusters:
 
 # List of Map Segments to generate chunks. All island designs.
 const MAP_SEGMENTS: Array[Resource] = [
-	#preload("res://Game_Objects/Islands/island_1_no_seabed.tscn")
-	
-	#preload("res://Game_Objects/Islands/island_1_no_clouds.tscn"),
-	preload("res://Game_Objects/Islands/island_2_no_clouds.tscn")
+	preload("res://Game_Objects/Islands/island_1_no_clouds.tscn"),
 	#preload("res://Scenes/island_1.tscn")
 	
 ]
@@ -79,8 +76,8 @@ func _process(delta: float) -> void:
 			var vector_change = Vector2(0,-1)
 			update_current_chunk(vector_change)
 		
-func load_chunk(scene_resource: Resource, x, y): 
-	var scene: Node = scene_resource.instantiate()
+func load_chunk(x, y): 
+	var scene: Node = MAP_SEGMENTS[0].instantiate()
 	scene.position = Vector2(x, y)
 	parent_scene.add_child.call_deferred(scene)
 	return scene
@@ -96,10 +93,7 @@ func update_map_by_player_position(vector_change: Vector2):
 	
 	if not chunks_map.has(key):
 		var next_chunk_position = Vector2(CHUNK_SIZE * next_x, CHUNK_SIZE * next_y)
-		
-		var random_index = randi() % MAP_SEGMENTS.size()
-		var chosen_map_segment = MAP_SEGMENTS[random_index]
-		var scene: Node = load_chunk(chosen_map_segment, next_chunk_position.x, next_chunk_position.y)
+		var scene: Node = load_chunk(next_chunk_position.x, next_chunk_position.y)
 		
 		# Save for next time
 		var island_cluster: IslandClusters = IslandClusters.new()
@@ -110,8 +104,7 @@ func update_map_by_player_position(vector_change: Vector2):
 		queue_chunks.append(key)
 	elif chunks_map.has(key) && key not in queue_chunks: 
 		var island_cluster: IslandClusters = chunks_map[key]
-		parent_scene.add_child.call_deferred(island_cluster.scene_ref)
-		#load_chunk(island_cluster.coordinate.x, island_cluster.coordinate.y)
+		load_chunk(island_cluster.coordinate.x, island_cluster.coordinate.y)
 		queue_chunks.append(key)
 		
 func update_current_chunk(vector_change: Vector2):

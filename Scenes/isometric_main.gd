@@ -7,11 +7,10 @@ signal begin_game
 var game_began = true
 
 func _ready():
-	Globals.unlocked_upgrades = []
+	Globals.unlocked_abilities = []
 	Engine.time_scale = 1.0
 	Signals.start_hitStop.connect(hit_stop)
 	Globals.camera = camera
-	Globals.camera.zoom = Vector2(1.5, 1.5)
 	game_over.visible = false
 	Globals.player_died.connect(show_game_over_screen)
 	animation_player.play('transition')
@@ -19,12 +18,8 @@ func _ready():
 func _input(event: InputEvent) -> void:
 	if game_began:
 		if event.is_action_pressed("ui_accept"):
-			game_began = false
 			begin_game.emit()
-			var tween = create_tween()
-			tween.tween_property(Globals.camera, "zoom", Vector2(0.7, 0.7), 0.7)\
-			.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
-			await get_tree().create_timer(.7).timeout
+			game_began = false
 
 func show_game_over_screen():
 	game_over.visible = true

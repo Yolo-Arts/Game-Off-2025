@@ -14,6 +14,7 @@ const DEAD_SHIP = preload("uid://cjqp43sw23woi")
 const EXP_ORB = preload("res://Scenes/exp_orb.tscn")
 const HIT_EXPLOSION = preload("uid://bk5p2f8p57tdj")
 const SHIP__4_ = preload("uid://dtggqs3n2orf8")
+const REPAIR_TOOL = preload("uid://d2ljupmutpso2")
 
 
 @onready var sprite = $Sprite2D
@@ -33,6 +34,7 @@ var enemy_stats: Resource
 #var isometric_transform: Transform2D
 
 var player = null
+var player_offset = null
 var isDead = false
 var can_move = true
 
@@ -62,6 +64,8 @@ func set_enemy_type(enemy_type: int):
 	enemy_stats = enemy_types[enemy_type]
 	speed = enemy_stats.speed
 	health = enemy_stats.health
+	
+	player_offset = rng.randi_range(0, 7)
 
 
 func _physics_process(_delta):
@@ -79,11 +83,47 @@ func _physics_process(_delta):
 func get_direction_to_player():
 	player = get_tree().get_first_node_in_group("player")
 	if player:
-		var direction = (player.global_position - global_position).normalized()
+		var player_global_position_offset = _off_set_player_position()
+		var direction = (player_global_position_offset - global_position).normalized()
 		return direction
 	return Vector2.ZERO  # Return zero vector if no player found
 
 # FIXME queue_free() enemy when they die. 
+
+func _off_set_player_position(): 
+	var PIXELS = reduce_pixel_by_relative_distance()
+	match player_offset: 
+		0: 
+			var vectorOffSet = Vector2(1,0)
+			return player.global_position + (vectorOffSet*PIXELS)
+		1: 
+			var vectorOffSet = Vector2(0,1)
+			return player.global_position + (vectorOffSet*PIXELS)
+		2:
+			var vectorOffSet = Vector2(-1,0)
+			return player.global_position + (vectorOffSet*PIXELS)
+		3:
+			var vectorOffSet = Vector2(0,-1)
+			return player.global_position + (vectorOffSet*PIXELS)
+		4: 
+			var vectorOffSet = Vector2(1,1)
+			return player.global_position + (vectorOffSet*PIXELS)
+		5: 
+			var vectorOffSet = Vector2(1,-1)
+			return player.global_position + (vectorOffSet*PIXELS)
+		6:
+			var vectorOffSet = Vector2(-1,1)
+			return player.global_position + (vectorOffSet*PIXELS)
+		7:
+			var vectorOffSet = Vector2(-1,-1)
+			return player.global_position + (vectorOffSet*PIXELS)
+			
+func reduce_pixel_by_relative_distance():
+	var distance_away = abs(player.global_position - global_position)
+	if distance_away < 100: 
+		return 0
+	else: 
+		return 100
 
 func update_sprite_rotation(angle: float):
 	# Convert angle to degrees and normalize to 0-360
@@ -114,6 +154,8 @@ func take_damage(damage: int):
 		spawn_dead_ship(self.position, get_direction_to_player())
 		spawn_death_explosion(self.position, Vector2(0,0))
 		spawn_exp_orb(self.position)
+		if randi() % 5 + 1 == 1:
+			spawn_repair_tool(self.position)
 		sprite.visible = false
 		isDead = true
 		free_waterTrail.emit()
@@ -144,6 +186,11 @@ func spawn_hit_explosion(pos: Vector2, normal:Vector2) -> void:
 
 func spawn_exp_orb(pos: Vector2):
 	var instance = EXP_ORB.instantiate()
+	get_tree().get_current_scene().call_deferred("add_child", instance)
+	instance.global_position = pos
+
+func spawn_repair_tool(pos: Vector2):
+	var instance = REPAIR_TOOL.instantiate()
 	get_tree().get_current_scene().call_deferred("add_child", instance)
 	instance.global_position = pos
 

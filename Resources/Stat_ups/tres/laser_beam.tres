@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Laser_beam" load_steps=4 format=3 uid="uid://bu0oi6w5o3q33"]
+
+[ext_resource type="Script" uid="uid://n8pwqdgr46xd" path="res://Resources/Stat_ups/AbilitiesFolder/Laser_beam/Laser_beam.gd" id="1_3uuq5"]
+[ext_resource type="PackedScene" uid="uid://cdwjaggyrthgi" path="res://Resources/Stat_ups/AbilitiesFolder/Laser_beam/Laser_beam_handler.tscn" id="1_errty"]
+[ext_resource type="Texture2D" uid="uid://c12v3gr0dt8sm" path="res://icon.svg" id="2_3bevr"]
+
+[resource]
+script = ExtResource("1_3uuq5")
+icon = ExtResource("2_3bevr")
+ability_scene = ExtResource("1_errty")
+image = ExtResource("2_3bevr")
+type = "Ability"
+is_unique = true
+metadata/_custom_type_script = "uid://n8pwqdgr46xd"

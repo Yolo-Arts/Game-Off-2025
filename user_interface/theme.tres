@@ -4,7 +4,11 @@
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_64tpl"]
 texture = ExtResource("1_3ohsl")
-region_rect = Rect2(13, 12, 68, 70)
+texture_margin_left = 11.0
+texture_margin_top = 11.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+region_rect = Rect2(0, 0, 96, 96)
 
 [resource]
 Panel/styles/panel = SubResource("StyleBoxTexture_64tpl")

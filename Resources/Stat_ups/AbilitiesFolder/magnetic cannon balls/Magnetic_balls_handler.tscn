@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dq4oj5kx1i2gn"]
+
+[ext_resource type="Script" uid="uid://bxtc32vxa0dfv" path="res://Resources/Stat_ups/AbilitiesFolder/magnetic cannon balls/magnetic_ball_handler.gd" id="1_cpfp4"]
+
+[node name="MagneticBallsHandler" type="Node"]
+script = ExtResource("1_cpfp4")

@@ -1,0 +1,5 @@
+extends Node
+
+var duration = 10.0
+func activate_ability(player: Player):
+	Signals.magnetic_balls.emit(duration)

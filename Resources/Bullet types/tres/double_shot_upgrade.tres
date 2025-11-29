@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="double_shot" load_steps=3 format=3 uid="uid://phfp64nlvbts"]
+
+[ext_resource type="Texture2D" uid="uid://c12v3gr0dt8sm" path="res://icon.svg" id="1_hl68p"]
+[ext_resource type="Script" uid="uid://kp0qh57df7jl" path="res://Resources/Bullet types/Doubleshot_upgrade.gd" id="2_hl68p"]
+
+[resource]
+script = ExtResource("2_hl68p")
+image = ExtResource("1_hl68p")
+name = "Double shot"
+description = "Doubles the number of shots"
+Weight = 10
+type = "Bullet Type"
+is_unique = true

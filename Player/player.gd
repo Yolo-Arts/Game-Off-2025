@@ -2,7 +2,7 @@ class_name  Player
 extends CharacterBody2D
 
 @export var Bullet_Type: Bullet_type
-@onready var CANNONBALL = preload("uid://m1jsvblrkbdq")
+@onready var CANNONBALL_SHOT = preload("uid://bnh5hl3deg8ec")
 
 var damage = 20.0
 var cannonball_scale = 1.0
@@ -15,7 +15,7 @@ var cannonball_scale = 1.0
 @export var turn_acceleration: float = 0.4
 @export var acceleration: float = 5.0
 @export var deceleration: float = 0.15
-@export var bounce_dampening: float = 0.7
+@export var bounce_dampening: float = 1
 @onready var drift:Timer = $drift
 @export var momentum_factor: float = 3.0  # Higher values = more momentum (more drift)
 @export var boost_decay: float = 14
@@ -28,7 +28,7 @@ var cannonball_scale = 1.0
 
 
 # Cannonball
-@onready var cannonball = preload("uid://m1jsvblrkbdq")
+@onready var cannonball_shot = preload("uid://bnh5hl3deg8ec")
 
 @onready var animation_player = $AnimationPlayer
 
@@ -138,7 +138,7 @@ func _physics_process(delta) -> void:
 
 
 func shoot():
-	Bullet_Type.shoot(cannonball, self, false, cannonball_scale)
+	Bullet_Type.shoot(cannonball_shot, self, false, cannonball_scale)
 
 
 func spawn_cannon_particles(pos: Vector2, normal: Vector2) -> void:
@@ -166,11 +166,10 @@ func spawn_bounce_particles(pos: Vector2, normal: Vector2) -> void:
 	
 	
 
-
-
 func _on_damage_area_body_entered(body: Node2D) -> void:
 	if $damage_interval_timer.is_stopped() and body is Enemy:
 		health -= body.enemy_stats.damage
+
 		print("hit")
 		self.animation_player.play("hit_shock")
 		Globals.camera.shake(0.5, 15, 10)
@@ -184,6 +183,12 @@ func _on_exp_collection_radius_body_entered(body: Node2D) -> void:
 	if body is Exp_Orb:
 		Globals.exp_collected.emit()
 		body.queue_free()
+	if body is Repair:
+		Signals.repair_collected.emit()
+		if health + 30 > player_max_health:
+			health = player_max_health
+		else:
+			health += 30
 
 
 func _on_drift_timeout() -> void:

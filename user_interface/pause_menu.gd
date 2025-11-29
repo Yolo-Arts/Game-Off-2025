@@ -32,7 +32,7 @@ func _on_continue_button_down() -> void:
 func _on_restart_button_down() -> void:
 	SoundManager.UI_ButtonPressed()
 	get_tree().paused = false
-	get_tree().change_scene_to_file("res://Scenes/isometric_main.tscn")
+	get_tree().reload_current_scene()
 
 
 func _on_continue_mouse_entered() -> void:
@@ -41,8 +41,3 @@ func _on_continue_mouse_entered() -> void:
 
 func _on_restart_mouse_entered() -> void:
 	SoundManager.UI_ButtonHovered()
-
-
-func _on_pause_button_paused_pressed() -> void:
-	self.visible = true
-	pause()

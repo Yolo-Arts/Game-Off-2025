@@ -8,7 +8,10 @@ var isometric_transform: Transform2D
 @onready var shoot_cooldown: Timer = $shootCooldown
 @onready var shockwave: ColorRect = %Shockwave
 @onready var shockwave_collision_shape: CollisionShape2D = $ShockwaveArea/ShockwaveCollisionShape
-@onready var hitbox: CollisionShape2D = $Hitbox
+@onready var laser_beam: Area2D = $Laser_beam
+
+@onready var hitbox: CollisionShape2D = $DamageAreaIso/CollisionShape2D
+@onready var hitbox2: CollisionShape2D = $Hitbox
 
 
 const RELOADING = preload("uid://c48542f6xe7d2")
@@ -40,12 +43,27 @@ func _ready():
 	Signals.infinite_ammo.connect(infiniteAmmo_ability)
 	Signals.time_freeze.connect(time_freeze_ability)
 	Signals.ghost_ship.connect(ghost_ship_ability)
+	Signals.magnetic_balls.connect(magnetic_balls_ability)
+	Signals.laser_beam.connect(Laser_beam_ability)
+
+func magnetic_balls_ability(duration):
+	pass
+
+func Laser_beam_ability(duration):
+	laser_beam.visible = true
+	laser_beam.monitoring = true
+	await get_tree().create_timer(duration).timeout
+	laser_beam.visible = false
+	laser_beam.monitoring = false
+	
 
 func ghost_ship_ability(duration):
 	hitbox.disabled = true
+	hitbox2.disabled = true
 	await get_tree().create_timer(duration).timeout
 	hitbox.disabled = false
-
+	hitbox2.disabled = false
+	
 func time_freeze_ability(duration):
 	await get_tree().create_timer(duration).timeout
 	Signals.time_freeze_disable.emit()
@@ -57,7 +75,6 @@ func infiniteAmmo_ability(duration):
 
 func shockwave_ability():
 	shockwave_fired = true
-	await get_tree().create_timer(0.4).timeout
 	shockwave_collision_shape.disabled = false
 
 func dead_player():
@@ -80,11 +97,10 @@ func _input(event):
 			spawn_reload_text()
 	if shockwave_fired == true:
 		shockwave_fired = false
+		shockwave_collision_shape.disabled = true
 		shockwave.material.set_shader_parameter("global_position", Vector2(1910/2.0, 1080/2))
 		if shockwave.has_node("AnimationPlayer"):
 			shockwave.get_node("AnimationPlayer").play("Shockwave")
-		await get_tree().create_timer(0.4).timeout
-		shockwave_collision_shape.disabled = true
 			
 
 
@@ -102,7 +118,7 @@ func _physics_process(delta) -> void:
 		
 		if can_drift == true && drift_cooldown_bar == true:
 			boost_indcator_start.emit()
-			if Input.is_action_just_released("turn_left") or Input.is_action_just_released("turn_right"):
+			if Input.is_action_just_pressed("left_shift"):
 				zoom_out.emit()
 				boost.emit()
 				drift_value += 1000
@@ -123,7 +139,7 @@ func _physics_process(delta) -> void:
 				if drift.is_stopped() and can_drift == false:
 					can_drift = true
 					zoom_in.emit()
-					print("Instant Boost Ready")
+					print("Instant Boost Ready (Held from previous state)")
 					
 			else:
 				drift.stop()
@@ -203,7 +219,7 @@ func stop_is_drifting():
 
 func shoot():
 
-	Bullet_Type.shoot(cannonball, self, true, cannonball_scale)
+	Bullet_Type.shoot(cannonball_shot, self, true, cannonball_scale)
 
 func spawn_cannon_particles(pos: Vector2, normal: Vector2) -> void:
 	var instance = cannon_fire.instantiate()
@@ -245,8 +261,12 @@ func _on_exp_collection_radius_area_entered(area: Area2D) -> void:
 	if area is Exp_Orb:
 		area.collected = true
 		area.player = self
-
-signal shake_hp_bar
+	if area is Repair:
+		if health + 30 > player_max_health:
+			health = player_max_health
+		else:
+			health += 30
+		area.queue_free()
 
 func _on_damage_area_iso_body_entered(body: Node2D) -> void:
 	if is_drifting:
@@ -255,7 +275,6 @@ func _on_damage_area_iso_body_entered(body: Node2D) -> void:
 		health -= body.enemy_stats.damage
 		self.player_hit()
 		print("hit")
-		shake_hp_bar.emit()
 		#TODO ADD BACK HITSHOCK
 		#self.animation_player.play("hit_shock")
 		Globals.camera.shake(0.5, 25, 25)
