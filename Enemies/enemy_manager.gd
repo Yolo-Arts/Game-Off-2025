@@ -103,6 +103,7 @@ func spawn():
 func setup_wave_for_difficulty(current_difficulty: int):
 	match current_difficulty:
 		0:
+			SoundManager.play_warHorn()
 			enemy_count = 15
 			spawn_interval = 2.0
 			wave_length = 30
