@@ -1,12 +1,12 @@
-[gd_scene load_steps=32 format=3 uid="uid://cjqdhk1yxoc0h"]
+[gd_scene load_steps=36 format=3 uid="uid://cjqdhk1yxoc0h"]
 
 [ext_resource type="Script" uid="uid://cy5j6mtf0cjtq" path="res://sounds/sound_manager.gd" id="1_a1hhe"]
 [ext_resource type="AudioStream" uid="uid://cwde2y4bxpmji" path="res://sounds/death_explosion1.sfxr" id="1_f05am"]
 [ext_resource type="AudioStream" uid="uid://d0bs1a2x8outq" path="res://sounds/cannon_fire.sfxr" id="1_witqk"]
 [ext_resource type="AudioStream" uid="uid://ddypdve0ts2xh" path="res://sounds/death_explosion2.sfxr" id="2_witqk"]
-[ext_resource type="AudioStream" uid="uid://de5cbvtstjw18" path="res://sounds/death_explosion.sfxr" id="3_8a8qv"]
+[ext_resource type="AudioStream" uid="uid://hp4m1sey84xw" path="res://sounds/death_explosion.sfxr" id="3_8a8qv"]
 [ext_resource type="AudioStream" uid="uid://du63xssb4ybdb" path="res://sounds/enemy_hit.sfxr" id="5_8a8qv"]
-[ext_resource type="AudioStream" uid="uid://bbo0dxfs3wbnj" path="res://sounds/playerHurt1.sfxr" id="6_yvcp5"]
+[ext_resource type="AudioStream" uid="uid://boxrkdnb3wksh" path="res://sounds/playerHurt1.sfxr" id="6_yvcp5"]
 [ext_resource type="AudioStream" uid="uid://db6pcdv5k26es" path="res://sounds/playerHurt2.sfxr" id="7_a1hhe"]
 [ext_resource type="AudioStream" uid="uid://bcdx1wnye1sbw" path="res://sounds/playerHurt3.sfxr" id="8_pp33v"]
 [ext_resource type="AudioStream" uid="uid://cwmkbho44l0ek" path="res://sounds/UI_SFX/Wood Block1.mp3" id="10_x2es2"]
@@ -23,6 +23,10 @@
 [ext_resource type="AudioStream" uid="uid://b56hlpycm5x1f" path="res://sounds/Collect 5.ogg" id="21_k4366"]
 [ext_resource type="AudioStream" uid="uid://bkyy3jqlnxvoa" path="res://sounds/LevelUp.ogg" id="22_k4366"]
 [ext_resource type="AudioStream" uid="uid://cdxbingt6d0yr" path="res://sounds/1911-reload-6248.mp3" id="23_150ry"]
+[ext_resource type="AudioStream" uid="uid://dvggw3xg6d0wl" path="res://sounds/bgm/The Rush.mp3" id="24_w7ljr"]
+[ext_resource type="AudioStream" uid="uid://bonxy282y6v1h" path="res://sounds/upgrades_SFX/TAPE STOP_15.wav" id="25_2o6ll"]
+[ext_resource type="AudioStream" uid="uid://catemaelxarrq" path="res://sounds/upgrades_SFX/LOAD_CASSETTE_08.wav" id="25_eyuff"]
+[ext_resource type="AudioStream" uid="uid://d0sne1g7v6m28" path="res://sounds/upgrades_SFX/REMOVE_CASSETTE_07.wav" id="26_w7ljr"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_8a8qv"]
 random_pitch = 1.51
@@ -123,3 +127,20 @@ bus = &"SFX"
 [node name="Reload" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_ogm50")
 bus = &"Bullet_Reload"
+
+[node name="bgm" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("24_w7ljr")
+bus = &"BGM"
+
+[node name="Load_Cassette" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("25_eyuff")
+bus = &"SFX"
+
+[node name="Remove_Cassette" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("26_w7ljr")
+bus = &"SFX"
+
+[node name="Music_Stop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("25_2o6ll")
+pitch_scale = 0.15
+bus = &"SFX"

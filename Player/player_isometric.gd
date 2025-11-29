@@ -32,7 +32,7 @@ var shockwave_fired = false
 func _ready():
 	get_tree().paused = false
 	Globals.player = self
-	health = 100
+	health = 10
 	#Globals.player_died.connect(dead_player)
 	
 	isometric_transform = Transform2D()
@@ -54,33 +54,37 @@ func shockwave_ability():
 func dead_player():
 	Globals.player_died.emit()
 	isDead = true
-	for i in range(0, 5):
+	Globals.camera.shake(5, 23, 15)
+	for i in range(0, 10):
+		SoundManager.play_DeathExplosions()
 		spawn_death_explosion(self.global_position)
+		await get_tree().create_timer(0.5).timeout
 	self.hide()
+	await get_tree().create_timer(5.0).timeout
 	get_tree().paused = true
 
 
 func _input(event):
 	if game_begin:
-		if event.is_action_pressed("fire"):
-			if can_shoot:
-				SoundManager.play_CannonFire()
-				shoot()
-				can_shoot = false
-				reload_ui.play()
-				shoot_cooldown.start()
-				SoundManager.play_reload()
-			else:
-				return
-				#spawn_reload_text()
-	if shockwave_fired == true:
-		shockwave_fired = false
-		shockwave.material.set_shader_parameter("global_position", Vector2(1910/2.0, 1080/2))
-		if shockwave.has_node("AnimationPlayer"):
-			shockwave.get_node("AnimationPlayer").play("Shockwave")
-		await get_tree().create_timer(0.4).timeout
-		shockwave_collision_shape.disabled = true
-			
+		if !isDead:
+			if event.is_action_pressed("fire"):
+				if can_shoot:
+					SoundManager.play_CannonFire()
+					shoot()
+					can_shoot = false
+					reload_ui.play()
+					shoot_cooldown.start()
+					SoundManager.play_reload()
+				else:
+					return
+					#spawn_reload_text()
+			if shockwave_fired == true:
+				shockwave_fired = false
+				shockwave.material.set_shader_parameter("global_position", Vector2(1910/2.0, 1080/2))
+				if shockwave.has_node("AnimationPlayer"):
+					shockwave.get_node("AnimationPlayer").play("Shockwave")
+				await get_tree().create_timer(0.4).timeout
+				shockwave_collision_shape.disabled = true
 
 
 #region spawn_reload_text (REMOVED)
@@ -100,6 +104,7 @@ func _physics_process(delta) -> void:
 		if can_drift == true && drift_cooldown_bar == true:
 			boost_indcator_start.emit()
 			if Input.is_action_just_released("turn_left") or Input.is_action_just_released("turn_right"):
+				
 				zoom_out.emit()
 				boost.emit()
 				drift_value += 1000
@@ -109,6 +114,7 @@ func _physics_process(delta) -> void:
 				stop_is_drifting()
 				reset_drift_cooldown_bar.emit()
 				drift_cooldown_bar = false
+				
 			
 			
 		if drift_cooldown_bar == true:
@@ -210,6 +216,8 @@ func spawn_cannon_particles(pos: Vector2, normal: Vector2) -> void:
 
 func spawn_death_explosion(pos: Vector2) -> void:
 	var instance = DEATH_EXPLOSION.instantiate()
+	#instance.scale = Vector2(4.0, 4.0)
+	instance.speed_scale = 0.5
 	get_tree().get_current_scene().add_child(instance)
 	instance.global_position = pos
 

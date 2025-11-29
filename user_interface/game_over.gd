@@ -35,7 +35,11 @@ func _on_restart_pressed():
 
 
 var total_score = 0
+
 func display_scores():
+	SoundManager.play_lose_game()
+	hide_stats()
+	await get_tree().create_timer(5.2).timeout
 	var final_score = Globals.score
 	seconds_score.text = str(final_score["PER_SECOND_SURVIVED"])
 	shipwrecked_score.text = str(final_score["ENEMY_SHIPWRECKED"])
@@ -47,7 +51,6 @@ func display_scores():
 		total_score += final_score[key]
 	total_score_label.text = str(total_score)
 	
-	hide_stats()
 	animate_stats()
 
 func hide_stats() -> void:

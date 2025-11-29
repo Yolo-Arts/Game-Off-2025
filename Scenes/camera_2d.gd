@@ -18,8 +18,10 @@ var max_zoom_in: Vector2
 var max_zoom_out: Vector2
 
 var zoom_tween: Tween
+var deadPlayer = false
 
 func _ready():
+	Globals.player_died.connect(dead_zoom)
 	print("zoom of x at the beginning is: ", zoom.x)
 	normal_zoom = zoom
 	max_zoom_in = normal_zoom + Vector2(0.15, 0.15)
@@ -28,6 +30,7 @@ func _ready():
 
 # Shake with decreasing intensity while there's time remaining.
 func _process(delta):
+	
 	# Only shake when there's shake time remaining.
 	if _timer == 0:
 		return
@@ -74,22 +77,38 @@ func _on_player_isometric_zoom_in() -> void:
 	start_camera_tween(max_zoom_in, 1.5)
 
 func _on_player_isometric_zoom_out() -> void:
-	if zoom_tween and zoom_tween.is_running():
-		zoom_tween.kill()
-	
-	zoom_tween = create_tween()
-	zoom_tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	zoom_tween.tween_property(self, "zoom", max_zoom_out, 1)
-	zoom_tween.tween_property(self, "zoom", normal_zoom, 0.5)
+	if Globals.playerDied:
+		print("Player is dead")
+		return
+	else:
+		if zoom_tween and zoom_tween.is_running():
+			zoom_tween.kill()
+
+		zoom_tween = create_tween()
+		zoom_tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		zoom_tween.tween_property(self, "zoom", max_zoom_out, 1)
+		zoom_tween.tween_property(self, "zoom", normal_zoom, 0.5)
 	
 	
 
 
 func start_camera_tween(target_zoom: Vector2, duration: float):
+	if Globals.playerDied:
+		return
+	else:
+		if zoom_tween and zoom_tween.is_running():
+			zoom_tween.kill()
+		
+		zoom_tween = create_tween()
+		zoom_tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		
+		zoom_tween.tween_property(self, "zoom", target_zoom, duration)
+
+func dead_zoom():
+	#await get_tree().create_timer(1.6).timeout
+	deadPlayer = true
 	if zoom_tween and zoom_tween.is_running():
 		zoom_tween.kill()
 	
 	zoom_tween = create_tween()
-	zoom_tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	
-	zoom_tween.tween_property(self, "zoom", target_zoom, duration)
+	zoom_tween.tween_property(self, "zoom", Vector2(3.0, 3.0), 1.0)

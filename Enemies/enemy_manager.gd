@@ -92,6 +92,7 @@ func spawn():
 func setup_wave_for_difficulty(current_difficulty: int):
 	match current_difficulty:
 		0:
+			enemy_table.add_item(6, 15) # Projectile enemy (orange)
 			enemy_count = 15
 			spawn_interval = 2.0
 			wave_length = 30
@@ -101,24 +102,23 @@ func setup_wave_for_difficulty(current_difficulty: int):
 			wave_length = 20
 			
 		2, 3, 4, 5:
-			enemy_table.add_item(1, 15) 
+			enemy_table.add_item(1, 15) # Add red boat
 			enemy_count = 5
 			spawn_interval = 0.8
 			wave_length = 10
 		6:
-			enemy_table.add_item(5, 15)
+			enemy_table.add_item(5, 15) # Dash enemy (purple)
 			enemy_count = 18
 			spawn_interval = 0.2
 			wave_length = 30
 			
 		7, 8, 9:
-			enemy_table.remove_item(0) 
-			enemy_table.add_item(2, 20) 
+			enemy_table.remove_item(0) # Remove black boat
+			enemy_table.add_item(2, 20)  # Add green boat
 			enemy_count = 25
 			spawn_interval = 1.0
 			
 		10:
-			enemy_table.add_item(6, 15)
 			enemy_table.remove_item(1) 
 			enemy_table.add_item(3, 10) 
 			enemy_count = 25
@@ -129,7 +129,7 @@ func setup_wave_for_difficulty(current_difficulty: int):
 			spawn_interval = 1
 			wave_length = 25
 		14, 15, 16, 17:
-			enemy_table.add_item(4, 15) 
+			enemy_table.add_item(4, 15) # purple non dash
 			enemy_count = 22
 			spawn_interval = 0.6
 			

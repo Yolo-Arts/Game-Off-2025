@@ -2,6 +2,7 @@ extends Node2D
 @onready var camera = %Camera2D
 @onready var game_over: CanvasLayer = $GameOver
 @onready var animation_player = $AnimationPlayer
+@onready var drift_bar: CanvasLayer = $UI/DriftBar
 
 signal begin_game
 var game_began = true
@@ -21,6 +22,7 @@ func _ready():
 	game_over.visible = false
 	Globals.player_died.connect(show_game_over_screen)
 	animation_player.play('transition')
+	SoundManager.start_bgm()
 
 func _input(event: InputEvent) -> void:
 	if game_began:
@@ -33,6 +35,9 @@ func _input(event: InputEvent) -> void:
 			await get_tree().create_timer(.7).timeout
 
 func show_game_over_screen():
+	#Globals.camera.zoom = Vector2(3.0, 3.0) 
+	drift_bar.visible = false
+	await get_tree().create_timer(5.0).timeout
 	game_over.visible = true
 
 func hit_stop(timescale: float, duration: float) -> void:

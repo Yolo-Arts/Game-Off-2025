@@ -9,8 +9,10 @@ extends Node
 @onready var upgrade_unlock: AudioStreamPlayer = $UpgradeUnlock
 @onready var level_up: AudioStreamPlayer = $LevelUp
 @onready var reload: AudioStreamPlayer = $Reload
-
-
+@onready var bgm_1: AudioStreamPlayer = $bgm
+@onready var load_cassette: AudioStreamPlayer = $Load_Cassette
+@onready var remove_cassette: AudioStreamPlayer = $Remove_Cassette
+@onready var music_stop: AudioStreamPlayer = $Music_Stop
 
 func play_CannonFire():
 	cannon_fire.play()
@@ -38,3 +40,29 @@ func play_LevelUp():
 
 func play_reload():
 	reload.play()
+
+func play_load_cassette():
+	load_cassette.play()
+
+func play_remove_casette():
+	remove_cassette.play()
+
+func start_bgm():
+	bgm_1.play()
+
+func play_bgm():
+	var bus_index = AudioServer.get_bus_index("BGM")
+	
+	AudioServer.get_bus_effect(bus_index, 0)
+	AudioServer.set_bus_effect_enabled(bus_index, 0, false)
+
+func stop_bgm():
+	var bus_index = AudioServer.get_bus_index("BGM")
+	print("Bus index:", bus_index)
+	
+	AudioServer.get_bus_effect(bus_index, 0)
+	AudioServer.set_bus_effect_enabled(bus_index, 0, true)
+
+func play_lose_game():
+	bgm_1.stream_paused = true
+	music_stop.play()

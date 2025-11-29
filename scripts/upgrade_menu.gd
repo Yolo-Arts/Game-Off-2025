@@ -34,6 +34,7 @@ func _ready() -> void:
 	stat_up_ui_2.update()
 
 func _on_player_level_up():
+	SoundManager.stop_bgm()
 	particles.emitting = true
 	Globals.upgrading = true
 	SoundManager.play_LevelUp()
@@ -77,6 +78,7 @@ func _on_card_selected(upgrade: Statup):
 	apply_upgrade(upgrade)
 	visible = false
 	particles.emitting = false
+	SoundManager.play_bgm()
 	Globals.upgrading = false
 
 func apply_upgrade(upgrade: Statup):

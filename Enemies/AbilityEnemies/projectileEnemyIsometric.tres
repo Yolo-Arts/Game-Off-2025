@@ -6,9 +6,9 @@
 [resource]
 script = ExtResource("1_qitju")
 texture = ExtResource("2_6132s")
-speed = 600.0
+speed = 700.0
 acceleration = 0.9
 can_shoot = true
-shoot_range = 900.0
-projectile_speed = 900.0
+shoot_range = 800.0
+projectile_speed = 700.0
 metadata/_custom_type_script = "uid://bujng151akkyd"

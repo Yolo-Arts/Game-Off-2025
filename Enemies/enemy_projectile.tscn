@@ -1,20 +1,22 @@
 [gd_scene load_steps=4 format=3 uid="uid://b8mkrqjumpy0x"]
 
 [ext_resource type="Script" uid="uid://kd2q8uo0hf4t" path="res://Enemies/enemy_projectile.gd" id="1_0wate"]
-[ext_resource type="Texture2D" uid="uid://nteeo1x4snbc" path="res://Assets/Particles/Particle.png" id="1_hrrub"]
+[ext_resource type="Texture2D" uid="uid://dx4qdtm1evw36" path="res://Assets/kenney_pirate-pack/PNG/Default size/Ship parts/cannonBall.png" id="2_0wate"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0wate"]
-radius = 29.15476
+radius = 20.0
 
 [node name="EnemyProjectile" type="Area2D"]
 collision_layer = 130
 script = ExtResource("1_0wate")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_hrrub")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_0wate")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.96484375, 0.26759338, 0.26759338, 1)
+scale = Vector2(3, 3)
+texture = ExtResource("2_0wate")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 10.0

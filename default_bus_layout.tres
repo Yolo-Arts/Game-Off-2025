@@ -1,4 +1,4 @@
-[gd_resource type="AudioBusLayout" load_steps=8 format=3 uid="uid://by3oywtx1dppy"]
+[gd_resource type="AudioBusLayout" load_steps=9 format=3 uid="uid://by3oywtx1dppy"]
 
 [sub_resource type="AudioEffectReverb" id="AudioEffectReverb_j3pel"]
 resource_name = "Reverb"
@@ -20,6 +20,10 @@ resource_name = "NotchFilter"
 
 [sub_resource type="AudioEffectPanner" id="AudioEffectPanner_j3pel"]
 resource_name = "Panner"
+
+[sub_resource type="AudioEffectFilter" id="AudioEffectFilter_g28q7"]
+resource_name = "Filter"
+resonance = 0.08
 
 [resource]
 bus/1/name = &"SFX"
@@ -48,3 +52,11 @@ bus/2/effect/5/effect = SubResource("AudioEffectNotchFilter_j3pel")
 bus/2/effect/5/enabled = true
 bus/2/effect/6/effect = SubResource("AudioEffectPanner_j3pel")
 bus/2/effect/6/enabled = true
+bus/3/name = &"BGM"
+bus/3/solo = false
+bus/3/mute = false
+bus/3/bypass_fx = false
+bus/3/volume_db = 0.0
+bus/3/send = &"Master"
+bus/3/effect/0/effect = SubResource("AudioEffectFilter_g28q7")
+bus/3/effect/0/enabled = false
