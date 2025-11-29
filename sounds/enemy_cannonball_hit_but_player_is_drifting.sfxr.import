@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://cptryce1cd4df"
+path="res://.godot/imported/enemy_cannonball_hit_but_player_is_drifting.sfxr-f8a09ded68d5f910732b4612fb900250.sample"
+
+[deps]
+
+source_file="res://sounds/enemy_cannonball_hit_but_player_is_drifting.sfxr"
+dest_files=["res://.godot/imported/enemy_cannonball_hit_but_player_is_drifting.sfxr-f8a09ded68d5f910732b4612fb900250.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

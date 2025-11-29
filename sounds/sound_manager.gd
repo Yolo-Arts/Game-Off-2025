@@ -15,6 +15,7 @@ extends Node
 @onready var music_stop: AudioStreamPlayer = $Music_Stop
 @onready var score_hit: AudioStreamPlayer = $Score_Hit
 @onready var heart_beat: AudioStreamPlayer = $HeartBeat
+@onready var enemy_cannon_ball_hit_but_player_is_drifting: AudioStreamPlayer = $EnemyCannonBallHitButPlayerIsDrifting
 
 func play_CannonFire():
 	cannon_fire.play()
@@ -93,3 +94,6 @@ func start_heartBeat():
 func stop_heartBeat():
 	heart_beat.stream_paused = true
 	
+
+func play_enemyCannonBallHitButPlayerIsDrifting():
+	enemy_cannon_ball_hit_but_player_is_drifting.play()
