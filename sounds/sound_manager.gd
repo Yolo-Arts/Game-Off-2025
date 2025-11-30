@@ -68,19 +68,17 @@ func stop_bgm():
 	AudioServer.get_bus_effect(bus_index, 0)
 	AudioServer.set_bus_effect_enabled(bus_index, 0, true)
 
-func play_bgm_heartbeat():
-	var bus_index = AudioServer.get_bus_index("BGM")
-	AudioServer.set_bus_volume_db(bus_index, linear_to_db(0.3))
-	AudioServer.get_bus_effect(bus_index, 0)
-	AudioServer.set_bus_effect_enabled(bus_index, 0, false)
 
-func stop_bgm_heartBeat():
+
+func apply_bgm_filter():
 	var bus_index = AudioServer.get_bus_index("BGM")
-	print("Bus index:", bus_index)
-	
-	AudioServer.get_bus_effect(bus_index, 0)
-	AudioServer.set_bus_volume_db(bus_index, linear_to_db(0.8))
-	AudioServer.set_bus_effect_enabled(bus_index, 0, true)
+	AudioServer.get_bus_effect(bus_index, 1)
+	AudioServer.set_bus_effect_enabled(bus_index, 1, true)
+
+func remove_bgm_filter():
+	var bus_index = AudioServer.get_bus_index("BGM")
+	AudioServer.get_bus_effect(bus_index, 1)
+	AudioServer.set_bus_effect_enabled(bus_index, 1, false)
 
 func play_lose_game():
 	bgm_1.stream_paused = true

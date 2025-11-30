@@ -26,13 +26,11 @@ func _process(delta: float) -> void:
 	heart_icon.max_value = player.player_max_health
 	#hp_label.text = "HP: " + str(player.health)
 	
-	if health_progress.value < health_progress.max_value * 0.25 && health_progress.value > 0:
+	if health_progress.value <= health_progress.max_value * 0.33 && health_progress.value > 0:
 		low_hp_vignette.visible = true
 		shaker.start()
 		hp_particles.emitting = true
 	else: 
-		SoundManager.play_bgm()
-		SoundManager.stop_heartBeat()
 		low_hp_vignette.visible = false
 		hp_particles.emitting = false
 
@@ -48,14 +46,14 @@ func _on_player_isometric_shake_hp_bar() -> void:
 	shaker.start()
 
 func _on_playheart_beat_timeout() -> void:
-	if health_progress.value <= health_progress.max_value * 0.30 && health_progress.value > 0:
-		SoundManager.stop_bgm_heartBeat()
+	if health_progress.value <= health_progress.max_value * 0.33 && health_progress.value > 0:
+		SoundManager.apply_bgm_filter()
 		SoundManager.start_heartBeat()
 		low_hp_vignette.visible = true
 		shaker.start()
 		hp_particles.emitting = true
 	else: 
-		SoundManager.play_bgm_heartbeat()
+		SoundManager.remove_bgm_filter()
 		SoundManager.stop_heartBeat()
 		low_hp_vignette.visible = false
 		hp_particles.emitting = false
