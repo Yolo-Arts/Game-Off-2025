@@ -88,6 +88,7 @@ func play_lose_game():
 
 func play_scoreHit():
 	score_hit.play()
+	
 
 func start_heartBeat():
 	heart_beat.play()
