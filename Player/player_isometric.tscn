@@ -29,6 +29,33 @@ shader_parameter/amplitude = 15.0
 shader_parameter/frequecy = 30.0
 shader_parameter/progress = 0.999999977648
 
+[sub_resource type="Animation" id="Animation_5y3gb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/redScreenFlash:material:shader_parameter/vignette_intensity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/redScreenFlash:material:shader_parameter/vignette_opacity")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
 [sub_resource type="Animation" id="Animation_eoyfg"]
 resource_name = "red_hit_flash"
 length = 0.4
@@ -55,33 +82,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [0.0, 0.5, 0.5, 0.0]
-}
-
-[sub_resource type="Animation" id="Animation_5y3gb"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CanvasLayer/redScreenFlash:material:shader_parameter/vignette_intensity")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.4]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CanvasLayer/redScreenFlash:material:shader_parameter/vignette_opacity")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ht2xh"]
@@ -120,6 +120,8 @@ collision_layer = 33
 collision_mask = 9
 script = ExtResource("1_60ovk")
 Bullet_Type = ExtResource("2_fphli")
+base_speed = 200.0
+max_speed = 500.0
 max_turn_speed = 3.0
 turn_acceleration = 0.5
 deceleration = 0.0

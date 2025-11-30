@@ -17,6 +17,7 @@ extends Node
 @onready var heart_beat: AudioStreamPlayer = $HeartBeat
 @onready var enemy_cannon_ball_hit_but_player_is_drifting: AudioStreamPlayer = $EnemyCannonBallHitButPlayerIsDrifting
 @onready var war_horn: AudioStreamPlayer = $WarHorn
+@onready var repair_boat: AudioStreamPlayer = $RepairBoat
 
 
 func play_CannonFire():
@@ -101,3 +102,6 @@ func play_enemyCannonBallHitButPlayerIsDrifting():
 
 func play_warHorn():
 	war_horn.play()
+
+func play_repairBoat():
+	repair_boat.play()

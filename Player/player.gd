@@ -4,7 +4,7 @@ extends CharacterBody2D
 @export var Bullet_Type: Bullet_type
 @onready var CANNONBALL = preload("uid://m1jsvblrkbdq")
 
-var damage = 20.0
+var damage = 10.0
 var cannonball_scale = 1.0
 # movement related code
 @export_group("Movement Parameters")
@@ -52,7 +52,7 @@ var player_max_health = 100.0
 var can_drift = false
 var drift_value = 1
 var isDead = false
-var shockwave_damage = 15
+var shockwave_damage = 20
 
 func _ready():
 	pass
@@ -191,6 +191,7 @@ func _on_exp_collection_radius_body_entered(body: Node2D) -> void:
 		Signals.repair_collected.emit()
 		if health + 30 > player_max_health:
 			health = player_max_health
+			SoundManager.play_repairBoat()
 		else:
 			health += 30
 

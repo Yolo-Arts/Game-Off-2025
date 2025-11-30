@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="enemy_type" load_steps=3 format=3 uid="uid://ccelj202yy21h"]
+
+[ext_resource type="Script" uid="uid://bujng151akkyd" path="res://Resources/enemy_type.gd" id="1_vkl3s"]
+[ext_resource type="Texture2D" uid="uid://bhhya7080ahh8" path="res://Enemies/Sprites/enemy_ship_red_spritesheet.png" id="2_06xdl"]
+
+[resource]
+script = ExtResource("1_vkl3s")
+texture = ExtResource("2_06xdl")
+speed = 900.0
+acceleration = 0.6
+metadata/_custom_type_script = "uid://bujng151akkyd"

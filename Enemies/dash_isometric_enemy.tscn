@@ -2,14 +2,14 @@
 
 [ext_resource type="PackedScene" uid="uid://h0hdesj12ofh" path="res://Enemies/isometric_basic_enemy.tscn" id="1_6k4ts"]
 [ext_resource type="Script" uid="uid://dyms33o4j0blm" path="res://Enemies/dash_isometric_enemy.gd" id="2_magd3"]
-[ext_resource type="Resource" uid="uid://ysqdaqmx1hac" path="res://Enemies/AbilityEnemies/dashEnemyIsometric.tres" id="3_magd3"]
+[ext_resource type="Resource" uid="uid://c0k8vmvwth46o" path="res://Enemies/Enemy_Types_V2/purple2.tres" id="3_y7xkd"]
 [ext_resource type="PackedScene" uid="uid://bu0akexxfytwy" path="res://Assets/Particles/dash_warning.tscn" id="4_r04sw"]
 [ext_resource type="PackedScene" uid="uid://bx6gp2g3j17xc" path="res://Assets/Particles/boost_particles_white.tscn" id="5_y7xkd"]
 [ext_resource type="PackedScene" uid="uid://c47b8w26445qp" path="res://Assets/Particles/boost_indicator.tscn" id="6_qqkc0"]
 
 [node name="DashEnemy" instance=ExtResource("1_6k4ts")]
 script = ExtResource("2_magd3")
-enemy_types = Array[Resource]([ExtResource("3_magd3")])
+enemy_types = Array[Resource]([ExtResource("3_y7xkd")])
 
 [node name="DashWarning" parent="." index="0" instance=ExtResource("4_r04sw")]
 visible = false

@@ -79,7 +79,7 @@ func _physics_process(delta):
 							var distance_to_player = global_position.distance_to(player.global_position)
 							if distance_to_player > 100 and distance_to_player < 1800:
 								#boost_indicator.emitting = true
-								if randf() < 0.02:  # 2% chance 
+								if randf() < 0.03:  # 3% chance 
 									start_dash(direction)
 			else:
 				velocity = velocity.lerp(Vector2.ZERO, friction * delta)
