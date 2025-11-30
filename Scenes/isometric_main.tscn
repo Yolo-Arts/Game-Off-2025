@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://b3imdjb1so30p"]
+[gd_scene load_steps=59 format=3 uid="uid://b3imdjb1so30p"]
 
 [ext_resource type="Script" uid="uid://wjiwydm880cx" path="res://Scenes/isometric_main.gd" id="1_1enjl"]
 [ext_resource type="PackedScene" uid="uid://cbag74ryx0pu8" path="res://Scenes/player_manager.tscn" id="2_dlawb"]
@@ -34,6 +34,9 @@
 [ext_resource type="Resource" uid="uid://brkxnwahwinvv" path="res://Enemies/Enemy_Types_V2/orange2.tres" id="22_oro4v"]
 [ext_resource type="PackedScene" uid="uid://dgatlx3brqvmv" path="res://user_interface/hpbar_andExpBar.tscn" id="22_yj477"]
 [ext_resource type="Resource" uid="uid://dt4x2qqrq61d0" path="res://Enemies/Enemy_Types_V2/orange3.tres" id="23_s4omk"]
+[ext_resource type="Resource" uid="uid://ircg607glgyy" path="res://Enemies/Enemy_Types_V2/black4.tres" id="24_j36ft"]
+[ext_resource type="Resource" uid="uid://djp06rprn44c5" path="res://Enemies/Enemy_Types_V2/red4.tres" id="25_3vkk7"]
+[ext_resource type="Resource" uid="uid://n23ac42qqysj" path="res://Enemies/Enemy_Types_V2/green4.tres" id="26_8udth"]
 [ext_resource type="PackedScene" uid="uid://br81uexsi3und" path="res://user_interface/drift_bar.tscn" id="26_40rgy"]
 [ext_resource type="PackedScene" uid="uid://dn75ntkbbgxb2" path="res://user_interface/pause_menu.tscn" id="26_veftd"]
 [ext_resource type="PackedScene" uid="uid://clpfc5m24onjx" path="res://user_interface/hot_bar.tscn" id="27_40rgy"]
@@ -197,7 +200,7 @@ script = ExtResource("5_yj477")
 basic_enemy_scene = ExtResource("14_dlawb")
 dash_enemy_scene = ExtResource("33_oqk4o")
 projectile_enemy_scene = ExtResource("13_gyupm")
-enemy_types = Array[Resource]([ExtResource("9_yj477"), ExtResource("10_oqk4o"), ExtResource("11_4lvfn"), ExtResource("12_bntkt"), ExtResource("13_8id1w"), ExtResource("14_urm01"), ExtResource("15_urm01"), ExtResource("16_wnblm"), ExtResource("17_j2nir"), ExtResource("18_bc4km"), ExtResource("19_pd4ol"), ExtResource("20_7mlm2"), ExtResource("21_43eng"), ExtResource("22_oro4v"), ExtResource("23_s4omk")])
+enemy_types = Array[Resource]([ExtResource("9_yj477"), ExtResource("10_oqk4o"), ExtResource("11_4lvfn"), ExtResource("12_bntkt"), ExtResource("13_8id1w"), ExtResource("14_urm01"), ExtResource("15_urm01"), ExtResource("16_wnblm"), ExtResource("17_j2nir"), ExtResource("18_bc4km"), ExtResource("19_pd4ol"), ExtResource("20_7mlm2"), ExtResource("21_43eng"), ExtResource("22_oro4v"), ExtResource("23_s4omk"), ExtResource("24_j36ft"), ExtResource("25_3vkk7"), ExtResource("26_8udth")])
 
 [node name="TimeCycle" type="CanvasModulate" parent="."]
 unique_name_in_owner = true

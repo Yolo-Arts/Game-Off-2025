@@ -188,7 +188,7 @@ func setup_wave_for_difficulty(current_difficulty: int):
 			wave_length = 15
 		#endregion
 		
-		#region Purple Boat
+		#region Purple (Dash) Boat
 		15:
 			setup_bounty_wave(star_3)
 			enemy_table.add_item(9, 15) # Purple
@@ -218,6 +218,7 @@ func setup_wave_for_difficulty(current_difficulty: int):
 			wave_length = 15
 		#endregion
 		
+		#region Orange (Projectile) Boat
 		20:
 			setup_bounty_wave(star_4)
 			enemy_table.remove_item(11)
@@ -245,10 +246,22 @@ func setup_wave_for_difficulty(current_difficulty: int):
 			enemy_count = 10
 			spawn_interval = 1.0
 			wave_length = 15
+		#endregion
+		
+		25:
+			setup_bounty_wave(star_5)
+			enemy_table.remove_item(14)
+			enemy_table.add_item(15, 15) # Black4
+			enemy_table.add_item(16, 15) # Red4
+			enemy_table.add_item(17, 15) # Green4
+			enemy_table.add_item(11, 15) # Purple
+			wave_length = 60
+			enemy_count = 60
+			spawn_interval = 1.0
 		_:
 			enemy_count += 2
-			wave_length += 1.0
-			#spawn_interval = max(0.4, spawn_interval - 0.05)
+			wave_length += 2.0
+			spawn_interval -= 0.05
 
 func setup_bounty_wave(star_node: Control):
 	star_node.visible = true
