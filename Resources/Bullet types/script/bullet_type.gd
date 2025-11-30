@@ -1,14 +1,15 @@
 class_name Bullet_type
-extends Resource
+extends Statup
 
 var left_cannon_direction
 var right_cannon_direction
 
-func apply_cannonball_upgrades(cannon_instance: Cannonball):
+func apply_cannonball_upgrades(Cannonball_scene: Cannonball_shot) -> Cannonball_shot:
 	if not Globals.active_cannonball_upgrades.is_empty():
 		for upgrade in Globals.active_cannonball_upgrades:
-			upgrade.apply_cannonBall_upgrade(cannon_instance)
-
+			Cannonball_scene = upgrade.apply_cannonball_upgrade(Cannonball_scene)
+	
+	return Cannonball_scene
 func _ready():
 	pass
 	

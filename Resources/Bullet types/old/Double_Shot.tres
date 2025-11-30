@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Double_Shot" load_steps=2 format=3 uid="uid://bgntu42b22hqi"]
 
-[ext_resource type="Script" uid="uid://3056ete8mbty" path="res://Resources/Bullet types/Double_shot.gd" id="1_wnkoe"]
+[ext_resource type="Script" uid="uid://3056ete8mbty" path="res://Resources/Bullet types/old/Double_shot.gd" id="1_wnkoe"]
 
 [resource]
 script = ExtResource("1_wnkoe")

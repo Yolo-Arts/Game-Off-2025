@@ -10,6 +10,8 @@ var projectile_speed: float
 var shoot_damage: float
 
 func _ready():
+	Signals.time_freeze.connect(_on_time_freeze)
+	Signals.time_freeze_disable.connect(_on_time_freeze_disable)
 	print("Projectile enemy spawned")
 	if sprite.material:
 		sprite.material = sprite.material.duplicate()
@@ -31,7 +33,7 @@ func _ready():
 	shoot_timer.one_shot = true 
 
 func _physics_process(delta):
-	if !isDead:
+	if !isDead and can_move:
 		var player = get_tree().get_first_node_in_group("player")
 		if player:
 			var direction_to_player = (player.global_position - global_position).normalized()

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="double_shot" load_steps=3 format=3 uid="uid://bsct142sn8ywd"]
+
+[ext_resource type="Texture2D" uid="uid://c12v3gr0dt8sm" path="res://icon.svg" id="1_6yysx"]
+[ext_resource type="Script" uid="uid://b61rjrjw3n1fa" path="res://Resources/Bullet types/script/Double_shot_upgrade.gd" id="2_4daj1"]
+
+[resource]
+script = ExtResource("2_4daj1")
+cannonball_upgrade_type = "number_altering"
+image = ExtResource("1_6yysx")
+name = "Double shot"
+description = "Double trouble... or maybe triple if u get this again"
+Weight = 100
+type = "Bullet Type"
+metadata/_custom_type_script = "uid://3056ete8mbty"

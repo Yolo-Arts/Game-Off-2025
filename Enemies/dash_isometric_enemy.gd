@@ -15,7 +15,8 @@ var dash_cooldown: float = 3.0
 @onready var boost_indicator: GPUParticles2D = $boostIndicator
 
 func _ready():
-	
+	Signals.time_freeze.connect(_on_time_freeze)
+	Signals.time_freeze_disable.connect(_on_time_freeze_disable)
 	print("Dash enemy spawned")
 	#print("Enemy dash speed: ", enemy_types[0].dash_speed)
 	if sprite.material:
@@ -48,7 +49,7 @@ func _ready():
 		#print("Enemy does not have stats")
 
 func _physics_process(delta):
-	if !isDead:
+	if !isDead and can_move:
 		if dash_cooldown_timer > 0:
 			dash_cooldown_timer -= delta
 		

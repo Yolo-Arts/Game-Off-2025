@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="TimeFreezeAbility" load_steps=4 format=3 uid="uid://co2jfg8i5cfql"]
+
+[ext_resource type="PackedScene" uid="uid://c5focoomo3g1e" path="res://Resources/Stat_ups/AbilitiesFolder/Time_freeze_handler.tscn" id="1_h3fmq"]
+[ext_resource type="Script" uid="uid://dkj8ei5wwh25l" path="res://Resources/Stat_ups/AbilitiesFolder/Time_freeze.gd" id="1_hwiff"]
+[ext_resource type="Texture2D" uid="uid://c12v3gr0dt8sm" path="res://icon.svg" id="2_e1xaw"]
+
+[resource]
+script = ExtResource("1_hwiff")
+icon = ExtResource("2_e1xaw")
+ability_scene = ExtResource("1_h3fmq")
+metadata/_custom_type_script = "uid://dkj8ei5wwh25l"

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="lightning_shot" load_steps=3 format=3 uid="uid://dnqplp0h5mdo5"]
+
+[ext_resource type="Script" uid="uid://ckrrryd8m75ni" path="res://Resources/Bullet types/script/Lightning_shot.gd" id="1_00ygv"]
+[ext_resource type="Texture2D" uid="uid://c12v3gr0dt8sm" path="res://icon.svg" id="1_s732b"]
+
+[resource]
+script = ExtResource("1_00ygv")
+image = ExtResource("1_s732b")
+name = "Lightning in a bottle"
+description = "Cannonballs zip from enemy to enemy... zips even more with additional_upgrades"
+Weight = 100
+type = "Bullet Type"
+metadata/_custom_type_script = "uid://ckrrryd8m75ni"

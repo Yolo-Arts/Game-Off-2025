@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dtcpiwj5vvvns"]
+
+[ext_resource type="Script" uid="uid://c37ge07j4ut0e" path="res://Resources/Stat_ups/AbilitiesFolder/ghost_ship_handler.gd" id="1_ja5af"]
+
+[node name="GhostShipHandler" type="Node"]
+script = ExtResource("1_ja5af")

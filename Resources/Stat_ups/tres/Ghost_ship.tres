@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Ghost_ship" load_steps=4 format=3 uid="uid://bcyy17l4c7n1u"]
+
+[ext_resource type="Script" uid="uid://nrxbaabde5y8" path="res://Resources/Stat_ups/AbilitiesFolder/ghost_ship.gd" id="1_6vcyl"]
+[ext_resource type="PackedScene" uid="uid://dtcpiwj5vvvns" path="res://Resources/Stat_ups/AbilitiesFolder/Ghost_ship_handler.tscn" id="1_n5a6g"]
+[ext_resource type="Texture2D" uid="uid://c12v3gr0dt8sm" path="res://icon.svg" id="2_7sgii"]
+
+[resource]
+script = ExtResource("1_6vcyl")
+icon = ExtResource("2_7sgii")
+ability_scene = ExtResource("1_n5a6g")
+image = ExtResource("2_7sgii")
+name = "Ghost Ship"
+metadata/_custom_type_script = "uid://nrxbaabde5y8"

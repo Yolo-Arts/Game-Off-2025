@@ -28,7 +28,7 @@ var cannonball_scale = 1.0
 
 
 # Cannonball
-@onready var cannonball = preload("uid://m1jsvblrkbdq")
+@onready var cannonball_shot = preload("uid://bl6r5vf0ad0ky")
 
 @onready var animation_player = $AnimationPlayer
 
@@ -138,7 +138,7 @@ func _physics_process(delta) -> void:
 
 
 func shoot():
-	Bullet_Type.shoot(cannonball, self, false, cannonball_scale)
+	Bullet_Type.shoot(cannonball_shot, self, false, cannonball_scale)
 
 
 func spawn_cannon_particles(pos: Vector2, normal: Vector2) -> void:

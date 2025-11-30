@@ -5,11 +5,8 @@ signal died
 
 #FIXME Fix the hitboxes, they do not rotate with the enemy.
 
-
-
-
 var knockback_resistance: float = 10.0 
-
+var can_move = true
 # value slows the boat to a stop when player is dead.
 var friction: float = 1.5
 
@@ -17,7 +14,8 @@ const DAMAGE_NUMBERS = preload("uid://xuhrxjj8flhn")
 
 
 func _ready() -> void:
-	
+	Signals.time_freeze.connect(_on_time_freeze)
+	Signals.time_freeze_disable.connect(_on_time_freeze_disable)
 	if enemy_stats and enemy_stats.texture:
 		sprite.texture = enemy_stats.texture
 
@@ -44,7 +42,7 @@ func set_enemy_type(enemy_type: int):
 		#move_and_slide()
 
 func _physics_process(delta):
-	if !isDead: 
+	if !isDead and can_move: 
 		var direction = get_direction_to_player()
 		var target_velocity = Vector2.ZERO
 		
@@ -170,3 +168,9 @@ func disable_hitbox():
 
 func _on_queue_free_timeout() -> void:
 	self.queue_free()
+
+func _on_time_freeze(_duration):
+	can_move = false
+	
+func _on_time_freeze_disable():
+	can_move = true

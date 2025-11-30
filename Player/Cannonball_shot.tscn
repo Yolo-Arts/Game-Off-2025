@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bl6r5vf0ad0ky"]
+
+[ext_resource type="Script" uid="uid://q6nyn3g3urr0" path="res://Player/cannonball_shot.gd" id="1_gq87w"]
+[ext_resource type="PackedScene" uid="uid://m1jsvblrkbdq" path="res://Player/cannonball.tscn" id="2_niek1"]
+
+[node name="CannonballShot" type="Node2D"]
+script = ExtResource("1_gq87w")
+
+[node name="cannonball" parent="." instance=ExtResource("2_niek1")]

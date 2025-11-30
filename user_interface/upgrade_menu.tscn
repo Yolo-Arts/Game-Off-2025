@@ -1,10 +1,11 @@
-[gd_scene load_steps=24 format=3 uid="uid://d38tjnetmpjft"]
+[gd_scene load_steps=30 format=3 uid="uid://d38tjnetmpjft"]
 
 [ext_resource type="Script" uid="uid://cjmocno1w2bko" path="res://scripts/upgrade_menu.gd" id="1_h4tj8"]
 [ext_resource type="PackedScene" uid="uid://oy6uunjy18" path="res://user_interface/stat_up_ui.tscn" id="2_l5p68"]
 [ext_resource type="Resource" uid="uid://bpypvqqa6sxmf" path="res://Resources/Stat_ups/tres/Shot_size_up.tres" id="3_h4tj8"]
+[ext_resource type="Resource" uid="uid://bsct142sn8ywd" path="res://Resources/Bullet types/tres/Double_shot_upgrade.tres" id="3_jcy8k"]
 [ext_resource type="Resource" uid="uid://dohph3126ka40" path="res://Resources/Stat_ups/tres/Handling_Stat_up.tres" id="4_l5p68"]
-[ext_resource type="Script" uid="uid://cx0xqtau6rhsj" path="res://Resources/Stat_ups/Stat_up.gd" id="4_qrpwb"]
+[ext_resource type="Script" uid="uid://cx0xqtau6rhsj" path="res://Resources/Stat_ups/Scripts/Stat_up.gd" id="4_qrpwb"]
 [ext_resource type="Resource" uid="uid://cf3k7rqex6tj7" path="res://Resources/Stat_ups/tres/Collection_radius_stat_up.tres" id="5_hw28x"]
 [ext_resource type="Script" uid="uid://cg70lvhu2m8ls" path="res://user_interface/stat_picker.gd" id="5_l5p68"]
 [ext_resource type="Resource" uid="uid://drnx6hr8xqkvv" path="res://Resources/Stat_ups/tres/damage_stat_up.tres" id="6_s7bs0"]
@@ -17,7 +18,12 @@
 [ext_resource type="Resource" uid="uid://f2rklnqjt65p" path="res://Resources/Stat_ups/tres/shockwave_ability.tres" id="12_qbaxy"]
 [ext_resource type="Resource" uid="uid://cvisr7wr5sfol" path="res://Resources/Stat_ups/tres/Piercing.tres" id="13_gglrb"]
 [ext_resource type="Resource" uid="uid://7p0pxpacwpao" path="res://Resources/Stat_ups/tres/InfiniteAmmoAbility.tres" id="14_6340c"]
+[ext_resource type="Resource" uid="uid://ukshai7h31k5" path="res://Resources/Bullet types/tres/explosive_shot.tres" id="16_otgh1"]
+[ext_resource type="Resource" uid="uid://dnqplp0h5mdo5" path="res://Resources/Bullet types/tres/Lightning_shot.tres" id="17_lcsrp"]
+[ext_resource type="Resource" uid="uid://co2jfg8i5cfql" path="res://Resources/Stat_ups/tres/Time Freeze.tres" id="18_bun18"]
 [ext_resource type="Texture2D" uid="uid://bopex10lmjama" path="res://Assets/white_square.png" id="18_o4chj"]
+[ext_resource type="Resource" uid="uid://cwfe6fajkag6c" path="res://Resources/Stat_ups/tres/Laser_beam.tres" id="19_mi4tb"]
+[ext_resource type="Resource" uid="uid://bcyy17l4c7n1u" path="res://Resources/Stat_ups/tres/Ghost_ship.tres" id="20_x3i3q"]
 
 [sub_resource type="Gradient" id="Gradient_o4chj"]
 offsets = PackedFloat32Array(0, 0.26774195, 0.44193548, 0.61612904, 0.78064513, 1)
@@ -56,7 +62,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_h4tj8")
-stat_up_list = Array[ExtResource("4_qrpwb")]([ExtResource("5_hw28x"), ExtResource("6_s7bs0"), ExtResource("4_l5p68"), ExtResource("8_163pu"), ExtResource("3_h4tj8"), ExtResource("10_ldfmy"), ExtResource("9_s7bs0"), ExtResource("10_163pu"), ExtResource("11_ldfmy"), ExtResource("12_qbaxy"), ExtResource("13_gglrb"), ExtResource("14_6340c")])
+stat_up_list = Array[ExtResource("4_qrpwb")]([ExtResource("6_s7bs0"), ExtResource("4_l5p68"), ExtResource("8_163pu"), ExtResource("3_h4tj8"), ExtResource("10_ldfmy"), ExtResource("9_s7bs0"), ExtResource("10_163pu"), ExtResource("11_ldfmy"), ExtResource("12_qbaxy"), ExtResource("13_gglrb"), ExtResource("14_6340c"), ExtResource("5_hw28x"), ExtResource("16_otgh1"), ExtResource("3_jcy8k"), ExtResource("17_lcsrp"), ExtResource("18_bun18"), ExtResource("19_mi4tb"), ExtResource("20_x3i3q")])
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
