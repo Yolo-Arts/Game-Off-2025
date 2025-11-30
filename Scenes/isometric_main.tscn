@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://b3imdjb1so30p"]
+[gd_scene load_steps=68 format=3 uid="uid://b3imdjb1so30p"]
 
 [ext_resource type="Script" uid="uid://wjiwydm880cx" path="res://Scenes/isometric_main.gd" id="1_1enjl"]
 [ext_resource type="PackedScene" uid="uid://cbag74ryx0pu8" path="res://Scenes/player_manager.tscn" id="2_dlawb"]
@@ -40,12 +40,21 @@
 [ext_resource type="PackedScene" uid="uid://br81uexsi3und" path="res://user_interface/drift_bar.tscn" id="26_40rgy"]
 [ext_resource type="PackedScene" uid="uid://dn75ntkbbgxb2" path="res://user_interface/pause_menu.tscn" id="26_veftd"]
 [ext_resource type="PackedScene" uid="uid://clpfc5m24onjx" path="res://user_interface/hot_bar.tscn" id="27_40rgy"]
+[ext_resource type="Resource" uid="uid://hcx5dondmwne" path="res://Enemies/Enemy_Types_V2/black5.tres" id="27_qm0yj"]
+[ext_resource type="Resource" uid="uid://26ijyp15gjbq" path="res://Enemies/Enemy_Types_V2/red5.tres" id="28_i6fsg"]
 [ext_resource type="Shader" uid="uid://cb3xbdufad64w" path="res://Shaders/shockwave.gdshader" id="28_jleb8"]
+[ext_resource type="Resource" uid="uid://dj1p78s3n7d5x" path="res://Enemies/Enemy_Types_V2/green5.tres" id="29_fjstp"]
 [ext_resource type="PackedScene" uid="uid://c60diwu1u2ajo" path="res://user_interface/ability_bar.tscn" id="29_ne86t"]
 [ext_resource type="PackedScene" uid="uid://qyff8bnvs86u" path="res://user_interface/wasted.tscn" id="30_8id1w"]
+[ext_resource type="Resource" uid="uid://d1b6fvf1hq0ox" path="res://Enemies/Enemy_Types_V2/black6.tres" id="30_175my"]
 [ext_resource type="PackedScene" uid="uid://vn1chcv7m0l" path="res://user_interface/spawn_ui.tscn" id="30_lc8nd"]
 [ext_resource type="PackedScene" uid="uid://6du57t1guvah" path="res://user_interface/pause_button.tscn" id="30_xqk4e"]
+[ext_resource type="Resource" uid="uid://b4i1feyc7i6rn" path="res://Enemies/Enemy_Types_V2/red6.tres" id="31_mepdn"]
+[ext_resource type="Resource" uid="uid://pw8nx6pgbnfp" path="res://Enemies/Enemy_Types_V2/green6.tres" id="32_8g1qq"]
+[ext_resource type="Resource" uid="uid://chxm8gfgcxgq1" path="res://Enemies/Enemy_Types_V2/black7.tres" id="33_mpgm7"]
 [ext_resource type="PackedScene" uid="uid://bewlchyk4ofw4" path="res://Enemies/dash_isometric_enemy.tscn" id="33_oqk4o"]
+[ext_resource type="Resource" uid="uid://b18xxrrikcfu4" path="res://Enemies/Enemy_Types_V2/red7.tres" id="34_oxt6w"]
+[ext_resource type="Resource" uid="uid://bqlglr0nwm6v3" path="res://Enemies/Enemy_Types_V2/green7.tres" id="35_c2oyx"]
 [ext_resource type="Script" uid="uid://bidsifwynuixy" path="res://Scenes/randomised_spawning.gd" id="38_urm01"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ne86t"]
@@ -200,7 +209,7 @@ script = ExtResource("5_yj477")
 basic_enemy_scene = ExtResource("14_dlawb")
 dash_enemy_scene = ExtResource("33_oqk4o")
 projectile_enemy_scene = ExtResource("13_gyupm")
-enemy_types = Array[Resource]([ExtResource("9_yj477"), ExtResource("10_oqk4o"), ExtResource("11_4lvfn"), ExtResource("12_bntkt"), ExtResource("13_8id1w"), ExtResource("14_urm01"), ExtResource("15_urm01"), ExtResource("16_wnblm"), ExtResource("17_j2nir"), ExtResource("18_bc4km"), ExtResource("19_pd4ol"), ExtResource("20_7mlm2"), ExtResource("21_43eng"), ExtResource("22_oro4v"), ExtResource("23_s4omk"), ExtResource("24_j36ft"), ExtResource("25_3vkk7"), ExtResource("26_8udth")])
+enemy_types = Array[Resource]([ExtResource("9_yj477"), ExtResource("10_oqk4o"), ExtResource("11_4lvfn"), ExtResource("12_bntkt"), ExtResource("13_8id1w"), ExtResource("14_urm01"), ExtResource("15_urm01"), ExtResource("16_wnblm"), ExtResource("17_j2nir"), ExtResource("18_bc4km"), ExtResource("19_pd4ol"), ExtResource("20_7mlm2"), ExtResource("21_43eng"), ExtResource("22_oro4v"), ExtResource("23_s4omk"), ExtResource("24_j36ft"), ExtResource("25_3vkk7"), ExtResource("26_8udth"), ExtResource("27_qm0yj"), ExtResource("28_i6fsg"), ExtResource("29_fjstp"), ExtResource("30_175my"), ExtResource("31_mepdn"), ExtResource("32_8g1qq"), ExtResource("33_mpgm7"), ExtResource("34_oxt6w"), ExtResource("35_c2oyx")])
 
 [node name="TimeCycle" type="CanvasModulate" parent="."]
 unique_name_in_owner = true
@@ -273,6 +282,7 @@ texture = ExtResource("6_0lw5m")
 visible = false
 
 [node name="PauseButton" parent="UI" instance=ExtResource("30_xqk4e")]
+layer = 7
 
 [node name="DriftBar" parent="UI" instance=ExtResource("26_40rgy")]
 visible = false
@@ -283,7 +293,7 @@ mouse_filter = 1
 [node name="AbilityBar" parent="UI" instance=ExtResource("29_ne86t")]
 
 [node name="PauseMenu" parent="UI" instance=ExtResource("26_veftd")]
-layer = 3
+layer = 6
 
 [node name="ScreenTransition" type="CanvasLayer" parent="UI"]
 layer = 11

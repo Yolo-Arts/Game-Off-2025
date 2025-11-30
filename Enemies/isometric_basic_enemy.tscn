@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://h0hdesj12ofh"]
+[gd_scene load_steps=40 format=3 uid="uid://h0hdesj12ofh"]
 
 [ext_resource type="Script" uid="uid://62nijy3yjwul" path="res://Enemies/basic_enemy_isometric.gd" id="1_guxgk"]
 [ext_resource type="Resource" uid="uid://c16fa7wruxfw0" path="res://Enemies/Enemy_Types_V2/black1.tres" id="2_ql4d2"]
@@ -20,6 +20,18 @@
 [ext_resource type="Resource" uid="uid://cooti224hqwf1" path="res://Enemies/Enemy_Types_V2/orange1.tres" id="14_uxjoj"]
 [ext_resource type="Resource" uid="uid://brkxnwahwinvv" path="res://Enemies/Enemy_Types_V2/orange2.tres" id="15_5orv6"]
 [ext_resource type="Resource" uid="uid://dt4x2qqrq61d0" path="res://Enemies/Enemy_Types_V2/orange3.tres" id="16_uwfaq"]
+[ext_resource type="Resource" uid="uid://ircg607glgyy" path="res://Enemies/Enemy_Types_V2/black4.tres" id="17_uxjoj"]
+[ext_resource type="Resource" uid="uid://djp06rprn44c5" path="res://Enemies/Enemy_Types_V2/red4.tres" id="18_5orv6"]
+[ext_resource type="Resource" uid="uid://n23ac42qqysj" path="res://Enemies/Enemy_Types_V2/green4.tres" id="19_uwfaq"]
+[ext_resource type="Resource" uid="uid://hcx5dondmwne" path="res://Enemies/Enemy_Types_V2/black5.tres" id="20_cmyqy"]
+[ext_resource type="Resource" uid="uid://26ijyp15gjbq" path="res://Enemies/Enemy_Types_V2/red5.tres" id="21_r54yv"]
+[ext_resource type="Resource" uid="uid://dj1p78s3n7d5x" path="res://Enemies/Enemy_Types_V2/green5.tres" id="22_w5ay4"]
+[ext_resource type="Resource" uid="uid://d1b6fvf1hq0ox" path="res://Enemies/Enemy_Types_V2/black6.tres" id="23_x2r6d"]
+[ext_resource type="Resource" uid="uid://b4i1feyc7i6rn" path="res://Enemies/Enemy_Types_V2/red6.tres" id="24_5xan4"]
+[ext_resource type="Resource" uid="uid://pw8nx6pgbnfp" path="res://Enemies/Enemy_Types_V2/green6.tres" id="25_u65iu"]
+[ext_resource type="Resource" uid="uid://chxm8gfgcxgq1" path="res://Enemies/Enemy_Types_V2/black7.tres" id="26_x2r6d"]
+[ext_resource type="Resource" uid="uid://b18xxrrikcfu4" path="res://Enemies/Enemy_Types_V2/red7.tres" id="27_5xan4"]
+[ext_resource type="Resource" uid="uid://bqlglr0nwm6v3" path="res://Enemies/Enemy_Types_V2/green7.tres" id="28_u65iu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qenpu"]
 shader = ExtResource("5_r2gfe")
@@ -80,7 +92,7 @@ z_index = 1
 collision_layer = 34
 collision_mask = 46
 script = ExtResource("1_guxgk")
-enemy_types = Array[Resource]([ExtResource("2_ql4d2"), ExtResource("3_sak5g"), ExtResource("4_gwrt0"), ExtResource("5_7g3qa"), ExtResource("6_q2y58"), ExtResource("7_vf0nd"), ExtResource("8_r2gfe"), ExtResource("9_mm0ux"), ExtResource("10_ovsua"), ExtResource("11_ki11w"), ExtResource("12_oohoa"), ExtResource("13_63arv"), ExtResource("14_uxjoj"), ExtResource("15_5orv6"), ExtResource("16_uwfaq")])
+enemy_types = Array[Resource]([ExtResource("2_ql4d2"), ExtResource("3_sak5g"), ExtResource("4_gwrt0"), ExtResource("5_7g3qa"), ExtResource("6_q2y58"), ExtResource("7_vf0nd"), ExtResource("8_r2gfe"), ExtResource("9_mm0ux"), ExtResource("10_ovsua"), ExtResource("11_ki11w"), ExtResource("12_oohoa"), ExtResource("13_63arv"), ExtResource("14_uxjoj"), ExtResource("15_5orv6"), ExtResource("16_uwfaq"), ExtResource("17_uxjoj"), ExtResource("18_5orv6"), ExtResource("19_uwfaq"), ExtResource("20_cmyqy"), ExtResource("21_r54yv"), ExtResource("22_w5ay4"), ExtResource("23_x2r6d"), ExtResource("24_5xan4"), ExtResource("25_u65iu"), ExtResource("26_x2r6d"), ExtResource("27_5xan4"), ExtResource("28_u65iu")])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_qenpu")

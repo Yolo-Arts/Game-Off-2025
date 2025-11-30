@@ -250,7 +250,7 @@ func setup_wave_for_difficulty(current_difficulty: int):
 		
 		25:
 			setup_bounty_wave(star_5)
-			enemy_table.remove_item(14)
+			#enemy_table.remove_item(14)
 			enemy_table.add_item(15, 15) # Black4
 			enemy_table.add_item(16, 15) # Red4
 			enemy_table.add_item(17, 15) # Green4
@@ -258,6 +258,27 @@ func setup_wave_for_difficulty(current_difficulty: int):
 			wave_length = 60
 			enemy_count = 60
 			spawn_interval = 1.0
+		28:
+			enemy_table.remove_item(15) 
+			enemy_table.remove_item(16) 
+			enemy_table.remove_item(17) 
+			enemy_table.add_item(18, 15) # Black5
+			enemy_table.add_item(19, 15) # Red5
+			enemy_table.add_item(20, 15) # Green5
+		30:
+			enemy_table.remove_item(18) 
+			enemy_table.remove_item(19) 
+			enemy_table.remove_item(20) 
+			enemy_table.add_item(21, 15) # Black6
+			enemy_table.add_item(22, 15) # Red6
+			enemy_table.add_item(23, 15) # Green6
+		33:
+			enemy_table.remove_item(21) 
+			enemy_table.remove_item(22) 
+			enemy_table.remove_item(23) 
+			enemy_table.add_item(24, 15) # Black6
+			enemy_table.add_item(25, 15) # Red6
+			enemy_table.add_item(26, 15) # Green6
 		_:
 			enemy_count += 2
 			wave_length += 2.0
