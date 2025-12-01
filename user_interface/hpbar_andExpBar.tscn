@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dgatlx3brqvmv"]
+[gd_scene load_steps=16 format=3 uid="uid://dgatlx3brqvmv"]
 
 [ext_resource type="Texture2D" uid="uid://qm52ibs46mas" path="res://Assets/RetroInventoryScaled3X/Health_04.png" id="1_doihw"]
 [ext_resource type="Script" uid="uid://denloirrie5u0" path="res://user_interface/hpbar.gd" id="1_hv2af"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://d0ae7d0gcekk" path="res://Assets/RetroInventoryScaled3X/Health_04_Bar06.png" id="5_xeyhu"]
 [ext_resource type="Script" uid="uid://b4hwrp8guiq8a" path="res://addons/shaker/shaker.gd" id="7_2pbg6"]
 [ext_resource type="Texture2D" uid="uid://bopex10lmjama" path="res://Assets/white_square.png" id="7_ce3fm"]
+[ext_resource type="Shader" uid="uid://p2wayu5l5hwl" path="res://Shaders/vignette.gdshader" id="9_63ruo"]
 
 [sub_resource type="Gradient" id="Gradient_63ruo"]
 
@@ -34,6 +35,12 @@ scale_max = 0.5
 scale_curve = SubResource("CurveTexture_ot78t")
 color = Color(1, 0.23137255, 0.09803922, 1)
 color_ramp = SubResource("GradientTexture1D_gfbru")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gfbru"]
+shader = ExtResource("9_63ruo")
+shader_parameter/vignette_intensity = 0.59
+shader_parameter/vignette_opacity = 0.5
+shader_parameter/vignette_rgb = Color(0.3828125, 0.0463562, 0.0463562, 1)
 
 [node name="HPbarExperienceBar" type="CanvasLayer"]
 script = ExtResource("1_hv2af")
@@ -107,3 +114,19 @@ max_value = 1.5
 constant = true
 duration = 0.5
 metadata/_custom_type_script = "uid://b4hwrp8guiq8a"
+
+[node name="lowHPVignette" type="ColorRect" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_gfbru")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="playheartBeat" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+ignore_time_scale = true
+
+[connection signal="timeout" from="playheartBeat" to="." method="_on_playheart_beat_timeout"]

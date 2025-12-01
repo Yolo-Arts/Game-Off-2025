@@ -14,6 +14,11 @@ extends Node
 @onready var remove_cassette: AudioStreamPlayer = $Remove_Cassette
 @onready var music_stop: AudioStreamPlayer = $Music_Stop
 @onready var score_hit: AudioStreamPlayer = $Score_Hit
+@onready var heart_beat: AudioStreamPlayer = $HeartBeat
+@onready var enemy_cannon_ball_hit_but_player_is_drifting: AudioStreamPlayer = $EnemyCannonBallHitButPlayerIsDrifting
+@onready var war_horn: AudioStreamPlayer = $WarHorn
+@onready var repair_boat: AudioStreamPlayer = $RepairBoat
+
 
 func play_CannonFire():
 	cannon_fire.play()
@@ -64,9 +69,39 @@ func stop_bgm():
 	AudioServer.get_bus_effect(bus_index, 0)
 	AudioServer.set_bus_effect_enabled(bus_index, 0, true)
 
+
+
+func apply_bgm_filter():
+	var bus_index = AudioServer.get_bus_index("BGM")
+	AudioServer.get_bus_effect(bus_index, 1)
+	AudioServer.set_bus_effect_enabled(bus_index, 1, true)
+
+func remove_bgm_filter():
+	var bus_index = AudioServer.get_bus_index("BGM")
+	AudioServer.get_bus_effect(bus_index, 1)
+	AudioServer.set_bus_effect_enabled(bus_index, 1, false)
+
 func play_lose_game():
 	bgm_1.stream_paused = true
 	music_stop.play()
 
 func play_scoreHit():
 	score_hit.play()
+	
+
+func start_heartBeat():
+	heart_beat.play()
+	heart_beat.stream_paused = false
+
+func stop_heartBeat():
+	heart_beat.stream_paused = true
+	
+
+func play_enemyCannonBallHitButPlayerIsDrifting():
+	enemy_cannon_ball_hit_but_player_is_drifting.play()
+
+func play_warHorn():
+	war_horn.play()
+
+func play_repairBoat():
+	repair_boat.play()

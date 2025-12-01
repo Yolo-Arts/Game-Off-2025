@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://cjqdhk1yxoc0h"]
+[gd_scene load_steps=44 format=3 uid="uid://cjqdhk1yxoc0h"]
 
 [ext_resource type="Script" uid="uid://cy5j6mtf0cjtq" path="res://sounds/sound_manager.gd" id="1_a1hhe"]
 [ext_resource type="AudioStream" uid="uid://cwde2y4bxpmji" path="res://sounds/death_explosion1.sfxr" id="1_f05am"]
@@ -28,6 +28,10 @@
 [ext_resource type="AudioStream" uid="uid://catemaelxarrq" path="res://sounds/upgrades_SFX/LOAD_CASSETTE_08.wav" id="25_eyuff"]
 [ext_resource type="AudioStream" uid="uid://d0sne1g7v6m28" path="res://sounds/upgrades_SFX/REMOVE_CASSETTE_07.wav" id="26_w7ljr"]
 [ext_resource type="AudioStream" uid="uid://bmgudkvv87eoa" path="res://sounds/scoreboard/score_hit.sfxr" id="28_u5kly"]
+[ext_resource type="AudioStream" uid="uid://b5bvystflt620" path="res://sounds/heartbeat-single-383748.mp3" id="29_iql4y"]
+[ext_resource type="AudioStream" uid="uid://cptryce1cd4df" path="res://sounds/enemy_cannonball_hit_but_player_is_drifting.sfxr" id="30_0ep21"]
+[ext_resource type="AudioStream" uid="uid://cn5ey7ynpa16k" path="res://sounds/war-horn-sfx-319881.mp3" id="31_jue7o"]
+[ext_resource type="AudioStream" uid="uid://deyo23won1d0h" path="res://sounds/repair/repair_boat.mp3" id="32_vux3y"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_8a8qv"]
 random_pitch = 1.51
@@ -90,6 +94,15 @@ random_pitch = 1.2
 streams_count = 1
 stream_0/stream = ExtResource("28_u5kly")
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_0ep21"]
+random_volume_offset_db = 1.72
+streams_count = 1
+stream_0/stream = ExtResource("29_iql4y")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_jue7o"]
+streams_count = 1
+stream_0/stream = ExtResource("30_0ep21")
+
 [node name="SoundManager" type="Node"]
 process_mode = 3
 script = ExtResource("1_a1hhe")
@@ -109,7 +122,7 @@ volume_db = -3.276
 
 [node name="PlayerHurtSFX" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_0v1q7")
-volume_db = -4.913
+volume_db = -6.564
 
 [node name="UI_SFX" type="Node" parent="."]
 
@@ -153,3 +166,20 @@ bus = &"SFX"
 
 [node name="Score_Hit" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_iql4y")
+
+[node name="HeartBeat" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_0ep21")
+volume_db = 5.2
+bus = &"HeartBeat"
+
+[node name="EnemyCannonBallHitButPlayerIsDrifting" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_jue7o")
+pitch_scale = 1.1
+
+[node name="WarHorn" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("31_jue7o")
+bus = &"WarHorn"
+
+[node name="RepairBoat" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("32_vux3y")
+bus = &"SFX"

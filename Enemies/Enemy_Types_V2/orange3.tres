@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="enemy_type" load_steps=3 format=3 uid="uid://dt4x2qqrq61d0"]
+
+[ext_resource type="Script" uid="uid://bujng151akkyd" path="res://Resources/enemy_type.gd" id="1_c0o31"]
+[ext_resource type="Texture2D" uid="uid://bv3fyys57wxdx" path="res://Enemies/Sprites/enemy_ship_orange_spritesheet.png" id="2_qiduq"]
+
+[resource]
+script = ExtResource("1_c0o31")
+texture = ExtResource("2_qiduq")
+speed = 900.0
+health = 77.0
+can_shoot = true
+shoot_cooldown = 6.0
+shoot_damage = 10.0
+shoot_range = 800.0
+metadata/_custom_type_script = "uid://bujng151akkyd"

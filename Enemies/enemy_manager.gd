@@ -25,6 +25,14 @@ var rng = RandomNumberGenerator.new()
 var enemy_count = 10
 var base_spawn_time = 10.0
 var spawn_interval: float = 2
+@onready var start_container: HBoxContainer = %StartContainer
+@onready var star_1: TextureRect = %Star1
+@onready var star_2: TextureRect = %Star2
+@onready var star_3: TextureRect = %Star3
+@onready var star_4: TextureRect = %Star4
+@onready var star_5: TextureRect = %Star5
+
+@onready var next_wave_label: Label = $WaveUI/DifficultyIncreased/NextWaveLabel
 
 
 # wave tracking
@@ -36,6 +44,9 @@ func _on_isometric_main_begin_game() -> void:
 	start_game()
 
 func _ready() -> void:
+	next_wave_label.visible = false
+	for i in start_container.get_children():
+		i.visible = false
 	enemy_table.add_item(0, 10)
 
 func start_game():
@@ -91,54 +102,205 @@ func spawn():
 
 func setup_wave_for_difficulty(current_difficulty: int):
 	match current_difficulty:
+		
+		#region black boats
 		0:
-			enemy_table.add_item(6, 15) # Projectile enemy (orange)
+			SoundManager.play_warHorn()
+			enemy_count = 5
+			spawn_interval = 3
+			wave_length = 20
+		1:
+			enemy_table.remove_item(0)
+			enemy_table.add_item(1, 15)
+			enemy_count = 7
+			spawn_interval = 2
+			wave_length = 20
+		2:
+			enemy_table.remove_item(1)
+			enemy_table.add_item(2, 15) 
 			enemy_count = 15
 			spawn_interval = 2.0
 			wave_length = 30
-		1:
+			
+		3, 4:
 			enemy_count = 15
-			spawn_interval = 1.5
+			spawn_interval = 1.8
 			wave_length = 20
-			
-		2, 3, 4, 5:
-			enemy_table.add_item(1, 15) # Add red boat
-			enemy_count = 5
-			spawn_interval = 0.8
-			wave_length = 10
+		#endregion
+		
+		#region red boats
+		5:
+			setup_bounty_wave(star_1)
+			enemy_table.remove_item(2)
+			enemy_table.add_item(3, 15) # Add red boat
+			enemy_count = 10
+			spawn_interval = 2
+			wave_length = 20
 		6:
-			enemy_table.add_item(5, 15) # Dash enemy (purple)
-			enemy_count = 18
-			spawn_interval = 0.2
-			wave_length = 30
-			
-		7, 8, 9:
-			enemy_table.remove_item(0) # Remove black boat
-			enemy_table.add_item(2, 20)  # Add green boat
-			enemy_count = 25
+			enemy_count = 7
+			spawn_interval = 1.7
+			wave_length = 15
+		7:
+			enemy_table.remove_item(3)
+			enemy_table.add_item(4, 15)
+			enemy_count = 7
+			spawn_interval = 1.7
+			wave_length = 15
+		8:
+			enemy_count = 7
+			spawn_interval = 1.7
+			wave_length = 15
+		9:
+			enemy_table.remove_item(4)
+			enemy_table.add_item(5, 15)
+			enemy_count = 10
 			spawn_interval = 1.0
-			
+			wave_length = 15
+		#endregion
+		
+		#region Green Boat
 		10:
-			enemy_table.remove_item(1) 
-			enemy_table.add_item(3, 10) 
-			enemy_count = 25
-			spawn_interval = 1
-			wave_length = 25
-		11, 12, 13:
-			enemy_count = 25
-			spawn_interval = 1
-			wave_length = 25
-		14, 15, 16, 17:
-			enemy_table.add_item(4, 15) # purple non dash
-			enemy_count = 22
-			spawn_interval = 0.6
-			
-		18, 19, 20:
-			enemy_count = 25
-			spawn_interval = 0.5
+			setup_bounty_wave(star_2)
+			enemy_table.add_item(6, 15) # Add red boat
+			enemy_count = 5
+			spawn_interval = 2
+			wave_length = 15
+		11:
+			enemy_table.remove_item(5)
+			enemy_count = 5
+			spawn_interval = 1.7
+			wave_length = 15
+		12:
+			enemy_table.remove_item(6)
+			enemy_table.add_item(7, 15)
+			enemy_count = 7
+			spawn_interval = 1.7
+			wave_length = 15
+		13:
+			enemy_count = 7
+			spawn_interval = 1.7
+			wave_length = 15
+		14:
+			enemy_table.remove_item(7)
+			enemy_table.add_item(8, 15)
+			enemy_count = 10
+			spawn_interval = 1.0
+			wave_length = 15
+		#endregion
+		
+		#region Purple (Dash) Boat
+		15:
+			setup_bounty_wave(star_3)
+			enemy_table.add_item(9, 15) # Purple
+			enemy_count = 7
+			spawn_interval = 2
+			wave_length = 15
+		16:
+			enemy_table.remove_item(8)
+			enemy_count = 7
+			spawn_interval = 1.7
+			wave_length = 15
+		17:
+			enemy_table.remove_item(9)
+			enemy_table.add_item(10, 15)
+			enemy_count = 7
+			spawn_interval = 1.7
+			wave_length = 15
+		18:
+			enemy_count = 7
+			spawn_interval = 1.7
+			wave_length = 15
+		19:
+			enemy_table.remove_item(10)
+			enemy_table.add_item(11, 15)
+			enemy_count = 10
+			spawn_interval = 1.0
+			wave_length = 15
+		#endregion
+		
+		#region Orange (Projectile) Boat
+		20:
+			setup_bounty_wave(star_4)
+			enemy_table.remove_item(11)
+			enemy_table.add_item(12, 15) # Orange
+			enemy_count = 7
+			spawn_interval = 2
+			wave_length = 15
+		21:
+			enemy_count = 5
+			spawn_interval = 1.7
+			wave_length = 15
+		22:
+			enemy_table.remove_item(12)
+			enemy_table.add_item(13, 15)
+			enemy_count = 7
+			spawn_interval = 1.7
+			wave_length = 15
+		23:
+			enemy_count = 7
+			spawn_interval = 1.7
+			wave_length = 15
+		24:
+			enemy_table.remove_item(13)
+			enemy_table.add_item(14, 15)
+			enemy_count = 10
+			spawn_interval = 1.0
+			wave_length = 15
+		#endregion
+		
+		25:
+			setup_bounty_wave(star_5)
+			#enemy_table.remove_item(14)
+			enemy_table.add_item(15, 15) # Black4
+			enemy_table.add_item(16, 15) # Red4
+			enemy_table.add_item(17, 15) # Green4
+			enemy_table.add_item(11, 15) # Purple
+			wave_length = 60
+			enemy_count = 60
+			spawn_interval = 1.0
+		28:
+			enemy_table.remove_item(15) 
+			enemy_table.remove_item(16) 
+			enemy_table.remove_item(17) 
+			enemy_table.add_item(18, 15) # Black5
+			enemy_table.add_item(19, 15) # Red5
+			enemy_table.add_item(20, 15) # Green5
+		30:
+			enemy_table.remove_item(18) 
+			enemy_table.remove_item(19) 
+			enemy_table.remove_item(20) 
+			enemy_table.add_item(21, 15) # Black6
+			enemy_table.add_item(22, 15) # Red6
+			enemy_table.add_item(23, 15) # Green6
+		33:
+			enemy_table.remove_item(21) 
+			enemy_table.remove_item(22) 
+			enemy_table.remove_item(23) 
+			enemy_table.add_item(24, 15) # Black6
+			enemy_table.add_item(25, 15) # Red6
+			enemy_table.add_item(26, 15) # Green6
 		_:
 			enemy_count += 2
-			spawn_interval = max(0.4, spawn_interval - 0.05)
+			wave_length += 2.0
+			spawn_interval -= 0.05
+
+func setup_bounty_wave(star_node: Control):
+	star_node.visible = true
+	Globals.update_score("BOUNTY_POINT")
+	show_next_wave_text() 
+
+func show_next_wave_text():
+	SoundManager.play_warHorn()
+	next_wave_label.visible = true
+	var tween = create_tween()
+	tween.tween_property(next_wave_label, "modulate:a", 1.0, 0.5).from(0.0)
+	tween.parallel().tween_property(next_wave_label, "position:y", 120, 1.0).from(-get_viewport().size.y)\
+	.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_interval(5.0)
+	tween.tween_property(next_wave_label, "modulate:a", 0.0, 1.0).from(1.0)
+	await get_tree().create_timer(7.0).timeout
+	next_wave_label.visible = false
+
 
 func _on_wave_timer_timeout():
 	wave_timer.stop() 

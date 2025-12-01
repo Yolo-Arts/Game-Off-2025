@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://dll8qkc2kpf2g"]
+
+[ext_resource type="Script" uid="uid://birbod3qq2cwo" path="res://loading_screen.gd" id="1_yly58"]
+[ext_resource type="Theme" uid="uid://b70rftml1sway" path="res://user_interface/themev3.tres" id="2_sp35x"]
+
+[node name="LoadingScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yly58")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.03529412, 0.12941177, 0.19215687, 1)
+
+[node name="LoadingPercent" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 59.0
+offset_top = -117.0
+offset_right = 239.0
+offset_bottom = -39.0
+grow_vertical = 0
+theme = ExtResource("2_sp35x")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 48
+text = "TEST"

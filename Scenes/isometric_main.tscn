@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://b3imdjb1so30p"]
+[gd_scene load_steps=68 format=3 uid="uid://b3imdjb1so30p"]
 
 [ext_resource type="Script" uid="uid://wjiwydm880cx" path="res://Scenes/isometric_main.gd" id="1_1enjl"]
 [ext_resource type="PackedScene" uid="uid://cbag74ryx0pu8" path="res://Scenes/player_manager.tscn" id="2_dlawb"]
@@ -9,32 +9,52 @@
 [ext_resource type="PackedScene" uid="uid://deqnmjpt3dxgb" path="res://Player/player_isometric.tscn" id="6_wgbrh"]
 [ext_resource type="PackedScene" uid="uid://brjyeo32vgcfh" path="res://Enemies/enemy_manager.tscn" id="7_0lw5m"]
 [ext_resource type="PackedScene" uid="uid://dgraqldufn15t" path="res://user_interface/wave_and_time_ui.tscn" id="8_gpok4"]
+[ext_resource type="Resource" uid="uid://c16fa7wruxfw0" path="res://Enemies/Enemy_Types_V2/black1.tres" id="9_yj477"]
 [ext_resource type="PackedScene" uid="uid://47p0cviqpnrv" path="res://user_interface/wave_time_manager.tscn" id="9_ynplv"]
-[ext_resource type="Resource" uid="uid://d1qpml40osw4y" path="res://Enemies/Enemy_Types/black_isometric.tres" id="9_yws0v"]
-[ext_resource type="Resource" uid="uid://3bjbysn0exty" path="res://Enemies/Enemy_Types/red_isometric.tres" id="10_dlawb"]
+[ext_resource type="Resource" uid="uid://cbj11m3tabnsn" path="res://Enemies/Enemy_Types_V2/black2.tres" id="10_oqk4o"]
+[ext_resource type="Resource" uid="uid://dxf0tuhbavkpm" path="res://Enemies/Enemy_Types_V2/black3.tres" id="11_4lvfn"]
+[ext_resource type="Resource" uid="uid://ck4phebogiii" path="res://Enemies/Enemy_Types_V2/red1.tres" id="12_bntkt"]
+[ext_resource type="Resource" uid="uid://ccelj202yy21h" path="res://Enemies/Enemy_Types_V2/red2.tres" id="13_8id1w"]
 [ext_resource type="PackedScene" uid="uid://bxgdqokymc1io" path="res://Enemies/projectile_isometric_enemy.tscn" id="13_gyupm"]
 [ext_resource type="PackedScene" uid="uid://h0hdesj12ofh" path="res://Enemies/isometric_basic_enemy.tscn" id="14_dlawb"]
-[ext_resource type="Resource" uid="uid://dm54cgwnfqywy" path="res://Enemies/Enemy_Types/green_isometric.tres" id="14_ga6nx"]
 [ext_resource type="PackedScene" uid="uid://d38tjnetmpjft" path="res://user_interface/upgrade_menu.tscn" id="14_gvepe"]
-[ext_resource type="Resource" uid="uid://svmp2d2l0to4" path="res://Enemies/Enemy_Types/purple_isometric.tres" id="15_2y55o"]
+[ext_resource type="Resource" uid="uid://brkc04hbghq7o" path="res://Enemies/Enemy_Types_V2/red3.tres" id="14_urm01"]
 [ext_resource type="PackedScene" uid="uid://cwwekbcfo4hgu" path="res://user_interface/game_over.tscn" id="15_gvepe"]
-[ext_resource type="Resource" uid="uid://bprcgrgyghoih" path="res://Enemies/Enemy_Types/orange_isometric.tres" id="16_dppuq"]
+[ext_resource type="Resource" uid="uid://ca46ld0bcygid" path="res://Enemies/Enemy_Types_V2/green1.tres" id="15_urm01"]
 [ext_resource type="Script" uid="uid://dt41mbv4yvwkl" path="res://Scenes/grayscale.gd" id="16_hvs2a"]
-[ext_resource type="Shader" uid="uid://c3xdyeo558avw" path="res://Shaders/grayscale.gdshader" id="16_ixf2m"]
-[ext_resource type="Resource" uid="uid://ysqdaqmx1hac" path="res://Enemies/AbilityEnemies/dashEnemyIsometric.tres" id="18_4lvfn"]
+[ext_resource type="Shader" path="res://Shaders/grayscale.gdshader" id="16_ixf2m"]
+[ext_resource type="Resource" uid="uid://e4i0c4p3abju" path="res://Enemies/Enemy_Types_V2/green2.tres" id="16_wnblm"]
+[ext_resource type="Resource" uid="uid://3seemy0y72yd" path="res://Enemies/Enemy_Types_V2/green3.tres" id="17_j2nir"]
+[ext_resource type="Resource" uid="uid://cautu3sguecqg" path="res://Enemies/Enemy_Types_V2/purple1.tres" id="18_bc4km"]
 [ext_resource type="Shader" uid="uid://ydw2wifhpp88" path="res://Shaders/screenTransition.gdshader" id="19_b21ex"]
-[ext_resource type="Resource" uid="uid://dnwb10yqffs0m" path="res://Enemies/AbilityEnemies/projectileEnemyIsometric.tres" id="19_bntkt"]
+[ext_resource type="Resource" uid="uid://c0k8vmvwth46o" path="res://Enemies/Enemy_Types_V2/purple2.tres" id="19_pd4ol"]
+[ext_resource type="Resource" uid="uid://clv5sxfrexkkx" path="res://Enemies/Enemy_Types_V2/purple3.tres" id="20_7mlm2"]
 [ext_resource type="Script" uid="uid://3cukdxaftfk6" path="res://Scenes/ui.gd" id="20_xqk4e"]
+[ext_resource type="Resource" uid="uid://cooti224hqwf1" path="res://Enemies/Enemy_Types_V2/orange1.tres" id="21_43eng"]
+[ext_resource type="Resource" uid="uid://brkxnwahwinvv" path="res://Enemies/Enemy_Types_V2/orange2.tres" id="22_oro4v"]
 [ext_resource type="PackedScene" uid="uid://dgatlx3brqvmv" path="res://user_interface/hpbar_andExpBar.tscn" id="22_yj477"]
+[ext_resource type="Resource" uid="uid://dt4x2qqrq61d0" path="res://Enemies/Enemy_Types_V2/orange3.tres" id="23_s4omk"]
+[ext_resource type="Resource" uid="uid://ircg607glgyy" path="res://Enemies/Enemy_Types_V2/black4.tres" id="24_j36ft"]
+[ext_resource type="Resource" uid="uid://djp06rprn44c5" path="res://Enemies/Enemy_Types_V2/red4.tres" id="25_3vkk7"]
+[ext_resource type="Resource" uid="uid://n23ac42qqysj" path="res://Enemies/Enemy_Types_V2/green4.tres" id="26_8udth"]
 [ext_resource type="PackedScene" uid="uid://br81uexsi3und" path="res://user_interface/drift_bar.tscn" id="26_40rgy"]
 [ext_resource type="PackedScene" uid="uid://dn75ntkbbgxb2" path="res://user_interface/pause_menu.tscn" id="26_veftd"]
 [ext_resource type="PackedScene" uid="uid://clpfc5m24onjx" path="res://user_interface/hot_bar.tscn" id="27_40rgy"]
+[ext_resource type="Resource" uid="uid://hcx5dondmwne" path="res://Enemies/Enemy_Types_V2/black5.tres" id="27_qm0yj"]
+[ext_resource type="Resource" uid="uid://26ijyp15gjbq" path="res://Enemies/Enemy_Types_V2/red5.tres" id="28_i6fsg"]
 [ext_resource type="Shader" uid="uid://cb3xbdufad64w" path="res://Shaders/shockwave.gdshader" id="28_jleb8"]
+[ext_resource type="Resource" uid="uid://dj1p78s3n7d5x" path="res://Enemies/Enemy_Types_V2/green5.tres" id="29_fjstp"]
 [ext_resource type="PackedScene" uid="uid://c60diwu1u2ajo" path="res://user_interface/ability_bar.tscn" id="29_ne86t"]
 [ext_resource type="PackedScene" uid="uid://qyff8bnvs86u" path="res://user_interface/wasted.tscn" id="30_8id1w"]
+[ext_resource type="Resource" uid="uid://d1b6fvf1hq0ox" path="res://Enemies/Enemy_Types_V2/black6.tres" id="30_175my"]
 [ext_resource type="PackedScene" uid="uid://vn1chcv7m0l" path="res://user_interface/spawn_ui.tscn" id="30_lc8nd"]
 [ext_resource type="PackedScene" uid="uid://6du57t1guvah" path="res://user_interface/pause_button.tscn" id="30_xqk4e"]
+[ext_resource type="Resource" uid="uid://b4i1feyc7i6rn" path="res://Enemies/Enemy_Types_V2/red6.tres" id="31_mepdn"]
+[ext_resource type="Resource" uid="uid://pw8nx6pgbnfp" path="res://Enemies/Enemy_Types_V2/green6.tres" id="32_8g1qq"]
+[ext_resource type="Resource" uid="uid://chxm8gfgcxgq1" path="res://Enemies/Enemy_Types_V2/black7.tres" id="33_mpgm7"]
 [ext_resource type="PackedScene" uid="uid://bewlchyk4ofw4" path="res://Enemies/dash_isometric_enemy.tscn" id="33_oqk4o"]
+[ext_resource type="Resource" uid="uid://b18xxrrikcfu4" path="res://Enemies/Enemy_Types_V2/red7.tres" id="34_oxt6w"]
+[ext_resource type="Resource" uid="uid://bqlglr0nwm6v3" path="res://Enemies/Enemy_Types_V2/green7.tres" id="35_c2oyx"]
 [ext_resource type="Script" uid="uid://bidsifwynuixy" path="res://Scenes/randomised_spawning.gd" id="38_urm01"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ne86t"]
@@ -185,6 +205,12 @@ script = ExtResource("38_urm01")
 [node name="TimeCycleManager" type="Node" parent="."]
 script = ExtResource("5_yj477")
 
+[node name="EnemyManager" parent="." instance=ExtResource("7_0lw5m")]
+basic_enemy_scene = ExtResource("14_dlawb")
+dash_enemy_scene = ExtResource("33_oqk4o")
+projectile_enemy_scene = ExtResource("13_gyupm")
+enemy_types = Array[Resource]([ExtResource("9_yj477"), ExtResource("10_oqk4o"), ExtResource("11_4lvfn"), ExtResource("12_bntkt"), ExtResource("13_8id1w"), ExtResource("14_urm01"), ExtResource("15_urm01"), ExtResource("16_wnblm"), ExtResource("17_j2nir"), ExtResource("18_bc4km"), ExtResource("19_pd4ol"), ExtResource("20_7mlm2"), ExtResource("21_43eng"), ExtResource("22_oro4v"), ExtResource("23_s4omk"), ExtResource("24_j36ft"), ExtResource("25_3vkk7"), ExtResource("26_8udth"), ExtResource("27_qm0yj"), ExtResource("28_i6fsg"), ExtResource("29_fjstp"), ExtResource("30_175my"), ExtResource("31_mepdn"), ExtResource("32_8g1qq"), ExtResource("33_mpgm7"), ExtResource("34_oxt6w"), ExtResource("35_c2oyx")])
+
 [node name="TimeCycle" type="CanvasModulate" parent="."]
 unique_name_in_owner = true
 color = Color(0.40234375, 0.40234375, 0.40234375, 1)
@@ -201,13 +227,8 @@ position = Vector2(-383, -480)
 unique_name_in_owner = true
 zoom = Vector2(0.7, 0.7)
 
-[node name="EnemyManager" parent="." instance=ExtResource("7_0lw5m")]
-basic_enemy_scene = ExtResource("14_dlawb")
-dash_enemy_scene = ExtResource("33_oqk4o")
-projectile_enemy_scene = ExtResource("13_gyupm")
-enemy_types = Array[Resource]([ExtResource("9_yws0v"), ExtResource("10_dlawb"), ExtResource("14_ga6nx"), ExtResource("15_2y55o"), ExtResource("16_dppuq"), ExtResource("18_4lvfn"), ExtResource("19_bntkt")])
-
 [node name="WaveAndTimeUI" parent="." instance=ExtResource("8_gpok4")]
+visible = false
 
 [node name="WaveTimeManager" parent="." instance=ExtResource("9_ynplv")]
 
@@ -261,6 +282,7 @@ texture = ExtResource("6_0lw5m")
 visible = false
 
 [node name="PauseButton" parent="UI" instance=ExtResource("30_xqk4e")]
+layer = 7
 
 [node name="DriftBar" parent="UI" instance=ExtResource("26_40rgy")]
 visible = false
@@ -271,7 +293,7 @@ mouse_filter = 1
 [node name="AbilityBar" parent="UI" instance=ExtResource("29_ne86t")]
 
 [node name="PauseMenu" parent="UI" instance=ExtResource("26_veftd")]
-layer = 3
+layer = 6
 
 [node name="ScreenTransition" type="CanvasLayer" parent="UI"]
 layer = 11
@@ -293,8 +315,8 @@ libraries = {
 
 [node name="SpawnUI" parent="." instance=ExtResource("30_lc8nd")]
 
-[connection signal="begin_game" from="." to="player_isometric" method="_on_isometric_main_begin_game"]
 [connection signal="begin_game" from="." to="EnemyManager" method="_on_isometric_main_begin_game"]
+[connection signal="begin_game" from="." to="player_isometric" method="_on_isometric_main_begin_game"]
 [connection signal="begin_game" from="." to="WaveTimeManager" method="_on_isometric_main_begin_game"]
 [connection signal="begin_game" from="." to="UI" method="_on_isometric_main_begin_game"]
 [connection signal="begin_game" from="." to="SpawnUI" method="_on_isometric_main_begin_game"]
