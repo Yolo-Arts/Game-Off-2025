@@ -12,7 +12,7 @@ func shoot(cannonball_scene: PackedScene, player:Player, isometric = false, scal
 	var bullet_instance = upgraded_cannon_ball
 	var bullet_instance2 = upgraded_cannon_ball2
 	
-	print(bullet_instance.get_cannonballs())
+	#print(bullet_instance.get_cannonballs())
 	
 	#var left_bullets :Array[Cannonball]
 	#var right_bullets :Array[Cannonball]

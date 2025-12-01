@@ -33,7 +33,7 @@ var game_begin = false
 var shockwave_fired = false
 @onready var shoot_cooldown_time = shoot_cooldown.wait_time
 @onready var infinite_ammo_time = 0.05
-@export var laserDamage = 10
+@export var laserDamage = 15
 
 func _ready():
 	get_tree().paused = false
@@ -56,6 +56,7 @@ func magnetic_balls_ability(duration):
 	pass
 
 func Laser_beam_ability(duration):
+	laser_beam.base_damage = laserDamage
 	laser_beam.visible = true
 	laser_beam.monitoring = true
 	await get_tree().create_timer(duration).timeout

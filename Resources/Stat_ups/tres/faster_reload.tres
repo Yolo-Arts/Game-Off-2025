@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="faster_reload" load_steps=3 format=3 uid="uid://drcdgpb75l57j"]
 
 [ext_resource type="Script" uid="uid://bgqw67v6t4oki" path="res://Resources/Stat_ups/Scripts/faster_reload.gd" id="1_74kc2"]
-[ext_resource type="Texture2D" uid="uid://c12v3gr0dt8sm" path="res://icon.svg" id="1_bav8w"]
+[ext_resource type="Texture2D" uid="uid://dyobrtv35yshu" path="res://Assets/skill_icons/fasterReload.png" id="1_bav8w"]
 
 [resource]
 script = ExtResource("1_74kc2")
 image = ExtResource("1_bav8w")
 name = "Faster reload"
 description = "Reload your cannons quicker"
-Weight = 100
+Weight = 3
 is_unique = true
 metadata/_custom_type_script = "uid://bgqw67v6t4oki"

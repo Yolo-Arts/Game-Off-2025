@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="LaserUpgrade" load_steps=3 format=3 uid="uid://0nprdxt3jsv0"]
+
+[ext_resource type="Texture2D" uid="uid://bjtlygpnsc0il" path="res://Assets/skill_icons/LaserUpgrade.png" id="1_uek8k"]
+[ext_resource type="Script" uid="uid://c55c5aqfumug8" path="res://Resources/Stat_ups/Scripts/LaserUpgrade.gd" id="2_1puvu"]
+
+[resource]
+script = ExtResource("2_1puvu")
+image = ExtResource("1_uek8k")
+name = "Powerful beam"
+description = "Increases laser damage by 50%"
+Weight = 3
+metadata/_custom_type_script = "uid://cx0xqtau6rhsj"

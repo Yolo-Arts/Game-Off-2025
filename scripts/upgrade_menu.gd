@@ -89,11 +89,15 @@ func _on_card_selected(upgrade: Statup):
 	Engine.time_scale= 1.0
 	if upgrade.type == "Ability":
 		if upgrade is ShockwaveAbility:
-			print("Selected shockwave! Adding shockwave related upgrades")
+			print("Selected shockwave, Adding shockwave related upgrades")
 			var new_upgrade = load("res://Resources/Stat_ups/tres/ShockwaveDamageUp.tres")
 			stat_up_list.append(new_upgrade)
 			item_table.add_item(new_upgrade, new_upgrade.Weight)
-		
+		if upgrade is Laser_beam:
+			print("Selected laser beam. Adding laserbeam related upgrades")
+			var new_upgrade = load("res://Resources/Stat_ups/tres/laserUpgrade.tres")
+			stat_up_list.append(new_upgrade)
+			item_table.add_item(new_upgrade, new_upgrade.Weight)
 		Globals.unlocked_abilities.append(upgrade)
 		item_table.remove_item(upgrade)
 		if Globals.unlocked_abilities.size() >= MAX_ABILITIES:
