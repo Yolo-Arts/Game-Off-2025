@@ -1,4 +1,4 @@
-[gd_scene load_steps=87 format=3 uid="uid://b3imdjb1so30p"]
+[gd_scene load_steps=88 format=3 uid="uid://b3imdjb1so30p"]
 
 [ext_resource type="Script" uid="uid://wjiwydm880cx" path="res://Scenes/isometric_main.gd" id="1_1enjl"]
 [ext_resource type="PackedScene" uid="uid://cbag74ryx0pu8" path="res://Scenes/player_manager.tscn" id="2_dlawb"]
@@ -75,6 +75,7 @@
 [ext_resource type="Resource" uid="uid://bsct142sn8ywd" path="res://Resources/Bullet types/tres/Double_shot_upgrade.tres" id="56_dpkvq"]
 [ext_resource type="Resource" uid="uid://dnqplp0h5mdo5" path="res://Resources/Bullet types/tres/Lightning_shot.tres" id="57_s7ycg"]
 [ext_resource type="Resource" uid="uid://bcyy17l4c7n1u" path="res://Resources/Stat_ups/tres/Ghost_ship.tres" id="60_s8lhi"]
+[ext_resource type="PackedScene" uid="uid://y1prd0dx6cak" path="res://user_interface/reload_ui.tscn" id="75_mkr30"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ne86t"]
 shader = ExtResource("28_jleb8")
@@ -327,6 +328,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 texture = SubResource("GradientTexture1D_7tq1b")
+
+[node name="ReloadUI" parent="UI" instance=ExtResource("75_mkr30")]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

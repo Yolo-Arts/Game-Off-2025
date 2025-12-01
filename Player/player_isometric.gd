@@ -16,6 +16,7 @@ var isometric_transform: Transform2D
 
 
 const RELOADING = preload("uid://c48542f6xe7d2")
+@onready var reload_ui: Node = $ReloadUI
 
 var can_shoot = true
 var is_drifting = false
@@ -96,9 +97,12 @@ func _input(event):
 			SoundManager.play_CannonFire()
 			shoot()
 			can_shoot = false
+			reload_ui.play()
 			shoot_cooldown.start()
+			SoundManager.play_reload()
 		else:
-			spawn_reload_text()
+			return
+			#spawn_reload_text()
 	if shockwave_fired == true:
 		shockwave_fired = false
 		shockwave_collision_shape.disabled = true
