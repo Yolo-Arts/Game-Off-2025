@@ -6,4 +6,4 @@ func _init() -> void:
 	description = "fire a massive laserbeam from the front of the ship"
 	#Weight = 400
 	type = "Ability"
-	cooldown = 15.0
+	cooldown = 20.0

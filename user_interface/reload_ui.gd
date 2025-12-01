@@ -9,5 +9,10 @@ func _process(delta: float) -> void:
 	var player = get_tree().get_first_node_in_group("player")
 	parent_reload_ui.global_position = player.global_position
 
-func play():
-	animation_player.play("reload")
+func play(target_duration: float):
+	var anim_name = "reload"
+	var anim_length = animation_player.get_animation(anim_name).length
+	var speed_scale = anim_length / target_duration
+	
+	parent_reload_ui.visible = true
+	animation_player.play(anim_name, -1, speed_scale)

@@ -6,6 +6,7 @@
 
 [resource]
 script = ExtResource("1_w631p")
+cooldown = 20.0
 icon = ExtResource("2_iohgi")
 ability_scene = ExtResource("1_iohgi")
 image = ExtResource("2_iohgi")

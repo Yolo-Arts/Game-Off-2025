@@ -1,4 +1,4 @@
-[gd_scene load_steps=87 format=3 uid="uid://b3imdjb1so30p"]
+[gd_scene load_steps=88 format=3 uid="uid://b3imdjb1so30p"]
 
 [ext_resource type="Script" uid="uid://wjiwydm880cx" path="res://Scenes/isometric_main.gd" id="1_1enjl"]
 [ext_resource type="PackedScene" uid="uid://cbag74ryx0pu8" path="res://Scenes/player_manager.tscn" id="2_dlawb"]
@@ -73,6 +73,7 @@
 [ext_resource type="Resource" uid="uid://cf3k7rqex6tj7" path="res://Resources/Stat_ups/tres/Collection_radius_stat_up.tres" id="54_vl7ep"]
 [ext_resource type="Resource" uid="uid://ukshai7h31k5" path="res://Resources/Bullet types/tres/explosive_shot.tres" id="55_o2irs"]
 [ext_resource type="Resource" uid="uid://bsct142sn8ywd" path="res://Resources/Bullet types/tres/Double_shot_upgrade.tres" id="56_dpkvq"]
+[ext_resource type="Resource" uid="uid://drcdgpb75l57j" path="res://Resources/Stat_ups/tres/faster_reload.tres" id="56_mkr30"]
 [ext_resource type="Resource" uid="uid://dnqplp0h5mdo5" path="res://Resources/Bullet types/tres/Lightning_shot.tres" id="57_s7ycg"]
 [ext_resource type="Resource" uid="uid://bcyy17l4c7n1u" path="res://Resources/Stat_ups/tres/Ghost_ship.tres" id="60_s8lhi"]
 
@@ -255,7 +256,7 @@ visible = false
 layer = 11
 
 [node name="Upgrade_Menu" parent="Upgrade_menu_UI" node_paths=PackedStringArray("hotbar") instance=ExtResource("14_gvepe")]
-stat_up_list = Array[ExtResource("42_4h8rn")]([ExtResource("43_dpkvq"), ExtResource("44_mkr30"), ExtResource("45_asrdp"), ExtResource("46_4s77f"), ExtResource("47_stqfi"), ExtResource("46_nj88g"), ExtResource("49_muuxf"), ExtResource("45_4jr33"), ExtResource("52_ms6uj"), ExtResource("54_vl7ep"), ExtResource("55_o2irs"), ExtResource("56_dpkvq"), ExtResource("57_s7ycg"), ExtResource("53_4lfgv"), ExtResource("51_5lwn7"), ExtResource("43_tmf2b"), ExtResource("44_xc7hu"), ExtResource("60_s8lhi")])
+stat_up_list = Array[ExtResource("42_4h8rn")]([ExtResource("43_dpkvq"), ExtResource("44_mkr30"), ExtResource("45_asrdp"), ExtResource("46_4s77f"), ExtResource("47_stqfi"), ExtResource("46_nj88g"), ExtResource("49_muuxf"), ExtResource("45_4jr33"), ExtResource("52_ms6uj"), ExtResource("54_vl7ep"), ExtResource("55_o2irs"), ExtResource("56_dpkvq"), ExtResource("57_s7ycg"), ExtResource("56_mkr30"), ExtResource("53_4lfgv"), ExtResource("51_5lwn7"), ExtResource("43_tmf2b"), ExtResource("44_xc7hu"), ExtResource("60_s8lhi")])
 hotbar = NodePath("../../UI/AbilityBar")
 
 [node name="GameOver" parent="." instance=ExtResource("15_gvepe")]

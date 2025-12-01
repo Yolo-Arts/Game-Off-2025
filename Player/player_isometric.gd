@@ -27,6 +27,7 @@ signal boost
 signal zoom_in
 signal zoom_out
 signal shake_hp_bar
+var infiniteAmmoActive = false
 
 var game_begin = false
 var shockwave_fired = false
@@ -77,7 +78,9 @@ func time_freeze_ability(duration):
 
 func infiniteAmmo_ability(duration):
 	shoot_cooldown.wait_time = infinite_ammo_time
+	infiniteAmmoActive = true
 	await get_tree().create_timer(duration).timeout
+	infiniteAmmoActive = false
 	shoot_cooldown.wait_time = shoot_cooldown_time
 
 func shockwave_ability():
@@ -105,7 +108,8 @@ func _input(event):
 				SoundManager.play_CannonFire()
 				shoot()
 				can_shoot = false
-				reload_ui.play()
+				if !infiniteAmmoActive:
+					reload_ui.play(shoot_cooldown.wait_time)
 				shoot_cooldown.start()
 				SoundManager.play_reload()
 			else:
