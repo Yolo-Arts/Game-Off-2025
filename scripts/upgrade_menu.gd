@@ -41,6 +41,7 @@ func _process(_delta):
 
 func _on_player_level_up():
 	Globals.upgrading = true
+	SoundManager.stop_bgm()
 	SoundManager.play_LevelUp()
 	Engine.time_scale = 0.05
 	
@@ -104,6 +105,7 @@ func _on_card_selected(upgrade: Statup):
 	Globals.upgrading = false
 
 func apply_upgrade(upgrade: Statup):
+	SoundManager.play_bgm()
 	if upgrade is Ability and hotbar:
 		hotbar.unlock_ability(upgrade)
 	else:

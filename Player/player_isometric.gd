@@ -36,7 +36,7 @@ var shockwave_fired = false
 func _ready():
 	get_tree().paused = false
 	Globals.player = self
-	health = 10
+	health = 100
 	#Globals.player_died.connect(dead_player)
 	
 	isometric_transform = Transform2D()
