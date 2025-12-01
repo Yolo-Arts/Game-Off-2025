@@ -1,10 +1,10 @@
-[gd_scene load_steps=68 format=3 uid="uid://b3imdjb1so30p"]
+[gd_scene load_steps=79 format=3 uid="uid://b3imdjb1so30p"]
 
 [ext_resource type="Script" uid="uid://wjiwydm880cx" path="res://Scenes/isometric_main.gd" id="1_1enjl"]
 [ext_resource type="PackedScene" uid="uid://cbag74ryx0pu8" path="res://Scenes/player_manager.tscn" id="2_dlawb"]
 [ext_resource type="PackedScene" uid="uid://2sw5s3fxyqo3" path="res://Scenes/camera_2d.tscn" id="2_pwvqx"]
 [ext_resource type="Script" uid="uid://d0kecd4amk3cw" path="res://Scenes/chunk_loader.gd" id="5_2y55o"]
-[ext_resource type="Script" uid="uid://dih701ldj41ee" path="res://Scenes/time_cycle_manager.gd" id="5_yj477"]
+[ext_resource type="Script" uid="uid://bkq7jmltaqsb6" path="res://Scenes/time_cycle_manager.gd" id="5_yj477"]
 [ext_resource type="Texture2D" uid="uid://c12v3gr0dt8sm" path="res://icon.svg" id="6_0lw5m"]
 [ext_resource type="PackedScene" uid="uid://deqnmjpt3dxgb" path="res://Player/player_isometric.tscn" id="6_wgbrh"]
 [ext_resource type="PackedScene" uid="uid://brjyeo32vgcfh" path="res://Enemies/enemy_manager.tscn" id="7_0lw5m"]
@@ -56,6 +56,17 @@
 [ext_resource type="Resource" uid="uid://b18xxrrikcfu4" path="res://Enemies/Enemy_Types_V2/red7.tres" id="34_oxt6w"]
 [ext_resource type="Resource" uid="uid://bqlglr0nwm6v3" path="res://Enemies/Enemy_Types_V2/green7.tres" id="35_c2oyx"]
 [ext_resource type="Script" uid="uid://bidsifwynuixy" path="res://Scenes/randomised_spawning.gd" id="38_urm01"]
+[ext_resource type="Script" uid="uid://cx0xqtau6rhsj" path="res://Resources/Stat_ups/Scripts/Stat_up.gd" id="42_4h8rn"]
+[ext_resource type="Resource" uid="uid://ccfryxxm40b6l" path="res://Resources/Stat_ups/tres/Boost_Power.tres" id="43_5wn43"]
+[ext_resource type="Resource" uid="uid://cf3k7rqex6tj7" path="res://Resources/Stat_ups/tres/Collection_radius_stat_up.tres" id="44_jea5i"]
+[ext_resource type="Resource" uid="uid://dfjbpgxypkjnl" path="res://Resources/Stat_ups/tres/crows_nest.tres" id="45_cqdm3"]
+[ext_resource type="Resource" uid="uid://drnx6hr8xqkvv" path="res://Resources/Stat_ups/tres/damage_stat_up.tres" id="46_bfbjw"]
+[ext_resource type="Resource" uid="uid://drcdgpb75l57j" path="res://Resources/Stat_ups/tres/faster_reload.tres" id="47_od8nw"]
+[ext_resource type="Resource" uid="uid://bcyy17l4c7n1u" path="res://Resources/Stat_ups/tres/Ghost_ship.tres" id="48_6imdn"]
+[ext_resource type="Resource" uid="uid://dohph3126ka40" path="res://Resources/Stat_ups/tres/Handling_Stat_up.tres" id="49_vwenc"]
+[ext_resource type="Resource" uid="uid://7iejxasil351" path="res://Resources/Stat_ups/tres/Health_stat_up.tres" id="50_dpkvq"]
+[ext_resource type="Resource" uid="uid://7p0pxpacwpao" path="res://Resources/Stat_ups/tres/InfiniteAmmoAbility.tres" id="51_mkr30"]
+[ext_resource type="Resource" uid="uid://cwfe6fajkag6c" path="res://Resources/Stat_ups/tres/Laser_beam.tres" id="52_asrdp"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ne86t"]
 shader = ExtResource("28_jleb8")
@@ -236,6 +247,7 @@ visible = false
 layer = 11
 
 [node name="Upgrade_Menu" parent="Upgrade_menu_UI" node_paths=PackedStringArray("hotbar") instance=ExtResource("14_gvepe")]
+stat_up_list = Array[ExtResource("42_4h8rn")]([ExtResource("43_5wn43"), ExtResource("44_jea5i"), ExtResource("45_cqdm3"), ExtResource("46_bfbjw"), ExtResource("47_od8nw"), ExtResource("48_6imdn"), ExtResource("49_vwenc"), ExtResource("50_dpkvq"), ExtResource("51_mkr30"), ExtResource("52_asrdp")])
 hotbar = NodePath("../../UI/AbilityBar")
 
 [node name="GameOver" parent="." instance=ExtResource("15_gvepe")]

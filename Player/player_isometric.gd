@@ -328,7 +328,6 @@ func take_damage(damage):
 
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var collision_shape_for_env: CollisionShape2D = $CollisionShapeForEnv
-@onready var damage_area_iso: Area2D = $DamageAreaIso
 @onready var exp_collection_radius: Area2D = $exp_collection_radius
 
 

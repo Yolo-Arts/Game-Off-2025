@@ -3,6 +3,7 @@ class_name WeightedTable
 var items: Array[Dictionary] = []
 var weight_sum = 0
 
+@export var stat_up_list: Array[Statup]
 
 func add_item(item, weight: int):
 	items.append({ "item": item, "weight": weight })

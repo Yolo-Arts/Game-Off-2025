@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Collection_radius_stat_up" load_steps=3 format=3 uid="uid://cf3k7rqex6tj7"]
 
 [ext_resource type="Texture2D" uid="uid://y8b6wivw7cpr" path="res://Assets/skill_icons/Magnet.png" id="1_pn0w0"]
-[ext_resource type="Script" path="res://Resources/Stat_ups/collection_radius_up.gd" id="1_rseqv"]
+[ext_resource type="Script" uid="uid://bcc6p4qig0vs0" path="res://Resources/Stat_ups/Scripts/collection_radius_up.gd" id="1_rseqv"]
 
 [resource]
 script = ExtResource("1_rseqv")

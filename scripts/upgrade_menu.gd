@@ -4,8 +4,8 @@ extends Control
 @onready var stat_up_ui_2: Stat_ui = $PanelContainer/HBoxContainer/CenterContainer/Stat_up_UI2
 
 # TODO when music is implemented, add an audio effect to change the way it sounds during an upgrade
-
 @export var stat_up_list: Array[Statup]
+
 @export var hotbar: HBoxContainer
 
 var item_table = WeightedTable.new()

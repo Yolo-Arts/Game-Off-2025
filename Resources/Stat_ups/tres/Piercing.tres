@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="PierceCannonballStrategy" load_steps=3 format=3 uid="uid://cvisr7wr5sfol"]
 
-[ext_resource type="Script" path="res://Resources/Stat_ups/piercing.gd" id="1_fue4k"]
+[ext_resource type="Script" uid="uid://byh0dh8il0btx" path="res://Resources/Stat_ups/Scripts/piercing.gd" id="1_fue4k"]
 [ext_resource type="Texture2D" uid="uid://ch0w1aidi3yf0" path="res://Assets/skill_icons/piercing.png" id="1_jh6qm"]
 
 [resource]
