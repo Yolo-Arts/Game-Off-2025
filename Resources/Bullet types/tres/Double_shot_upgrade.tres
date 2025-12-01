@@ -8,7 +8,8 @@ script = ExtResource("2_4daj1")
 cannonball_upgrade_type = "number_altering"
 image = ExtResource("1_6yysx")
 name = "Extra Cannon"
-description = "Double trouble... or maybe triple if u get this again"
+description = "+1 cannon ball. 
+Double trouble... or maybe triple if u get this again"
 Weight = 2
 type = "Bullet Type"
 metadata/_custom_type_script = "uid://3056ete8mbty"

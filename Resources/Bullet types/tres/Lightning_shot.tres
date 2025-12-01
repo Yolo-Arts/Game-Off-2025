@@ -7,7 +7,7 @@
 script = ExtResource("1_00ygv")
 image = ExtResource("1_s732b")
 name = "Lightning in a bottle"
-description = "Cannonballs zip from enemy to enemy... zips even more with additional_upgrades"
+description = "Cannonballs zip from enemy to enemy... zips even more with additional_upgrades."
 Weight = 2
 type = "Bullet Type"
 metadata/_custom_type_script = "uid://ckrrryd8m75ni"

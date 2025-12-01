@@ -12,4 +12,5 @@ can_shoot = true
 shoot_cooldown = 6.0
 shoot_damage = 10.0
 shoot_range = 800.0
+projectile_speed = 500.0
 metadata/_custom_type_script = "uid://bujng151akkyd"

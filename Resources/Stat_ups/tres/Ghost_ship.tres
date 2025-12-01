@@ -10,5 +10,5 @@ icon = ExtResource("2_n5a6g")
 ability_scene = ExtResource("1_n5a6g")
 image = ExtResource("2_n5a6g")
 name = "Ghost Ship"
-Weight = 100
+Weight = 10
 metadata/_custom_type_script = "uid://nrxbaabde5y8"

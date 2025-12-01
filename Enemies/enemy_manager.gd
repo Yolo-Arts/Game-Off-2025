@@ -105,7 +105,6 @@ func setup_wave_for_difficulty(current_difficulty: int):
 		
 		#region black boats
 		0:
-			enemy_table.add_item(12, 15) # Orange
 			SoundManager.play_warHorn()
 			enemy_count = 5
 			spawn_interval = 3
