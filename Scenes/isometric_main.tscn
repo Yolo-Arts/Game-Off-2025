@@ -1,4 +1,4 @@
-[gd_scene load_steps=90 format=3 uid="uid://b3imdjb1so30p"]
+[gd_scene load_steps=93 format=3 uid="uid://b3imdjb1so30p"]
 
 [ext_resource type="Script" uid="uid://wjiwydm880cx" path="res://Scenes/isometric_main.gd" id="1_1enjl"]
 [ext_resource type="PackedScene" uid="uid://cbag74ryx0pu8" path="res://Scenes/player_manager.tscn" id="2_dlawb"]
@@ -59,6 +59,9 @@
 [ext_resource type="Resource" uid="uid://bpq58apu0bkny" path="res://Enemies/Enemy_Types_V2/red8.tres" id="37_muuxf"]
 [ext_resource type="Resource" uid="uid://clnra5ln1lc4x" path="res://Enemies/Enemy_Types_V2/green8.tres" id="38_5lwn7"]
 [ext_resource type="Script" uid="uid://bidsifwynuixy" path="res://Scenes/randomised_spawning.gd" id="38_urm01"]
+[ext_resource type="Resource" uid="uid://d4k2642mc8e5a" path="res://Enemies/Enemy_Types_V2/black9.tres" id="39_5lwn7"]
+[ext_resource type="Resource" uid="uid://c6vuyjfkedmcg" path="res://Enemies/Enemy_Types_V2/red9.tres" id="40_ms6uj"]
+[ext_resource type="Resource" uid="uid://dga21iuh4oqhh" path="res://Enemies/Enemy_Types_V2/green9.tres" id="41_4lfgv"]
 [ext_resource type="Script" uid="uid://cx0xqtau6rhsj" path="res://Resources/Stat_ups/Scripts/Stat_up.gd" id="42_4h8rn"]
 [ext_resource type="Resource" uid="uid://drnx6hr8xqkvv" path="res://Resources/Stat_ups/tres/damage_stat_up.tres" id="43_dpkvq"]
 [ext_resource type="Resource" uid="uid://co2jfg8i5cfql" path="res://Resources/Stat_ups/tres/Time Freeze.tres" id="43_tmf2b"]
@@ -231,7 +234,7 @@ script = ExtResource("5_yj477")
 basic_enemy_scene = ExtResource("14_dlawb")
 dash_enemy_scene = ExtResource("33_oqk4o")
 projectile_enemy_scene = ExtResource("13_gyupm")
-enemy_types = Array[Resource]([ExtResource("9_yj477"), ExtResource("10_oqk4o"), ExtResource("11_4lvfn"), ExtResource("12_bntkt"), ExtResource("13_8id1w"), ExtResource("14_urm01"), ExtResource("15_urm01"), ExtResource("16_wnblm"), ExtResource("17_j2nir"), ExtResource("18_bc4km"), ExtResource("19_pd4ol"), ExtResource("20_7mlm2"), ExtResource("21_43eng"), ExtResource("22_oro4v"), ExtResource("23_s4omk"), ExtResource("24_j36ft"), ExtResource("25_3vkk7"), ExtResource("26_8udth"), ExtResource("27_qm0yj"), ExtResource("28_i6fsg"), ExtResource("29_fjstp"), ExtResource("30_175my"), ExtResource("31_mepdn"), ExtResource("32_8g1qq"), ExtResource("33_mpgm7"), ExtResource("34_oxt6w"), ExtResource("35_c2oyx"), ExtResource("36_stqfi"), ExtResource("37_muuxf"), ExtResource("38_5lwn7")])
+enemy_types = Array[Resource]([ExtResource("9_yj477"), ExtResource("10_oqk4o"), ExtResource("11_4lvfn"), ExtResource("12_bntkt"), ExtResource("13_8id1w"), ExtResource("14_urm01"), ExtResource("15_urm01"), ExtResource("16_wnblm"), ExtResource("17_j2nir"), ExtResource("18_bc4km"), ExtResource("19_pd4ol"), ExtResource("20_7mlm2"), ExtResource("21_43eng"), ExtResource("22_oro4v"), ExtResource("23_s4omk"), ExtResource("24_j36ft"), ExtResource("25_3vkk7"), ExtResource("26_8udth"), ExtResource("27_qm0yj"), ExtResource("28_i6fsg"), ExtResource("29_fjstp"), ExtResource("30_175my"), ExtResource("31_mepdn"), ExtResource("32_8g1qq"), ExtResource("33_mpgm7"), ExtResource("34_oxt6w"), ExtResource("35_c2oyx"), ExtResource("36_stqfi"), ExtResource("37_muuxf"), ExtResource("38_5lwn7"), ExtResource("39_5lwn7"), ExtResource("40_ms6uj"), ExtResource("41_4lfgv")])
 
 [node name="TimeCycle" type="CanvasModulate" parent="."]
 unique_name_in_owner = true
