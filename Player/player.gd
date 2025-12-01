@@ -52,7 +52,7 @@ var player_max_health = 100.0
 var can_drift = false
 var drift_value = 1
 var isDead = false
-var shockwave_damage = 20
+var shockwave_damage = 15
 
 func _ready():
 	pass

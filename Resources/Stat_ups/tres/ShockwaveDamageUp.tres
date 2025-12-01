@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ShockwaveDamageUp" load_steps=3 format=3 uid="uid://6v2o0jijd22q"]
+
+[ext_resource type="Texture2D" uid="uid://dgyuislq61fdb" path="res://Assets/skill_icons/shockwaveV2-upgrade.png" id="1_pj0nb"]
+[ext_resource type="Script" uid="uid://dsp2pqu5yu0nl" path="res://Resources/Stat_ups/Scripts/ShockwaveDamageUp.gd" id="2_pj0nb"]
+
+[resource]
+script = ExtResource("2_pj0nb")
+image = ExtResource("1_pj0nb")
+name = "Powerful waves"
+description = "Increases Shockwave damage by 50%"
+Weight = 3
+metadata/_custom_type_script = "uid://cx0xqtau6rhsj"

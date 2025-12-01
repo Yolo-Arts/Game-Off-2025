@@ -88,6 +88,12 @@ func _on_card_selected(upgrade: Statup):
 	await get_tree().create_timer(0.05).timeout
 	Engine.time_scale= 1.0
 	if upgrade.type == "Ability":
+		if upgrade is ShockwaveAbility:
+			print("Selected shockwave! Adding shockwave related upgrades")
+			var new_upgrade = load("res://Resources/Stat_ups/tres/ShockwaveDamageUp.tres")
+			stat_up_list.append(new_upgrade)
+			item_table.add_item(new_upgrade, new_upgrade.Weight)
+		
 		Globals.unlocked_abilities.append(upgrade)
 		item_table.remove_item(upgrade)
 		if Globals.unlocked_abilities.size() >= MAX_ABILITIES:
