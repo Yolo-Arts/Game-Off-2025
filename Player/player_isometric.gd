@@ -36,7 +36,7 @@ var shockwave_fired = false
 func _ready():
 	get_tree().paused = false
 	Globals.player = self
-	health = 100
+	health = 10
 	#Globals.player_died.connect(dead_player)
 	
 	isometric_transform = Transform2D()
@@ -86,29 +86,33 @@ func dead_player():
 	Globals.player_died.emit()
 	isDead = true
 	for i in range(0, 5):
+		SoundManager.play_DeathExplosions()
 		spawn_death_explosion(self.global_position)
+		await get_tree().create_timer(0.5).timeout
 	self.hide()
+	await get_tree().create_timer(5.0).timeout
 	get_tree().paused = true
 
 
 func _input(event):
-	if event.is_action_pressed("fire"):
-		if can_shoot:
-			SoundManager.play_CannonFire()
-			shoot()
-			can_shoot = false
-			reload_ui.play()
-			shoot_cooldown.start()
-			SoundManager.play_reload()
-		else:
-			return
-			#spawn_reload_text()
-	if shockwave_fired == true:
-		shockwave_fired = false
-		shockwave_collision_shape.disabled = true
-		shockwave.material.set_shader_parameter("global_position", Vector2(1910/2.0, 1080/2))
-		if shockwave.has_node("AnimationPlayer"):
-			shockwave.get_node("AnimationPlayer").play("Shockwave")
+	if !isDead:
+		if event.is_action_pressed("fire"):
+			if can_shoot:
+				SoundManager.play_CannonFire()
+				shoot()
+				can_shoot = false
+				reload_ui.play()
+				shoot_cooldown.start()
+				SoundManager.play_reload()
+			else:
+				return
+				#spawn_reload_text()
+		if shockwave_fired == true:
+			shockwave_fired = false
+			shockwave_collision_shape.disabled = true
+			shockwave.material.set_shader_parameter("global_position", Vector2(1910/2.0, 1080/2))
+			if shockwave.has_node("AnimationPlayer"):
+				shockwave.get_node("AnimationPlayer").play("Shockwave")
 			
 
 
