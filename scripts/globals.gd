@@ -57,3 +57,14 @@ func _on_playerDied():
 	player_died.emit()
 	playerDied = true
 	print("Final Score %s" % score)
+
+func reset_run():
+	unlocked_abilities.clear()
+	active_cannonball_upgrades.clear()
+	
+	
+	playerDied = false
+	upgrading = false
+	
+	for key in score:
+		score[key] = 0

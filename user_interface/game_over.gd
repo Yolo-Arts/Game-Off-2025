@@ -27,6 +27,7 @@ func _ready():
 	
 
 func _on_restart_pressed():
+	Globals.reset_run()
 	$TextureRect.show()
 	SoundManager.UI_ButtonPressed()
 	animation_player.play("close-transition")

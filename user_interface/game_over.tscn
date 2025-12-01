@@ -4,7 +4,7 @@
 [ext_resource type="Theme" uid="uid://bi4882lo6q8km" path="res://user_interface/ThemeV2.tres" id="2_adlvt"]
 [ext_resource type="Script" uid="uid://b4hwrp8guiq8a" path="res://addons/shaker/shaker.gd" id="3_adlvt"]
 [ext_resource type="Theme" uid="uid://b70rftml1sway" path="res://user_interface/themev3.tres" id="3_upsow"]
-[ext_resource type="Shader" path="res://Shaders/screenTransition.gdshader" id="4_12xn0"]
+[ext_resource type="Shader" uid="uid://ydw2wifhpp88" path="res://Shaders/screenTransition.gdshader" id="4_12xn0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_upsow"]
 shader = ExtResource("4_12xn0")

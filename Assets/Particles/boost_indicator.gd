@@ -1,4 +1,4 @@
-extends GPUParticles2D
+extends CPUParticles2D
 
 @onready var parent = get_parent()
 

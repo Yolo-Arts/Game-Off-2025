@@ -30,6 +30,7 @@ func _on_continue_button_down() -> void:
 	self.visible = false
 
 func _on_restart_button_down() -> void:
+	Globals.reset_run()
 	SoundManager.UI_ButtonPressed()
 	get_tree().paused = false
 	get_tree().reload_current_scene()

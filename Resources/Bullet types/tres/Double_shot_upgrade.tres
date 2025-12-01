@@ -10,6 +10,6 @@ image = ExtResource("1_6yysx")
 name = "Extra Cannon"
 description = "+1 cannon ball. 
 Double trouble... or maybe triple if u get this again"
-Weight = 2
+Weight = 100
 type = "Bullet Type"
 metadata/_custom_type_script = "uid://3056ete8mbty"
