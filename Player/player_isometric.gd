@@ -28,6 +28,7 @@ signal zoom_in
 signal zoom_out
 signal shake_hp_bar
 var infiniteAmmoActive = false
+var ghost_active = false
 
 var game_begin = false
 var shockwave_fired = false
@@ -65,6 +66,7 @@ func Laser_beam_ability(duration):
 	
 
 func ghost_ship_ability(duration):
+	ghost_active = true
 	modulate.a = 0.3
 	damage_area_iso.set_collision_mask_value(2, false)
 	damage_area_iso.set_collision_mask_value(8, false)
@@ -72,6 +74,7 @@ func ghost_ship_ability(duration):
 	modulate.a = 1.0
 	damage_area_iso.set_collision_mask_value(2, true)
 	damage_area_iso.set_collision_mask_value(8, true)
+	ghost_active = false
 	
 func time_freeze_ability(duration):
 	await get_tree().create_timer(duration).timeout
@@ -293,6 +296,8 @@ func _on_exp_collection_radius_area_entered(area: Area2D) -> void:
 
 func _on_damage_area_iso_body_entered(body: Node2D) -> void:
 	if is_drifting:
+		return
+	elif ghost_active:
 		return
 	elif $damage_interval_timer.is_stopped() and body is Enemy:
 		health -= body.enemy_stats.damage
