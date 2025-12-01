@@ -8,5 +8,5 @@ script = ExtResource("2_1puvu")
 image = ExtResource("1_uek8k")
 name = "Powerful beam"
 description = "Increases laser damage by 50%"
-Weight = 3
+Weight = 5
 metadata/_custom_type_script = "uid://cx0xqtau6rhsj"

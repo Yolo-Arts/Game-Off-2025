@@ -8,5 +8,5 @@ script = ExtResource("2_pj0nb")
 image = ExtResource("1_pj0nb")
 name = "Powerful waves"
 description = "Increases Shockwave damage by 50%"
-Weight = 3
+Weight = 5
 metadata/_custom_type_script = "uid://cx0xqtau6rhsj"

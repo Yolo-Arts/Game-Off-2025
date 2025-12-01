@@ -35,6 +35,7 @@ enum POINTS_CATEGORIES  {
 }
 
 func _ready() -> void:
+	unlocked_abilities = []
 	active_cannonball_upgrades  = []
 	UserInterface = get_parent()
 	my_timer.wait_time = INTERVAL

@@ -8,6 +8,6 @@ script = ExtResource("1_74kc2")
 image = ExtResource("1_bav8w")
 name = "Faster reload"
 description = "Reload your cannons quicker"
-Weight = 3
+Weight = 4
 is_unique = true
 metadata/_custom_type_script = "uid://bgqw67v6t4oki"

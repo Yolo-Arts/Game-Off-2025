@@ -8,5 +8,5 @@ script = ExtResource("1_pwikv")
 image = ExtResource("1_n2035")
 name = "Crows Nest"
 description = "Improve vision by 10%"
-Weight = 2
+Weight = 1
 metadata/_custom_type_script = "uid://cx0xqtau6rhsj"

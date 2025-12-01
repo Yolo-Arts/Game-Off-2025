@@ -8,5 +8,5 @@ script = ExtResource("1_1mwep")
 image = ExtResource("1_ldafg")
 name = "Improved Cannons"
 description = "Increases cannon damage by 50%"
-Weight = 2
+Weight = 5
 metadata/_custom_type_script = "uid://ctortlq4yl2bm"

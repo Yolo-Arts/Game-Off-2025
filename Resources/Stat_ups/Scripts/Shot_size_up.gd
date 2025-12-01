@@ -3,4 +3,4 @@ extends Statup
 
 func apply_upgrade(player: Player):
 	player.cannonball_scale += 0.20
-	player.damage += 2
+	player.damage += 4
