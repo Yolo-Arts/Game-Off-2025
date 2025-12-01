@@ -34,4 +34,4 @@ grow_vertical = 0
 theme = ExtResource("2_sp35x")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 48
-text = "TEST"
+text = "Loading..."
