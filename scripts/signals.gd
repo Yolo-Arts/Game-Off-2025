@@ -7,7 +7,7 @@ signal start_hitStop
 signal collect_all_exp(player:Player)
 
 signal shockwave_fired
-signal infinite_ammo(duration: float)
+signal infinite_ammo
 signal time_freeze(duration: float)
 signal time_freeze_disable
 signal ghost_ship(duration: float)

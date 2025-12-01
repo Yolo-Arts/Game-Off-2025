@@ -8,5 +8,5 @@ script = ExtResource("1_p5qbs")
 image = ExtResource("1_y1qs3")
 name = "Shot size up"
 description = "Increases size of cannon balls"
-Weight = 3
+Weight = 2
 metadata/_custom_type_script = "uid://dthqoqsq5vdfa"

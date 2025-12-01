@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="explosive_shot" load_steps=3 format=3 uid="uid://ukshai7h31k5"]
 
-[ext_resource type="Texture2D" uid="uid://c12v3gr0dt8sm" path="res://icon.svg" id="1_47jsi"]
+[ext_resource type="Texture2D" uid="uid://drkcthpy6scdo" path="res://Assets/skill_icons/Explosion.png" id="1_47jsi"]
 [ext_resource type="Script" uid="uid://2bjsq8rmhag" path="res://Resources/Bullet types/script/explosive_shot.gd" id="1_qtgag"]
 
 [resource]
@@ -8,6 +8,6 @@ script = ExtResource("1_qtgag")
 image = ExtResource("1_47jsi")
 name = "big boom cannonballs"
 description = "Cannonballs go boom on impact... get more for an even bigger boom"
-Weight = 100
+Weight = 2
 type = "Bullet Type"
 metadata/_custom_type_script = "uid://2bjsq8rmhag"

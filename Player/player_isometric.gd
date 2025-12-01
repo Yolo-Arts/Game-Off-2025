@@ -326,19 +326,19 @@ func take_damage(damage):
 		Globals.camera.shake(0.5, 25, 25)
 		$damage_interval_timer.start()
 
-@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
-@onready var collision_shape_for_env: CollisionShape2D = $CollisionShapeForEnv
+#@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
+#@onready var collision_shape_for_env: CollisionShape2D = $CollisionShapeForEnv
 @onready var exp_collection_radius: Area2D = $exp_collection_radius
 
 
 
 func disable_hitbox():
-	if collision_shape_2d:
-		collision_shape_2d.set_deferred("disabled", true)
-		collision_shape_2d.queue_free()
-	if collision_shape_for_env:
-		collision_shape_for_env.set_deferred("monitorable", false)
-		collision_shape_for_env.queue_free()
+	#if collision_shape_2d:
+		#collision_shape_2d.set_deferred("disabled", true)
+		#collision_shape_2d.queue_free()
+	#if collision_shape_for_env:
+		#collision_shape_for_env.set_deferred("monitorable", false)
+		#collision_shape_for_env.queue_free()
 	if damage_area_iso:
 		damage_area_iso.set_deferred("monitorable", false)
 		damage_area_iso.queue_free()
