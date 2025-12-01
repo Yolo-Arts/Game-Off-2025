@@ -155,7 +155,6 @@ func remove_other_abilities(Unlocked_abilities: Array[Statup]):
 
 func sort_cannonball_upgrades(cannonball_upgrade1: cannon_ball_upgrade, cannonball_upgrade2:cannon_ball_upgrade):
 	
-	
 	if cannonball_upgrade1.cannonball_upgrade_type == "number_altering" and cannonball_upgrade2.cannonball_upgrade_type != "number_altering":
 		return true
 	return false

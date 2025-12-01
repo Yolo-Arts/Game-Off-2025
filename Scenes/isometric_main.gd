@@ -17,6 +17,7 @@ func _ready():
 	score["WAVES_SURVIVED"] = 0
 	score["BOSSES_SHIPWRECKED"] = 0
 	Globals.unlocked_abilities = []
+	Globals.active_cannonball_upgrades = []
 	Engine.time_scale = 1.0
 	Signals.start_hitStop.connect(hit_stop)
 	Globals.camera = camera
