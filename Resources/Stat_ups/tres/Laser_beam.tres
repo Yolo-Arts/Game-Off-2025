@@ -9,5 +9,5 @@ script = ExtResource("1_w631p")
 icon = ExtResource("2_iohgi")
 ability_scene = ExtResource("1_iohgi")
 image = ExtResource("2_iohgi")
-Weight = 10
+Weight = 100
 metadata/_custom_type_script = "uid://b32ta8vusg2hk"

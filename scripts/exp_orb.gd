@@ -2,7 +2,7 @@ class_name Exp_Orb
 extends Area2D
 
 var velocity = Vector2(0, 0)
-var faster = 100.00
+var faster = 70.00
 var speed = 0
 var player: Player
 var collected = false
@@ -15,7 +15,7 @@ func _ready() -> void:
 	
 func _physics_process(delta: float) -> void:
 	if collected:
-		speed = player.base_speed + faster
+		speed = player.max_speed + faster
 		direction_to_player = get_direction_to_player()
 		velocity = direction_to_player*speed
 		global_position = global_position + velocity*delta

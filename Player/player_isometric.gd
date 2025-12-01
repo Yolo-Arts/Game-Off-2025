@@ -48,6 +48,7 @@ func _ready():
 	Signals.ghost_ship.connect(ghost_ship_ability)
 	Signals.magnetic_balls.connect(magnetic_balls_ability)
 	Signals.laser_beam.connect(Laser_beam_ability)
+	laser_beam.base_damage = 5
 
 func magnetic_balls_ability(duration):
 	pass
