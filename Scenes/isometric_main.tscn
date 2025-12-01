@@ -255,7 +255,7 @@ visible = false
 layer = 11
 
 [node name="Upgrade_Menu" parent="Upgrade_menu_UI" node_paths=PackedStringArray("hotbar") instance=ExtResource("14_gvepe")]
-stat_up_list = Array[ExtResource("42_4h8rn")]([ExtResource("43_dpkvq"), ExtResource("44_mkr30"), ExtResource("45_asrdp"), ExtResource("46_4s77f"), ExtResource("47_stqfi"), ExtResource("46_nj88g"), ExtResource("49_muuxf"), ExtResource("45_4jr33"), ExtResource("51_5lwn7"), ExtResource("52_ms6uj"), ExtResource("53_4lfgv"), ExtResource("54_vl7ep"), ExtResource("55_o2irs"), ExtResource("56_dpkvq"), ExtResource("57_s7ycg"), ExtResource("43_tmf2b"), ExtResource("44_xc7hu"), ExtResource("60_s8lhi")])
+stat_up_list = Array[ExtResource("42_4h8rn")]([ExtResource("43_dpkvq"), ExtResource("44_mkr30"), ExtResource("45_asrdp"), ExtResource("46_4s77f"), ExtResource("47_stqfi"), ExtResource("46_nj88g"), ExtResource("49_muuxf"), ExtResource("45_4jr33"), ExtResource("52_ms6uj"), ExtResource("54_vl7ep"), ExtResource("55_o2irs"), ExtResource("56_dpkvq"), ExtResource("57_s7ycg"), ExtResource("53_4lfgv"), ExtResource("51_5lwn7"), ExtResource("43_tmf2b"), ExtResource("44_xc7hu"), ExtResource("60_s8lhi")])
 hotbar = NodePath("../../UI/AbilityBar")
 
 [node name="GameOver" parent="." instance=ExtResource("15_gvepe")]
