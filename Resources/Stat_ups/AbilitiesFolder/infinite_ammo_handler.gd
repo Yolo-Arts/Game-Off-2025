@@ -1,4 +1,4 @@
 extends Node
 
 func activate_ability(player: Player):
-	Signals.infinite_ammo.emit(5.0)
+	Signals.infinite_ammo.emit(3.0)

@@ -61,9 +61,11 @@ func Laser_beam_ability(duration):
 	
 
 func ghost_ship_ability(duration):
+	modulate.a = 0.3
 	damage_area_iso.set_collision_mask_value(2, false)
 	damage_area_iso.set_collision_mask_value(8, false)
 	await get_tree().create_timer(duration).timeout
+	modulate.a = 1.0
 	damage_area_iso.set_collision_mask_value(2, true)
 	damage_area_iso.set_collision_mask_value(8, true)
 	
