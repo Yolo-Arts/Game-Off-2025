@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://dn75ntkbbgxb2"]
+[gd_scene load_steps=6 format=3 uid="uid://dn75ntkbbgxb2"]
 
 [ext_resource type="Script" uid="uid://vnw6gi11xhm" path="res://user_interface/pause_menu.gd" id="1_3al74"]
 [ext_resource type="Theme" uid="uid://bi4882lo6q8km" path="res://user_interface/ThemeV2.tres" id="1_rhd5n"]
+[ext_resource type="Script" uid="uid://cv3mgand7j3bs" path="res://user_interface/bgm.gd" id="3_vbv2j"]
+[ext_resource type="Script" uid="uid://bgpjreolf1h37" path="res://user_interface/sfx.gd" id="4_6s2r0"]
+[ext_resource type="Theme" uid="uid://b70rftml1sway" path="res://user_interface/themev3.tres" id="5_6s2r0"]
 
 [node name="PauseMenu" type="CanvasLayer"]
 process_mode = 3
@@ -69,6 +72,85 @@ theme = ExtResource("1_rhd5n")
 theme_override_colors/font_color = Color(0.2509804, 0.17254902, 0.047058824, 1)
 theme_override_font_sizes/font_size = 146
 text = "Paused"
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -819.0
+offset_top = -240.0
+offset_bottom = -120.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_right = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer2"]
+layout_mode = 2
+alignment = 2
+
+[node name="BGM" type="HSlider" parent="MarginContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+value = 1.0
+script = ExtResource("3_vbv2j")
+
+[node name="MarginContainer3" type="MarginContainer" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -819.0
+offset_top = -120.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_right = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer3"]
+layout_mode = 2
+alignment = 2
+
+[node name="SFX" type="HSlider" parent="MarginContainer3/VBoxContainer"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+value = 1.0
+script = ExtResource("4_6s2r0")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(1091, 240)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -240.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 8
+mouse_filter = 2
+
+[node name="bgm" type="Label" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+theme = ExtResource("5_6s2r0")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 71
+text = "BGM:"
+
+[node name="sfx" type="Label" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+theme = ExtResource("5_6s2r0")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 71
+text = "SFX:"
 
 [connection signal="button_down" from="MarginContainer/MarginContainer/VBoxContainer/Continue" to="." method="_on_continue_button_down"]
 [connection signal="mouse_entered" from="MarginContainer/MarginContainer/VBoxContainer/Continue" to="." method="_on_continue_mouse_entered"]

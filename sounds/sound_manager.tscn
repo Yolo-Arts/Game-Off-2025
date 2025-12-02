@@ -115,14 +115,17 @@ bus = &"SFX"
 [node name="DeathExplosions" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_1awae")
 volume_db = -6.551
+bus = &"SFX"
 
 [node name="EnemyHit" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_v0x57")
 volume_db = -3.276
+bus = &"SFX"
 
 [node name="PlayerHurtSFX" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_0v1q7")
 volume_db = -6.564
+bus = &"SFX"
 
 [node name="UI_SFX" type="Node" parent="."]
 

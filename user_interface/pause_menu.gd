@@ -1,10 +1,46 @@
 extends CanvasLayer
 
+#@onready var bgm = $MarginContainer2/VBoxContainer/BGM
+#@onready var sfx = $MarginContainer3/VBoxContainer/SFX
+#
+#var bus_bgm: String = "BGM"
+#var bus_sfx: String = "SFX"
+#
+#var index_bgm : int
+#var index_sfx : int
+#
+#
+#
+#
+#
+#func _ready() -> void:
+	#self.visible = false
+	#index_bgm = AudioServer.get_bus_index(bus_bgm)
+	#index_sfx = AudioServer.get_bus_index(bus_sfx)
+	#bgm.value_changed(_on_value_changed_bgm)
+	#sfx.value_changed(_on_value_changed_sfx)
+	#
+#
+#
+#func _on_value_changed_bgm(value : float) -> void:
+	#AudioServer.set_bus_volume_db(
+		#index_bgm,
+		#linear_to_db(value)
+	#)
+#
+#func _on_value_changed_sfx(value: float) -> void:
+	#AudioServer.set_bus_volume_db(
+		#index_sfx,
+		#linear_to_db(value)
+	#)
+#
+
+func _ready() -> void:
+	self.visible = false
+
 func _unhandled_input(event: InputEvent) -> void:
 	testEsc()
 
-func _ready():
-	self.visible = false
 
 func testEsc():
 	if Input.is_action_just_pressed("esc") and (get_tree().paused == false):
