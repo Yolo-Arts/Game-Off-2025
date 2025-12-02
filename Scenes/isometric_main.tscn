@@ -1,4 +1,4 @@
-[gd_scene load_steps=93 format=3 uid="uid://b3imdjb1so30p"]
+[gd_scene load_steps=97 format=3 uid="uid://b3imdjb1so30p"]
 
 [ext_resource type="Script" uid="uid://wjiwydm880cx" path="res://Scenes/isometric_main.gd" id="1_1enjl"]
 [ext_resource type="PackedScene" uid="uid://cbag74ryx0pu8" path="res://Scenes/player_manager.tscn" id="2_dlawb"]
@@ -81,6 +81,9 @@
 [ext_resource type="Resource" uid="uid://drcdgpb75l57j" path="res://Resources/Stat_ups/tres/faster_reload.tres" id="56_mkr30"]
 [ext_resource type="Resource" uid="uid://dnqplp0h5mdo5" path="res://Resources/Bullet types/tres/Lightning_shot.tres" id="57_s7ycg"]
 [ext_resource type="Resource" uid="uid://bcyy17l4c7n1u" path="res://Resources/Stat_ups/tres/Ghost_ship.tres" id="60_s8lhi"]
+[ext_resource type="Shader" uid="uid://dxd7ltgyi65wj" path="res://Scenes/scrollingBG.gdshader" id="82_4lfgv"]
+[ext_resource type="Texture2D" uid="uid://bilyn8fqai6k4" path="res://Assets/seabed - Copy.png" id="82_ms6uj"]
+[ext_resource type="Script" uid="uid://cqtbln4dbkujn" path="res://Scenes/scrolling_bg.gd" id="84_vl7ep"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ne86t"]
 shader = ExtResource("28_jleb8")
@@ -219,6 +222,10 @@ _data = {
 &"transition": SubResource("Animation_b21ex")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vl7ep"]
+shader = ExtResource("82_4lfgv")
+shader_parameter/scroll_offset = Vector2(0, 0)
+
 [node name="isometricMain" type="Node2D"]
 script = ExtResource("1_1enjl")
 
@@ -251,6 +258,7 @@ position = Vector2(-383, -480)
 [node name="Camera2D" parent="player_isometric" instance=ExtResource("2_pwvqx")]
 unique_name_in_owner = true
 zoom = Vector2(0.7, 0.7)
+limit_enabled = false
 
 [node name="WaveAndTimeUI" parent="." instance=ExtResource("8_gpok4")]
 visible = false
@@ -340,6 +348,17 @@ libraries = {
 }
 
 [node name="SpawnUI" parent="." instance=ExtResource("30_lc8nd")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -3
+
+[node name="ScrollingBG" type="Sprite2D" parent="CanvasLayer" node_paths=PackedStringArray("player")]
+material = SubResource("ShaderMaterial_vl7ep")
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("82_ms6uj")
+script = ExtResource("84_vl7ep")
+player = NodePath("../../player_isometric")
+speed_scale = Vector2(0.2, 0.2)
 
 [connection signal="begin_game" from="." to="EnemyManager" method="_on_isometric_main_begin_game"]
 [connection signal="begin_game" from="." to="player_isometric" method="_on_isometric_main_begin_game"]

@@ -335,16 +335,21 @@ func _ready() -> void:
 	player = get_tree().get_first_node_in_group("player") as Node2D
 	update_map_by_player_position(Vector2(0,0))
 
+const ADD_LAYERS_EVERY_N_FRAMES = 3
+var frame_counter = 0
+
 func _process(delta: float) -> void:
+	frame_counter += 1
 	# 1. PROCESS THE QUEUE (The Shredder)
 	# Add one visual layer back per frame
-	if not layers_to_add_queue.is_empty():
+	if not layers_to_add_queue.is_empty() and frame_counter >= ADD_LAYERS_EVERY_N_FRAMES:
 		var job = layers_to_add_queue.pop_front()
 		var parent_node = job["parent"]
 		var child_node = job["child"]
 		
 		if is_instance_valid(parent_node) and is_instance_valid(child_node):
 			parent_node.add_child(child_node)
+		frame_counter = 0
 	
 	# 2. PLAYER LOGIC
 	if player:
@@ -409,13 +414,84 @@ func update_map_by_player_position(vector_change: Vector2):
 
 # RUNS ON BACKGROUND THREAD
 # RUNS ON BACKGROUND THREAD
+#func _thread_instantiate_chunk(resource: Resource, position: Vector2, key: String):
+	#var new_scene = resource.instantiate()
+	#new_scene.position = position
+	#
+	## --- THE SHREDDER LOGIC ---
+	#var heavy_layers = []
+	#var children = new_scene.get_children()
+	#
+	#
+	#for child in children:
+		## 1. KEEP BASE (Physics)
+		#if child.name == BASE_NODE_NAME:
+			#continue
+		#
+		## 2. KEEP SPAWN POINTS (Logic)
+		## We must keep this attached so the Spawn Script can find it immediately
+		#if child.name == "SpawnPoints":
+			#continue
+		#
+		#if child.name == "Seabed" or child.name == "underwater3": 
+			#print("Kept seabed")
+			#continue
+		#
+		## 3. DETACH EVERYTHING ELSE (Visuals)
+		## Water, Trees, etc. get removed and added back slowly
+		#new_scene.remove_child(child)
+		#heavy_layers.append(child)
+	#
+	#
+	## Send back to Main Thread
+	#call_deferred("_finish_loading_chunk", new_scene, heavy_layers, position, key, resource)
+#
+## RUNS ON MAIN THREAD
+#func _finish_loading_chunk(scene: Node, heavy_layers: Array, position: Vector2, key: String, resource: Resource):
+	#loading_in_progress.erase(key)
+	#
+	## 1. Add the Scene (which now ONLY contains base2)
+	#parent_scene.add_child(scene)
+	#
+	## 2. Queue the rest to load 1 per frame
+	#for layer in heavy_layers:
+		#layers_to_add_queue.append({
+			#"parent": scene,
+			#"child": layer
+		#})
+	#
+	## 3. Store Data
+	#var island_cluster: IslandClusters = IslandClusters.new()
+	#island_cluster.scene_ref = scene
+	#island_cluster.coordinate = position
+	#island_cluster.map_segement_file = resource
+	#chunks_map[key] = island_cluster
+	#queue_chunks.append(key)
+
+# --- THREADING FUNCTIONS (CORRECTED) ---
+
+# RUNS ON BACKGROUND THREAD
+# This function's ONLY job is to instantiate the scene. It MUST NOT touch the scene tree.
 func _thread_instantiate_chunk(resource: Resource, position: Vector2, key: String):
+	# Instantiate the scene on the background thread. This is safe.
 	var new_scene = resource.instantiate()
+	
+	# IMPORTANT: We set the position here, which is safe.
+	# We DO NOT touch its children here.
 	new_scene.position = position
 	
-	# --- THE SHREDDER LOGIC ---
+	# Send the fully instantiated scene back to the Main Thread for processing.
+	call_deferred("_finish_loading_chunk", new_scene, position, key, resource)
+
+# RUNS ON MAIN THREAD
+# All scene tree manipulation happens here.
+func _finish_loading_chunk(scene: Node, position: Vector2, key: String, resource: Resource):
+	loading_in_progress.erase(key)
+	
+	# --- THE SHREDDER LOGIC (NOW ON MAIN THREAD) ---
 	var heavy_layers = []
-	var children = new_scene.get_children()
+	# Make a copy of the children array to iterate over, as we are modifying the original.
+	var children = scene.get_children().duplicate()
 	
 	for child in children:
 		# 1. KEEP BASE (Physics)
@@ -423,23 +499,21 @@ func _thread_instantiate_chunk(resource: Resource, position: Vector2, key: Strin
 			continue
 		
 		# 2. KEEP SPAWN POINTS (Logic)
-		# We must keep this attached so the Spawn Script can find it immediately
 		if child.name == "SpawnPoints":
 			continue
+			
+		# 3. KEEP SEABED AND UNDERWATER3
+		if child.name == "Seabed" or child.name == "underwater3":
+			# The print statement was good for debugging, but we can remove it now.
+			# print("Kept seabed/underwater3: ", child.name)
+			continue
 		
-		# 3. DETACH EVERYTHING ELSE (Visuals)
+		# 4. DETACH EVERYTHING ELSE (Visuals)
 		# Water, Trees, etc. get removed and added back slowly
-		new_scene.remove_child(child)
+		scene.remove_child(child)
 		heavy_layers.append(child)
 	
-	# Send back to Main Thread
-	call_deferred("_finish_loading_chunk", new_scene, heavy_layers, position, key, resource)
-
-# RUNS ON MAIN THREAD
-func _finish_loading_chunk(scene: Node, heavy_layers: Array, position: Vector2, key: String, resource: Resource):
-	loading_in_progress.erase(key)
-	
-	# 1. Add the Scene (which now ONLY contains base2)
+	# 1. Add the Scene (which now contains base2, SpawnPoints, Seabed, and underwater3)
 	parent_scene.add_child(scene)
 	
 	# 2. Queue the rest to load 1 per frame
@@ -456,6 +530,7 @@ func _finish_loading_chunk(scene: Node, heavy_layers: Array, position: Vector2, 
 	island_cluster.map_segement_file = resource
 	chunks_map[key] = island_cluster
 	queue_chunks.append(key)
+
 
 # --- CLEANUP LOGIC ---
 

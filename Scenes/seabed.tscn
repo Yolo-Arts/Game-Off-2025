@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bu8jcfr2617pc"]
+
+[ext_resource type="Shader" uid="uid://d4bm3827t4f0h" path="res://Shaders/seabed.gdshader" id="1_eliec"]
+[ext_resource type="Texture2D" uid="uid://brk71boxg4mbs" path="res://Assets/seabed.png" id="2_dccd7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hhu5j"]
+shader = ExtResource("1_eliec")
+
+[node name="Seabed" type="Node2D"]
+z_index = -2
+
+[node name="Seabed" type="Sprite2D" parent="."]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_hhu5j")
+texture = ExtResource("2_dccd7")
+centered = false
+offset = Vector2(-2000, -2000)
+region_enabled = true
+region_rect = Rect2(0, 0, 4000, 4000)
