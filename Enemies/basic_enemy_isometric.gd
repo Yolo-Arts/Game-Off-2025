@@ -28,6 +28,10 @@ func set_enemy_type(enemy_type: int):
 	enemy_stats = enemy_types[enemy_type]
 	speed = enemy_stats.speed
 	health = enemy_stats.health
+	print("health: ", health)
+	health *= Globals.health_mult
+	print("Globals health mult: ", Globals.health_mult)
+	print("new mult health: ", health)
 	total_frames = enemy_stats.total_frames
 	frame_offset = enemy_stats.frame_offset
 	acceleration = enemy_stats.acceleration
@@ -66,6 +70,7 @@ func _physics_process(delta):
 			if collider.is_in_group("player") && collider.is_drifting:
 				var bounce_force = 700
 				take_damage(collider.ram_damage)
+				collider.enemies_hit_by_drift.append(self)
 				apply_knockback(collider.global_position, bounce_force)
 				Globals.camera.shake(0.5, 25, 25)
 			else:

@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="enemy_type" load_steps=3 format=3 uid="uid://cfienns4xs0wk"]
+
+[ext_resource type="Script" uid="uid://bujng151akkyd" path="res://Resources/enemy_type.gd" id="1_mxngb"]
+[ext_resource type="Texture2D" uid="uid://cbi4fgucg15sw" path="res://Enemies/Sprites/dreadnought_spritesheet.png" id="2_l83w6"]
+
+[resource]
+script = ExtResource("1_mxngb")
+total_frames = 180
+frame_offset = -10
+texture = ExtResource("2_l83w6")
+speed = 800.0
+health = 2000.0
+can_dash = true
+dash_duration = 1.0
+dash_cooldown = 5.0
+can_shoot = true
+shoot_range = 800.0
+projectile_speed = 700.0
+is_boss = true
+metadata/_custom_type_script = "uid://bujng151akkyd"

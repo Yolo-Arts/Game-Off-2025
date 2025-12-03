@@ -6,6 +6,7 @@ var swapper_index = 0
 @export var basic_enemy_scene: PackedScene
 @export var dash_enemy_scene: PackedScene
 @export var projectile_enemy_scene: PackedScene
+@export var boss_enemy_scene: PackedScene
 
 @export var enemy_types: Array[Resource]
 
@@ -31,6 +32,8 @@ var spawn_interval: float = 2
 @onready var star_3: TextureRect = %Star3
 @onready var star_4: TextureRect = %Star4
 @onready var star_5: TextureRect = %Star5
+@onready var star_6: TextureRect = %Star6
+@onready var star_7: TextureRect = %Star7
 
 @onready var next_wave_label: Label = $WaveUI/DifficultyIncreased/NextWaveLabel
 
@@ -44,6 +47,7 @@ func _on_isometric_main_begin_game() -> void:
 	start_game()
 
 func _ready() -> void:
+	
 	next_wave_label.visible = false
 	for i in start_container.get_children():
 		i.visible = false
@@ -53,7 +57,7 @@ func start_game():
 	start_next_wave()
 
 func start_next_wave():
-	print("--- Starting Wave ", difficulty + 1, " ---")
+	print("--- Starting Wave ", difficulty, " ---")
 	
 	#enemies_in_current_wave = enemy_count
 	#enemies_defeated_in_current_wave = 0
@@ -77,7 +81,10 @@ func spawn():
 	var enemy_type_index = enemy_table.pick_item()
 	var enemy_stats = enemy_types[enemy_type_index]
 	var enemy_scene = basic_enemy_scene
-	if enemy_stats.can_dash:
+	if enemy_stats.is_boss:
+		print("Boss enemy spawning")
+		enemy_scene = boss_enemy_scene
+	elif enemy_stats.can_dash:
 		print("Enemy can dash")
 		enemy_scene = dash_enemy_scene
 	elif enemy_stats.can_shoot:
@@ -105,10 +112,10 @@ func setup_wave_for_difficulty(current_difficulty: int):
 		
 		#region black boats
 		0:
-			SoundManager.play_warHorn()
-			enemy_count = 5
+			setup_bounty_wave(star_1)
+			enemy_count = 5 # default 5
 			spawn_interval = 3
-			wave_length = 20
+			wave_length = 20 # default 20
 		1:
 			enemy_table.remove_item(0)
 			enemy_table.add_item(1, 15)
@@ -130,7 +137,7 @@ func setup_wave_for_difficulty(current_difficulty: int):
 		
 		#region red boats
 		5:
-			setup_bounty_wave(star_1)
+			setup_bounty_wave(star_2)
 			enemy_table.remove_item(2)
 			enemy_table.add_item(3, 15) # Add red boat
 			enemy_count = 10
@@ -160,7 +167,7 @@ func setup_wave_for_difficulty(current_difficulty: int):
 		
 		#region Green Boat
 		10:
-			setup_bounty_wave(star_2)
+			setup_bounty_wave(star_3)
 			enemy_table.add_item(6, 15) # Add red boat
 			enemy_count = 5
 			spawn_interval = 2
@@ -190,7 +197,7 @@ func setup_wave_for_difficulty(current_difficulty: int):
 		
 		#region Purple (Dash) Boat
 		15:
-			setup_bounty_wave(star_3)
+			setup_bounty_wave(star_4)
 			enemy_table.add_item(9, 15) # Purple
 			enemy_count = 7
 			spawn_interval = 2
@@ -220,7 +227,7 @@ func setup_wave_for_difficulty(current_difficulty: int):
 		
 		#region Orange (Projectile) Boat
 		20:
-			setup_bounty_wave(star_4)
+			setup_bounty_wave(star_5)
 			enemy_table.remove_item(11)
 			enemy_table.add_item(12, 15) # Orange
 			enemy_count = 7
@@ -237,20 +244,22 @@ func setup_wave_for_difficulty(current_difficulty: int):
 			spawn_interval = 1.7
 			wave_length = 15
 		23:
-			enemy_count = 7
-			spawn_interval = 1.7
-			wave_length = 15
-		24:
 			enemy_table.remove_item(13)
 			enemy_table.add_item(14, 15)
 			enemy_count = 10
 			spawn_interval = 1.0
 			wave_length = 15
 		#endregion
-		
+		24:
+			setup_bounty_wave(star_6) 
+			enemy_table.remove_item(14)
+			enemy_table.add_item(33, 1000000) # dreadnought
+			enemy_count = 1
+			wave_length = 30
 		25:
-			setup_bounty_wave(star_5)
+			setup_bounty_wave(star_7)
 			#enemy_table.remove_item(14)
+			enemy_table.remove_item(33)
 			enemy_table.add_item(15, 15) # Black4
 			enemy_table.add_item(16, 15) # Red4
 			enemy_table.add_item(17, 15) # Green4
@@ -258,6 +267,8 @@ func setup_wave_for_difficulty(current_difficulty: int):
 			wave_length = 60
 			enemy_count = 60
 			spawn_interval = 1.0
+		26, 27:
+			pass
 		28:
 			enemy_table.remove_item(15) 
 			enemy_table.remove_item(16) 
@@ -265,6 +276,8 @@ func setup_wave_for_difficulty(current_difficulty: int):
 			enemy_table.add_item(18, 15) # Black5
 			enemy_table.add_item(19, 15) # Red5
 			enemy_table.add_item(20, 15) # Green5
+		29:
+			pass
 		30:
 			enemy_table.remove_item(18) 
 			enemy_table.remove_item(19) 
@@ -272,6 +285,8 @@ func setup_wave_for_difficulty(current_difficulty: int):
 			enemy_table.add_item(21, 15) # Black6
 			enemy_table.add_item(22, 15) # Red6
 			enemy_table.add_item(23, 15) # Green6
+		31, 32: 
+			pass
 		33:
 			enemy_table.remove_item(21) 
 			enemy_table.remove_item(22) 
@@ -279,6 +294,7 @@ func setup_wave_for_difficulty(current_difficulty: int):
 			enemy_table.add_item(24, 15) # Black7
 			enemy_table.add_item(25, 15) # Red7
 			enemy_table.add_item(26, 15) # Green7
+		34: pass
 		35:
 			enemy_table.remove_item(24) 
 			enemy_table.remove_item(25) 
@@ -286,6 +302,7 @@ func setup_wave_for_difficulty(current_difficulty: int):
 			enemy_table.add_item(27, 15) # Black8
 			enemy_table.add_item(28, 15) # Red8
 			enemy_table.add_item(29, 15) # Green8
+		36: pass
 		37:
 			enemy_table.remove_item(27) 
 			enemy_table.remove_item(28) 
@@ -293,6 +310,7 @@ func setup_wave_for_difficulty(current_difficulty: int):
 			enemy_table.add_item(30, 15) # Black9
 			enemy_table.add_item(31, 15) # Red9
 			enemy_table.add_item(32, 15) # Green9
+			enemy_table.add_item(33, 5)
 		_:
 			enemy_count += 4
 			wave_length += 2.0
@@ -301,11 +319,23 @@ func setup_wave_for_difficulty(current_difficulty: int):
 func setup_bounty_wave(star_node: Control):
 	star_node.visible = true
 	Globals.update_score("BOUNTY_POINT")
-	show_next_wave_text() 
+	show_next_wave_text()
 
 func show_next_wave_text():
 	SoundManager.play_warHorn()
 	next_wave_label.visible = true
+	
+	var current_text = "Next Wave Incoming.\n"
+	if difficulty == 24:
+		next_wave_label.text = "Boss Arrived.\nKill the boss!"
+	
+	elif difficulty < 24:
+		var waves_remaining = 24 - difficulty
+		next_wave_label.text = "Next Wave Incoming.\nBoss arriving in %d waves.\nDifficulty Increased!" % waves_remaining
+		
+	else:
+		next_wave_label.text = "Next Wave Incoming.\nDifficulty Increased!"
+	
 	var tween = create_tween()
 	tween.tween_property(next_wave_label, "modulate:a", 1.0, 0.5).from(0.0)
 	tween.parallel().tween_property(next_wave_label, "position:y", 120, 1.0).from(-get_viewport().size.y)\
@@ -321,6 +351,10 @@ func _on_wave_timer_timeout():
 	
 	difficulty += 1
 	Globals.update_score("WAVES_SURVIVED")
+	
+	if difficulty > 37 && difficulty % 2 == 0:
+		Globals.health_mult *= 2
+	
 	setup_wave_for_difficulty(difficulty)
 	
 	# After the match, start the next wave

@@ -92,5 +92,15 @@ unique_name_in_owner = true
 layout_mode = 2
 texture = ExtResource("3_fo7ss")
 
+[node name="Star6" type="TextureRect" parent="WaveUI/Control/StartContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("3_fo7ss")
+
+[node name="Star7" type="TextureRect" parent="WaveUI/Control/StartContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("3_fo7ss")
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="WaveTimer" to="." method="_on_wave_timer_timeout"]

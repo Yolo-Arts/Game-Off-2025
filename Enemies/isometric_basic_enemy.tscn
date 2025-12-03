@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://h0hdesj12ofh"]
+[gd_scene load_steps=47 format=3 uid="uid://h0hdesj12ofh"]
 
 [ext_resource type="Script" uid="uid://62nijy3yjwul" path="res://Enemies/basic_enemy_isometric.gd" id="1_guxgk"]
 [ext_resource type="Resource" uid="uid://c16fa7wruxfw0" path="res://Enemies/Enemy_Types_V2/black1.tres" id="2_ql4d2"]
@@ -38,6 +38,7 @@
 [ext_resource type="Resource" uid="uid://d4k2642mc8e5a" path="res://Enemies/Enemy_Types_V2/black9.tres" id="32_uglot"]
 [ext_resource type="Resource" uid="uid://c6vuyjfkedmcg" path="res://Enemies/Enemy_Types_V2/red9.tres" id="33_30hih"]
 [ext_resource type="Resource" uid="uid://dga21iuh4oqhh" path="res://Enemies/Enemy_Types_V2/green9.tres" id="34_1oqpv"]
+[ext_resource type="Resource" uid="uid://cfienns4xs0wk" path="res://Enemies/Bosses/dreadnought.tres" id="35_30hih"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qenpu"]
 shader = ExtResource("5_r2gfe")
@@ -45,16 +46,16 @@ shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/flash_value = 0.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iioo1"]
-radius = 17.0
-height = 96.00849
+radius = 68.99441
+height = 160.13258
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4vdx4"]
-radius = 25.0
-height = 120.0
+radius = 90.0
+height = 186.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rcyh1"]
-radius = 16.0
-height = 110.0
+radius = 83.0
+height = 166.0
 
 [sub_resource type="Animation" id="Animation_e4a15"]
 length = 0.001
@@ -98,7 +99,7 @@ z_index = 1
 collision_layer = 34
 collision_mask = 46
 script = ExtResource("1_guxgk")
-enemy_types = Array[Resource]([ExtResource("2_ql4d2"), ExtResource("3_sak5g"), ExtResource("4_gwrt0"), ExtResource("5_7g3qa"), ExtResource("6_q2y58"), ExtResource("7_vf0nd"), ExtResource("8_r2gfe"), ExtResource("9_mm0ux"), ExtResource("10_ovsua"), ExtResource("11_ki11w"), ExtResource("12_oohoa"), ExtResource("13_63arv"), ExtResource("14_uxjoj"), ExtResource("15_5orv6"), ExtResource("16_uwfaq"), ExtResource("17_uxjoj"), ExtResource("18_5orv6"), ExtResource("19_uwfaq"), ExtResource("20_cmyqy"), ExtResource("21_r54yv"), ExtResource("22_w5ay4"), ExtResource("23_x2r6d"), ExtResource("24_5xan4"), ExtResource("25_u65iu"), ExtResource("26_x2r6d"), ExtResource("27_5xan4"), ExtResource("28_u65iu"), ExtResource("29_bbyjt"), ExtResource("30_8hcao"), ExtResource("31_6ilnh"), ExtResource("32_uglot"), ExtResource("33_30hih"), ExtResource("34_1oqpv")])
+enemy_types = Array[Resource]([ExtResource("2_ql4d2"), ExtResource("3_sak5g"), ExtResource("4_gwrt0"), ExtResource("5_7g3qa"), ExtResource("6_q2y58"), ExtResource("7_vf0nd"), ExtResource("8_r2gfe"), ExtResource("9_mm0ux"), ExtResource("10_ovsua"), ExtResource("11_ki11w"), ExtResource("12_oohoa"), ExtResource("13_63arv"), ExtResource("14_uxjoj"), ExtResource("15_5orv6"), ExtResource("16_uwfaq"), ExtResource("17_uxjoj"), ExtResource("18_5orv6"), ExtResource("19_uwfaq"), ExtResource("20_cmyqy"), ExtResource("21_r54yv"), ExtResource("22_w5ay4"), ExtResource("23_x2r6d"), ExtResource("24_5xan4"), ExtResource("25_u65iu"), ExtResource("26_x2r6d"), ExtResource("27_5xan4"), ExtResource("28_u65iu"), ExtResource("29_bbyjt"), ExtResource("30_8hcao"), ExtResource("31_6ilnh"), ExtResource("32_uglot"), ExtResource("33_30hih"), ExtResource("34_1oqpv"), ExtResource("35_30hih")])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_qenpu")

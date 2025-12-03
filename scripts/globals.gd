@@ -14,6 +14,8 @@ signal player_died
 var player: Player
 var upgrading = false
 
+var health_mult = 1
+
 var my_timer: Timer = Timer.new()      
 const INTERVAL: float = 1
 var score = {
@@ -31,7 +33,7 @@ enum POINTS_CATEGORIES  {
 	ENEMY_SHIPWRECKED = 50,
 	BOUNTY_POINT = 500,
 	WAVES_SURVIVED = 100, 
-	BOSSES_SHIPWRECKED = 250
+	BOSSES_SHIPWRECKED = 5000
 }
 
 func _ready() -> void:

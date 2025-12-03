@@ -23,6 +23,7 @@ func _ready():
 	frame_offset = enemy_stats.frame_offset
 	speed = enemy_stats.speed
 	health = enemy_stats.health
+	health *= Globals.health_mult
 	
 	shoot_cooldown = enemy_stats.shoot_cooldown
 	shoot_range = enemy_stats.shoot_range

@@ -10,9 +10,9 @@ var can_dash: bool = true
 var dash_speed: float = 800.0
 var dash_duration: float = 0.5
 var dash_cooldown: float = 3.0
-@onready var dash_warning: GPUParticles2D = $DashWarning
-@onready var boost_particles: GPUParticles2D = $BoostParticles_White
-@onready var boost_indicator: GPUParticles2D = $boostIndicator
+@onready var dash_warning = $DashWarning
+@onready var boost_particles: CPUParticles2D = $BoostParticles_White
+@onready var boost_indicator: CPUParticles2D = $boostIndicator
 
 func _ready():
 	Signals.time_freeze.connect(_on_time_freeze)
@@ -29,6 +29,7 @@ func _ready():
 	frame_offset = enemy_stats.frame_offset
 	speed = enemy_stats.speed
 	health = enemy_stats.health
+	health *= Globals.health_mult
 	var damage = enemy_stats.damage
 	can_dash = enemy_stats.can_dash
 	dash_speed = enemy_stats.dash_speed

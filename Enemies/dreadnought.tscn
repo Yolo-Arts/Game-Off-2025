@@ -1,0 +1,36 @@
+[gd_scene load_steps=9 format=3 uid="uid://xjnp8spso0se"]
+
+[ext_resource type="PackedScene" uid="uid://h0hdesj12ofh" path="res://Enemies/isometric_basic_enemy.tscn" id="1_t4n3g"]
+[ext_resource type="Script" uid="uid://2kp6xsbrodw2" path="res://Enemies/dreadnought.gd" id="2_cby61"]
+[ext_resource type="PackedScene" uid="uid://b8mkrqjumpy0x" path="res://Enemies/enemy_projectile.tscn" id="3_u4wmu"]
+[ext_resource type="Resource" uid="uid://cfienns4xs0wk" path="res://Enemies/Bosses/dreadnought.tres" id="4_n845g"]
+[ext_resource type="Texture2D" uid="uid://cbi4fgucg15sw" path="res://Enemies/Sprites/dreadnought_spritesheet.png" id="5_s6gk2"]
+[ext_resource type="PackedScene" uid="uid://bx6gp2g3j17xc" path="res://Assets/Particles/boost_particles_white.tscn" id="6_alx4l"]
+[ext_resource type="Script" uid="uid://uyknira0fpnb" path="res://Enemies/dreadnought_camera_culling.gd" id="6_eaig8"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s6gk2"]
+radius = 85.0
+height = 474.0
+
+[node name="Dreadnought" instance=ExtResource("1_t4n3g")]
+script = ExtResource("2_cby61")
+projectile_scene = ExtResource("3_u4wmu")
+enemy_types = Array[Resource]([ExtResource("4_n845g")])
+
+[node name="Sprite2D" parent="." index="0"]
+scale = Vector2(4, 4)
+texture = ExtResource("5_s6gk2")
+vframes = 4
+
+[node name="CameraCulling" parent="." index="8"]
+script = ExtResource("6_eaig8")
+
+[node name="ShootTimer" type="Timer" parent="." index="9"]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." index="10"]
+rotation = -1.5707964
+shape = SubResource("CapsuleShape2D_s6gk2")
+
+[node name="StateTimer" type="Timer" parent="." index="11"]
+
+[node name="BoostParticles_White" parent="." index="12" instance=ExtResource("6_alx4l")]

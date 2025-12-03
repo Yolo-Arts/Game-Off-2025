@@ -14,6 +14,7 @@ var isometric_transform: Transform2D
 
 @onready var red_screen_flash: AnimationPlayer = $AnimationPlayer
 
+var enemies_hit_by_drift: Array = []
 
 const RELOADING = preload("uid://c48542f6xe7d2")
 @onready var reload_ui: Node = $ReloadUI
@@ -240,6 +241,7 @@ func stop_is_drifting():
 	print("drift began")
 	await get_tree().create_timer(drift_invulnerability).timeout
 	is_drifting = false
+	enemies_hit_by_drift.clear()
 	print("not drifting")
 
 func shoot():
@@ -356,6 +358,9 @@ func take_damage(damage):
 
 
 func disable_hitbox():
+	if hitbox:
+		hitbox.set_deferred("monitorable", false)
+		hitbox.queue_free()
 	#if collision_shape_2d:
 		#collision_shape_2d.set_deferred("disabled", true)
 		#collision_shape_2d.queue_free()

@@ -32,6 +32,8 @@ class_name enemy_type
 @export var shoot_range: float = 500.0  
 @export var projectile_speed: float = 400.0
 
+@export var is_boss: bool = false
+
 enum types {
 	SLOW,
 	NORMAL,

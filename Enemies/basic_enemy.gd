@@ -62,6 +62,11 @@ func set_enemy_type(enemy_type: int):
 	enemy_stats = enemy_types[enemy_type]
 	speed = enemy_stats.speed
 	health = enemy_stats.health
+	print("health: ", health)
+	print("Globals health mult: ", Globals.health_mult)
+	health *= Globals.health_mult
+	print("new mult health: ", health)
+	
 
 
 func _physics_process(_delta):
