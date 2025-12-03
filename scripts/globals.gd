@@ -64,7 +64,7 @@ func reset_run():
 	unlocked_abilities.clear()
 	active_cannonball_upgrades.clear()
 	
-	
+	health_mult = 1
 	playerDied = false
 	upgrading = false
 	
