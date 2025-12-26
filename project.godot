@@ -14,7 +14,7 @@ config/name="Game-Off-2025"
 run/main_scene="uid://b3imdjb1so30p"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 boot_splash/image="uid://3wcjkonlcdnl"
-config/icon="res://icon.svg"
+config/icon="uid://blfs8uoxro1yx"
 
 [autoload]
 
