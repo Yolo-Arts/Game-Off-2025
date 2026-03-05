@@ -362,6 +362,7 @@ texture = ExtResource("82_ms6uj")
 script = ExtResource("84_vl7ep")
 player = NodePath("../../player_isometric")
 speed_scale = Vector2(0.2, 0.2)
+metadata/_edit_lock_ = true
 
 [connection signal="begin_game" from="." to="EnemyManager" method="_on_isometric_main_begin_game"]
 [connection signal="begin_game" from="." to="player_isometric" method="_on_isometric_main_begin_game"]

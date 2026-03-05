@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://da1djwy4cr28t"]
 
 [ext_resource type="Texture2D" uid="uid://5bl37308ujlt" path="res://Assets/Particles/Explosion_Sheet.png" id="1_242b4"]
-[ext_resource type="Script" path="res://Assets/Particles/death_explosion.gd" id="2_5orr4"]
+[ext_resource type="Script" uid="uid://32mx7rj8qifb" path="res://Assets/Particles/death_explosion.gd" id="2_5orr4"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vtle1"]
 particles_animation = true
