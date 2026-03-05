@@ -22,6 +22,7 @@ config/icon="uid://blfs8uoxro1yx"
 Globals="*res://scripts/globals.gd"
 SoundManager="*res://sounds/sound_manager.tscn"
 Signals="*res://scripts/signals.gd"
+Talo="*res://addons/talo/talo_manager.gd"
 
 [display]
 
@@ -31,7 +32,7 @@ window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg", "res://addons/gdfxr/plugin.cfg", "res://addons/shaker/plugin.cfg", "res://addons/trail_2d/plugin.cfg")
+enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg", "res://addons/gdfxr/plugin.cfg", "res://addons/shaker/plugin.cfg", "res://addons/talo/plugin.cfg", "res://addons/trail_2d/plugin.cfg")
 
 [file_customization]
 
